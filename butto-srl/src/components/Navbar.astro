@@ -1,11 +1,13 @@
 ---
+import LanguageSwitch from './LanguageSwitch.astro';
+
 const navLinks = [
-  { label: 'Home',          href: '/' },
-  { label: 'Chi Siamo',     href: '/chi-siamo' },
-  { label: 'Servizi',       href: '/servizi' },
-  { label: 'Sostenibilità', href: '/sostenibilita' },
-  { label: 'Certificazioni',href: '/certificazioni' },
-  { label: 'News',          href: '/news' },
+  { label: 'Home',           href: '/',               key: 'nav.home' },
+  { label: 'Chi Siamo',      href: '/chi-siamo',      key: 'nav.chiSiamo' },
+  { label: 'Servizi',        href: '/servizi',         key: 'nav.servizi' },
+  { label: 'Sostenibilità',  href: '/sostenibilita',   key: 'nav.sostenibilita' },
+  { label: 'Certificazioni', href: '/certificazioni',  key: 'nav.certificazioni' },
+  { label: 'News',           href: '/news',            key: 'nav.news' },
 ];
 const currentPath = Astro.url.pathname;
 ---
@@ -15,20 +17,21 @@ const currentPath = Astro.url.pathname;
 
     <!-- Brand -->
     <a href="/" class="flex items-center gap-3 group shrink-0" aria-label="Buttò S.r.l.">
-      <img 
-        src="/logo.png" 
-        alt="Buttò S.r.l." 
+      <img
+        src="/logo.png"
+        alt="Buttò S.r.l."
         class="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
       />
     </a>
 
     <!-- Desktop links -->
     <div class="hidden md:flex items-center gap-0.5">
-      {navLinks.map(({ label, href }) => {
+      {navLinks.map(({ label, href, key }) => {
         const active = currentPath === href || (href !== '/' && currentPath.startsWith(href));
         return (
           <a
             href={href}
+            data-i18n={key}
             class={`relative px-5 py-2.5 font-condensed font-600 text-sm tracking-[0.08em] uppercase transition-all duration-200 ${
               active ? 'text-ochre' : 'text-ivory/55 hover:text-ivory'
             }`}
@@ -40,10 +43,15 @@ const currentPath = Astro.url.pathname;
       })}
     </div>
 
-    <!-- CTA + hamburger -->
-    <div class="flex items-center gap-4 shrink-0">
+    <!-- Language switch + CTA + hamburger -->
+    <div class="flex items-center gap-3 shrink-0">
+      <!-- Language switch (desktop) -->
+      <div class="hidden md:flex">
+        <LanguageSwitch />
+      </div>
       <a
         href="/contatti"
+        data-i18n="nav.contattaci"
         class="hidden sm:inline-flex items-center gap-2 btn-primary"
       >
         <i class="fa-solid fa-envelope text-[11px]"></i>
@@ -63,11 +71,12 @@ const currentPath = Astro.url.pathname;
   <!-- Mobile menu -->
   <div id="mobile-menu" class="md:hidden border-t border-white/5 bg-forest/98 overflow-hidden">
     <div class="flex flex-col p-5 gap-1 max-w-screen-2xl mx-auto">
-      {navLinks.map(({ label, href }) => {
+      {navLinks.map(({ label, href, key }) => {
         const active = currentPath === href || (href !== '/' && currentPath.startsWith(href));
         return (
           <a
             href={href}
+            data-i18n={key}
             class={`px-4 py-3 font-condensed font-600 text-sm tracking-[0.08em] uppercase transition-colors ${
               active ? 'text-ochre' : 'text-ivory/55 hover:text-ivory'
             }`}
@@ -76,8 +85,14 @@ const currentPath = Astro.url.pathname;
           </a>
         );
       })}
+      <!-- Language switch (mobile) -->
+      <div class="px-4 py-3 flex items-center gap-3">
+        <span class="font-condensed text-xs text-ivory/30 uppercase tracking-widest">Lingua</span>
+        <LanguageSwitch />
+      </div>
       <a
         href="/contatti"
+        data-i18n="nav.contattaci"
         class="mt-3 flex items-center justify-center gap-2 btn-primary text-center"
       >
         <i class="fa-solid fa-envelope text-[11px]"></i>

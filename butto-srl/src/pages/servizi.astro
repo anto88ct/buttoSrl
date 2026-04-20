@@ -65,32 +65,29 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
   <!-- ══════════════════════ HERO ══════════════════════ -->
   <section class="relative py-36 bg-ivory dot-grid overflow-hidden">
 
-    <!-- LAVORO watermark — parallax via JS -->
     <div id="lavoro-wm" class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
       <span class="font-condensed font-800 text-[24vw] text-ink/[0.04] leading-none tracking-tighter">LAVORO</span>
     </div>
 
-    <!-- Editorial catalogue tag -->
     <div class="absolute top-8 right-14 hidden lg:flex items-center gap-3 pointer-events-none select-none">
       <span class="font-condensed text-[0.6rem] tracking-[0.3em] uppercase text-muted/40">Catalogo Servizi</span>
       <span class="font-condensed font-700 text-[0.6rem] tracking-[0.2em] text-ochre/50">2025</span>
     </div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
-      <span class="overline text-ochre mb-5 block reveal">I Nostri Servizi</span>
-      <h1 class="display-xl text-ink reveal delay-1" style="text-wrap: balance;">
+      <span data-i18n="servizi.hero.eyebrow" class="overline text-ochre mb-5 block reveal">I Nostri Servizi</span>
+      <h1 data-i18n-html="servizi.hero.h1html" class="display-xl text-ink reveal delay-1" style="text-wrap: balance;">
         Custodi del<br/>
         <em class="text-forest-soft not-italic">Bene Comune</em>
       </h1>
-      <p class="font-body text-muted text-xl max-w-2xl leading-relaxed mt-8 reveal delay-2">
+      <p data-i18n="servizi.hero.body" class="font-body text-muted text-xl max-w-2xl leading-relaxed mt-8 reveal delay-2">
         Soluzioni integrate per l'ambiente attraverso una gestione consapevole delle risorse e la cura meticolosa degli spazi pubblici siciliani.
       </p>
 
-      <!-- Quick nav -->
       <div class="flex flex-wrap gap-3 mt-10 reveal delay-3">
-        {categorie.map(({ id, num, title }) => (
+        {categorie.map(({ id, num, title }, ci) => (
           <a href={`#${id}`} class="cat-nav-link font-condensed font-600 text-[0.7rem] uppercase tracking-[0.14em] px-4 py-2.5 border border-linen text-muted hover:border-ochre hover:text-ochre transition-all duration-200">
-            {num} — {title}
+            <span>{num} — </span><span data-i18n={`servizi.categorie.${ci}.title`}>{title}</span>
           </a>
         ))}
       </div>
@@ -98,7 +95,7 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
   </section>
 
   <!-- ══════════════════════ SERVICE CATEGORIES ══════════════════════ -->
-  {categorie.map(({ id, num, icon, title, bg, dark, servizi }) => (
+  {categorie.map(({ id, num, icon, title, bg, dark, servizi }, ci) => (
     <section
       id={id}
       class:list={[
@@ -107,7 +104,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
         dark ? 'grain grain-anim spotlight-section' : '',
       ]}
     >
-      <!-- Vertical editorial serial tag -->
       <div
         class:list={[
           'absolute top-1/2 -translate-y-1/2 pointer-events-none select-none hidden xl:flex flex-col items-center gap-4',
@@ -131,7 +127,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
 
       <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
 
-        <!-- Category header -->
         <div class:list={[
           'flex items-center gap-6 mb-16 pb-8 border-b reveal-blur',
           dark ? 'border-white/10' : 'border-linen',
@@ -143,7 +138,7 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
           <div>
             <div class="flex items-center gap-3 mb-1">
               <i class:list={['fa-solid', icon, 'text-2xl text-ochre service-icon-inner']}></i>
-              <h2 class:list={[
+              <h2 data-i18n={`servizi.categorie.${ci}.title`} class:list={[
                 'display-sm italic',
                 dark ? 'text-ivory' : 'text-ink',
               ]} style="text-wrap: balance;">{title}</h2>
@@ -152,12 +147,11 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
           </div>
         </div>
 
-        <!-- Bento grid -->
         <div class:list={[
           'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px',
           dark ? 'bg-white/10' : 'bg-black/[0.06]',
         ]}>
-          {servizi.map(({ icon: sIcon, title: sTitle, desc, bento }, i) => (
+          {servizi.map(({ icon: sIcon, title: sTitle, desc, bento }, si) => (
             <div
               class:list={[
                 'group p-10 flex flex-col gap-6 cursor-default bento-card reveal-blur',
@@ -167,7 +161,7 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
                   : 'bg-ivory hover:bg-forest',
                 'transition-colors duration-500',
               ]}
-              style={`transition-delay: ${i * 0.1}s`}
+              style={`transition-delay: ${si * 0.1}s`}
             >
               <div class:list={[
                 'w-11 h-11 border flex items-center justify-center flex-shrink-0',
@@ -180,17 +174,17 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
                 ]}></i>
               </div>
               <div class="flex-1">
-                <h3 class:list={[
+                <h3 data-i18n={`servizi.categorie.${ci}.servizi.${si}.title`} class:list={[
                   'font-serif text-xl italic leading-tight mb-3 transition-colors',
                   dark ? 'text-ivory group-hover:text-sage' : 'text-ink group-hover:text-ivory',
                 ]} style="text-wrap: balance;">{sTitle}</h3>
-                <p class:list={[
+                <p data-i18n={`servizi.categorie.${ci}.servizi.${si}.desc`} class:list={[
                   'font-body text-sm leading-relaxed transition-colors',
                   dark ? 'text-ivory/45 group-hover:text-ivory/60' : 'text-muted group-hover:text-ivory/55',
                 ]}>{desc}</p>
               </div>
               <span class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ochre/60 group-hover:text-ochre flex items-center gap-2 group-hover:gap-3 transition-all">
-                Informazioni <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                <span data-i18n="servizi.learnMore">Informazioni</span> <i class="fa-solid fa-arrow-right text-[9px]"></i>
               </span>
             </div>
           ))}
@@ -200,17 +194,16 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
     </section>
   ))}
 
-  <!-- ══════════════════════ CERTIFICATIONS — infinite marquee ══════════════════════ -->
+  <!-- ══════════════════════ CERTIFICATIONS ══════════════════════ -->
   <section class="py-24 bg-forest grain grain-anim overflow-hidden">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mb-16">
       <div class="text-center reveal-blur">
-        <span class="overline text-ochre">Le Nostre Garanzie</span>
+        <span data-i18n="servizi.certs.eyebrow" class="overline text-ochre">Le Nostre Garanzie</span>
         <div class="h-px w-8 bg-ochre mx-auto mt-4 mb-0"></div>
-        <h2 class="display-sm text-ivory italic mt-5" style="text-wrap: balance;">Qualità Certificata</h2>
+        <h2 data-i18n="servizi.certs.h2" class="display-sm text-ivory italic mt-5" style="text-wrap: balance;">Qualità Certificata</h2>
       </div>
     </div>
 
-    <!-- Marquee track with edge fades -->
     <div class="relative">
       <div class="absolute inset-y-0 left-0 w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, #0D1A10, transparent);"></div>
       <div class="absolute inset-y-0 right-0 w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, #0D1A10, transparent);"></div>
@@ -233,23 +226,20 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
   <!-- ══════════════════════ CTA ══════════════════════ -->
   <section class="py-24 bg-ivory">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 text-center reveal-blur">
-      <span class="overline text-ochre">Serve una soluzione su misura?</span>
-      <h2 class="display-sm text-ink italic mt-4 mb-5" style="text-wrap: balance;">Ogni territorio è unico</h2>
-      <p class="font-body text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+      <span data-i18n="servizi.cta.eyebrow" class="overline text-ochre">Serve una soluzione su misura?</span>
+      <h2 data-i18n="servizi.cta.h2" class="display-sm text-ink italic mt-4 mb-5" style="text-wrap: balance;">Ogni territorio è unico</h2>
+      <p data-i18n="servizi.cta.body" class="font-body text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
         Il nostro team è pronto ad ascoltarti e progettare il servizio più adatto alla tua realtà.
       </p>
       <a href="/contatti" class="btn-primary px-10 py-5">
-        Richiedi un preventivo <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        <span data-i18n="servizi.cta.btn">Richiedi un preventivo</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
     </div>
   </section>
 
 </Layout>
 
-<!-- ══════════════════════ PAGE-SPECIFIC STYLES ══════════════════════ -->
 <style is:global>
-
-  /* ── Reveal with blur ────────────────────────────────────────── */
   .reveal-blur {
     opacity: 0;
     transform: translateY(28px);
@@ -264,8 +254,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
     transform: none;
     filter: blur(0);
   }
-
-  /* ── Spotlight on dark sections ─────────────────────────────── */
   .spotlight-section {
     --sx: 50%;
     --sy: 50%;
@@ -283,8 +271,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
     z-index: 1;
     transition: background 0.05s linear;
   }
-
-  /* ── Animated grain ──────────────────────────────────────────── */
   @keyframes grainShift {
     0%, 100% { background-position:   0px   0px; }
     20%       { background-position: -28px -14px; }
@@ -295,8 +281,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
   .grain-anim::after {
     animation: grainShift 0.7s steps(1) infinite;
   }
-
-  /* ── Icon pop on section entry ───────────────────────────────── */
   @keyframes iconPop {
     0%   { transform: scale(0.55) rotate(-8deg); opacity: 0; }
     55%  { transform: scale(1.18) rotate(4deg);  opacity: 1; }
@@ -308,35 +292,25 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
   .section-active .bento-card:nth-child(2) .service-icon-inner { animation-delay: 0.12s; }
   .section-active .bento-card:nth-child(3) .service-icon-inner { animation-delay: 0.24s; }
   .section-active .bento-card:nth-child(4) .service-icon-inner { animation-delay: 0.36s; }
-
-  /* ── Cert marquee speed ──────────────────────────────────────── */
   .cert-track {
     animation-duration: 26s;
   }
-
-  /* ── Bento row-span min-height ───────────────────────────────── */
   @media (min-width: 1024px) {
     .lg\:row-span-2 { min-height: 360px; }
   }
-
-  /* ── Cat nav active highlight ────────────────────────────────── */
   .cat-nav-link.is-active {
     border-color: var(--ochre);
     color: var(--ochre);
   }
-
 </style>
 
-<!-- ══════════════════════ PAGE-SPECIFIC SCRIPTS ══════════════════════ -->
 <script>
-  /* ── LAVORO watermark parallax ── */
   const lavoro = document.getElementById('lavoro-wm');
   window.addEventListener('scroll', () => {
     if (!lavoro) return;
     lavoro.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.13}px))`;
   }, { passive: true });
 
-  /* ── Reveal-blur observer ── */
   const blurIO = new IntersectionObserver(
     entries => entries.forEach(e => {
       if (e.isIntersecting) {
@@ -348,7 +322,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
   );
   document.querySelectorAll('.reveal-blur').forEach(el => blurIO.observe(el));
 
-  /* ── Spotlight effect on forest sections ── */
   document.querySelectorAll<HTMLElement>('.spotlight-section').forEach(section => {
     section.addEventListener('mousemove', e => {
       const r = section.getBoundingClientRect();
@@ -357,7 +330,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
     });
   });
 
-  /* ── Section entry: icon pop animations ── */
   const sectionIO = new IntersectionObserver(
     entries => entries.forEach(e => {
       if (e.isIntersecting) e.target.classList.add('section-active');
@@ -366,7 +338,6 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
   );
   document.querySelectorAll('.service-section').forEach(s => sectionIO.observe(s));
 
-  /* ── Cat nav: active highlight on scroll ── */
   const navLinks = document.querySelectorAll<HTMLAnchorElement>('.cat-nav-link');
   const activeIO = new IntersectionObserver(
     entries => entries.forEach(e => {

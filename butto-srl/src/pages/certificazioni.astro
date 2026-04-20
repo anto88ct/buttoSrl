@@ -1,5 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const alboCats = [
+  { cat: 'Cat. 1 - Classe F', desc: 'Raccolta e trasporto di rifiuti urbani (per popolazioni inferiori a 5.000 abitanti).' },
+  { cat: 'Cat. 4 - Classe F', desc: 'Raccolta e trasporto di rifiuti speciali non pericolosi (quantità annua inferiore a 3.000 tonnellate).' },
+  { cat: 'Cat. 5 - Classe F', desc: 'Raccolta e trasporto di rifiuti speciali pericolosi (quantità annua inferiore a 3.000 tonnellate).' },
+  { cat: 'Cat. 8 - Classe F', desc: 'Intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi.' },
+];
+
+const macrocategorie = [
+  { icon: 'fa-box',              title: 'Imballaggi',       code: 'Cap. 15.01', desc: 'Gestione e avvio al recupero di imballaggi in carta, cartone, plastica, legno, metallo, vetro e materiali compositi.' },
+  { icon: 'fa-plug',             title: 'RAEE e Batterie',  code: 'Cap. 16',    desc: 'Ritiro e avvio a recupero di rifiuti di apparecchiature elettriche ed elettroniche e accumulatori esauriti.' },
+  { icon: 'fa-trowel-bricks',    title: 'Edilizia e Amianto', code: 'Cap. 17', desc: 'Smaltimento di scarti da costruzione, macerie, e materiali edili di varia natura.' },
+  { icon: 'fa-truck-medical',    title: 'Rifiuti Sanitari', code: 'Cap. 18',    desc: 'Gestione sicura di rifiuti derivanti da attività mediche, veterinarie e di ricerca scientifica.' },
+  { icon: 'fa-oil-can',          title: 'Oli e Solventi',   code: 'Cap. 13-14', desc: 'Trattamento e stoccaggio di oli esauriti, residui di combustibili, solventi e fluidi industriali.' },
+  { icon: 'fa-industry',         title: 'Rifiuti Industriali', code: 'Cap. 19',desc: 'Scarti prodotti da impianti di trattamento rifiuti, depurazione acque reflue e potabilizzazione.' },
+];
 ---
 
 <Layout
@@ -14,12 +30,12 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
-      <span class="overline text-ochre mb-5 block reveal">Trasparenza e Normative</span>
-      <h1 class="display-xl text-ink reveal delay-1">
+      <span data-i18n="certificazioni.hero.eyebrow" class="overline text-ochre mb-5 block reveal">Trasparenza e Normative</span>
+      <h1 data-i18n-html="certificazioni.hero.h1html" class="display-xl text-ink reveal delay-1">
         Certificazioni e<br/>
         <em class="text-forest-soft not-italic">Gestione Rifiuti</em>
       </h1>
-      <p class="font-body text-muted text-xl max-w-2xl leading-relaxed mt-8 reveal delay-2">
+      <p data-i18n="certificazioni.hero.body" class="font-body text-muted text-xl max-w-2xl leading-relaxed mt-8 reveal delay-2">
         Operiamo nel pieno rispetto delle normative vigenti, garantendo tracciabilità, sicurezza e i massimi standard qualitativi in ogni fase del processo ambientale.
       </p>
     </div>
@@ -30,25 +46,20 @@ import Layout from '../layouts/Layout.astro';
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
       <div class="grid lg:grid-cols-2 gap-16">
         <div class="reveal">
-          <span class="overline text-ochre">Le nostre garanzie</span>
-          <h2 class="display-sm text-ivory italic mt-4 mb-6">Albo Nazionale Gestori Ambientali e Certificazioni</h2>
+          <span data-i18n="certificazioni.albo.eyebrow" class="overline text-ochre">Le nostre garanzie</span>
+          <h2 data-i18n="certificazioni.albo.h2" class="display-sm text-ivory italic mt-4 mb-6">Albo Nazionale Gestori Ambientali e Certificazioni</h2>
           <div class="font-body text-ivory/60 leading-relaxed space-y-4">
-            <p>
+            <p data-i18n="certificazioni.albo.body">
               Per BUTTÒ CARMELO S.R.L. la conformità non è solo un obbligo di legge, ma la solida base di ogni partnership. Il possesso di specifiche iscrizioni all'Albo e delle certificazioni ambientali (come la norma ISO 14001 o la registrazione EMAS) rappresenta una garanzia assoluta di qualità, trasparenza e costante miglioramento, tutelando sia i partner pubblici che privati.
             </p>
           </div>
         </div>
-        
+
         <div class="grid gap-4 reveal delay-1">
-          {[
-            { cat: 'Cat. 1 - Classe F', desc: 'Raccolta e trasporto di rifiuti urbani (per popolazioni inferiori a 5.000 abitanti).' },
-            { cat: 'Cat. 4 - Classe F', desc: 'Raccolta e trasporto di rifiuti speciali non pericolosi (quantità annua inferiore a 3.000 tonnellate).' },
-            { cat: 'Cat. 5 - Classe F', desc: 'Raccolta e trasporto di rifiuti speciali pericolosi (quantità annua inferiore a 3.000 tonnellate).' },
-            { cat: 'Cat. 8 - Classe F', desc: 'Intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi.' }
-          ].map(({ cat, desc }) => (
+          {alboCats.map(({ cat, desc }, i) => (
             <div class="bg-forest-mid p-6 border-l-4 border-ochre hover:bg-forest-soft transition-colors">
-              <h3 class="font-serif text-xl italic text-ivory mb-2">{cat}</h3>
-              <p class="font-body text-sm text-ivory/60">{desc}</p>
+              <h3 data-i18n={`certificazioni.albo.cats.${i}.cat`} class="font-serif text-xl italic text-ivory mb-2">{cat}</h3>
+              <p data-i18n={`certificazioni.albo.cats.${i}.desc`} class="font-body text-sm text-ivory/60">{desc}</p>
             </div>
           ))}
         </div>
@@ -60,31 +71,24 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-24 bg-ivory dot-grid">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
       <div class="text-center mb-16 reveal">
-        <span class="overline text-ochre">Classificazione EER/CER</span>
+        <span data-i18n="certificazioni.macrocategorie.eyebrow" class="overline text-ochre">Classificazione EER/CER</span>
         <div class="rule-ochre mx-auto mt-4 mb-0"></div>
-        <h2 class="display-sm text-ink italic mt-5">Macrocategorie di Rifiuti Gestiti</h2>
-        <p class="font-body text-muted text-lg max-w-2xl mx-auto mt-4">
+        <h2 data-i18n="certificazioni.macrocategorie.h2" class="display-sm text-ink italic mt-5">Macrocategorie di Rifiuti Gestiti</h2>
+        <p data-i18n="certificazioni.macrocategorie.body" class="font-body text-muted text-lg max-w-2xl mx-auto mt-4">
           Copriamo un ampio spettro di codifiche EER/CER, garantendo una gestione impeccabile per rifiuti urbani, speciali, pericolosi e non pericolosi.
         </p>
       </div>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-linen border border-linen reveal delay-1">
-        {[
-          { icon: 'fa-box', title: 'Imballaggi', code: 'Cap. 15.01', desc: 'Gestione e avvio al recupero di imballaggi in carta, cartone, plastica, legno, metallo, vetro e materiali compositi.' },
-          { icon: 'fa-plug', title: 'RAEE e Batterie', code: 'Cap. 16', desc: 'Ritiro e avvio a recupero di rifiuti di apparecchiature elettriche ed elettroniche e accumulatori esauriti.' },
-          { icon: 'fa-trowel-bricks', title: 'Edilizia e Amianto', code: 'Cap. 17', desc: 'Smaltimento di scarti da costruzione, macerie, e materiali edili di varia natura.' },
-          { icon: 'fa-truck-medical', title: 'Rifiuti Sanitari', code: 'Cap. 18', desc: 'Gestione sicura di rifiuti derivanti da attività mediche, veterinarie e di ricerca scientifica.' },
-          { icon: 'fa-oil-can', title: 'Oli e Solventi', code: 'Cap. 13-14', desc: 'Trattamento e stoccaggio di oli esauriti, residui di combustibili, solventi e fluidi industriali.' },
-          { icon: 'fa-industry', title: 'Rifiuti Industriali', code: 'Cap. 19', desc: 'Scarti prodotti da impianti di trattamento rifiuti, depurazione acque reflue e potabilizzazione.' },
-        ].map(({ icon, title, code, desc }) => (
+        {macrocategorie.map(({ icon, title, code, desc }, i) => (
           <div class="group bg-ivory p-8 hover:bg-forest transition-colors duration-500 flex flex-col gap-4">
             <div class="w-11 h-11 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors">
               <i class={`fa-solid ${icon} text-lg text-ochre/60 group-hover:text-ochre transition-colors`}></i>
             </div>
             <div>
               <span class="inline-block px-2 py-1 bg-linen group-hover:bg-forest-mid text-ink group-hover:text-ivory text-xs font-condensed tracking-wider mb-2 transition-colors">CER {code}</span>
-              <h3 class="font-serif text-xl italic text-ink group-hover:text-ivory transition-colors mb-2">{title}</h3>
-              <p class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{desc}</p>
+              <h3 data-i18n={`certificazioni.macrocategorie.items.${i}.title`} class="font-serif text-xl italic text-ink group-hover:text-ivory transition-colors mb-2">{title}</h3>
+              <p data-i18n={`certificazioni.macrocategorie.items.${i}.desc`} class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{desc}</p>
             </div>
           </div>
         ))}
@@ -93,7 +97,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="mt-8 bg-parchment p-6 border border-linen text-center reveal delay-2">
         <p class="font-body text-ink text-sm">
           <i class="fa-solid fa-circle-check text-ochre mr-2"></i>
-          Siamo inoltre autorizzati alla gestione di <strong>Rifiuti Spiaggiati (CER 20.01.99)</strong> e <strong>Rifiuti Cimiteriali (CER 20.03.99)</strong>.
+          <span data-i18n-html="certificazioni.macrocategorie.note">Siamo inoltre autorizzati alla gestione di <strong>Rifiuti Spiaggiati (CER 20.01.99)</strong> e <strong>Rifiuti Cimiteriali (CER 20.03.99)</strong>.</span>
         </p>
       </div>
     </div>
@@ -105,16 +109,15 @@ import Layout from '../layouts/Layout.astro';
       <div class="grid lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-5 reveal">
           <div class="aspect-square bg-forest flex items-center justify-center p-12 relative overflow-hidden">
-             <!-- Background image -->
              <img src="/placeholder.jpg" alt="Rifiuti Speciali" class="absolute inset-0 w-full h-full object-cover opacity-20" loading="lazy" />
              <div class="absolute inset-0 bg-forest/80 mix-blend-multiply"></div>
              <i class="fa-solid fa-shield-virus text-[8rem] text-ochre/40 relative z-10"></i>
           </div>
         </div>
         <div class="lg:col-span-7 space-y-6 reveal delay-1">
-          <span class="overline text-ochre">Focus Specialistico</span>
-          <h2 class="display-sm text-ink italic">Interventi ad Alto Profilo Tecnico</h2>
-          <p class="font-body text-muted text-lg leading-relaxed">
+          <span data-i18n="certificazioni.focus.eyebrow" class="overline text-ochre">Focus Specialistico</span>
+          <h2 data-i18n="certificazioni.focus.h2" class="display-sm text-ink italic">Interventi ad Alto Profilo Tecnico</h2>
+          <p data-i18n="certificazioni.focus.body" class="font-body text-muted text-lg leading-relaxed">
             La nostra azienda è altamente specializzata nella gestione e nel trasporto di flussi di rifiuti che richiedono particolari e rigorose misure di sicurezza:
           </p>
           <ul class="space-y-4 mt-6">
@@ -123,8 +126,8 @@ import Layout from '../layouts/Layout.astro';
                 <i class="fa-solid fa-virus text-ochre text-sm"></i>
               </div>
               <div>
-                <strong class="font-condensed uppercase tracking-wide text-ink text-sm">Rifiuti a Rischio Infettivo (CER 18.01.03*)</strong>
-                <p class="font-body text-muted text-sm mt-1">Procedure rigide per il contenimento, il trasporto e il conferimento sicuro dei materiali sanitari a rischio biologico e infettivo.</p>
+                <strong data-i18n="certificazioni.focus.item1Title" class="font-condensed uppercase tracking-wide text-ink text-sm">Rifiuti a Rischio Infettivo (CER 18.01.03*)</strong>
+                <p data-i18n="certificazioni.focus.item1Desc" class="font-body text-muted text-sm mt-1">Procedure rigide per il contenimento, il trasporto e il conferimento sicuro dei materiali sanitari a rischio biologico e infettivo.</p>
               </div>
             </li>
             <li class="flex items-start gap-4">
@@ -132,8 +135,8 @@ import Layout from '../layouts/Layout.astro';
                 <i class="fa-solid fa-house-chimney-crack text-ochre text-sm"></i>
               </div>
               <div>
-                <strong class="font-condensed uppercase tracking-wide text-ink text-sm">Materiali Contenenti Amianto (CER 17.06.xx*)</strong>
-                <p class="font-body text-muted text-sm mt-1">Supporto qualificato nel ritiro e nel trasporto in totale sicurezza di manufatti contenenti amianto, a seguito di bonifiche certificate.</p>
+                <strong data-i18n="certificazioni.focus.item2Title" class="font-condensed uppercase tracking-wide text-ink text-sm">Materiali Contenenti Amianto (CER 17.06.xx*)</strong>
+                <p data-i18n="certificazioni.focus.item2Desc" class="font-body text-muted text-sm mt-1">Supporto qualificato nel ritiro e nel trasporto in totale sicurezza di manufatti contenenti amianto, a seguito di bonifiche certificate.</p>
               </div>
             </li>
             <li class="flex items-start gap-4">
@@ -141,8 +144,8 @@ import Layout from '../layouts/Layout.astro';
                 <i class="fa-solid fa-baby text-ochre text-sm"></i>
               </div>
               <div>
-                <strong class="font-condensed uppercase tracking-wide text-ink text-sm">Prodotti Assorbenti Persona (PAP)</strong>
-                <p class="font-body text-muted text-sm mt-1">Servizio dedicato e strutturato per la raccolta e l'avvio allo smaltimento sostenibile di pannolini e pannoloni, ideale per enti comunali e strutture sanitarie e socio-assistenziali.</p>
+                <strong data-i18n="certificazioni.focus.item3Title" class="font-condensed uppercase tracking-wide text-ink text-sm">Prodotti Assorbenti Persona (PAP)</strong>
+                <p data-i18n="certificazioni.focus.item3Desc" class="font-body text-muted text-sm mt-1">Servizio dedicato e strutturato per la raccolta e l'avvio allo smaltimento sostenibile di pannolini e pannoloni, ideale per enti comunali e strutture sanitarie e socio-assistenziali.</p>
               </div>
             </li>
           </ul>
@@ -157,13 +160,13 @@ import Layout from '../layouts/Layout.astro';
       <div class="absolute inset-0 bg-gradient-to-r from-forest to-transparent z-10"></div>
     </div>
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10 text-center reveal">
-      <span class="overline text-ochre">Hai bisogno di consulenza?</span>
-      <h2 class="display-sm text-ivory italic mt-4 mb-5">Assistenza Normativa e Classificazione CER</h2>
-      <p class="font-body text-ivory/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+      <span data-i18n="certificazioni.cta.eyebrow" class="overline text-ochre">Hai bisogno di consulenza?</span>
+      <h2 data-i18n="certificazioni.cta.h2" class="display-sm text-ivory italic mt-4 mb-5">Assistenza Normativa e Classificazione CER</h2>
+      <p data-i18n="certificazioni.cta.body" class="font-body text-ivory/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
         Hai dubbi sulla corretta codifica dei tuoi rifiuti o cerchi un partner affidabile e certificato per lo smaltimento? I nostri specialisti sono a tua disposizione.
       </p>
       <a href="/contatti" class="btn-primary px-10 py-5 inline-flex">
-        Contatta per consulenza sui codici CER <i class="fa-solid fa-arrow-right text-[10px] ml-2 mt-1"></i>
+        <span data-i18n="certificazioni.cta.btn">Contatta per consulenza sui codici CER</span> <i class="fa-solid fa-arrow-right text-[10px] ml-2 mt-1"></i>
       </a>
     </div>
   </section>

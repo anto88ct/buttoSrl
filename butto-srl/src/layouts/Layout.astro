@@ -39,6 +39,14 @@ const fullTitle = title === 'Home'
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href={`${siteURL}${canonicalURL}`} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- i18n: apply stored language before paint to avoid FOUC -->
+    <script is:inline>
+      (function() {
+        var lang = localStorage.getItem('lang') || 'it';
+        document.documentElement.setAttribute('data-lang', lang);
+        document.documentElement.lang = lang;
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Font Awesome 6 -->
@@ -145,6 +153,33 @@ const fullTitle = title === 'Home'
         document.getElementById('icon-bars')?.classList.toggle('hidden', !!isOpen);
         document.getElementById('icon-close')?.classList.toggle('hidden', !isOpen);
       });
+
+      /* ── i18n ── */
+      import { translations } from '../i18n/translations';
+
+      type Lang = keyof typeof translations;
+
+      function resolveKey(obj: any, dotPath: string): string | undefined {
+        const val = dotPath.split('.').reduce((o, k) => o?.[k], obj);
+        return typeof val === 'string' ? val : undefined;
+      }
+
+      (window as any).__applyLang = function(lang: string) {
+        const t = translations[(lang as Lang)] ?? translations['it'];
+        document.querySelectorAll<HTMLElement>('[data-i18n]').forEach(el => {
+          const val = resolveKey(t, el.dataset.i18n!);
+          if (val) el.textContent = val;
+        });
+        document.querySelectorAll<HTMLElement>('[data-i18n-html]').forEach(el => {
+          const val = resolveKey(t, el.dataset.i18nHtml!);
+          if (val) el.innerHTML = val;
+        });
+        document.documentElement.lang = lang;
+        document.documentElement.setAttribute('data-lang', lang);
+        document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
+      };
+
+      (window as any).__applyLang(localStorage.getItem('lang') || 'it');
     </script>
 
     <style is:global>

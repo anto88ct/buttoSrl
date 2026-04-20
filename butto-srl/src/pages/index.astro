@@ -49,25 +49,16 @@ const clientiB = [
   <!-- ══════════════════════ HERO ══════════════════════ -->
   <section class="relative h-screen flex items-center overflow-hidden">
 
-    <!-- Video background -->
     <video
       class="absolute inset-0 w-full h-full object-cover"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="auto"
+      autoplay muted loop playsinline preload="auto"
     >
       <source src="/video.mp4" type="video/mp4" />
     </video>
 
-    <!-- Dark overlay for text legibility -->
     <div class="absolute inset-0 bg-forest/75"></div>
-
-    <!-- Grain texture -->
     <div class="absolute inset-0 grain pointer-events-none"></div>
 
-    <!-- Diagonal accent lines -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-ochre/20 via-ochre/5 to-transparent"></div>
       <div class="absolute top-0 right-1/4 w-px h-2/3 bg-gradient-to-b from-white/5 to-transparent"></div>
@@ -76,44 +67,34 @@ const clientiB = [
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 w-full py-6 relative z-10">
       <div class="grid lg:grid-cols-2 gap-8 items-center">
 
-        <!-- Copy column -->
         <div class="space-y-5">
           <div class="reveal">
-            <span class="overline text-ochre tracking-[0.28em]">
+            <span data-i18n="home.hero.eyebrow" class="overline text-ochre tracking-[0.28em]">
               <i class="fa-solid fa-circle-dot text-[6px] align-middle mr-2"></i>
               Assoro · Sicilia · Dal 1978
             </span>
           </div>
 
           <div class="space-y-1 reveal delay-1">
-            <h1 class="display-xl text-ivory">
-              Custodi
-            </h1>
-            <h1 class="display-xl text-ivory italic">
-              dell'<span class="text-sage">Ambiente</span>,
-            </h1>
-            <h1 class="display-xl text-ivory">
-              Innovatori
-            </h1>
-            <h1 class="display-xl text-ivory italic">
-              per Passione
-            </h1>
+            <h1 data-i18n="home.hero.h1l1" class="display-xl text-ivory">Custodi</h1>
+            <h1 data-i18n-html="home.hero.h1l2html" class="display-xl text-ivory italic">dell'<span class="text-sage">Ambiente</span>,</h1>
+            <h1 data-i18n="home.hero.h1l3" class="display-xl text-ivory">Innovatori</h1>
+            <h1 data-i18n="home.hero.h1l4" class="display-xl text-ivory italic">per Passione</h1>
           </div>
 
-          <p class="font-body text-ivory/50 text-base leading-relaxed max-w-lg reveal delay-2">
+          <p data-i18n="home.hero.body" class="font-body text-ivory/50 text-base leading-relaxed max-w-lg reveal delay-2">
             Leader nella gestione integrata delle risorse ambientali nel territorio siciliano. Trasformiamo le sfide ecologiche in soluzioni sostenibili per oltre 120 comuni.
           </p>
 
           <div class="flex flex-wrap gap-4 reveal delay-3">
             <a href="/servizi" class="btn-primary">
-              I Nostri Servizi <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              <span data-i18n="home.hero.cta1">I Nostri Servizi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </a>
             <a href="/chi-siamo" class="btn-ghost-dark">
-              La Nostra Storia
+              <span data-i18n="home.hero.cta2">La Nostra Storia</span>
             </a>
           </div>
 
-          <!-- Trust strip -->
           <div class="flex flex-wrap gap-6 pt-3 border-t border-white/8 reveal delay-4">
             {[
               { icon: 'fa-certificate', text: 'ISO 14001' },
@@ -128,10 +109,8 @@ const clientiB = [
           </div>
         </div>
 
-        <!-- Image column -->
         <div class="reveal-right delay-2">
           <div class="relative">
-            <!-- Offset frame -->
             <div class="absolute -top-4 -right-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
 
             <div class="img-zoom aspect-[3/2] bg-forest-mid relative max-h-[55vh]">
@@ -139,15 +118,13 @@ const clientiB = [
               <div class="absolute inset-0 bg-gradient-to-t from-forest/60 to-transparent"></div>
             </div>
 
-            <!-- Floating CO2 badge -->
             <div class="absolute -bottom-6 -left-6 bg-ochre text-forest px-6 py-4 float z-10">
-              <p class="overline text-forest/60 mb-1">CO₂ Risparmiata</p>
+              <p data-i18n="home.hero.co2Label" class="overline text-forest/60 mb-1">CO₂ Risparmiata</p>
               <p class="font-display text-3xl leading-none">4.200 <span class="text-base font-body font-600">Ton</span></p>
             </div>
 
-            <!-- Floating year badge -->
             <div class="absolute -top-5 -right-5 bg-forest-mid border border-ochre/30 text-ivory px-5 py-4 float-alt z-10">
-              <p class="overline text-ivory/40 mb-1">Fondazione</p>
+              <p data-i18n="home.hero.yearLabel" class="overline text-ivory/40 mb-1">Fondazione</p>
               <p class="font-display text-3xl leading-none">1978</p>
             </div>
           </div>
@@ -155,9 +132,8 @@ const clientiB = [
       </div>
     </div>
 
-    <!-- Scroll indicator -->
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 reveal delay-5">
-      <span class="overline text-ivory/20 text-[0.6rem]">Scorri</span>
+      <span data-i18n="home.hero.scroll" class="overline text-ivory/20 text-[0.6rem]">Scorri</span>
       <div class="w-px h-12 bg-gradient-to-b from-ochre/40 to-transparent animate-scan"></div>
     </div>
   </section>
@@ -178,17 +154,17 @@ const clientiB = [
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-0 border border-linen">
         {[
-          { count: '45', suffix: '+', label: 'Anni',    sub: 'di esperienza sul campo' },
-          { count: '120', suffix: '+', label: 'Comuni',  sub: 'serviti in Sicilia' },
-          { count: '4200', suffix: '',  label: 'Ton CO₂', sub: 'risparmiate ogni anno' },
-          { count: '85', suffix: '%',  label: 'Rifiuti', sub: 'recuperati e riciclati' },
-        ].map(({ count, suffix, label, sub }, i) => (
+          { count: '45',   suffix: '+', lKey: 'home.stats.anni',       sKey: 'home.stats.anniSub',      label: 'Anni',    sub: 'di esperienza sul campo' },
+          { count: '120',  suffix: '+', lKey: 'home.stats.comuni',      sKey: 'home.stats.comuniSub',    label: 'Comuni',  sub: 'serviti in Sicilia' },
+          { count: '4200', suffix: '',  lKey: 'home.stats.co2Label',    sKey: 'home.stats.co2Sub',       label: 'Ton CO₂', sub: 'risparmiate ogni anno' },
+          { count: '85',   suffix: '%', lKey: 'home.stats.rifiutiLabel',sKey: 'home.stats.rifiutiSub',   label: 'Rifiuti', sub: 'recuperati e riciclati' },
+        ].map(({ count, suffix, lKey, sKey, label, sub }, i) => (
           <div class={`p-10 lg:p-14 text-center ${i < 3 ? 'border-r border-linen' : ''} ${i >= 2 ? 'border-t lg:border-t-0 border-linen' : ''} reveal delay-${i + 1}`}>
             <p class="stat-xl text-ochre mb-1">
               <span data-count={count + suffix}>{count}{suffix}</span>
             </p>
-            <p class="font-condensed font-700 text-ink text-base uppercase tracking-[0.12em]">{label}</p>
-            <p class="font-body text-muted text-xs mt-1">{sub}</p>
+            <p data-i18n={lKey} class="font-condensed font-700 text-ink text-base uppercase tracking-[0.12em]">{label}</p>
+            <p data-i18n={sKey} class="font-body text-muted text-xs mt-1">{sub}</p>
           </div>
         ))}
       </div>
@@ -201,25 +177,24 @@ const clientiB = [
 
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-20">
         <div class="reveal">
-          <span class="overline text-ochre">I Nostri Servizi</span>
+          <span data-i18n="home.services.eyebrow" class="overline text-ochre">I Nostri Servizi</span>
           <rule class="rule-ochre"></rule>
-          <h2 class="display-lg text-ink mt-5">
+          <h2 data-i18n-html="home.services.h2" class="display-lg text-ink mt-5">
             Custodi del<br/>
             <em class="text-forest-soft not-italic">Bene Comune</em>
           </h2>
         </div>
         <a href="/servizi" class="self-start lg:self-auto font-condensed font-700 text-[0.75rem] uppercase tracking-[0.16em] text-ochre flex items-center gap-2 hover:gap-4 transition-all duration-300 reveal delay-2">
-          Vedi tutti i servizi <i class="fa-solid fa-arrow-right"></i>
+          <span data-i18n="home.services.viewAll">Vedi tutti i servizi</span> <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
 
       <div class="grid md:grid-cols-2 gap-px bg-linen">
-        {services.map(({ num, icon, title, desc, href }, i) => (
+        {services.map(({ num, icon, href }, i) => (
           <a
             href={href}
             class={`group bg-ivory p-10 lg:p-12 flex flex-col gap-8 hover:bg-forest transition-colors duration-500 reveal delay-${(i % 4) + 1}`}
           >
-            <!-- Number + icon row -->
             <div class="flex items-start justify-between">
               <span class="font-condensed font-800 text-[4.5rem] text-ink/6 group-hover:text-ivory/6 leading-none tracking-tighter transition-colors">{num}</span>
               <div class="w-12 h-12 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors duration-300">
@@ -228,12 +203,12 @@ const clientiB = [
             </div>
 
             <div class="space-y-3">
-              <h3 class="font-serif text-2xl font-600 text-ink group-hover:text-ivory transition-colors leading-tight">{title}</h3>
-              <p class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{desc}</p>
+              <h3 data-i18n={`home.services.items.${i}.title`} class="font-serif text-2xl font-600 text-ink group-hover:text-ivory transition-colors leading-tight">{services[i].title}</h3>
+              <p data-i18n={`home.services.items.${i}.desc`} class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{services[i].desc}</p>
             </div>
 
             <div class="flex items-center gap-2 font-condensed font-700 text-[0.7rem] uppercase tracking-[0.16em] text-ochre/70 group-hover:text-ochre group-hover:gap-4 transition-all duration-300 mt-auto">
-              Scopri di più <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              <span data-i18n="home.services.learnMore">Scopri di più</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
             </div>
           </a>
         ))}
@@ -246,20 +221,17 @@ const clientiB = [
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
       <div class="grid lg:grid-cols-12 gap-16 items-center">
 
-        <!-- Image -->
         <div class="lg:col-span-5 reveal-left">
           <div class="relative">
             <div class="img-zoom aspect-[3/4]">
               <img src="/placeholder.jpg" alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" />
             </div>
-            <!-- Ochre year chip -->
             <div class="absolute top-6 left-6 bg-ochre text-forest px-4 py-2.5">
-              <p class="font-condensed font-800 text-xs uppercase tracking-[0.2em] text-forest/60">Fondato</p>
+              <p data-i18n="home.founder.fondato" class="font-condensed font-800 text-xs uppercase tracking-[0.2em] text-forest/60">Fondato</p>
               <p class="font-display text-2xl leading-none">1978</p>
             </div>
-            <!-- Quote chip -->
             <div class="absolute -bottom-6 -right-4 bg-forest text-ivory p-6 max-w-[230px] grain">
-              <p class="font-serif italic text-sm leading-relaxed text-ivory/80">
+              <p data-i18n="home.founder.quote" class="font-serif italic text-sm leading-relaxed text-ivory/80">
                 "Un territorio pulito è il regalo più grande."
               </p>
               <p class="font-condensed text-[0.62rem] uppercase tracking-[0.18em] text-ochre mt-3">— Carmelo Buttò</p>
@@ -267,42 +239,40 @@ const clientiB = [
           </div>
         </div>
 
-        <!-- Copy -->
         <div class="lg:col-span-7 lg:pl-8 space-y-8 reveal-right delay-1">
           <div>
-            <span class="overline text-ochre">La Nostra Storia</span>
+            <span data-i18n="home.founder.eyebrow" class="overline text-ochre">La Nostra Storia</span>
             <div class="rule-ochre"></div>
-            <h2 class="display-lg text-ink mt-5">
+            <h2 data-i18n-html="home.founder.h2html" class="display-lg text-ink mt-5">
               Un'eredità di cura<br/>
               <em class="text-forest-soft not-italic">per il territorio</em>
             </h2>
           </div>
 
           <div class="space-y-5 font-body text-muted leading-relaxed">
-            <p>
+            <p data-i18n="home.founder.p1">
               Fondata da Carmelo Buttò ad Assoro, in provincia di Enna, la nostra azienda è cresciuta dal nucleo familiare fino a diventare un punto di riferimento nella gestione ambientale per la Sicilia centro-orientale.
             </p>
-            <p>
+            <p data-i18n="home.founder.p2">
               Quattro decenni di esperienza ci hanno insegnato che prendersi cura dell'ambiente non è un servizio — è una vocazione che si tramanda di generazione in generazione.
             </p>
           </div>
 
-          <!-- Mini metrics -->
           <div class="grid grid-cols-3 gap-0 border border-linen mt-8">
             {[
-              { v: '45', suf: '+', l: 'Anni' },
-              { v: '120', suf: '+', l: 'Comuni' },
-              { v: '∞', suf: '', l: 'Passione' },
-            ].map(({ v, suf, l }, i) => (
+              { v: '45', suf: '+', lKey: 'home.founder.anni',   l: 'Anni' },
+              { v: '120', suf: '+', lKey: 'home.founder.comuni', l: 'Comuni' },
+              { v: '∞', suf: '',   lKey: 'home.founder.passione',l: 'Passione' },
+            ].map(({ v, suf, lKey, l }, i) => (
               <div class={`p-6 text-center ${i < 2 ? 'border-r border-linen' : ''}`}>
                 <p class="font-display text-3xl text-ink leading-none">{v}{suf}</p>
-                <p class="font-condensed font-600 text-[0.65rem] uppercase tracking-[0.16em] text-muted mt-1.5">{l}</p>
+                <p data-i18n={lKey} class="font-condensed font-600 text-[0.65rem] uppercase tracking-[0.16em] text-muted mt-1.5">{l}</p>
               </div>
             ))}
           </div>
 
           <a href="/chi-siamo" class="btn-primary inline-flex">
-            Scopri la nostra storia <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            <span data-i18n="home.founder.cta">Scopri la nostra storia</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </a>
         </div>
       </div>
@@ -312,65 +282,59 @@ const clientiB = [
   <!-- ══════════════════════ SUSTAINABILITY BAND ══════════════════════ -->
   <section class="py-28 bg-forest grain relative overflow-hidden">
 
-    <!-- Accent line -->
     <div class="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-ochre/60 via-ochre/20 to-transparent"></div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
       <div class="grid lg:grid-cols-12 gap-14 items-start">
 
-        <!-- Left text -->
         <div class="lg:col-span-5 space-y-8 reveal">
           <div>
-            <span class="overline text-ochre">Eco-Responsabilità</span>
+            <span data-i18n="home.sustainability.eyebrow" class="overline text-ochre">Eco-Responsabilità</span>
             <div class="rule-ochre"></div>
-            <h2 class="display-lg text-ivory mt-5">
+            <h2 data-i18n-html="home.sustainability.h2html" class="display-lg text-ivory mt-5">
               Numeri che<br/>
               <em class="text-sage not-italic">Respirano.</em>
             </h2>
           </div>
-          <p class="font-body text-ivory/45 leading-relaxed">
+          <p data-i18n="home.sustainability.body" class="font-body text-ivory/45 leading-relaxed">
             L'impatto tangibile delle nostre operazioni ambientali, anno dopo anno, comunità per comunità.
           </p>
           <a href="/sostenibilita" class="btn-ghost-dark inline-flex">
-            Il nostro impegno <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            <span data-i18n="home.sustainability.cta">Il nostro impegno</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </a>
         </div>
 
-        <!-- Bento grid -->
         <div class="lg:col-span-7 reveal-right delay-1">
           <div class="grid grid-cols-2 gap-px bg-white/8">
 
-            <!-- CO2 — spanning full width -->
             <div class="col-span-2 bg-forest-mid p-10 group hover:bg-forest-soft transition-colors duration-300">
               <div class="flex items-start justify-between mb-6">
                 <i class="fa-solid fa-leaf text-sage text-2xl"></i>
-                <span class="overline text-ivory/25">Anno su Anno</span>
+                <span data-i18n="home.sustainability.annoPer" class="overline text-ivory/25">Anno su Anno</span>
               </div>
               <p class="stat-xl text-ivory mb-2">
                 <span data-count="4200">4.200</span>
               </p>
-              <p class="font-condensed font-700 text-ivory/40 text-sm uppercase tracking-[0.18em]">Tonnellate CO₂ Risparmiate</p>
-              <p class="font-body text-ivory/25 text-xs mt-4 pt-4 border-t border-white/8">
+              <p data-i18n="home.sustainability.co2Sub" class="font-condensed font-700 text-ivory/40 text-sm uppercase tracking-[0.18em]">Tonnellate CO₂ Risparmiate</p>
+              <p data-i18n="home.sustainability.co2Note" class="font-body text-ivory/25 text-xs mt-4 pt-4 border-t border-white/8">
                 Equivalente a 120.000 alberi piantati ogni anno
               </p>
             </div>
 
-            <!-- Recovery -->
             <div class="bg-ochre p-10">
               <i class="fa-solid fa-recycle text-forest text-2xl mb-6 block"></i>
               <p class="stat-xl text-forest leading-none mb-2">
                 <span data-count="85%">85%</span>
               </p>
-              <p class="font-condensed font-700 text-forest/60 text-xs uppercase tracking-[0.18em]">Rifiuti Recuperati</p>
+              <p data-i18n="home.sustainability.rifiutiLabel" class="font-condensed font-700 text-forest/60 text-xs uppercase tracking-[0.18em]">Rifiuti Recuperati</p>
             </div>
 
-            <!-- Municipalities -->
             <div class="bg-forest-mid p-10 group hover:bg-forest-soft transition-colors">
               <i class="fa-solid fa-city text-sage/50 text-2xl mb-6 block"></i>
               <p class="stat-xl text-ivory leading-none mb-2">
                 <span data-count="120+">120+</span>
               </p>
-              <p class="font-condensed font-700 text-ivory/40 text-xs uppercase tracking-[0.18em]">Comuni Serviti</p>
+              <p data-i18n="home.sustainability.comuniLabel" class="font-condensed font-700 text-ivory/40 text-xs uppercase tracking-[0.18em]">Comuni Serviti</p>
             </div>
           </div>
         </div>
@@ -384,21 +348,20 @@ const clientiB = [
 
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
         <div class="reveal">
-          <span class="overline text-ochre">L'Archivio Organico</span>
+          <span data-i18n="home.news.eyebrow" class="overline text-ochre">L'Archivio Organico</span>
           <div class="rule-ochre"></div>
-          <h2 class="display-lg text-ink mt-5">
+          <h2 data-i18n-html="home.news.h2html" class="display-lg text-ink mt-5">
             Cronache della<br/>
             <em class="text-forest-soft not-italic">Sostenibilità</em>
           </h2>
         </div>
         <a href="/news" class="font-condensed font-700 text-[0.75rem] uppercase tracking-[0.16em] text-ochre flex items-center gap-2 hover:gap-4 transition-all duration-300 self-start reveal delay-2">
-          Tutte le news <i class="fa-solid fa-arrow-right"></i>
+          <span data-i18n="home.news.viewAll">Tutte le news</span> <i class="fa-solid fa-arrow-right"></i>
         </a>
       </div>
 
       <div class="grid md:grid-cols-12 gap-px bg-linen">
 
-        <!-- Featured dark card -->
         <article class="md:col-span-5 bg-forest grain group cursor-pointer">
           <div class="img-zoom aspect-[4/3]">
             <img src="/placeholder.jpg" alt="News" class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity" loading="lazy" />
@@ -411,13 +374,12 @@ const clientiB = [
             <div class="flex items-center justify-between border-t border-white/8 pt-4">
               <span class="font-condensed text-ivory/30 text-xs tracking-wide">14 Maggio 2024</span>
               <span class="font-condensed font-700 text-ochre text-xs uppercase tracking-[0.14em] flex items-center gap-2 group-hover:gap-3 transition-all">
-                Leggi <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                <span data-i18n="home.news.read">Leggi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </span>
             </div>
           </div>
         </article>
 
-        <!-- Two stacked cards -->
         <div class="md:col-span-7 grid grid-rows-2 gap-px bg-linen">
           {[
             { cat: 'Interno',       title: 'Nuovi mezzi a basse emissioni per la flotta aziendale.',    date: '02 Maggio 2024', icon: 'fa-truck' },
@@ -443,45 +405,35 @@ const clientiB = [
   <!-- ══════════════════════ CLIENTI ══════════════════════ -->
   <section class="py-24 bg-forest-mid grain overflow-hidden relative">
 
-    <!-- Thin ochre top rule -->
     <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ochre/40 to-transparent"></div>
 
-    <!-- Header -->
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mb-14 relative z-10">
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 reveal">
         <div>
-          <span class="overline text-ochre">I Nostri Clienti</span>
+          <span data-i18n="home.clients.eyebrow" class="overline text-ochre">I Nostri Clienti</span>
           <div class="rule-ochre"></div>
-          <h2 class="display-sm text-ivory italic mt-5">
+          <h2 data-i18n-html="home.clients.h2" class="display-sm text-ivory italic mt-5">
             Comuni e Istituzioni<br/>
             <span class="text-sage">che ci affidano il territorio</span>
           </h2>
         </div>
-        <p class="font-body text-ivory/30 text-sm max-w-xs lg:text-right leading-relaxed reveal delay-2">
+        <p data-i18n="home.clients.body" class="font-body text-ivory/30 text-sm max-w-xs lg:text-right leading-relaxed reveal delay-2">
           Dal 1978 al fianco di oltre 120 comuni, province ed enti pubblici della Sicilia centro-orientale.
         </p>
       </div>
     </div>
 
-    <!-- Track 1 — scrolls left -->
     <div class="overflow-hidden mb-px">
       <div class="flex w-max" style="animation: marquee-clients-l 36s linear infinite;">
         {[...clientiA, ...clientiA].map(({ name, tipo }) => (
           <div class="flex items-center gap-0 shrink-0">
-            <!-- Client card -->
             <div class="flex items-center gap-4 px-8 py-5 border-r border-white/6 group hover:bg-white/4 transition-colors cursor-default">
-              <!-- Logo placeholder -->
               <div class="w-10 h-10 shrink-0 overflow-hidden border border-white/10 group-hover:border-ochre/30 transition-colors">
                 <img src="/placeholder.jpg" alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" />
               </div>
-              <!-- Name -->
               <div>
-                <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">
-                  {name}
-                </p>
-                <p class="font-condensed text-[0.58rem] uppercase tracking-[0.18em] text-ochre/40 group-hover:text-ochre/60 transition-colors whitespace-nowrap leading-none">
-                  {tipo}
-                </p>
+                <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">{name}</p>
+                <p class="font-condensed text-[0.58rem] uppercase tracking-[0.18em] text-ochre/40 group-hover:text-ochre/60 transition-colors whitespace-nowrap leading-none">{tipo}</p>
               </div>
             </div>
           </div>
@@ -489,10 +441,8 @@ const clientiB = [
       </div>
     </div>
 
-    <!-- Thin divider between tracks -->
     <div class="h-px bg-white/5 mx-0"></div>
 
-    <!-- Track 2 — scrolls right (reverse) -->
     <div class="overflow-hidden mt-px">
       <div class="flex w-max" style="animation: marquee-clients-r 44s linear infinite;">
         {[...clientiB, ...clientiB].map(({ name, tipo }) => (
@@ -502,12 +452,8 @@ const clientiB = [
                 <img src="/placeholder.jpg" alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" />
               </div>
               <div>
-                <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">
-                  {name}
-                </p>
-                <p class="font-condensed text-[0.58rem] uppercase tracking-[0.18em] text-ochre/40 group-hover:text-ochre/60 transition-colors whitespace-nowrap leading-none">
-                  {tipo}
-                </p>
+                <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">{name}</p>
+                <p class="font-condensed text-[0.58rem] uppercase tracking-[0.18em] text-ochre/40 group-hover:text-ochre/60 transition-colors whitespace-nowrap leading-none">{tipo}</p>
               </div>
             </div>
           </div>
@@ -515,25 +461,23 @@ const clientiB = [
       </div>
     </div>
 
-    <!-- Counter strip -->
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mt-14 relative z-10">
       <div class="flex flex-wrap gap-0 border border-white/8 w-fit reveal">
         {[
-          { count: '120', suffix: '+', label: 'Clienti attivi' },
-          { count: '45',  suffix: '+', label: 'Anni di fiducia' },
-          { count: '100', suffix: '%', label: 'Rinnovi contratto' },
-        ].map(({ count, suffix, label }, i) => (
+          { count: '120', suffix: '+', lKey: 'home.clients.clientiAttivi', l: 'Clienti attivi' },
+          { count: '45',  suffix: '+', lKey: 'home.clients.anniFiducia',   l: 'Anni di fiducia' },
+          { count: '100', suffix: '%', lKey: 'home.clients.rinnovi',       l: 'Rinnovi contratto' },
+        ].map(({ count, suffix, lKey, l }, i) => (
           <div class={`px-8 py-5 ${i < 2 ? 'border-r border-white/8' : ''}`}>
             <p class="font-display text-2xl text-ochre leading-none">
               <span data-count={count + suffix}>{count}{suffix}</span>
             </p>
-            <p class="font-condensed text-[0.6rem] uppercase tracking-[0.18em] text-ivory/25 mt-1">{label}</p>
+            <p data-i18n={lKey} class="font-condensed text-[0.6rem] uppercase tracking-[0.18em] text-ivory/25 mt-1">{l}</p>
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Bottom accent line -->
     <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ochre/30 to-transparent"></div>
 
     <style>
@@ -545,7 +489,6 @@ const clientiB = [
         from { transform: translateX(-50%); }
         to   { transform: translateX(0); }
       }
-      /* Pause both tracks on section hover */
       section:has(.flex:hover) .flex[style*="marquee-clients"] {
         animation-play-state: paused;
       }
@@ -555,32 +498,30 @@ const clientiB = [
   <!-- ══════════════════════ FINAL CTA ══════════════════════ -->
   <section class="py-28 bg-forest grain relative overflow-hidden">
 
-    <!-- Giant text watermark -->
     <div class="absolute right-0 bottom-0 pointer-events-none select-none">
       <span class="font-condensed font-800 text-[20vw] text-ivory/[0.1] leading-none tracking-tighter">TALK</span>
     </div>
 
-    <!-- Ochre geometric accents -->
     <div class="absolute top-12 right-12 w-32 h-32 border border-ochre/10 rotate-45 pointer-events-none"></div>
     <div class="absolute top-20 right-20 w-16 h-16 border border-ochre/15 rotate-45 pointer-events-none"></div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
       <div class="max-w-2xl reveal">
-        <span class="overline text-ochre">Parliamo del tuo Territorio</span>
+        <span data-i18n="home.cta.eyebrow" class="overline text-ochre">Parliamo del tuo Territorio</span>
         <div class="rule-ochre"></div>
-        <h2 class="display-lg text-ivory mt-5 mb-6">
+        <h2 data-i18n-html="home.cta.h2html" class="display-lg text-ivory mt-5 mb-6">
           Costruiamo insieme<br/>
           <em class="text-sage not-italic">la soluzione su misura</em>
         </h2>
-        <p class="font-body text-ivory/40 text-lg leading-relaxed mb-12 max-w-xl">
+        <p data-i18n="home.cta.body" class="font-body text-ivory/40 text-lg leading-relaxed mb-12 max-w-xl">
           Ente pubblico o azienda privata: il nostro team è pronto ad ascoltarti e progettare il servizio ambientale più adatto alla tua realtà.
         </p>
         <div class="flex flex-wrap gap-5">
           <a href="/contatti" class="btn-primary text-base px-10 py-5">
-            Contattaci Ora <i class="fa-solid fa-envelope text-[11px]"></i>
+            <span data-i18n="home.cta.cta1">Contattaci Ora</span> <i class="fa-solid fa-envelope text-[11px]"></i>
           </a>
           <a href="/servizi" class="btn-ghost-dark text-base px-10 py-5">
-            Esplora i Servizi <i class="fa-solid fa-arrow-right text-[10px]"></i>
+            <span data-i18n="home.cta.cta2">Esplora i Servizi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </a>
         </div>
       </div>

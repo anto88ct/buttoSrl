@@ -47,7 +47,7 @@ const docLinks = [
           />
         </a>
 
-        <p class="font-body text-ivory/40 text-sm leading-relaxed max-w-xs">
+        <p data-i18n="footer.descrizione" class="font-body text-ivory/40 text-sm leading-relaxed max-w-xs">
           Dal 1978, custodi dell'ambiente siciliano. Leader nella gestione
           integrata dei rifiuti e servizi pubblici.
         </p>
@@ -65,7 +65,7 @@ const docLinks = [
 
         <!-- Social -->
         <div class="flex items-center gap-3 pt-2">
-          <span class="overline text-ivory/20 mr-1">Seguici</span>
+          <span data-i18n="footer.seguici" class="overline text-ivory/20 mr-1">Seguici</span>
           <a
             href="#"
             aria-label="LinkedIn"
@@ -85,7 +85,7 @@ const docLinks = [
 
       <!-- Navigation -->
       <div class="lg:col-span-2">
-        <p class="overline text-ivory/25 mb-7">Navigazione</p>
+        <p data-i18n="footer.navigazione" class="overline text-ivory/25 mb-7">Navigazione</p>
         <ul class="space-y-3">
           {
             navLinks.map(({ label, href }) => (
@@ -104,7 +104,7 @@ const docLinks = [
 
       <!-- Documents -->
       <div class="lg:col-span-2">
-        <p class="overline text-ivory/25 mb-7">Documenti</p>
+        <p data-i18n="footer.documenti" class="overline text-ivory/25 mb-7">Documenti</p>
         <ul class="space-y-3">
           {
             docLinks.map(({ label, href }) => (
@@ -123,7 +123,7 @@ const docLinks = [
 
       <!-- Contact -->
       <div class="lg:col-span-4">
-        <p class="overline text-ivory/25 mb-7">Contatti</p>
+        <p data-i18n="footer.contatti" class="overline text-ivory/25 mb-7">Contatti</p>
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
             <i
@@ -155,7 +155,7 @@ const docLinks = [
           <li class="mt-6 p-5 border border-ochre/20 bg-ochre/5">
             <p class="overline text-ochre/60 mb-2">
               <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>
-              Emergenze 24/7
+              <span data-i18n="footer.emergenze">Emergenze 24/7</span>
             </p>
             <p class="font-display text-ivory text-2xl">
               800 <span class="text-ochre">— — — —</span>
@@ -175,6 +175,7 @@ const docLinks = [
         © {new Date().getFullYear()} Buttò S.r.l. — Assoro (EN) · P.IVA [Da Inserire]
       </span>
       <span
+        data-i18n="footer.tagline"
         class="font-condensed text-[0.62rem] text-ivory/15 tracking-[0.2em] uppercase"
       >
         Custodi dell'Ambiente dal 1978

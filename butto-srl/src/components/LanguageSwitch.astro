@@ -1,0 +1,48 @@
+---
+---
+<div class="flex items-center gap-0.5 border border-white/10 p-1 shrink-0">
+  <button
+    data-lang-btn="it"
+    aria-label="Italiano"
+    class="lang-btn w-8 h-7 flex items-center justify-center transition-all duration-200 rounded-sm"
+  >
+    <img src="/italia.svg" alt="IT" class="w-5 h-5 object-contain" />
+  </button>
+  <span class="w-px h-4 bg-white/10"></span>
+  <button
+    data-lang-btn="en"
+    aria-label="English"
+    class="lang-btn w-8 h-7 flex items-center justify-center transition-all duration-200 rounded-sm"
+  >
+    <img src="/inglese.svg" alt="EN" class="w-5 h-5 object-contain" />
+  </button>
+</div>
+
+<script>
+  function syncLangBtns(lang: string) {
+    document.querySelectorAll<HTMLButtonElement>('[data-lang-btn]').forEach(btn => {
+      const active = btn.dataset.langBtn === lang;
+      btn.style.opacity = active ? '1' : '0.4';
+      if (active) {
+        btn.classList.add('bg-white/10');
+      } else {
+        btn.classList.remove('bg-white/10');
+      }
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('[data-lang-btn]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const lang = btn.dataset.langBtn!;
+      localStorage.setItem('lang', lang);
+      (window as any).__applyLang(lang);
+    });
+  });
+
+  const currentLang = localStorage.getItem('lang') || 'it';
+  syncLangBtns(currentLang);
+
+  document.addEventListener('langchange', (e: Event) => {
+    syncLangBtns((e as CustomEvent<string>).detail);
+  });
+</script>
