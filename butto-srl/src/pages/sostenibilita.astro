@@ -1,0 +1,205 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pilastri = [
+  { icon: 'fa-arrows-rotate',  title: 'Economia Circolare', desc: 'Recupero massimo di ogni materia prima secondaria attraverso processi certificati e catene di fornitura tracciate.' },
+  { icon: 'fa-solar-panel',    title: 'Energia Pulita',     desc: "Utilizzo crescente di fonti rinnovabili per i nostri impianti e ottimizzazione dei consumi energetici della flotta." },
+  { icon: 'fa-droplet',        title: 'Gestione Idrica',    desc: "Protocolli di risparmio idrico nelle operazioni di pulizia e sanificazione per ridurre l'impatto sulle risorse locali." },
+  { icon: 'fa-tree',           title: 'Riforestazione',     desc: "Programma di piantumazione per compensare le emissioni residue: 120.000 alberi equivalenti ogni anno." },
+];
+
+const sdgs = [
+  { code: 'SDG 11', title: 'Città e Comunità Sostenibili',           color: 'bg-ochre',       text: 'text-forest' },
+  { code: 'SDG 12', title: 'Consumo e Produzione Responsabili',      color: 'bg-forest-mid',  text: 'text-ivory' },
+  { code: 'SDG 13', title: 'Lotta contro il Cambiamento Climatico',  color: 'bg-forest-soft', text: 'text-ivory' },
+  { code: 'SDG 15', title: 'Vita sulla Terra',                       color: 'bg-sage-dim',    text: 'text-ivory' },
+];
+---
+
+<Layout
+  title="Sostenibilità"
+  description="L'impegno ambientale di Buttò S.r.l.: 4.200 tonnellate di CO₂ risparmiate, 85% di rifiuti recuperati e un piano di economia circolare certificato."
+>
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="relative min-h-[90vh] flex items-center bg-forest-mid overflow-hidden">
+
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img src="/placeholder.jpg" alt="" class="w-full h-full object-cover opacity-20" loading="eager" aria-hidden="true" />
+      <div class="absolute inset-0 bg-gradient-to-r from-forest via-forest/80 to-transparent"></div>
+    </div>
+
+    <!-- Giant watermark -->
+    <div class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden">
+      <span class="font-condensed font-800 text-[22vw] text-ivory/[0.04] leading-none tracking-tighter">TERRA</span>
+    </div>
+
+    <div class="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-14 w-full py-32">
+      <div class="max-w-3xl">
+        <span class="overline text-ochre mb-5 block reveal">Eco-Responsabilità</span>
+        <h1 class="display-xl text-ivory reveal delay-1">
+          Custodi del<br/>
+          <em class="text-sage not-italic">Domani.</em>
+        </h1>
+        <p class="font-body text-ivory/45 text-xl max-w-xl leading-relaxed mt-8 reveal delay-2">
+          La sostenibilità non è un obiettivo, ma il respiro della nostra azienda. Trasformiamo la gestione dei rifiuti in un atto di amore per il territorio siciliano.
+        </p>
+
+        <!-- Mini stats -->
+        <div class="flex flex-wrap gap-0 mt-12 border border-white/10 reveal delay-3">
+          {[
+            { v: '4.200', suf: ' Ton', l: 'CO₂ risparmiate' },
+            { v: '85', suf: '%',       l: 'rifiuti recuperati' },
+            { v: '-30', suf: '%',      l: 'emissioni flotta' },
+          ].map(({ v, suf, l }, i) => (
+            <div class={`px-8 py-6 ${i < 2 ? 'border-r border-white/10' : ''}`}>
+              <p class="font-display text-2xl text-ivory leading-none">{v}<span class="text-ochre">{suf}</span></p>
+              <p class="font-condensed text-[0.65rem] uppercase tracking-[0.18em] text-ivory/35 mt-1.5">{l}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ COMMITMENT ══════════════════════ -->
+  <section class="py-28 bg-ivory">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+        <div class="space-y-8 reveal-left">
+          <div>
+            <span class="overline text-ochre">Il Nostro Impegno</span>
+            <div class="rule-ochre"></div>
+            <h2 class="display-sm text-ink italic mt-5">Il Nostro Impegno Verde</h2>
+          </div>
+          <div class="space-y-5 font-body text-muted leading-relaxed">
+            <p>In Buttò S.r.l., ogni operazione è filtrata attraverso una lente di rigorosa etica ambientale. Non ci limitiamo a gestire risorse; archiviamo il passato industriale per far crescere un futuro rigoglioso.</p>
+            <p>Dalla logistica a basso impatto alla digitalizzazione dei processi di tracciamento, ogni nostro passo è misurato per ridurre l'impronta ecologica delle comunità che serviamo.</p>
+          </div>
+          <div class="grid grid-cols-2 gap-px bg-linen border border-linen">
+            {[
+              { icon: 'fa-leaf',       title: 'Economia Circolare', label: 'Recupero al 100%' },
+              { icon: 'fa-solar-panel',title: 'Energia Pulita',     label: 'Fonti rinnovabili' },
+            ].map(({ icon, title, label }) => (
+              <div class="bg-ivory p-6">
+                <i class={`fa-solid ${icon} text-ochre text-xl mb-3 block`}></i>
+                <p class="font-condensed font-700 text-ink text-sm">{title}</p>
+                <p class="font-body text-muted text-xs mt-0.5">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="relative reveal-right delay-1">
+          <div class="absolute -top-4 -right-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
+          <div class="img-zoom aspect-[4/5]">
+            <img src="/placeholder.jpg" alt="Operatori Buttò al lavoro" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ BENTO METRICS ══════════════════════ -->
+  <section class="py-28 bg-forest grain">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="text-center mb-16 reveal">
+        <span class="overline text-ochre">Impatto Misurabile</span>
+        <h2 class="display-sm text-ivory italic mt-4">Numeri che Respirano</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-px bg-white/8">
+
+        <!-- CO2 large -->
+        <div class="lg:col-span-8 bg-forest-mid p-12 lg:p-16 group hover:bg-forest-soft transition-colors duration-300 reveal">
+          <div class="flex items-center justify-between mb-8">
+            <i class="fa-solid fa-leaf text-sage text-2xl"></i>
+            <span class="overline text-ivory/20">Efficienza Energetica</span>
+          </div>
+          <div class="flex flex-col md:flex-row md:items-end gap-3 mb-4">
+            <span class="stat-xl text-ivory"><span data-count="4200">4.200</span></span>
+            <span class="font-condensed font-700 text-ivory/30 text-2xl pb-2 uppercase tracking-wide">Ton</span>
+          </div>
+          <h3 class="font-serif text-2xl text-ivory italic mb-5">Emissioni CO₂ Risparmiate</h3>
+          <p class="font-body text-ivory/35 text-sm leading-relaxed border-t border-white/8 pt-5 max-w-lg">
+            Ogni tonnellata risparmiata rappresenta il nostro impegno diretto — l'equivalente di 120.000 alberi piantati.
+          </p>
+        </div>
+
+        <!-- Rifiuti -->
+        <div class="lg:col-span-4 bg-ochre p-12 flex flex-col justify-between reveal delay-2">
+          <i class="fa-solid fa-recycle text-forest/40 text-2xl"></i>
+          <div class="mt-8">
+            <p class="stat-xl text-forest leading-none mb-3"><span data-count="85%">85%</span></p>
+            <h3 class="font-serif text-xl text-forest italic mb-3">Rifiuti Recuperati</h3>
+            <p class="font-body text-forest/50 text-sm border-t border-forest/10 pt-4">
+              Economia circolare certificata.
+            </p>
+          </div>
+        </div>
+
+        <!-- Bottom 3 -->
+        {[
+          { icon: 'fa-city',          v: '120+', l: 'Comuni Serviti',   sub: 'Sicilia centro-orientale' },
+          { icon: 'fa-truck',         v: '-30%', l: 'Emissioni Flotta', sub: 'Con nuovi mezzi eco' },
+          { icon: 'fa-circle-check',  v: '100%', l: 'Tracciabilità',    sub: 'Ogni operazione certificata' },
+        ].map(({ icon, v, l, sub }, i) => (
+          <div class={`lg:col-span-4 bg-forest-mid p-10 group hover:bg-forest-soft transition-colors duration-300 reveal delay-${i + 1}`}>
+            <i class={`fa-solid ${icon} text-sage/40 text-xl mb-6 block`}></i>
+            <p class="stat-xl text-ivory text-4xl leading-none mb-2"><span>{v}</span></p>
+            <p class="font-serif text-ivory italic text-lg mb-1">{l}</p>
+            <p class="font-body text-ivory/30 text-xs">{sub}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ I 4 PILASTRI ══════════════════════ -->
+  <section class="py-28 bg-ivory dot-grid">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="mb-20 reveal">
+        <span class="overline text-ochre">Principi Fondamentali</span>
+        <div class="rule-ochre"></div>
+        <h2 class="display-sm text-ink italic mt-5">I 4 Pilastri Ambientali</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-px bg-linen border border-linen">
+        {pilastri.map(({ icon, title, desc }, i) => (
+          <div class={`group bg-ivory p-10 hover:bg-forest transition-colors duration-500 flex flex-col gap-6 cursor-default reveal delay-${(i % 4) + 1}`}>
+            <div class="w-11 h-11 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors">
+              <i class={`fa-solid ${icon} text-lg text-ochre/60 group-hover:text-ochre transition-colors`}></i>
+            </div>
+            <div>
+              <h3 class="font-serif text-2xl italic text-ink group-hover:text-ivory transition-colors mb-3">{title}</h3>
+              <p class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ SDG ══════════════════════ -->
+  <section class="py-24 bg-parchment">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="text-center mb-16 reveal">
+        <span class="overline text-ochre">Agenda 2030</span>
+        <h2 class="display-sm text-ink italic mt-4">Allineati agli SDG ONU</h2>
+        <p class="font-body text-muted text-lg max-w-2xl mx-auto mt-4">
+          Le nostre operazioni contribuiscono direttamente agli Obiettivi di Sviluppo Sostenibile delle Nazioni Unite.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-linen">
+        {sdgs.map(({ code, title, color, text }, i) => (
+          <div class={`${color} p-10 text-center group hover:brightness-110 transition-all duration-300 cursor-default reveal delay-${i + 1}`}>
+            <p class={`font-display text-3xl ${text} mb-3 leading-none`}>{code}</p>
+            <p class={`font-body text-xs leading-snug ${text === 'text-forest' ? 'text-forest/60' : 'text-ivory/60'}`}>{title}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Layout>

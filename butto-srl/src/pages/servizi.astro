@@ -1,0 +1,383 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const categorie = [
+  {
+    id: 'gestione-rifiuti',
+    num: '01',
+    icon: 'fa-recycle',
+    title: 'Gestione Rifiuti',
+    bg: 'bg-forest',
+    dark: true,
+    servizi: [
+      { icon: 'fa-industry',      title: 'Logistica Industriale',   bento: 'lg:col-span-3 lg:row-span-2', desc: "Trasporto e smaltimento certificato di rifiuti speciali e pericolosi, con tracciabilità digitale completa e conformità normativa." },
+      { icon: 'fa-arrows-rotate', title: 'Economia Circolare',      bento: 'lg:col-span-2',               desc: 'Consulenza strategica per la riduzione degli scarti e ottimizzazione del recupero materie prime in ottica Zero Waste.' },
+      { icon: 'fa-truck',         title: 'Raccolta Differenziata',  bento: 'lg:col-span-2',               desc: 'Pianificazione e gestione di sistemi di raccolta differenziata per comuni e aziende, con obiettivi superiori al 65%.' },
+    ],
+  },
+  {
+    id: 'pulizie-pubbliche',
+    num: '02',
+    icon: 'fa-broom',
+    title: 'Pulizie Enti Pubblici',
+    bg: 'bg-parchment',
+    dark: false,
+    servizi: [
+      { icon: 'fa-building-columns', title: 'Patrimonio Istituzionale', bento: 'lg:col-span-2',  desc: 'Sanificazione di sedi istituzionali, uffici comunali e archivi storici con prodotti a ridotto impatto ambientale.' },
+      { icon: 'fa-school',           title: 'Istituti Scolastici',      bento: 'lg:col-span-3',  desc: 'Pulizia e igienizzazione di scuole di ogni ordine e grado, con protocolli dedicati alla sicurezza dei bambini.' },
+      { icon: 'fa-hospital',         title: 'Strutture Sanitarie',      bento: 'lg:col-span-5',  desc: 'Sanificazione specializzata di strutture ospedaliere con metodologie certificate di controllo infezioni.' },
+    ],
+  },
+  {
+    id: 'verde-urbano',
+    num: '03',
+    icon: 'fa-tree',
+    title: 'Verde Urbano',
+    bg: 'bg-forest',
+    dark: true,
+    servizi: [
+      { icon: 'fa-seedling', title: 'Spazi Pubblici',        bento: 'lg:col-span-3', desc: 'Gestione del verde pubblico, parchi gioco e aree ricreative per il decoro urbano e la sicurezza cittadina.' },
+      { icon: 'fa-road',     title: 'Manutenzione Stradale', bento: 'lg:col-span-2', desc: 'Pulizia e decoro di viali, marciapiedi, aree pedonali e spazi condivisi nelle aree urbane e periurbane.' },
+    ],
+  },
+  {
+    id: 'economia-circolare',
+    num: '04',
+    icon: 'fa-earth-europe',
+    title: 'Sostenibilità & Consulenza',
+    bg: 'bg-parchment',
+    dark: false,
+    servizi: [
+      { icon: 'fa-chart-bar',  title: 'Audit Ambientale', bento: 'lg:col-span-2', desc: "Analisi dei processi aziendali per identificare opportunità di riduzione degli sprechi e miglioramento dell'efficienza ambientale." },
+      { icon: 'fa-circle-dot', title: 'Piano Zero Waste',  bento: 'lg:col-span-3', desc: 'Strategie personalizzate per raggiungere obiettivi di zero conferimento in discarica attraverso recupero e riciclo.' },
+    ],
+  },
+];
+
+const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'Attestazione SOA'];
+---
+
+<Layout
+  title="Servizi"
+  description="I servizi di Buttò S.r.l.: gestione rifiuti speciali, pulizie enti pubblici, verde urbano ed economia circolare per il territorio siciliano."
+>
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="relative py-36 bg-ivory dot-grid overflow-hidden">
+
+    <!-- LAVORO watermark — parallax via JS -->
+    <div id="lavoro-wm" class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
+      <span class="font-condensed font-800 text-[24vw] text-ink/[0.04] leading-none tracking-tighter">LAVORO</span>
+    </div>
+
+    <!-- Editorial catalogue tag -->
+    <div class="absolute top-8 right-14 hidden lg:flex items-center gap-3 pointer-events-none select-none">
+      <span class="font-condensed text-[0.6rem] tracking-[0.3em] uppercase text-muted/40">Catalogo Servizi</span>
+      <span class="font-condensed font-700 text-[0.6rem] tracking-[0.2em] text-ochre/50">2025</span>
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <span class="overline text-ochre mb-5 block reveal">I Nostri Servizi</span>
+      <h1 class="display-xl text-ink reveal delay-1" style="text-wrap: balance;">
+        Custodi del<br/>
+        <em class="text-forest-soft not-italic">Bene Comune</em>
+      </h1>
+      <p class="font-body text-muted text-xl max-w-2xl leading-relaxed mt-8 reveal delay-2">
+        Soluzioni integrate per l'ambiente attraverso una gestione consapevole delle risorse e la cura meticolosa degli spazi pubblici siciliani.
+      </p>
+
+      <!-- Quick nav -->
+      <div class="flex flex-wrap gap-3 mt-10 reveal delay-3">
+        {categorie.map(({ id, num, title }) => (
+          <a href={`#${id}`} class="cat-nav-link font-condensed font-600 text-[0.7rem] uppercase tracking-[0.14em] px-4 py-2.5 border border-linen text-muted hover:border-ochre hover:text-ochre transition-all duration-200">
+            {num} — {title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ SERVICE CATEGORIES ══════════════════════ -->
+  {categorie.map(({ id, num, icon, title, bg, dark, servizi }) => (
+    <section
+      id={id}
+      class:list={[
+        'relative py-24 overflow-hidden service-section',
+        bg,
+        dark ? 'grain grain-anim spotlight-section' : '',
+      ]}
+    >
+      <!-- Vertical editorial serial tag -->
+      <div
+        class:list={[
+          'absolute top-1/2 -translate-y-1/2 pointer-events-none select-none hidden xl:flex flex-col items-center gap-4',
+          dark ? 'left-5' : 'right-5',
+        ]}
+      >
+        <span
+          class:list={[
+            'font-condensed font-700 text-[0.55rem] tracking-[0.35em] uppercase',
+            dark ? 'text-ivory/20' : 'text-ink/18',
+          ]}
+          style="writing-mode: vertical-rl; transform: rotate(180deg);"
+        >
+          §{num} — Buttò S.r.l.
+        </span>
+        <span
+          class="w-px h-14 block"
+          style={dark ? 'background: rgba(242,237,223,0.1)' : 'background: rgba(30,28,23,0.08)'}
+        ></span>
+      </div>
+
+      <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+
+        <!-- Category header -->
+        <div class:list={[
+          'flex items-center gap-6 mb-16 pb-8 border-b reveal-blur',
+          dark ? 'border-white/10' : 'border-linen',
+        ]}>
+          <span class:list={[
+            'font-condensed font-800 text-[5rem] leading-none tracking-tighter select-none',
+            dark ? 'text-ivory/[0.07]' : 'text-ink/[0.06]',
+          ]}>{num}</span>
+          <div>
+            <div class="flex items-center gap-3 mb-1">
+              <i class:list={['fa-solid', icon, 'text-2xl text-ochre service-icon-inner']}></i>
+              <h2 class:list={[
+                'display-sm italic',
+                dark ? 'text-ivory' : 'text-ink',
+              ]} style="text-wrap: balance;">{title}</h2>
+            </div>
+            <div class="h-px w-16 bg-ochre mt-2"></div>
+          </div>
+        </div>
+
+        <!-- Bento grid -->
+        <div class:list={[
+          'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px',
+          dark ? 'bg-white/10' : 'bg-black/[0.06]',
+        ]}>
+          {servizi.map(({ icon: sIcon, title: sTitle, desc, bento }, i) => (
+            <div
+              class:list={[
+                'group p-10 flex flex-col gap-6 cursor-default bento-card reveal-blur',
+                bento,
+                dark
+                  ? 'bg-forest-mid hover:bg-forest-soft'
+                  : 'bg-ivory hover:bg-forest',
+                'transition-colors duration-500',
+              ]}
+              style={`transition-delay: ${i * 0.1}s`}
+            >
+              <div class:list={[
+                'w-11 h-11 border flex items-center justify-center flex-shrink-0',
+                dark ? 'border-white/10 group-hover:border-ochre/40' : 'border-linen group-hover:border-ochre/40',
+                'transition-colors duration-300',
+              ]}>
+                <i class:list={[
+                  'fa-solid', sIcon,
+                  'text-base text-ochre/60 group-hover:text-ochre transition-colors service-icon-inner',
+                ]}></i>
+              </div>
+              <div class="flex-1">
+                <h3 class:list={[
+                  'font-serif text-xl italic leading-tight mb-3 transition-colors',
+                  dark ? 'text-ivory group-hover:text-sage' : 'text-ink group-hover:text-ivory',
+                ]} style="text-wrap: balance;">{sTitle}</h3>
+                <p class:list={[
+                  'font-body text-sm leading-relaxed transition-colors',
+                  dark ? 'text-ivory/45 group-hover:text-ivory/60' : 'text-muted group-hover:text-ivory/55',
+                ]}>{desc}</p>
+              </div>
+              <span class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ochre/60 group-hover:text-ochre flex items-center gap-2 group-hover:gap-3 transition-all">
+                Informazioni <i class="fa-solid fa-arrow-right text-[9px]"></i>
+              </span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  ))}
+
+  <!-- ══════════════════════ CERTIFICATIONS — infinite marquee ══════════════════════ -->
+  <section class="py-24 bg-forest grain grain-anim overflow-hidden">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mb-16">
+      <div class="text-center reveal-blur">
+        <span class="overline text-ochre">Le Nostre Garanzie</span>
+        <div class="h-px w-8 bg-ochre mx-auto mt-4 mb-0"></div>
+        <h2 class="display-sm text-ivory italic mt-5" style="text-wrap: balance;">Qualità Certificata</h2>
+      </div>
+    </div>
+
+    <!-- Marquee track with edge fades -->
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, #0D1A10, transparent);"></div>
+      <div class="absolute inset-y-0 right-0 w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, #0D1A10, transparent);"></div>
+
+      <div class="marquee-track cert-track">
+        {[...certs, ...certs, ...certs, ...certs].map((c) => (
+          <a
+            href="/certificazioni"
+            class="group cert-card flex-shrink-0 mx-5 flex flex-col items-center gap-5 px-14 py-10 border border-white/8 hover:border-ochre/35 transition-all duration-500 hover:bg-forest-mid"
+            style="min-width: 230px;"
+          >
+            <i class="fa-solid fa-certificate text-3xl text-ochre/50 group-hover:text-ochre transition-colors duration-300"></i>
+            <p class="font-serif text-base text-ivory/75 group-hover:text-ivory text-center leading-tight transition-colors">{c}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CTA ══════════════════════ -->
+  <section class="py-24 bg-ivory">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 text-center reveal-blur">
+      <span class="overline text-ochre">Serve una soluzione su misura?</span>
+      <h2 class="display-sm text-ink italic mt-4 mb-5" style="text-wrap: balance;">Ogni territorio è unico</h2>
+      <p class="font-body text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+        Il nostro team è pronto ad ascoltarti e progettare il servizio più adatto alla tua realtà.
+      </p>
+      <a href="/contatti" class="btn-primary px-10 py-5">
+        Richiedi un preventivo <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<!-- ══════════════════════ PAGE-SPECIFIC STYLES ══════════════════════ -->
+<style is:global>
+
+  /* ── Reveal with blur ────────────────────────────────────────── */
+  .reveal-blur {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(5px);
+    transition:
+      opacity  0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      filter   0.85s ease;
+  }
+  .reveal-blur.visible {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+
+  /* ── Spotlight on dark sections ─────────────────────────────── */
+  .spotlight-section {
+    --sx: 50%;
+    --sy: 50%;
+  }
+  .spotlight-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      680px circle at var(--sx) var(--sy),
+      rgba(196, 146, 42, 0.072),
+      transparent 60%
+    );
+    pointer-events: none;
+    z-index: 1;
+    transition: background 0.05s linear;
+  }
+
+  /* ── Animated grain ──────────────────────────────────────────── */
+  @keyframes grainShift {
+    0%, 100% { background-position:   0px   0px; }
+    20%       { background-position: -28px -14px; }
+    40%       { background-position:  12px  26px; }
+    60%       { background-position: -14px  10px; }
+    80%       { background-position:  22px -22px; }
+  }
+  .grain-anim::after {
+    animation: grainShift 0.7s steps(1) infinite;
+  }
+
+  /* ── Icon pop on section entry ───────────────────────────────── */
+  @keyframes iconPop {
+    0%   { transform: scale(0.55) rotate(-8deg); opacity: 0; }
+    55%  { transform: scale(1.18) rotate(4deg);  opacity: 1; }
+    100% { transform: scale(1)    rotate(0deg);  opacity: 1; }
+  }
+  .section-active .service-icon-inner {
+    animation: iconPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  .section-active .bento-card:nth-child(2) .service-icon-inner { animation-delay: 0.12s; }
+  .section-active .bento-card:nth-child(3) .service-icon-inner { animation-delay: 0.24s; }
+  .section-active .bento-card:nth-child(4) .service-icon-inner { animation-delay: 0.36s; }
+
+  /* ── Cert marquee speed ──────────────────────────────────────── */
+  .cert-track {
+    animation-duration: 26s;
+  }
+
+  /* ── Bento row-span min-height ───────────────────────────────── */
+  @media (min-width: 1024px) {
+    .lg\:row-span-2 { min-height: 360px; }
+  }
+
+  /* ── Cat nav active highlight ────────────────────────────────── */
+  .cat-nav-link.is-active {
+    border-color: var(--ochre);
+    color: var(--ochre);
+  }
+
+</style>
+
+<!-- ══════════════════════ PAGE-SPECIFIC SCRIPTS ══════════════════════ -->
+<script>
+  /* ── LAVORO watermark parallax ── */
+  const lavoro = document.getElementById('lavoro-wm');
+  window.addEventListener('scroll', () => {
+    if (!lavoro) return;
+    lavoro.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.13}px))`;
+  }, { passive: true });
+
+  /* ── Reveal-blur observer ── */
+  const blurIO = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        (e.target as HTMLElement).classList.add('visible');
+        blurIO.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.07, rootMargin: '0px 0px -30px 0px' }
+  );
+  document.querySelectorAll('.reveal-blur').forEach(el => blurIO.observe(el));
+
+  /* ── Spotlight effect on forest sections ── */
+  document.querySelectorAll<HTMLElement>('.spotlight-section').forEach(section => {
+    section.addEventListener('mousemove', e => {
+      const r = section.getBoundingClientRect();
+      section.style.setProperty('--sx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+      section.style.setProperty('--sy', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+    });
+  });
+
+  /* ── Section entry: icon pop animations ── */
+  const sectionIO = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('section-active');
+    }),
+    { threshold: 0.18 }
+  );
+  document.querySelectorAll('.service-section').forEach(s => sectionIO.observe(s));
+
+  /* ── Cat nav: active highlight on scroll ── */
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>('.cat-nav-link');
+  const activeIO = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+        });
+      }
+    }),
+    { rootMargin: '-38% 0px -38% 0px' }
+  );
+  document.querySelectorAll<HTMLElement>('.service-section').forEach(s => activeIO.observe(s));
+</script>

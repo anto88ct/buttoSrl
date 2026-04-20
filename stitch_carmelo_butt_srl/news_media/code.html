@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>News &amp; Aggiornamenti | Buttò S.r.l.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#9dcee3",
+              "inverse-surface": "#31312d",
+              "on-primary-fixed-variant": "#205034",
+              "inverse-on-surface": "#f3f0ea",
+              "primary-fixed": "#bbefc9",
+              "surface-bright": "#fcf9f3",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#ffb955",
+              "on-tertiary-fixed-variant": "#164d5e",
+              "error": "#ba1a1a",
+              "primary-fixed-dim": "#9fd2ae",
+              "surface-variant": "#e5e2dc",
+              "on-tertiary": "#ffffff",
+              "on-error": "#ffffff",
+              "surface-dim": "#dcdad4",
+              "surface-container-high": "#ebe8e2",
+              "primary-container": "#2d5c3f",
+              "on-primary": "#ffffff",
+              "on-secondary-fixed-variant": "#633f00",
+              "on-surface-variant": "#414942",
+              "surface-container-highest": "#e5e2dc",
+              "tertiary-fixed": "#baeaff",
+              "inverse-primary": "#9fd2ae",
+              "outline": "#717971",
+              "secondary-container": "#fdb241",
+              "surface-container": "#f0eee8",
+              "on-secondary": "#ffffff",
+              "on-surface": "#1c1c18",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#001f29",
+              "on-primary-fixed": "#00210f",
+              "secondary-fixed": "#ffddb5",
+              "secondary": "#835500",
+              "surface": "#fcf9f3",
+              "on-background": "#1c1c18",
+              "tertiary": "#034253",
+              "surface-container-low": "#f6f3ed",
+              "on-secondary-container": "#6e4600",
+              "surface-tint": "#39684a",
+              "primary": "#144429",
+              "on-tertiary-container": "#9dcee4",
+              "on-secondary-fixed": "#2a1800",
+              "on-primary-container": "#9fd2ae",
+              "outline-variant": "#c1c9c0",
+              "tertiary-container": "#26596b",
+              "background": "#fcf9f3",
+              "error-container": "#ffdad6"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Public Sans"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .organic-wave-bg {
+            mask-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 25 20 50 50 T 100 50 V 100 H 0 Z' fill='black'/%3E%3C/svg%3E");
+            mask-size: cover;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-secondary-container">
+<!-- Top Navigation Bar -->
+<nav class="sticky top-0 w-full z-50 bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-md shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<img alt="Buttò S.r.l. Logo" class="h-10 w-auto" data-alt="professional logo for environmental services company with organic green wave shapes and serif typography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCD8OEeaN2i2QQeAO9pANY8eDrS__v9Y4S4lXgPI_vbLQf9cnJd9BBS2veMOwOmy6cicbW7MGNrjB6wLqaOnvEO7D3Zxr2n97T4DtfceldPQ2aPtJjk9K0TaB9xttSgN1a4ufLESOL-v1onqQA17NgpnLuOTpeJExCsN3qUJsuuPx6_CIxwynF5dLc6GnMH-DYDB5Zktipl7ySFEMYuDUFI_WmCNx3uuZiGBTU7zJkpJDUTCnkX6AtPr0EUk1sMh-Wj06EHXKOPiA"/>
+<span class="text-2xl font-bold tracking-tight text-primary dark:text-primary-light font-headline">Buttò S.r.l.</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant-dark hover:text-primary transition-colors text-sm font-medium tracking-tight" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant-dark hover:text-primary transition-colors text-sm font-medium tracking-tight" href="#">Chi Siamo</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant-dark hover:text-primary transition-colors text-sm font-medium tracking-tight" href="#">Servizi</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant-dark hover:text-primary transition-colors text-sm font-medium tracking-tight" href="#">Sostenibilità</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant-dark hover:text-primary transition-colors text-sm font-medium tracking-tight" href="#">Lavora con Noi</a>
+<a class="text-primary dark:text-primary-light font-bold border-b-2 border-secondary text-sm tracking-tight" href="#">News</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-xl font-medium text-sm hover:opacity-90 transition-all scale-95 duration-200 ease-in-out">
+                Contattaci
+            </button>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-8 py-16">
+<!-- Editorial Header -->
+<header class="mb-20">
+<div class="inline-block px-4 py-1 mb-6 bg-secondary-container/20 text-secondary font-label text-xs tracking-widest uppercase rounded-full">
+                L'Archivio Organico
+            </div>
+<h1 class="text-6xl md:text-8xl font-headline font-bold text-primary tracking-tighter max-w-4xl leading-[0.9] mb-8">
+                Cronache della <br/><span class="italic text-secondary">Sostenibilità</span>.
+            </h1>
+<p class="text-xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+                Tutte le ultime novità riguardanti le normative ambientali, le innovazioni tecnologiche nel settore dei rifiuti e gli aggiornamenti dalla sede di Buttò S.r.l.
+            </p>
+</header>
+<!-- Featured News (Asymmetric Layout) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+<div class="lg:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-low p-8 md:p-12 flex flex-col justify-end min-h-[600px]">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="vibrant overhead shot of a dense green forest with morning mist rolling through the valleys between trees" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDxDbFa5WO4xG5Xd_VMg6i5W4ac4WFnKsxWjt1NZhhEeooqgXPWIjf9tqRxRVQXvVszSahy8LPmLtUL6fZxXGYFr1STkmkcUGJKXFVwVH_iBTpPIS4s8sOufktxZybBGrlRfCHmjKCzcvmfMHr266mNT7_fC92sQPHqNAUpyPqO-klilhrpOrV3AsS_UaxVYm_dbb2ZhAdHVCEQ08wosftJTlYN-9WF6q9jeplcjoGyO9O6DskPYhSdblmpOxbFpKfwVoxZymS9Mg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent"></div>
+<div class="relative z-10">
+<span class="text-primary-fixed font-label text-xs tracking-widest uppercase mb-4 block">Normative 2024</span>
+<h2 class="text-4xl md:text-5xl font-headline font-bold text-on-primary mb-6 leading-tight max-w-2xl">
+                        Nuovo Albo Gestori Ambientali: Le novità introdotte dal decreto legislativo.
+                    </h2>
+<p class="text-primary-fixed/80 max-w-xl mb-8 font-body">
+                        Analisi approfondita dei nuovi requisiti tecnici e delle tempistiche di adeguamento per le imprese di smaltimento e trasporto.
+                    </p>
+<div class="flex items-center gap-4 text-on-primary/70 text-sm">
+<span class="font-bold">14 Maggio 2024</span>
+<span class="w-1 h-1 rounded-full bg-secondary"></span>
+<span>Lettura: 8 min</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-8">
+<div class="flex-1 bg-surface-container-high rounded-xl p-8 flex flex-col justify-between">
+<div>
+<span class="text-secondary font-label text-xs tracking-widest uppercase mb-4 block">Interno</span>
+<h3 class="text-2xl font-headline font-bold text-primary mb-4 leading-snug">
+                            Investimento Tecnologico: Nuovi mezzi a basse emissioni.
+                        </h3>
+</div>
+<div class="text-on-surface-variant text-sm border-t border-outline-variant/30 pt-6">
+<p class="mb-4">Buttò S.r.l. rinnova la flotta per ridurre del 30% l'impatto di CO2 nei trasporti logistici.</p>
+<span class="font-semibold text-primary">02 Maggio 2024</span>
+</div>
+</div>
+<div class="flex-1 bg-primary text-on-primary rounded-xl p-8 flex flex-col justify-between relative overflow-hidden">
+<div class="absolute -right-8 -bottom-8 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="eco">eco</span>
+</div>
+<div class="relative z-10">
+<span class="text-primary-fixed font-label text-xs tracking-widest uppercase mb-4 block">Certificazioni</span>
+<h3 class="text-2xl font-headline font-bold mb-4 leading-snug">
+                            Ottenuta la certificazione ISO 14001:2015.
+                        </h3>
+</div>
+<div class="relative z-10 text-primary-fixed/80 text-sm border-t border-primary-container pt-6">
+<p class="mb-4">Un traguardo che conferma il nostro impegno costante per l'ambiente e la trasparenza.</p>
+<span class="font-semibold">28 Aprile 2024</span>
+</div>
+</div>
+</div>
+</section>
+<!-- News Grid -->
+<section class="mb-20">
+<div class="flex items-center justify-between mb-12 border-b border-surface-container-highest pb-6">
+<h2 class="text-3xl font-headline font-bold text-primary">Ultimi Aggiornamenti</h2>
+<div class="flex gap-4">
+<button class="p-2 border border-outline-variant/20 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 border border-outline-variant/20 rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+<!-- Article 1 -->
+<article class="flex flex-col group">
+<div class="aspect-[16/10] bg-surface-container-high rounded-xl mb-6 overflow-hidden">
+<img alt="Recycling process" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="close-up of clean glass bottles in a recycling container with soft natural morning light reflecting on surfaces" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdMC8nurCRZGgLh4O7C6JOxQJiOzhWr2PTMriM_7BIoXESjT2vUmBZ-XSIhAmzbINsNAmWWMTIzp3NaQqsPoOwRhY5yCcymgRxRYKKCAW_e2_Xm93VPygo0_SzMTeBtDg7jauqdtcsHG8W7nM3R7JNOH3knEo0C9ivwGe_zpuhZ_UsdwxSZ5AjzqFS09iaqngURAt37nGpKoBHQ5IIvJ3XoGYAsAt1WPpCSGkXyfu2JcIsnhIOS-HKBxydvG8OYQyLp5v38c4qmA"/>
+</div>
+<div class="flex items-center gap-3 mb-4">
+<span class="text-[10px] font-label tracking-widest uppercase px-2 py-0.5 border border-outline-variant/30 text-on-surface-variant rounded">Economia Circolare</span>
+<span class="text-xs text-on-surface-variant/60 font-medium">15 Aprile 2024</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-primary mb-3 leading-snug group-hover:text-secondary transition-colors">
+                        Il futuro del riciclo del vetro: nuove frontiere tecnologiche.
+                    </h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 flex-grow">
+                        Scopriamo come le nuove tecniche di separazione ottica stanno trasformando l'efficienza degli impianti di trattamento.
+                    </p>
+<a class="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider group/link" href="#">
+                        Leggi di più 
+                        <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</article>
+<!-- Article 2 -->
+<article class="flex flex-col group">
+<div class="aspect-[16/10] bg-surface-container-high rounded-xl mb-6 overflow-hidden">
+<img alt="Clean city" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="wide angle shot of a clean modern european city square at dusk with soft golden artificial lighting and historic architecture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSW5DdrBzTIF_p5Yv94UZIU_vZlbW3-14OYGSoU_RXNzcJxSLEMxGJ0CZ0HPLQ2aXdQTMtmVqbpf_5Ei9vCZcOIzDj90ETEvJ26tHBdLfUVqotb0yT9DpRAv3FnqEYMpl9VGIECQZZ4hnhcUdSbl9WShqkE_L25uN4oyuUlGK7V-GmE8lOAWVHzjCN6co14TVAlqfsokeY0ULvDAsuYn5mumSA1FTazwQV3BFb9RT9t_93xjVIuUtbf0j7Y54D3o-eaUQsLwsZCw"/>
+</div>
+<div class="flex items-center gap-3 mb-4">
+<span class="text-[10px] font-label tracking-widest uppercase px-2 py-0.5 border border-outline-variant/30 text-on-surface-variant rounded">Urbanistica</span>
+<span class="text-xs text-on-surface-variant/60 font-medium">10 Aprile 2024</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-primary mb-3 leading-snug group-hover:text-secondary transition-colors">
+                        Città più pulite: la gestione intelligente dei rifiuti urbani.
+                    </h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 flex-grow">
+                        Come i sensori IoT stanno aiutando Buttò S.r.l. a ottimizzare i percorsi di raccolta, riducendo rumore ed emissioni.
+                    </p>
+<a class="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider group/link" href="#">
+                        Leggi di più 
+                        <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</article>
+<!-- Article 3 -->
+<article class="flex flex-col group">
+<div class="aspect-[16/10] bg-surface-container-high rounded-xl mb-6 overflow-hidden">
+<img alt="Environmental education" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="dappled sunlight filtering through tall green trees in a silent peaceful woodland during spring afternoon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZyogyjf01lRZm833t4Yn_HVN5yteyUYWeKCk8XbTEYD5tATb0s8RScWrJyXrP3Bl126bN6kLcLqiaHndLxm9X8GmBrilPNM-tj_3xmfqei1Z-OKZ8WkNiTf5XTiX6rRu3vekF7h2fhauU6QbzaG1KkNI-kEL2xCWOKwOn2yOc902jLDy08Q_u3Hldw3TaP4xchG-lTMOoCAF3rFC_y4sLfghOfYhpxUfPRnxwqzqvwMx4XVn2Tf20Y67IOZJOCNV3btgCQfpCPQ"/>
+</div>
+<div class="flex items-center gap-3 mb-4">
+<span class="text-[10px] font-label tracking-widest uppercase px-2 py-0.5 border border-outline-variant/30 text-on-surface-variant rounded">Educational</span>
+<span class="text-xs text-on-surface-variant/60 font-medium">05 Aprile 2024</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-primary mb-3 leading-snug group-hover:text-secondary transition-colors">
+                        Educazione Ambientale nelle scuole: il progetto "Buttò Green".
+                    </h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6 flex-grow">
+                        Iniziative locali per sensibilizzare le nuove generazioni sull'importanza della raccolta differenziata e del riuso.
+                    </p>
+<a class="flex items-center gap-2 text-primary text-xs font-bold uppercase tracking-wider group/link" href="#">
+                        Leggi di più 
+                        <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</article>
+</div>
+<!-- Pagination -->
+<div class="mt-20 flex justify-center items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="bg-surface-container-low rounded-2xl p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-12 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[400px]" data-icon="mail">mail</span>
+</div>
+<div class="max-w-xl relative z-10 text-center md:text-left">
+<h2 class="text-4xl font-headline font-bold text-primary mb-4">Resta Aggiornato.</h2>
+<p class="text-on-surface-variant">Iscriviti alla nostra newsletter per ricevere mensilmente gli ultimi aggiornamenti normativi e le news di settore direttamente nella tua casella di posta.</p>
+</div>
+<div class="w-full md:w-auto relative z-10">
+<form class="flex flex-col sm:flex-row gap-4">
+<input class="px-6 py-4 rounded-xl border-none bg-surface-container-highest focus:ring-2 focus:ring-primary/20 w-full sm:w-80 font-body text-sm" placeholder="La tua email professionale" type="email"/>
+<button class="px-8 py-4 bg-primary text-on-primary rounded-xl font-bold text-sm hover:bg-primary/90 transition-all">Iscriviti</button>
+</form>
+<p class="text-[10px] text-on-surface-variant/60 mt-4 text-center md:text-left">Iscrivendoti accetti la nostra Privacy Policy e il trattamento dei dati personali.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-surface-container-low-dark w-full rounded-t-none">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-16 max-w-screen-2xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-3 mb-6">
+<img alt="Buttò Logo" class="h-8" data-alt="company logo icon with organic flow and dark green aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1RCI3UzX-IvcZwOVMOhK6zefZyExp2Bd30qLfT-Ws7onJjl8Fzk0oIrUm-13JKJNBt_SXuq9BbGHR-yMfYIbtxxB6QbWmou0jvVlBSvEdxHJ70q1WD-POQMUL1fl-CvJQAGtaaRi3Skdbzd6SJqSI7jMODgW8PUOP6If6s_8hXY8yHVOMd0HQ8G6qqXC9KEAL2bzIBdc7zm10oObZc0NMDlFR9TKWjJeSmllQb7ORXG9UdzLmVEs_a4pYxGLHTQktfN1mrUHi7w"/>
+<span class="text-xl font-bold text-primary dark:text-primary-light font-headline italic">Buttò S.r.l.</span>
+</div>
+<p class="text-on-surface-variant/80 text-sm leading-relaxed mb-6 font-body">
+                    Custodi dell'ambiente, architetti della sostenibilità. Dal 1980 operiamo con eccellenza nella gestione delle risorse.
+                </p>
+<div class="flex gap-4">
+<a class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+</a>
+<a class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
+</a>
+</div>
+</div>
+<div>
+<h4 class="text-primary font-label text-xs tracking-wider uppercase mb-8">Servizi</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Smaltimento Rifiuti</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Consulenza Ambientale</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Logistica Integrata</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Bonifiche</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-primary font-label text-xs tracking-wider uppercase mb-8">Azienda</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Chi Siamo</a></li>
+<li><a class="text-secondary dark:text-secondary-light font-semibold text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">News &amp; Blog</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Sostenibilità</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Contatti</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-primary font-label text-xs tracking-wider uppercase mb-8">Note Legali</h4>
+<ul class="space-y-4">
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Cookie Policy</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Certificazioni ISO</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary text-sm transition-all hover:underline underline-offset-4 decoration-secondary" href="#">Albo Gestori</a></li>
+</ul>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-outline-variant/10 max-w-screen-2xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="text-on-surface-variant/60 text-[10px] tracking-widest uppercase font-label">
+                © 2024 Buttò S.r.l. - Sede Legale: Via dell'Ambiente 1, Italia - P.IVA 0123456789
+            </span>
+<div class="flex gap-6">
+<span class="text-[10px] font-label text-on-surface-variant/40 tracking-widest uppercase">Ethics First</span>
+<span class="text-[10px] font-label text-on-surface-variant/40 tracking-widest uppercase">Green Verified</span>
+</div>
+</div>
+</footer>
+</body></html>

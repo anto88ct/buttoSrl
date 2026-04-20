@@ -1,0 +1,301 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const valori = [
+  { icon: 'fa-handshake',     title: 'Integrità',             desc: 'Ogni contratto e ogni operazione è gestita con la massima trasparenza verso la comunità e le istituzioni.' },
+  { icon: 'fa-leaf',          title: 'Rispetto Ambientale',   desc: "L'ambiente non è il nostro campo di lavoro, è il nostro mandato morale. Ogni azione mira a lasciare il territorio migliore di com'era." },
+  { icon: 'fa-users',         title: 'Radici Comunitarie',    desc: "Siamo un'azienda di Assoro. Conosciamo ogni strada, ogni borgo, ogni esigenza del territorio ennese." },
+  { icon: 'fa-arrow-trend-up',title: 'Innovazione Continua',  desc: 'Investiamo in tecnologie a basse emissioni, tracciabilità digitale e processi di economia circolare certificati.' },
+];
+
+const timeline = [
+  { year: '1978', title: 'La Fondazione',         desc: "Carmelo Buttò avvia la prima attività di raccolta rifiuti ad Assoro, ponendo le fondamenta di quella che diventerà un punto di riferimento regionale." },
+  { year: '1990', title: 'Primo Appalto Pubblico', desc: "L'azienda si aggiudica il primo contratto di pulizia con un ente pubblico siciliano, aprendo la strada alla specializzazione istituzionale." },
+  { year: '2005', title: 'Certificazione ISO',    desc: "Buttò S.r.l. ottiene la certificazione ISO 14001, diventando una delle prime realtà del settore nella regione. <a href='/certificazioni' class='text-ochre hover:text-ochre/80 transition-colors underline decoration-ochre/30 underline-offset-2'>Scopri le certificazioni</a>" },
+  { year: '2018', title: 'Rinnovo della Flotta',  desc: "Investimento strategico in mezzi a basse emissioni e sistemi digitali di tracciamento per ridurre l'impatto ambientale del 30%." },
+  { year: 'Oggi', title: "L'Archivio Organico",   desc: '45 anni dopo, Buttò S.r.l. opera in oltre 120 comuni siciliani portando avanti la visione del fondatore: un territorio pulito è un territorio che vive.' },
+];
+---
+
+<Layout
+  title="Chi Siamo"
+  description="La storia di Buttò S.r.l. – dall'eredità del fondatore Carmelo Buttò ai valori che guidano oggi l'azienda nella gestione ambientale ad Assoro (EN)."
+>
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="relative py-36 bg-ivory dot-grid overflow-hidden">
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
+      <span class="font-condensed font-800 text-[24vw] text-ink/[0.04] leading-none tracking-tighter">STORIA</span>
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <span class="overline text-ochre mb-5 block reveal">La Nostra Storia</span>
+      <h1 class="display-xl text-ink reveal delay-1">
+        Un Omaggio al<br/>
+        <em class="text-forest-soft not-italic">Fondatore</em>
+      </h1>
+      <p class="font-body text-muted text-xl max-w-2xl leading-relaxed mt-8 reveal delay-2">
+        La storia di Buttò S.r.l. è la storia di un uomo, di una famiglia e di un amore incondizionato per la Sicilia.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FONDATORE ══════════════════════ -->
+  <section class="py-28 bg-ivory">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="grid lg:grid-cols-12 gap-16 items-center">
+
+        <div class="lg:col-span-5 reveal-left">
+          <div class="relative">
+            <!-- Offset decorative border -->
+            <div class="absolute -top-4 -left-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
+            <div class="img-zoom aspect-[3/4]">
+              <img src="/placeholder.jpg" alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent"></div>
+            </div>
+            <!-- Year label -->
+            <div class="absolute top-6 right-6 bg-ochre text-forest px-4 py-2.5">
+              <p class="font-condensed font-800 text-xs uppercase tracking-[0.2em] text-forest/60">Fondazione</p>
+              <p class="font-display text-3xl leading-none">1978</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-8 reveal-right delay-1">
+          <div>
+            <span class="overline text-ochre">Carmelo Buttò</span>
+            <div class="rule-ochre"></div>
+            <h2 class="display-sm text-ink mt-5 italic">Il Custode</h2>
+          </div>
+
+          <!-- Pull quote -->
+          <blockquote class="border-l-2 border-ochre pl-7 py-2 my-8">
+            <p class="font-serif text-xl italic text-muted leading-relaxed">
+              "Un territorio pulito è il regalo più grande che possiamo fare alle generazioni future."
+            </p>
+            <cite class="block mt-4 font-condensed font-700 text-[0.68rem] uppercase tracking-[0.2em] text-ochre not-italic">
+              — Carmelo Buttò, Fondatore
+            </cite>
+          </blockquote>
+
+          <div class="space-y-5 font-body text-muted leading-relaxed">
+            <p>Nato ad Assoro in una famiglia profondamente legata alla terra siciliana, Carmelo Buttò ha iniziato la sua attività nel 1978 con una visione semplice ma potente: lasciare il territorio migliore di come lo aveva trovato.</p>
+            <p>Quello che era un piccolo servizio di raccolta rifiuti si è trasformato, grazie alla sua dedizione, in un'azienda che oggi copre oltre 120 comuni con standard certificati a livello internazionale.</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-px bg-linen border border-linen mt-8">
+            {[
+              { icon: 'fa-certificate', v: '45+ Anni', l: 'di esperienza' },
+              { icon: 'fa-location-dot', v: 'Assoro (EN)', l: 'sede storica' },
+            ].map(({ icon, v, l }) => (
+              <div class="bg-ivory p-6">
+                <i class={`fa-solid ${icon} text-ochre mb-3 block text-lg`}></i>
+                <p class="font-condensed font-700 text-ink text-sm">{v}</p>
+                <p class="font-body text-muted text-xs mt-0.5">{l}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ TIMELINE ══════════════════════ -->
+  <section class="py-28 bg-parchment dot-grid overflow-hidden">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+
+      <div class="mb-24 reveal">
+        <span class="overline text-ochre">La Nostra Evoluzione</span>
+        <div class="rule-ochre"></div>
+        <h2 class="display-sm text-ink mt-5 italic">45 Anni di Storia</h2>
+      </div>
+
+      <div class="relative" id="tl-track">
+
+        <!-- Spine: static linen rail -->
+        <div class="hidden lg:block absolute left-1/2 -translate-x-1/2 inset-y-0 w-px bg-linen pointer-events-none" aria-hidden="true"></div>
+        <!-- Spine: scroll-driven ochre fill -->
+        <div id="tl-fill" class="hidden lg:block absolute left-1/2 -translate-x-1/2 top-0 w-px pointer-events-none origin-top tl-spine-color" aria-hidden="true" style="height:0%"></div>
+
+        {timeline.map(({ year, title, desc }, i) => (
+          <div class={`tl-item ${i % 2 === 0 ? 'tl-even' : 'tl-odd'}`}>
+
+            <!-- ── Desktop: alternating grid ── -->
+            <div class="hidden lg:grid tl-grid items-start">
+
+              <!-- Left slot -->
+              <div class="py-16 pr-20 xl:pr-28">
+                {i % 2 === 0 && (
+                  <div class="tl-card text-right">
+                    <span class="overline text-ochre mb-4 block">{year}</span>
+                    <h3 class="font-serif text-3xl text-ink italic mb-4 leading-snug">{title}</h3>
+                    <p class="font-body text-muted text-sm leading-relaxed ml-auto tl-desc" set:html={desc}></p>
+                  </div>
+                )}
+              </div>
+
+              <!-- Center: animated dot node -->
+              <div class="tl-node-col flex items-start justify-center">
+                <div class="tl-dot relative z-10 w-3.5 h-3.5 rounded-full border-2 border-linen bg-parchment flex-shrink-0">
+                  <div class="tl-inner absolute inset-[3px] rounded-full tl-inner-color"></div>
+                  <div class="tl-ring  absolute inset-0  rounded-full border tl-ring-color"></div>
+                </div>
+              </div>
+
+              <!-- Right slot -->
+              <div class="py-16 pl-20 xl:pl-28">
+                {i % 2 !== 0 && (
+                  <div class="tl-card">
+                    <span class="overline text-ochre mb-4 block">{year}</span>
+                    <h3 class="font-serif text-3xl text-ink italic mb-4 leading-snug">{title}</h3>
+                    <p class="font-body text-muted text-sm leading-relaxed tl-desc" set:html={desc}></p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <!-- ── Mobile: left-rail layout ── -->
+            <div class="lg:hidden flex gap-6 py-10 border-b border-linen/50 last:border-0">
+              <div class="flex flex-col items-center flex-shrink-0 w-4">
+                <div class="w-2.5 h-2.5 rounded-full flex-shrink-0 mt-1 tl-mobile-dot"></div>
+                <div class="w-px bg-linen grow mt-3"></div>
+              </div>
+              <div class="pb-4 flex-1 min-w-0">
+                <span class="overline text-ochre mb-3 block">{year}</span>
+                <h3 class="font-serif text-xl text-ink italic mb-3 leading-snug">{title}</h3>
+                <p class="font-body text-muted text-sm leading-relaxed" set:html={desc}></p>
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ VALORI ══════════════════════ -->
+  <section class="py-28 bg-ivory">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="mb-20 reveal">
+        <span class="overline text-ochre">I Nostri Valori</span>
+        <div class="rule-ochre"></div>
+        <h2 class="display-sm text-ink mt-5 italic">La Bussola dell'Azienda</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-px bg-linen border border-linen">
+        {valori.map(({ icon, title, desc }, i) => (
+          <div class={`group bg-ivory p-10 hover:bg-forest transition-colors duration-500 cursor-default reveal delay-${(i % 4) + 1}`}>
+            <div class="w-12 h-12 border border-linen group-hover:border-ochre/30 flex items-center justify-center mb-6 transition-colors">
+              <i class={`fa-solid ${icon} text-lg text-ochre/70 group-hover:text-ochre transition-colors`}></i>
+            </div>
+            <h3 class="font-serif text-2xl text-ink group-hover:text-ivory transition-colors italic mb-4">{title}</h3>
+            <p class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CTA ══════════════════════ -->
+  <section class="py-24 bg-forest grain">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 text-center reveal">
+      <span class="overline text-ochre">Parliamo insieme</span>
+      <h2 class="display-sm text-ivory italic mt-4 mb-5">Costruiamo insieme il futuro</h2>
+      <p class="font-body text-ivory/40 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+        Scopri come i valori di Carmelo Buttò si traducono oggi in soluzioni concrete per il tuo territorio.
+      </p>
+      <a href="/contatti" class="btn-primary px-10 py-5">
+        Contattaci <i class="fa-solid fa-arrow-right text-[10px]"></i>
+      </a>
+    </div>
+  </section>
+
+
+<style>
+  /* ── Spine fill color ── */
+  .tl-spine-color { @apply bg-ochre; }
+
+  /* ── Desktop grid layout ── */
+  .tl-grid { grid-template-columns: 1fr 5rem 1fr; }
+  .tl-node-col { padding-top: 4.375rem; } /* aligns dot with first text line */
+  .tl-desc { max-width: 30ch; }
+
+  /* ── Card: initial hidden state ── */
+  .tl-card {
+    opacity: 0;
+    transition:
+      opacity  0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tl-even .tl-card { transform: translateX(2rem); }
+  .tl-odd  .tl-card { transform: translateX(-2rem); }
+
+  /* ── Card: revealed state ── */
+  .tl-item.visible .tl-card {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ── Dot border ── */
+  .tl-dot { transition: border-color 0.4s ease 0.2s; }
+  .tl-item.visible .tl-dot { @apply border-ochre; }
+
+  /* ── Dot inner fill ── */
+  .tl-inner-color { @apply bg-ochre; }
+  .tl-inner {
+    opacity: 0;
+    transform: scale(0);
+    transition:
+      opacity   0.35s ease 0.4s,
+      transform 0.5s  cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s;
+  }
+  .tl-item.visible .tl-inner { opacity: 1; transform: scale(1); }
+
+  /* ── Pulse ring ── */
+  .tl-ring-color { @apply border-ochre; }
+  .tl-ring { opacity: 0; transform: scale(1); }
+  .tl-item.visible .tl-ring { animation: tl-pulse 1s ease 0.55s forwards; }
+  @keyframes tl-pulse {
+    0%   { opacity: 0.55; transform: scale(1); }
+    100% { opacity: 0;    transform: scale(4.5); }
+  }
+
+  /* ── Mobile dot ── */
+  .tl-mobile-dot { @apply bg-ochre; }
+</style>
+
+<script>
+  (() => {
+    const track = document.getElementById('tl-track');
+    const fill  = document.getElementById('tl-fill');
+    const items = document.querySelectorAll('.tl-item');
+
+    /** Drive the ochre spine upward as the track enters the viewport */
+    const updateSpine = () => {
+      if (!fill || !track) return;
+      const { top, height } = track.getBoundingClientRect();
+      const pct = Math.max(0, Math.min(1, (window.innerHeight * 0.65 - top) / height));
+      fill.style.height = (pct * 100) + '%';
+      fill.style.transition = 'height 0.15s linear';
+    };
+
+    /** Reveal each timeline item as it crosses the viewport threshold */
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) {
+          target.classList.add('visible');
+          obs.unobserve(target);
+        }
+      }),
+      { threshold: 0.25, rootMargin: '-30px 0px' }
+    );
+
+    items.forEach(el => obs.observe(el));
+
+    window.addEventListener('scroll', updateSpine, { passive: true });
+    window.addEventListener('resize', updateSpine, { passive: true });
+    updateSpine();
+  })();
+</script>
+
+</Layout>

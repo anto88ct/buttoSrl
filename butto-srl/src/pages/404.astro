@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Pagina non trovata" description="La pagina che stai cercando non esiste.">
+  <section class="min-h-[85vh] flex items-center justify-center bg-forest grain relative overflow-hidden">
+
+    <!-- Giant 404 watermark -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+      <span class="font-condensed font-800 text-[40vw] text-ivory/[0.04] leading-none tracking-tighter">404</span>
+    </div>
+
+    <!-- Geometric accents -->
+    <div class="absolute top-16 right-16 w-28 h-28 border border-ochre/10 rotate-45 pointer-events-none"></div>
+    <div class="absolute bottom-20 left-20 w-16 h-16 border border-ochre/10 rotate-45 pointer-events-none"></div>
+
+    <div class="text-center max-w-lg mx-auto px-6 relative z-10 reveal">
+      <span class="overline text-ochre mb-6 block">Errore</span>
+      <h1 class="font-serif text-5xl text-ivory italic mb-4 leading-tight">Pagina non trovata</h1>
+      <p class="font-body text-ivory/40 text-lg mb-12 leading-relaxed">
+        La pagina che stai cercando non esiste o è stata spostata.
+      </p>
+      <a href="/" class="btn-primary px-10 py-4 text-base">
+        <i class="fa-solid fa-house text-[11px]"></i>
+        Torna alla Homepage
+      </a>
+    </div>
+  </section>
+</Layout>

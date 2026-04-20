@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html class="light" lang="it"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed-dim": "#9dcee3",
+              "inverse-surface": "#31312d",
+              "on-primary-fixed-variant": "#205034",
+              "inverse-on-surface": "#f3f0ea",
+              "primary-fixed": "#bbefc9",
+              "surface-bright": "#fcf9f3",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#ffb955",
+              "on-tertiary-fixed-variant": "#164d5e",
+              "error": "#ba1a1a",
+              "primary-fixed-dim": "#9fd2ae",
+              "surface-variant": "#e5e2dc",
+              "on-tertiary": "#ffffff",
+              "on-error": "#ffffff",
+              "surface-dim": "#dcdad4",
+              "surface-container-high": "#ebe8e2",
+              "primary-container": "#2d5c3f",
+              "on-primary": "#ffffff",
+              "on-secondary-fixed-variant": "#633f00",
+              "on-surface-variant": "#414942",
+              "surface-container-highest": "#e5e2dc",
+              "tertiary-fixed": "#baeaff",
+              "inverse-primary": "#9fd2ae",
+              "outline": "#717971",
+              "secondary-container": "#fdb241",
+              "surface-container": "#f0eee8",
+              "on-secondary": "#ffffff",
+              "on-surface": "#1c1c18",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#001f29",
+              "on-primary-fixed": "#00210f",
+              "secondary-fixed": "#ffddb5",
+              "secondary": "#835500",
+              "surface": "#fcf9f3",
+              "on-background": "#1c1c18",
+              "tertiary": "#034253",
+              "surface-container-low": "#f6f3ed",
+              "on-secondary-container": "#6e4600",
+              "surface-tint": "#39684a",
+              "primary": "#144429",
+              "on-tertiary-container": "#9dcee4",
+              "on-secondary-fixed": "#2a1800",
+              "on-primary-container": "#9fd2ae",
+              "outline-variant": "#c1c9c0",
+              "tertiary-container": "#26596b",
+              "background": "#fcf9f3",
+              "error-container": "#ffdad6"
+            },
+            fontFamily: {
+              "headline": ["Noto Serif"],
+              "body": ["Public Sans"],
+              "label": ["Public Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .organic-wave-bg {
+            background-image: radial-gradient(circle at 2px 2px, rgba(20, 68, 41, 0.05) 1px, transparent 0);
+            background-size: 40px 40px;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(20, 68, 41, 0.9), rgba(45, 92, 63, 0.8)), url('image-hero-bg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar -->
+<nav class="sticky top-0 w-full z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-4">
+<img alt="Buttò S.r.l. Logo" class="h-10 w-auto" data-alt="minimalist organic logo with wave shapes in deep green representing environmental stewardship" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNLAA7G9S8zhIDOb6rmEit1X6QZWekxZ6Va5Ac1R4LE73nvWltYj1Tze12KrYYJe9vsY0A_HAOth2DV8I7GRGTboiIuV3UIAyB-DMb-GSikmx_kvq9GJ3cM4KG6G-OKurt9w8nBzdNz6SUZNBgdmpv-F_2xyOHpCwNPuqP6IX5I9RmHNj-s4nllxK48iXCBU2F52TI0MxfnpTRuBROwxmTNUwsVlVsTTUgRwJ3_FMLm_UA87fAWSBuNgyv4hi4_3WsgiPrYqdykA"/>
+<span class="text-2xl font-bold tracking-tight text-primary font-headline">Buttò S.r.l.</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors Public Sans tracking-tight font-medium text-sm" href="#">Home</a>
+<a class="text-primary font-bold border-b-2 border-secondary Public Sans tracking-tight text-sm" href="#">Chi Siamo</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors Public Sans tracking-tight font-medium text-sm" href="#">Servizi</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors Public Sans tracking-tight font-medium text-sm" href="#">Sostenibilità</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors Public Sans tracking-tight font-medium text-sm" href="#">Lavora con Noi</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors Public Sans tracking-tight font-medium text-sm" href="#">News</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-xl font-medium hover:bg-primary-container transition-all scale-95 duration-200 ease-in-out">
+                Contattaci
+            </button>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-[500px] flex items-center justify-center text-center px-6 overflow-hidden">
+<div class="absolute inset-0 z-0 bg-primary-container" data-alt="cinematic wide shot of a pristine ancient forest with sunlight filtering through tall canopy trees" style="background-image: linear-gradient(rgba(20, 68, 41, 0.7), rgba(20, 68, 41, 0.7)), url('https://lh3.googleusercontent.com/aida-public/AB6AXuA5ZZIxpGUsR9EOuOpCbqt1OVtvV00DLAk06bhQpk-pmcfzx37PCZFxQY8oz83qbip8dvsFg-0VtbnvEtZmvsR_3GjBB-fWM5arxwWRDOH-zh0Fkc6_rkFg7DceZC9o4XKH7yxc4n3ER_BEraQI2TnDSmNVJRxkTt06mKcWPPQ5P1XPnGsWJnX7freRamBRPUE3MxcvqilKei7QMX0Qtxe_CipHqecQ7LAKM0r-Tw4u0MK_ICkaGkriG7MZrTX5nS6GlOSPrpdcNw'); background-size: cover; background-position: center;"></div>
+<div class="relative z-10 max-w-4xl">
+<h1 class="font-headline text-5xl md:text-7xl font-bold text-on-primary mb-6 tracking-tight">Custodi del Futuro,<br/><span class="italic font-light">da Generazioni.</span></h1>
+<p class="text-on-primary/90 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">Dal 1978, trasformiamo la gestione dei rifiuti in una risorsa per l'ambiente e la comunità attraverso l'innovazione e il rispetto della terra.</p>
+</div>
+</section>
+<!-- Amplified Historical Section -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto organic-wave-bg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Text Column -->
+<div class="lg:col-span-7 space-y-12">
+<div>
+<span class="text-secondary font-bold tracking-widest uppercase text-xs">La Nostra Eredità</span>
+<h2 class="font-headline text-4xl md:text-5xl text-primary font-bold leading-tight mt-2">Le Nostre Radici: Una Visione di Carmelo Buttò.</h2>
+<div class="mt-8 space-y-6 text-on-surface-variant text-lg leading-relaxed">
+<p>
+                        La storia di Buttò S.r.l. affonda le radici nel 1978, quando <strong>Carmelo Buttò</strong>, con lungimiranza e spirito d'iniziativa, fondò l'azienda come una piccola realtà familiare. Inizialmente focalizzata sul trasporto merci, l'impresa ha saputo interpretare fin da subito i segnali di un mondo in mutamento, orientando il proprio impegno verso la salvaguardia del decoro urbano e la gestione responsabile dei materiali di scarto.
+                    </p>
+<p>
+                        Quella che era nata come una sfida locale si è presto trasformata in una missione di eccellenza. Decennio dopo decennio, la Buttò S.r.l. ha ampliato i propri orizzonti, evolvendosi in un punto di riferimento imprescindibile per enti pubblici e istituzioni nella gestione ambientale integrata e nelle operazioni di pulizia tecnica specialistica.
+                    </p>
+</div>
+</div>
+<!-- Detailed Timeline -->
+<div class="space-y-12">
+<h3 class="font-headline text-3xl text-primary font-bold italic">Un'Evoluzione Sostenibile</h3>
+<div class="relative border-l-2 border-secondary/30 ml-4 pl-10 space-y-12">
+<!-- 1990s -->
+<div class="relative">
+<div class="absolute -left-[49px] top-0 bg-secondary w-4 h-4 rounded-full border-4 border-surface"></div>
+<h4 class="font-headline text-xl text-primary font-bold">Anni '90: La Qualità come Standard</h4>
+<p class="text-on-surface-variant mt-2">
+                            L'azienda intraprende un rigoroso percorso di istituzionalizzazione. Sono gli anni delle prime importanti certificazioni ISO, che hanno sancito ufficialmente il nostro impegno verso processi operativi trasparenti, sicuri e a basso impatto ambientale.
+                        </p>
+</div>
+<!-- 2000s -->
+<div class="relative">
+<div class="absolute -left-[49px] top-0 bg-secondary w-4 h-4 rounded-full border-4 border-surface"></div>
+<h4 class="font-headline text-xl text-primary font-bold">Anni 2000: Avanguardia Tecnologica</h4>
+<p class="text-on-surface-variant mt-2">
+                            L'espansione del parco mezzi segna una svolta: investiamo in veicoli ad alta tecnologia ed ecologici, capaci di operare con la massima efficienza anche nei contesti urbani più complessi, garantendo tempestività e precisione.
+                        </p>
+</div>
+<!-- Present -->
+<div class="relative">
+<div class="absolute -left-[49px] top-0 bg-secondary w-4 h-4 rounded-full border-4 border-surface"></div>
+<h4 class="font-headline text-xl text-primary font-bold">Oggi: Il Passaggio Generazionale</h4>
+<p class="text-on-surface-variant mt-2">
+                            Oggi la Buttò S.r.l. vive una nuova stagione sotto la guida della nuova generazione, che ha saputo integrare le più moderne strategie di economia circolare con i valori originari del fondatore: integrità, rispetto assoluto per il territorio e un'etica del lavoro rassicurante e solida.
+                        </p>
+</div>
+</div>
+</div>
+<div class="flex gap-12 pt-8">
+<div>
+<span class="block font-headline text-4xl text-primary font-bold">45+</span>
+<span class="text-xs uppercase tracking-tighter text-on-surface-variant">Anni di Storia</span>
+</div>
+<div>
+<span class="block font-headline text-4xl text-primary font-bold">120+</span>
+<span class="text-xs uppercase tracking-tighter text-on-surface-variant">Mezzi Ecologici</span>
+</div>
+</div>
+</div>
+<!-- Images Column -->
+<div class="lg:col-span-5 space-y-6">
+<div class="relative">
+<img class="rounded-xl shadow-lg w-full aspect-[4/5] object-cover" data-alt="vintage black and white photograph of an early waste management truck from the 1970s in a small Italian town" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCipvPz5HCKi4LKfj5f-IUFyZEdo_P5JYFhb-bFiGrrwmxsONiMcM6sgk4aVEDHCaJpcC55RilLURdLYIEUPkGQ9HhpF5IGHq7JzzCeWtaQR5ZGaGmA-nQizKSRooLPM3arlshhsSdeF8zFCRC0wGysGcCGEjb58HuV2B9bqTfnQIC8rSpWsvWBkZofdsL01ysDmVTWmpVc0OyhYeZ9n25Pg5BRI43F0nswfQRGP1PyGrtNgBCif798P33mK-Qps_8kK5d6fJl5Hg"/>
+<div class="absolute bottom-6 right-6 bg-primary p-6 rounded-xl text-on-primary shadow-xl max-w-[200px]">
+<span class="material-symbols-outlined text-3xl mb-2" style="font-variation-settings: 'FILL' 1;">history</span>
+<h4 class="font-headline text-lg italic">Fondata nel 1978</h4>
+<p class="text-xs opacity-80 mt-1">L'inizio di una visione dedicata al bene comune.</p>
+</div>
+</div>
+<img class="rounded-xl shadow-lg w-full aspect-[16/9] object-cover" data-alt="modern industrial waste processing facility with high-tech machinery and organized recycling bins" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZjWAj0r1ZZ3RmxyNpb4HZv0QRwFFqD9iqV7AwQQxYFY4CbaSJUDgRwksd4Dv8oAICkYl50DrRgWyP5r947XW9u77Vk58ijq1PRlU55ZmVcG7dzpI8Ziqa97Luk5G2JSSyfu2WLHJfnBNBHiMKrhauo1CJAq4tOVGpLw-jYEF0mNIq7ZvemmN4-tbuzi9P4rk_TOGuDVNgr6UbTY4aKu5t4khIFoVXBhlMP4TLubk1EUcvfjvfpYDlhU6qy_4sgJf_e9Df56a-HA"/>
+</div>
+</div>
+</section>
+<!-- Founder Feature Section -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto border-y border-outline-variant/10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="order-2 lg:order-1 space-y-8">
+<div class="inline-flex items-center gap-3 text-secondary font-bold tracking-widest uppercase text-xs">
+<span class="h-px w-8 bg-secondary"></span>
+                Il Nostro Fondatore
+            </div>
+<h2 class="font-headline text-4xl md:text-5xl text-primary font-bold leading-tight">Carmelo Buttò: Il Visionario Dietro la Nostra Missione.</h2>
+<div class="space-y-6 text-on-surface-variant text-lg leading-relaxed">
+<p>
+                    Nel 1978, in un'Italia in pieno fermento industriale, Carmelo Buttò diede vita a quella che oggi è una realtà leader nel settore ambientale. Tutto ebbe inizio con un solo automezzo e una convinzione incrollabile: che il servizio alla comunità dovesse passare attraverso una gestione impeccabile e responsabile dei rifiuti.
+                </p>
+<p>
+                    Con la saggezza di chi conosce il valore del lavoro duro, Carmelo ha guidato l'azienda in una transizione storica, passando dal semplice trasporto locale alla fornitura di servizi ambientali tecnologicamente avanzati. La sua bussola è sempre stata il rispetto assoluto per il territorio, un valore che ha trasmesso intatto alle nuove generazioni.
+                </p>
+</div>
+<div class="bg-primary-container/10 border-l-4 border-primary p-8 rounded-r-xl">
+<blockquote class="font-headline text-2xl text-primary italic font-medium leading-snug">
+                    "Lavorare per le generazioni future significa prendersi cura della terra oggi."
+                </blockquote>
+<p class="mt-4 text-sm font-bold text-primary/70 uppercase tracking-widest">— Carmelo Buttò</p>
+</div>
+</div>
+<div class="order-1 lg:order-2 relative">
+<div class="absolute -inset-4 border border-secondary/20 rounded-2xl -z-10 transform rotate-3"></div>
+<img class="rounded-xl shadow-2xl w-full aspect-[4/5] object-cover ring-1 ring-black/5" data-alt="dignified elderly Italian businessman with a visionary gaze, wearing a professional suit, standing in a classic warm wood-paneled office with maps and heritage documents in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOz93oE2N3Vp2m9y_G_p3yH0y9XvO_t8I7pQ1u5_QpL7N_A5z4m7l8Y1o2X3h5j6k7l8m9n0p1q2r3s4t5u6v7w8x9y0z_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u"/>
+<div class="absolute -bottom-8 -left-8 bg-surface p-6 rounded-xl shadow-lg border border-outline-variant/10 hidden md:block">
+<div class="flex items-center gap-4 text-primary">
+<span class="material-symbols-outlined text-4xl">workspace_premium</span>
+<div>
+<p class="font-headline font-bold text-lg leading-none">Integrità</p>
+<p class="text-xs text-on-surface-variant mt-1 italic">Valore Fondante</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Valori (Tonal Layering Cards) -->
+<section class="bg-surface-container-low py-24 px-8">
+<div class="max-w-screen-2xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline text-4xl text-primary font-bold mb-4 italic">I Nostri Valori Fondanti</h2>
+<div class="h-1 w-24 bg-secondary mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="bg-surface p-10 rounded-xl hover:shadow-md transition-all border-b-4 border-primary">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">eco</span>
+<h3 class="font-headline text-2xl text-primary font-bold mb-4">Sostenibilità Reale</h3>
+<p class="text-on-surface-variant leading-relaxed">Non solo una parola, ma un metodo operativo che riduce l'impatto ambientale di ogni nostra azione quotidiana.</p>
+</div>
+<div class="bg-surface p-10 rounded-xl hover:shadow-md transition-all border-b-4 border-primary">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">verified_user</span>
+<h3 class="font-headline text-2xl text-primary font-bold mb-4">Integrità e Etica</h3>
+<p class="text-on-surface-variant leading-relaxed">Operiamo nel pieno rispetto delle normative, garantendo trasparenza totale verso i cittadini e le istituzioni.</p>
+</div>
+<div class="bg-surface p-10 rounded-xl hover:shadow-md transition-all border-b-4 border-primary">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6">precision_manufacturing</span>
+<h3 class="font-headline text-2xl text-primary font-bold mb-4">Innovazione Continua</h3>
+<p class="text-on-surface-variant leading-relaxed">Investiamo costantemente in tecnologie di ultima generazione per ottimizzare il recupero delle materie prime.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Team Section -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-2xl">
+<span class="text-secondary font-bold tracking-widest uppercase text-xs">Capitale Umano</span>
+<h2 class="font-headline text-4xl text-primary font-bold mt-2 leading-tight">La forza dietro ogni nostro successo.</h2>
+</div>
+<p class="text-on-surface-variant max-w-sm italic">"La nostra azienda non è fatta di macchine, ma di persone che credono in un mondo più pulito."</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Team Member -->
+<div class="group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-4">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="professional male executive in a smart casual blazer smiling confidently in a modern bright office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEWklVYcF2G4I6DsopAvP3t_BAemrmv9DqC76C46ZfdgbK-exir27Dk45NsM1iPqz_i2kfTONTJmiypzMxkEz6jYrBF1axvCc04RxsGDc6XckpFOVhg-Un4uJnpLSQG2MlaHHIU7dLtSL8A6cihoOVMzjwQq_d1Ds4C1CpK8vDorm1aaqbhqqaUyLJLP8q1ikWyDhFk39y-wVELUTbuxlmijt1DzrIJliRleLDyDCSeTQH0rVeq7GOpBSNTVtxfYUoigsCyUJhyQ"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<h4 class="font-headline text-xl text-primary font-bold">Dott. Marco Buttò</h4>
+<p class="text-sm text-on-surface-variant font-medium uppercase tracking-wider">Amministratore Delegato</p>
+</div>
+<div class="group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-4">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="professional female manager with glasses looking at camera in a professional corporate setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCV_pXPmYFZGSpPYmtZo1661RvDiWM2CYUuu8oJJXtOU_NGGomg7WxQwlzzkudQE19-uN-OXJVQDNDa_rlCuxmaG5VvkE999GJyIfLuSXwpX1TpTDG1txr_nUL3QJmDjjAZteUT--x-4fhPaXRb0GR5etnEcCdTwstGx2Lt7n4DzdkMnZtiRs9s0E0I3uBQiQWeF9v1Qwa44RbwjnYVtAD5ApmFiHL0UfoHr4o0GruzXHNFgnfiAl1oXs71sj560uR4IoQ9mwB4WA"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<h4 class="font-headline text-xl text-primary font-bold">Ing. Elena Riva</h4>
+<p class="text-sm text-on-surface-variant font-medium uppercase tracking-wider">Responsabile Operativa</p>
+</div>
+<div class="group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-4">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="middle aged businessman in a suit leaning against a clean white wall looking professional" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5termElfCnlB2vbvGCiM433DO3PIeqjoTuJP3Swh_2bdcV7tKo-dYSL30Lw4jJo199nVV5MlQNp0p4TpnbIV023YAlsuRBquqEpDAo2r1qO9c3enwCLg-gZ5xlGHmJfgkVa08ttOE3wNFyp8gq8Ya1hG9ejm2wE7bV0buw1I6FmYZPHNnchZXdaDKG0qG6acDjg9EJwEMshCFtd9oznLlvmNOphpZmXrzz8d1dhGk3s3zb9xjZ5eUklzkA9pUUfINf7QaAJ5oTA"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<h4 class="font-headline text-xl text-primary font-bold">Arch. Luca Bianchi</h4>
+<p class="text-sm text-on-surface-variant font-medium uppercase tracking-wider">Sostenibilità &amp; Design</p>
+</div>
+<div class="group">
+<div class="relative overflow-hidden rounded-xl aspect-[4/5] mb-4">
+<img class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="young professional man in a green sweater smiling in an airy modern workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXjKI0oH4Qr8BS-OrTa3ROG8jCra4okykJIpoRLDnm7squf2wxcgFFqtjnZQIFbTOedUogCqR-tQRUwWGPZ5OM8iD2shkmRehZworbG8YKqrVzAhEQJ9iyOwXNCOJ_hPgzdZLCjOPGcTLzwoCJDtaUV6VKGEj7yTC69gf140YDBsyLq2-i5aSvIq3SeqvlvqkVquvkObUqUOPidljuYqNaJLVu18CkR-Jn3RUtX4NZdxkUbkUUTzSfW7DcMdXsCy2qlzRECcvnwg"/>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<h4 class="font-headline text-xl text-primary font-bold">Stefano Neri</h4>
+<p class="text-sm text-on-surface-variant font-medium uppercase tracking-wider">Logistica &amp; Flotta</p>
+</div>
+</div>
+</section>
+<!-- Certificazioni (Institutional Badge Layout) -->
+<section class="bg-surface-container-high py-24 px-8">
+<div class="max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline text-4xl text-primary font-bold mb-6 italic">Garanzia di Qualità e Conformità</h2>
+<p class="text-on-surface-variant text-lg mb-8 leading-relaxed">
+                            Buttò S.r.l. opera secondo i più alti standard internazionali. Le nostre certificazioni non sono solo titoli, ma promesse di affidabilità che rinnoviamo ogni giorno attraverso audit rigorosi e processi certificati.
+                        </p>
+<div class="flex flex-wrap gap-4">
+<div class="bg-surface px-6 py-4 rounded-lg flex items-center gap-4 shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-bold text-primary">ISO 9001:2015</span>
+</div>
+<div class="bg-surface px-6 py-4 rounded-lg flex items-center gap-4 shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-bold text-primary">ISO 14001:2015</span>
+</div>
+<div class="bg-surface px-6 py-4 rounded-lg flex items-center gap-4 shadow-sm">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+<span class="font-bold text-primary">ISO 45001:2018</span>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -top-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+<div class="relative bg-surface p-12 rounded-2xl shadow-xl border border-outline-variant/15">
+<div class="flex items-center gap-6 mb-8">
+<span class="material-symbols-outlined text-5xl text-primary">gavel</span>
+<h4 class="font-headline text-2xl font-bold text-primary">Albo Gestori Ambientali</h4>
+</div>
+<p class="text-on-surface-variant italic mb-6">"Iscrizione ordinaria in categoria 1, 4, 5 e 8. Autorizzati al trasporto di rifiuti pericolosi e non pericolosi su tutto il territorio nazionale."</p>
+<a class="inline-flex items-center gap-2 text-secondary font-bold hover:underline decoration-2 underline-offset-4" href="#">
+                                Scarica Certificazioni Complete
+                                <span class="material-symbols-outlined">download</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full rounded-t-none">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-16 max-w-screen-2xl mx-auto">
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<img alt="Buttò Logo" class="h-8 w-auto" data-alt="minimalist organic logo with wave shapes in deep green" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZT9HW4xssrqoCFArD2kdHsYyFgE1ShRa66GvqxH1IR46jlfRw_jOmbpl5mxdUefqZEzQEwKfvRckSJbzSa4B9Xw2s_Mt6fQ9c70DJxB10q4VP62Mpr1CKr8iKcvQfydB36EsGAwExyfMZ3wq53RSX4KoP1v4HVjDF2H4EorwawoMMYsnXDMamjuv3FS4ZdPSLCEAKBqndEfUQ7oJWRmoSKeVvMwKaifLTz8UmU9zY1NvnawzPT_CTvayPJZ2I5kzRGg8FGruCMA"/>
+<span class="text-xl font-bold text-primary font-headline">Buttò S.r.l.</span>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed">Eco-efficienza e innovazione tecnologica al servizio dell'ambiente dal 1978.</p>
+</div>
+<div class="space-y-4">
+<h5 class="font-headline italic text-primary font-bold">Esplora</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant/80 hover:text-primary hover:underline underline-offset-4 decoration-secondary transition-all Public Sans text-xs tracking-wider uppercase" href="#">Storia</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary hover:underline underline-offset-4 decoration-secondary transition-all Public Sans text-xs tracking-wider uppercase" href="#">Servizi Pubblici</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary hover:underline underline-offset-4 decoration-secondary transition-all Public Sans text-xs tracking-wider uppercase" href="#">Contatti</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-headline italic text-primary font-bold">Documentazione</h5>
+<ul class="space-y-2">
+<li><a class="text-on-surface-variant/80 hover:text-primary hover:underline underline-offset-4 decoration-secondary transition-all Public Sans text-xs tracking-wider uppercase" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary hover:underline underline-offset-4 decoration-secondary transition-all Public Sans text-xs tracking-wider uppercase" href="#">Cookie Policy</a></li>
+<li><a class="text-on-surface-variant/80 hover:text-primary hover:underline underline-offset-4 decoration-secondary transition-all Public Sans text-xs tracking-wider uppercase" href="#">Certificazioni ISO</a></li>
+</ul>
+</div>
+<div class="space-y-4">
+<h5 class="font-headline italic text-primary font-bold">Contatti</h5>
+<p class="text-on-surface-variant/80 text-sm">Via dell'Ambiente 1, Italia<br/>T: +39 0123 456789<br/>E: info@butto.it</p>
+<div class="flex gap-4 pt-2">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">share</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:scale-110 transition-transform">mail</span>
+</div>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-outline-variant/10 text-center">
+<p class="text-[10px] text-on-surface-variant/60 Public Sans tracking-wider uppercase">© 2024 Buttò S.r.l. - Sede Legale: Via dell'Ambiente 1, Italia - P.IVA 0123456789</p>
+</div>
+</footer>
+</body></html>

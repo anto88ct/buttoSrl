@@ -1,0 +1,159 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalURL?: string;
+}
+
+const {
+  title,
+  description = 'Buttò S.r.l. – Eccellenza nella gestione integrata dei servizi ambientali ad Assoro (EN). Smaltimento rifiuti, appalti pubblici di pulizia e sostenibilità circolare.',
+  ogImage = '/og-default.jpg',
+  canonicalURL = Astro.url.pathname,
+} = Astro.props;
+
+const siteURL = 'https://butto-srl.it';
+const fullTitle = title === 'Home'
+  ? 'Buttò S.r.l. | Eccellenza nella Gestione Ambientale'
+  : `${title} | Buttò S.r.l.`;
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteURL}${ogImage}`} />
+    <meta property="og:url" content={`${siteURL}${canonicalURL}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="it_IT" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={`${siteURL}${canonicalURL}`} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{fullTitle}</title>
+  </head>
+
+  <body class="overflow-x-hidden">
+    <!-- Scroll progress -->
+    <div id="scroll-progress"></div>
+
+    <!-- Custom cursor -->
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+
+    <Navbar />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      /* ── Scroll Progress ── */
+      const bar = document.getElementById('scroll-progress')!;
+      window.addEventListener('scroll', () => {
+        const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        bar.style.transform = `scaleX(${Math.min(pct, 1)})`;
+      }, { passive: true });
+
+      /* ── Reveal on scroll ── */
+      const revealEls = document.querySelectorAll(
+        '.reveal, .reveal-left, .reveal-right, .reveal-scale'
+      );
+      const revealIO = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            revealIO.unobserve(e.target);
+          }
+        }),
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
+      revealEls.forEach(el => revealIO.observe(el));
+
+      /* ── Counter animation ── */
+      function animateCounter(el: HTMLElement) {
+        const raw   = el.getAttribute('data-count') ?? '0';
+        const num   = parseFloat(raw.replace(/[^0-9.]/g, ''));
+        const suffix = raw.replace(/[0-9.,]/g, '');
+        const prefix = el.getAttribute('data-prefix') ?? '';
+        const dur   = 1800;
+        const start = performance.now();
+
+        function tick(now: number) {
+          const p = Math.min((now - start) / dur, 1);
+          const ease = 1 - Math.pow(1 - p, 4);
+          const cur  = Math.round(ease * num * 10) / 10;
+          el.textContent = prefix + (Number.isInteger(num) ? Math.round(cur).toLocaleString('it-IT') : cur.toLocaleString('it-IT')) + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      const counterIO = new IntersectionObserver(
+        (entries) => entries.forEach(e => {
+          if (e.isIntersecting) {
+            animateCounter(e.target as HTMLElement);
+            counterIO.unobserve(e.target);
+          }
+        }),
+        { threshold: 0.3 }
+      );
+      document.querySelectorAll('[data-count]').forEach(el => counterIO.observe(el));
+
+      /* ── Custom cursor ── */
+      const cursor     = document.getElementById('cursor')!;
+      const cursorRing = document.getElementById('cursor-ring')!;
+      let mx = 0, my = 0, rx = 0, ry = 0;
+
+      document.addEventListener('mousemove', e => {
+        mx = e.clientX; my = e.clientY;
+        cursor.style.left = mx + 'px';
+        cursor.style.top  = my + 'px';
+      });
+      function animRing() {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        cursorRing.style.left = rx + 'px';
+        cursorRing.style.top  = ry + 'px';
+        requestAnimationFrame(animRing);
+      }
+      animRing();
+
+      /* ── Navbar scroll ── */
+      const header = document.querySelector('header')!;
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('nav-scrolled', window.scrollY > 50);
+      }, { passive: true });
+
+      /* ── Mobile menu ── */
+      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+        const menu = document.getElementById('mobile-menu');
+        const isOpen = menu?.classList.toggle('is-open');
+        document.getElementById('icon-bars')?.classList.toggle('hidden', !!isOpen);
+        document.getElementById('icon-close')?.classList.toggle('hidden', !isOpen);
+      });
+    </script>
+
+    <style>
+      header.nav-scrolled {
+        box-shadow: 0 1px 32px rgba(13,26,16,0.18);
+        background: rgba(13,26,16,0.97) !important;
+      }
+      #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.16,1,0.3,1); }
+      #mobile-menu.is-open { max-height: 480px; }
+    </style>
+  </body>
+</html>
