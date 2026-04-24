@@ -177,49 +177,113 @@ const clientiB = [
     </div>
   </section>
 
-  <!-- ══════════════════════ SERVICES ══════════════════════ -->
-  <section class="py-28 bg-ivory">
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+  <!-- ══════════════════════ SERVICES / CUSTODI ══════════════════════ -->
+  <section id="custodi" class="relative bg-white pt-16 pb-20">
 
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-20">
-        <div class="reveal">
-          <span data-i18n="home.services.eyebrow" class="overline text-ochre">I Nostri Servizi</span>
-          <rule class="rule-ochre"></rule>
-          <h2 data-i18n-html="home.services.h2" class="display-lg text-ink mt-5">
-            Custodi del<br/>
-            <em class="text-forest-soft not-italic">Bene Comune</em>
-          </h2>
-        </div>
-        <a href="/servizi" class="self-start lg:self-auto font-condensed font-700 text-[0.75rem] uppercase tracking-[0.16em] text-ochre flex items-center gap-2 hover:gap-4 transition-all duration-300 reveal delay-2">
-          <span data-i18n="home.services.viewAll">Vedi tutti i servizi</span> <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-px bg-linen">
-        {services.map(({ num, icon, href }, i) => (
-          <a
-            href={href}
-            class={`group bg-ivory p-10 lg:p-12 flex flex-col gap-8 hover:bg-forest transition-colors duration-500 reveal delay-${(i % 4) + 1}`}
-          >
-            <div class="flex items-start justify-between">
-              <span class="font-condensed font-800 text-[4.5rem] text-ink/6 group-hover:text-ivory/6 leading-none tracking-tighter transition-colors">{num}</span>
-              <div class="w-12 h-12 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors duration-300">
-                <i class={`fa-solid ${icon} text-lg text-ochre/70 group-hover:text-ochre transition-colors`}></i>
-              </div>
-            </div>
-
-            <div class="space-y-3">
-              <h3 data-i18n={`home.services.items.${i}.title`} class="font-serif text-2xl font-600 text-ink group-hover:text-ivory transition-colors leading-tight">{services[i].title}</h3>
-              <p data-i18n={`home.services.items.${i}.desc`} class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{services[i].desc}</p>
-            </div>
-
-            <div class="flex items-center gap-2 font-condensed font-700 text-[0.7rem] uppercase tracking-[0.16em] text-ochre/70 group-hover:text-ochre group-hover:gap-4 transition-all duration-300 mt-auto">
-              <span data-i18n="home.services.learnMore">Scopri di più</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </div>
-          </a>
-        ))}
-      </div>
+    <!-- Overline + Titolo centrati -->
+    <div class="text-center mb-8 reveal max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <span data-i18n="home.services.eyebrow" class="overline text-ochre">I Nostri Servizi</span>
+      <div class="rule-ochre mx-auto"></div>
+      <h2 data-i18n-html="home.services.h2" class="display-lg text-ink mt-5">
+        Custodi del<br/>
+        <em class="text-forest-soft not-italic">Bene Comune</em>
+      </h2>
+      <a href="/servizi" class="inline-flex mt-5 font-condensed font-700 text-[0.75rem] uppercase tracking-[0.16em] text-ochre items-center gap-2 hover:gap-4 transition-all duration-300">
+        <span data-i18n="home.services.viewAll">Vedi tutti i servizi</span> <i class="fa-solid fa-arrow-right"></i>
+      </a>
     </div>
+
+    <!-- Video globo: quasi full-width -->
+    <div id="globe-wrapper" class="w-full h-[52vh] md:h-[70vh]">
+      <video
+        id="globe-video"
+        src="/videos/world-spinning.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="w-full h-full object-contain"
+      ></video>
+    </div>
+
+    <!-- Card animate: overlap il bordo inferiore del globo -->
+    <div id="custodi-cards" class="-mt-24 md:-mt-32 relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto px-6">
+      {services.map(({ num, icon, href }, i) => (
+        <a
+          href={href}
+          class="custodi-card group bg-ivory border border-linen p-7 lg:p-9 flex flex-col gap-5 hover:bg-forest transition-colors duration-500"
+          style="box-shadow: 0 8px 40px rgba(22,44,27,0.10), 0 2px 8px rgba(22,44,27,0.06);"
+        >
+          <div class="flex items-start justify-between">
+            <span class="font-condensed font-800 text-[3rem] text-ink/6 group-hover:text-ivory/6 leading-none tracking-tighter transition-colors">{num}</span>
+            <div class="w-10 h-10 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors duration-300">
+              <i class={`fa-solid ${icon} text-base text-ochre/70 group-hover:text-ochre transition-colors`}></i>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h3 data-i18n={`home.services.items.${i}.title`} class="font-serif text-xl font-600 text-ink group-hover:text-ivory transition-colors leading-tight">{services[i].title}</h3>
+            <p data-i18n={`home.services.items.${i}.desc`} class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{services[i].desc}</p>
+          </div>
+
+          <div class="flex items-center gap-2 font-condensed font-700 text-[0.7rem] uppercase tracking-[0.16em] text-ochre/70 group-hover:text-ochre group-hover:gap-4 transition-all duration-300 mt-auto">
+            <span data-i18n="home.services.learnMore">Scopri di più</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <script is:inline>
+      (function () {
+        var LOOP_DURATION = 8;
+        var CARD_DELAY_STEP = 0.5;
+
+        function initCustodiAnimation() {
+          var video = document.getElementById('globe-video');
+          var cards = document.querySelectorAll('.custodi-card');
+
+          if (!video || cards.length === 0) return;
+
+          cards.forEach(function (card) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(28px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          });
+
+          cards.forEach(function (card, i) {
+            var triggerTime = CARD_DELAY_STEP * i;
+            var revealed = false;
+            var checkTime = function () {
+              if (!revealed && video.currentTime >= triggerTime) {
+                revealed = true;
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+                video.removeEventListener('timeupdate', checkTime);
+              }
+            };
+            video.addEventListener('timeupdate', checkTime);
+          });
+
+          video.addEventListener('timeupdate', function () {
+            var progress = (video.currentTime % LOOP_DURATION) / LOOP_DURATION;
+            var scale = 1 + 0.025 * Math.sin(progress * Math.PI * 2);
+            video.style.transform = 'scale(' + scale + ')';
+          });
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              initCustodiAnimation();
+              observer.disconnect();
+            }
+          });
+        }, { threshold: 0.2 });
+
+        var custodiSection = document.getElementById('custodi');
+        if (custodiSection) observer.observe(custodiSection);
+      })();
+    </script>
   </section>
 
   <!-- ══════════════════════ FOUNDER ══════════════════════ -->

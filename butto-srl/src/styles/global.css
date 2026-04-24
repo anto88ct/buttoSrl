@@ -405,3 +405,19 @@
   clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
   margin-top: -5%;
 }
+
+/* ── Custodi del Bene Comune ────────────────────────────────── */
+#custodi {
+  background-color: #ffffff;
+}
+
+#globe-wrapper {
+  overflow: hidden;
+}
+
+#globe-wrapper video {
+  mix-blend-mode: multiply;
+  background: transparent;
+  transition: transform 0.1s linear;
+  will-change: transform;
+}

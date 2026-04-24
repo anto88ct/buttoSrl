@@ -384,7 +384,7 @@
         ch = canvas.height;
       const iw = img.naturalWidth,
         ih = img.naturalHeight;
-      const scale = Math.min(cw / iw, ch / ih);
+      const scale = Math.max(cw / iw, ch / ih); // cover: fills viewport, crops edges
       const dw = iw * scale,
         dh = ih * scale;
       ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
