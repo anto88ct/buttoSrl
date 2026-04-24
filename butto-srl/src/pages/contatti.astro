@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import garbageCleaning from '../assets/garbage-cleaning.jpg';
 
 const info = [
   { icon: 'fa-location-dot', titleKey: 'contatti.info.sedeLabel',  title: 'Sede Operativa',  lines: ['Via San Giuseppe, 42', 'Assoro (EN), 94010 · Sicilia'] },
@@ -32,7 +34,7 @@ const temi = [
   <section class="relative h-[65vh] flex items-center bg-forest grain overflow-hidden">
 
     <div class="absolute inset-0">
-      <img src="/placeholder.jpg" alt="" class="w-full h-full object-cover opacity-15" loading="eager" aria-hidden="true" />
+      <Image src={garbageCleaning} alt="" class="w-full h-full object-cover opacity-15" loading="eager" fetchpriority="high" width={1200} aria-hidden="true" />
       <div class="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/70 to-transparent"></div>
     </div>
 

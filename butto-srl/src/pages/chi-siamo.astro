@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import cleaning from '../assets/cleaning.jpg';
 
 const valori = [
   { icon: 'fa-handshake',     title: 'Integrità',             desc: 'Ogni contratto e ogni operazione è gestita con la massima trasparenza verso la comunità e le istituzioni.' },
@@ -49,7 +51,7 @@ const timeline = [
           <div class="relative">
             <div class="absolute -top-4 -left-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
             <div class="img-zoom aspect-[3/4]">
-              <img src="/placeholder.jpg" alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" />
+              <Image src={cleaning} alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" width={800} />
               <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent"></div>
             </div>
             <div class="absolute top-6 right-6 bg-ochre text-forest px-4 py-2.5">

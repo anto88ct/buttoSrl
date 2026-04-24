@@ -13,7 +13,7 @@ interface Props {
 const {
   title,
   description = 'Buttò S.r.l. – Eccellenza nella gestione integrata dei servizi ambientali ad Assoro (EN). Smaltimento rifiuti, appalti pubblici di pulizia e sostenibilità circolare.',
-  ogImage = '/og-default.jpg',
+  ogImage = '/og-default.jpg',  // static file in public/
   canonicalURL = Astro.url.pathname,
 } = Astro.props;
 
@@ -37,8 +37,41 @@ const fullTitle = title === 'Home'
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteURL}${ogImage}`} />
     <link rel="canonical" href={`${siteURL}${canonicalURL}`} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Buttò S.r.l.",
+      "description": "Dal 1978, leader nella gestione integrata dei servizi ambientali ad Assoro (EN). Smaltimento rifiuti, appalti pubblici di pulizia, sostenibilità circolare.",
+      "url": siteURL,
+      "logo": `${siteURL}/logo.png`,
+      "image": `${siteURL}${ogImage}`,
+      "telephone": "+39 0000 000000",
+      "email": "info@butto-srl.it",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via San Giuseppe, 42",
+        "addressLocality": "Assoro",
+        "addressRegion": "EN",
+        "postalCode": "94010",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.6317,
+        "longitude": 14.4197
+      },
+      "foundingDate": "1978",
+      "areaServed": {
+        "@type": "AdministrativeArea",
+        "name": "Sicilia"
+      },
+      "sameAs": []
+    })} />
     <!-- i18n: apply stored language before paint to avoid FOUC -->
     <script is:inline>
       (function() {
@@ -121,24 +154,27 @@ const fullTitle = title === 'Home'
       );
       document.querySelectorAll('[data-count]').forEach(el => counterIO.observe(el));
 
-      /* ── Custom cursor ── */
+      /* ── Custom Cursor ──────────────────────────────────────────── */
       const cursor     = document.getElementById('cursor')!;
       const cursorRing = document.getElementById('cursor-ring')!;
-      let mx = 0, my = 0, rx = 0, ry = 0;
 
-      document.addEventListener('mousemove', e => {
-        mx = e.clientX; my = e.clientY;
-        cursor.style.left = mx + 'px';
-        cursor.style.top  = my + 'px';
-      });
-      function animRing() {
-        rx += (mx - rx) * 0.12;
-        ry += (my - ry) * 0.12;
-        cursorRing.style.left = rx + 'px';
-        cursorRing.style.top  = ry + 'px';
-        requestAnimationFrame(animRing);
+      if (window.innerWidth > 1024) {
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        document.addEventListener('mousemove', e => {
+          mx = e.clientX; my = e.clientY;
+          cursor.style.left = mx + 'px';
+          cursor.style.top  = my + 'px';
+        });
+        function animRing() {
+          rx += (mx - rx) * 0.12;
+          ry += (my - ry) * 0.12;
+          cursorRing.style.left = rx + 'px';
+          cursorRing.style.top  = ry + 'px';
+          requestAnimationFrame(animRing);
+        }
+        animRing();
       }
-      animRing();
 
       /* ── Navbar scroll ── */
       const header = document.querySelector('header')!;
@@ -184,8 +220,8 @@ const fullTitle = title === 'Home'
 
     <style is:global>
       header.nav-scrolled {
-        box-shadow: 0 1px 32px rgba(13,26,16,0.18);
-        background: rgba(13,26,16,0.97) !important;
+        box-shadow: 0 1px 32px rgba(22, 44, 27, 0.18);
+        background: rgba(22, 44, 27, 0.97) !important;
       }
       #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.16,1,0.3,1); }
       #mobile-menu.is-open { max-height: 480px; }

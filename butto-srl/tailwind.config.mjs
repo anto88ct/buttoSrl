@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        forest:        '#0D1A10',
-        'forest-mid':  '#1B3A2D',
-        'forest-soft': '#2D5C3F',
+        forest:        '#162C1B',
+        'forest-mid':  '#244D3C',
+        'forest-soft': '#356B4D',
         sage:          '#8DB49A',
         'sage-dim':    '#5A8A6E',
         ivory:         '#F2EDDF',

@@ -1,5 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import garbageCleaning from '../assets/garbage-cleaning.jpg';
+import leafeHeart from '../assets/leafe-heart.jpg';
+import garbageStock from '../assets/garbage-stock.jpg';
+import cleaning from '../assets/cleaning.jpg';
 
 const services = [
   { num: '01', icon: 'fa-recycle',      title: 'Gestione Rifiuti',      desc: 'Trasporto e smaltimento certificato con tracciabilità digitale e piena conformità normativa.',   href: '/servizi#gestione-rifiuti' },
@@ -51,7 +56,8 @@ const clientiB = [
 
     <video
       class="absolute inset-0 w-full h-full object-cover"
-      autoplay muted loop playsinline preload="auto"
+      autoplay muted loop playsinline preload="none"
+      poster="/og-default.jpg"
     >
       <source src="/video.mp4" type="video/mp4" />
     </video>
@@ -114,7 +120,7 @@ const clientiB = [
             <div class="absolute -top-4 -right-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
 
             <div class="img-zoom aspect-[3/2] bg-forest-mid relative max-h-[55vh]">
-              <img src="/placeholder.jpg" alt="Flotta Buttò S.r.l." class="w-full h-full object-cover" loading="eager" />
+              <Image src={garbageCleaning} alt="Flotta Buttò S.r.l." class="w-full h-full object-cover" loading="eager" fetchpriority="high" width={1200} />
               <div class="absolute inset-0 bg-gradient-to-t from-forest/60 to-transparent"></div>
             </div>
 
@@ -224,7 +230,7 @@ const clientiB = [
         <div class="lg:col-span-5 reveal-left">
           <div class="relative">
             <div class="img-zoom aspect-[3/4]">
-              <img src="/placeholder.jpg" alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" />
+              <Image src={leafeHeart} alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" width={800} />
             </div>
             <div class="absolute top-6 left-6 bg-ochre text-forest px-4 py-2.5">
               <p data-i18n="home.founder.fondato" class="font-condensed font-800 text-xs uppercase tracking-[0.2em] text-forest/60">Fondato</p>
@@ -364,7 +370,7 @@ const clientiB = [
 
         <article class="md:col-span-5 bg-forest grain group cursor-pointer">
           <div class="img-zoom aspect-[4/3]">
-            <img src="/placeholder.jpg" alt="News" class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity" loading="lazy" />
+            <Image src={garbageStock} alt="News" class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity" loading="lazy" width={800} />
           </div>
           <div class="p-8">
             <span class="overline text-ochre">Normative 2024</span>
@@ -429,7 +435,7 @@ const clientiB = [
           <div class="flex items-center gap-0 shrink-0">
             <div class="flex items-center gap-4 px-8 py-5 border-r border-white/6 group hover:bg-white/4 transition-colors cursor-default">
               <div class="w-10 h-10 shrink-0 overflow-hidden border border-white/10 group-hover:border-ochre/30 transition-colors">
-                <img src="/placeholder.jpg" alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" />
+                <Image src={cleaning} alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" loading="lazy" width={600} />
               </div>
               <div>
                 <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">{name}</p>
@@ -449,7 +455,7 @@ const clientiB = [
           <div class="flex items-center gap-0 shrink-0">
             <div class="flex items-center gap-4 px-8 py-5 border-r border-white/6 group hover:bg-white/4 transition-colors cursor-default">
               <div class="w-10 h-10 shrink-0 overflow-hidden border border-white/10 group-hover:border-ochre/30 transition-colors">
-                <img src="/placeholder.jpg" alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" />
+                <Image src={cleaning} alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" loading="lazy" width={600} />
               </div>
               <div>
                 <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">{name}</p>

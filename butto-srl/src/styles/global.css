@@ -7,9 +7,9 @@
 
 /* ── CSS Variables ──────────────────────────────────────────── */
 :root {
-  --forest: #0D1A10;
-  --forest-mid: #1B3A2D;
-  --forest-soft: #2D5C3F;
+  --forest: #162C1B;
+  --forest-mid: #244D3C;
+  --forest-soft: #356B4D;
   --sage: #8DB49A;
   --ivory: #F2EDDF;
   --parchment: #E8E0CC;
@@ -53,36 +53,44 @@
 }
 
 /* ── Custom Cursor ──────────────────────────────────────────── */
-#cursor {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: var(--ochre);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  mix-blend-mode: multiply;
-  opacity: 0;
+@media (min-width: 1025px) {
+  #cursor {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--ochre);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    mix-blend-mode: multiply;
+    opacity: 0;
+  }
+
+  #cursor-ring {
+    position: fixed;
+    width: 34px;
+    height: 34px;
+    border: 1.5px solid var(--ochre);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+  }
+
+  body:hover #cursor,
+  body:hover #cursor-ring {
+    opacity: 0.6;
+  }
 }
 
-#cursor-ring {
-  position: fixed;
-  width: 34px;
-  height: 34px;
-  border: 1.5px solid var(--ochre);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
-  opacity: 0;
-}
-
-body:hover #cursor,
-body:hover #cursor-ring {
-  opacity: 0.6;
+@media (max-width: 1024px) {
+  #cursor, #cursor-ring {
+    display: none !important;
+  }
 }
 
 /* ── Scroll Progress ────────────────────────────────────────── */

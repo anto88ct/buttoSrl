@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import leafeHeart from '../assets/leafe-heart.jpg';
+import garbageStock from '../assets/garbage-stock.jpg';
 
 const pilastri = [
   { icon: 'fa-arrows-rotate',  title: 'Economia Circolare', desc: 'Recupero massimo di ogni materia prima secondaria attraverso processi certificati e catene di fornitura tracciate.' },
@@ -25,7 +28,7 @@ const sdgs = [
   <section class="relative min-h-[90vh] flex items-center bg-forest-mid overflow-hidden">
 
     <div class="absolute inset-0">
-      <img src="/placeholder.jpg" alt="" class="w-full h-full object-cover opacity-20" loading="eager" aria-hidden="true" />
+      <Image src={leafeHeart} alt="" class="w-full h-full object-cover opacity-20" loading="eager" fetchpriority="high" width={1200} aria-hidden="true" />
       <div class="absolute inset-0 bg-gradient-to-r from-forest via-forest/80 to-transparent"></div>
     </div>
 
@@ -92,7 +95,7 @@ const sdgs = [
         <div class="relative reveal-right delay-1">
           <div class="absolute -top-4 -right-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
           <div class="img-zoom aspect-[4/5]">
-            <img src="/placeholder.jpg" alt="Operatori Buttò al lavoro" class="w-full h-full object-cover" loading="lazy" />
+            <Image src={garbageStock} alt="Operatori Buttò al lavoro" class="w-full h-full object-cover" loading="lazy" width={900} />
           </div>
         </div>
       </div>

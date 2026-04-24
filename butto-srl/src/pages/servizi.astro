@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ServiziScrollytelling from '../components/ServiziScrollytelling.astro';
 
 const categorie = [
   {
@@ -93,6 +94,9 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
       </div>
     </div>
   </section>
+
+  <!-- ══════════════════════ SCROLLYTELLING ══════════════════════ -->
+  <ServiziScrollytelling />
 
   <!-- ══════════════════════ SERVICE CATEGORIES ══════════════════════ -->
   {categorie.map(({ id, num, icon, title, bg, dark, servizi }, ci) => (

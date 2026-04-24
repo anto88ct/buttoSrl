@@ -152,6 +152,31 @@ export const translations = {
         body: 'Soluzioni integrate per l\'ambiente attraverso una gestione consapevole delle risorse e la cura meticolosa degli spazi pubblici siciliani.',
       },
       learnMore: 'Informazioni',
+      scrollytelling: {
+        loading: 'Caricamento',
+        scrollHint: 'Scorri per scoprire',
+        beatA: {
+          overline: 'I NOSTRI SERVIZI',
+          title: "DA 45 ANNI AL SERVIZIO DELL'AMBIENTE.",
+          sub: 'Tre aree di competenza. Un unico impegno verso il territorio.',
+        },
+        beatB: {
+          overline: 'GESTIONE RIFIUTI',
+          title: 'RACCOLTA. TRASPORTO. SMALTIMENTO.',
+          sub: 'Soluzioni integrate per rifiuti speciali, urbani e industriali. Tracciabilità totale, zero compromessi.',
+        },
+        beatC: {
+          overline: 'PULIZIA E IGIENE',
+          title: 'AMBIENTI IMPECCABILI.',
+          sub: 'Pulizia industriale, civile e sanitizzazione. Efficienza certificata per ogni contesto.',
+        },
+        beatD: {
+          overline: 'VERDE E TERRITORIO',
+          title: 'LA TERRA CHE CURIAMO.',
+          sub: "Manutenzione del verde urbano e privato. Perché prendersi cura dell'ambiente inizia dal territorio.",
+          cta: 'Scopri tutti i servizi →',
+        },
+      },
       certs: {
         eyebrow: 'Le Nostre Garanzie',
         h2: 'Qualità Certificata',
@@ -497,6 +522,31 @@ export const translations = {
         body: 'Integrated environmental solutions through conscious resource management and meticulous care of Sicilian public spaces.',
       },
       learnMore: 'Information',
+      scrollytelling: {
+        loading: 'Loading',
+        scrollHint: 'Scroll to discover',
+        beatA: {
+          overline: 'OUR SERVICES',
+          title: '45 YEARS SERVING THE ENVIRONMENT.',
+          sub: 'Three areas of expertise. One commitment to the territory.',
+        },
+        beatB: {
+          overline: 'WASTE MANAGEMENT',
+          title: 'COLLECTION. TRANSPORT. DISPOSAL.',
+          sub: 'Integrated solutions for special, urban and industrial waste. Total traceability, zero compromise.',
+        },
+        beatC: {
+          overline: 'CLEANING & HYGIENE',
+          title: 'IMPECCABLE ENVIRONMENTS.',
+          sub: 'Industrial, civil and sanitisation cleaning. Certified efficiency for every context.',
+        },
+        beatD: {
+          overline: 'GREEN & TERRITORY',
+          title: 'THE LAND WE CARE FOR.',
+          sub: "Maintenance of urban and private green spaces. Because caring for the environment starts with the territory.",
+          cta: 'Discover all services →',
+        },
+      },
       certs: {
         eyebrow: 'Our Guarantees',
         h2: 'Certified Quality',

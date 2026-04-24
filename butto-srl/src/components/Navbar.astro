@@ -1,5 +1,7 @@
 ---
 import LanguageSwitch from './LanguageSwitch.astro';
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
 
 const navLinks = [
   { label: 'Home',           href: '/',               key: 'nav.home' },
@@ -17,10 +19,13 @@ const currentPath = Astro.url.pathname;
 
     <!-- Brand -->
     <a href="/" class="flex items-center gap-3 group shrink-0" aria-label="Buttò S.r.l.">
-      <img
-        src="/logo.png"
+      <Image
+        src={logo}
         alt="Buttò S.r.l."
-        class="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        class="h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+        width={200}
+        loading="eager"
+        fetchpriority="high"
       />
     </a>
 

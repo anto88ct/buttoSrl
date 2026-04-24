@@ -1,5 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import garbageStock from '../assets/garbage-stock.jpg';
+import cleaning from '../assets/cleaning.jpg';
 
 const articles = [
   { id:1, cat:'Normative 2024',     date:'14 Mag 2024', readTime:'8 min', title:'Nuovo Albo Gestori Ambientali: Le novità introdotte dal decreto legislativo.', excerpt:'Analisi dei nuovi requisiti tecnici e delle tempistiche di adeguamento per le imprese di smaltimento.', featured:true },
@@ -50,7 +53,7 @@ const grid     = articles.slice(3);
         <!-- Big feature -->
         <article class="lg:col-span-7 group relative cursor-pointer overflow-hidden">
           <div class="img-zoom aspect-[16/10]">
-            <img src="/placeholder.jpg" alt={featured.title} class="w-full h-full object-cover" loading="eager" />
+            <Image src={garbageStock} alt={featured.title} class="w-full h-full object-cover" loading="eager" fetchpriority="high" width={1200} />
             <div class="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/40 to-transparent"></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 p-8 lg:p-10">
@@ -122,7 +125,7 @@ const grid     = articles.slice(3);
         {grid.map(({ cat, date, readTime, title, excerpt }, i) => (
           <article class={`group flex flex-col cursor-pointer reveal delay-${(i % 3) + 1}`}>
             <div class="img-zoom aspect-[16/10] mb-6">
-              <img src="/placeholder.jpg" alt={title} class="w-full h-full object-cover" loading="lazy" />
+              <Image src={cleaning} alt={title} class="w-full h-full object-cover" loading="lazy" width={600} />
               <div class="absolute top-4 left-4">
                 <span class="font-condensed font-700 text-[0.62rem] uppercase tracking-[0.18em] bg-ivory/90 text-ochre px-3 py-1.5">
                   {cat}

@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import garbageStock from '../assets/garbage-stock.jpg';
 
 const alboCats = [
   { cat: 'Cat. 1 - Classe F', desc: 'Raccolta e trasporto di rifiuti urbani (per popolazioni inferiori a 5.000 abitanti).' },
@@ -109,7 +111,7 @@ const macrocategorie = [
       <div class="grid lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-5 reveal">
           <div class="aspect-square bg-forest flex items-center justify-center p-12 relative overflow-hidden">
-             <img src="/placeholder.jpg" alt="Rifiuti Speciali" class="absolute inset-0 w-full h-full object-cover opacity-20" loading="lazy" />
+             <Image src={garbageStock} alt="Rifiuti Speciali" class="absolute inset-0 w-full h-full object-cover opacity-20" loading="lazy" width={900} />
              <div class="absolute inset-0 bg-forest/80 mix-blend-multiply"></div>
              <i class="fa-solid fa-shield-virus text-[8rem] text-ochre/40 relative z-10"></i>
           </div>
