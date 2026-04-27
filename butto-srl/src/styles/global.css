@@ -26,11 +26,15 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   body {
     @apply bg-ivory font-body text-ink antialiased;
     font-feature-settings: "kern" 1, "liga" 1;
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   ::selection {
@@ -184,14 +188,14 @@
 
 .reveal-left {
   opacity: 0;
-  transform: translateX(-44px);
+  transform: translateX(-32px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-right {
   opacity: 0;
-  transform: translateX(44px);
+  transform: translateX(32px);
   transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }

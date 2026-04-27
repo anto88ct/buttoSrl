@@ -56,6 +56,21 @@ const categorie = [
 ];
 
 const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'Attestazione SOA'];
+
+const faqs = [
+  {
+    q: 'Quali tipologie di rifiuti gestite?',
+    a: "L'azienda opera secondo le categorie di iscrizione all'Albo Nazionale Gestori Ambientali, garantendo servizi specializzati e conformi per ogni tipologia autorizzata.",
+  },
+  {
+    q: 'Offrite servizi di emergenza?',
+    a: 'Sì, sono disponibili interventi straordinari con sistemi di reperibilità concordata per rispondere a situazioni urgenti.',
+  },
+  {
+    q: 'Come viene garantita la tracciabilità?',
+    a: 'Attraverso registri digitali, formulari elettronici e integrazione completa con il sistema RENTRI per la massima trasparenza operativa.',
+  },
+];
 ---
 
 <Layout
@@ -224,7 +239,7 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
       </div>
     </div>
 
-    <div class="relative">
+    <div class="relative overflow-hidden">
       <div class="absolute inset-y-0 left-0 w-28 z-10 pointer-events-none" style="background: linear-gradient(to right, #0D1A10, transparent);"></div>
       <div class="absolute inset-y-0 right-0 w-28 z-10 pointer-events-none" style="background: linear-gradient(to left, #0D1A10, transparent);"></div>
 
@@ -254,6 +269,57 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
       <a href="/contatti" class="btn-primary px-10 py-5">
         <span data-i18n="servizi.cta.btn">Richiedi un preventivo</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
       </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ FAQ ══════════════════════ -->
+  <section class="relative py-24 bg-parchment overflow-hidden">
+
+    <div class="absolute top-1/2 -translate-y-1/2 right-5 pointer-events-none select-none hidden xl:flex flex-col items-center gap-4">
+      <span
+        class="font-condensed font-700 text-[0.55rem] tracking-[0.35em] uppercase text-ink/18"
+        style="writing-mode: vertical-rl; transform: rotate(180deg);"
+      >§FAQ — Buttò S.r.l.</span>
+      <span class="w-px h-14 block" style="background: rgba(30,28,23,0.08)"></span>
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+
+      <div class="flex items-center gap-6 mb-16 pb-8 border-b border-linen reveal-blur">
+        <span class="font-condensed font-800 text-[5rem] leading-none tracking-tighter select-none text-ink/[0.06]">FAQ</span>
+        <div>
+          <div class="flex items-center gap-3 mb-1">
+            <i class="fa-solid fa-circle-question text-2xl text-ochre"></i>
+            <h2 data-i18n="servizi.faq.h2" class="display-sm italic text-ink" style="text-wrap: balance;">Domande Frequenti</h2>
+          </div>
+          <div class="h-px w-16 bg-ochre mt-2"></div>
+        </div>
+      </div>
+
+      <div class="max-w-4xl">
+        {faqs.map(({ q, a }, i) => (
+          <div
+            class="faq-item border-b border-linen reveal-blur"
+            style={`transition-delay: ${i * 0.12}s`}
+          >
+            <button class="faq-trigger w-full flex items-start gap-6 py-8 text-left group" aria-expanded="false">
+              <span class="font-condensed font-700 text-[0.6rem] tracking-[0.25em] text-ochre/60 group-hover:text-ochre transition-colors flex-shrink-0 pt-1">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class="font-serif text-xl italic text-ink leading-snug flex-1 group-hover:text-forest transition-colors duration-300">
+                {q}
+              </span>
+              <span class="faq-icon-box flex-shrink-0 w-8 h-8 border border-linen group-hover:border-ochre/50 flex items-center justify-center transition-all duration-300 mt-0.5">
+                <i class="fa-solid fa-plus text-[9px] text-ochre/50 group-hover:text-ochre faq-icon-svg transition-all duration-300"></i>
+              </span>
+            </button>
+            <div class="faq-body" style="max-height: 0; overflow: hidden;">
+              <p class="font-body text-muted text-base leading-relaxed pb-8 pl-12">{a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
     </div>
   </section>
 
@@ -342,6 +408,19 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
     border-color: var(--ochre);
     color: var(--ochre);
   }
+
+  /* FAQ accordion */
+  .faq-body {
+    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .faq-item.faq-open .faq-icon-svg {
+    transform: rotate(45deg);
+    color: var(--ochre);
+  }
+  .faq-item.faq-open .faq-icon-box {
+    border-color: rgba(196, 146, 42, 0.5);
+  }
+  .faq-trigger { cursor: pointer; background: none; border: none; }
 </style>
 
 <script>
@@ -391,4 +470,25 @@ const certs = ['ISO 14001:2015', 'ISO 9001:2015', 'Albo Gestori Ambientali', 'At
     { rootMargin: '-38% 0px -38% 0px' }
   );
   document.querySelectorAll<HTMLElement>('.service-section').forEach(s => activeIO.observe(s));
+
+  // FAQ accordion
+  document.querySelectorAll<HTMLButtonElement>('.faq-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest<HTMLElement>('.faq-item')!;
+      const body = item.querySelector<HTMLElement>('.faq-body')!;
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+
+      document.querySelectorAll<HTMLElement>('.faq-item').forEach(i => {
+        i.querySelector<HTMLButtonElement>('.faq-trigger')!.setAttribute('aria-expanded', 'false');
+        i.querySelector<HTMLElement>('.faq-body')!.style.maxHeight = '0';
+        i.classList.remove('faq-open');
+      });
+
+      if (!isOpen) {
+        trigger.setAttribute('aria-expanded', 'true');
+        body.style.maxHeight = body.scrollHeight + 'px';
+        item.classList.add('faq-open');
+      }
+    });
+  });
 </script>

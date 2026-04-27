@@ -1,27 +1,62 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import garbageCleaning from '../assets/garbage-cleaning.jpg';
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import garbageCleaning from "../assets/garbage-cleaning.jpg";
 
 const info = [
-  { icon: 'fa-location-dot', titleKey: 'contatti.info.sedeLabel',  title: 'Sede Operativa',  lines: ['Via San Giuseppe, 42', 'Assoro (EN), 94010 · Sicilia'] },
-  { icon: 'fa-phone',        titleKey: 'contatti.info.telLabel',    title: 'Telefono',         lines: ['+39 0000 000000'],   noteKey: 'contatti.info.telNote', note: 'Lun–Ven 08:30–18:00' },
-  { icon: 'fa-envelope',     titleKey: 'contatti.info.emailLabel',  title: 'Email',            lines: ['info@butto-srl.it', 'butto.srl@legalmail.it'] },
+  {
+    icon: "fa-location-dot",
+    titleKey: "contatti.info.sedeLabel",
+    title: "Sede Operativa",
+    lines: ["Via S. Giuseppe N°42", "Assoro (EN), 94010 · Sicilia"],
+  },
+  {
+    icon: "fa-phone",
+    titleKey: "contatti.info.telLabel",
+    title: "Telefono",
+    lines: ["+39 375 927 8085"],
+    noteKey: "contatti.info.telNote",
+    note: "Lun–Ven 08:30–18:00",
+  },
+  {
+    icon: "fa-envelope",
+    titleKey: "contatti.info.emailLabel",
+    title: "Email",
+    lines: ["servizi.butto@gmail.com", "impresabutto@pec.it"],
+  },
 ];
 
 const schedule = [
-  { dayKey: 'contatti.info.schedule.0.day', day: 'Lunedì – Venerdì', hoursKey: undefined,                         hours: '08:30 – 18:00', open: true },
-  { dayKey: 'contatti.info.schedule.1.day', day: 'Sabato',           hoursKey: undefined,                         hours: '09:00 – 12:00', open: true },
-  { dayKey: 'contatti.info.schedule.2.day', day: 'Domenica',         hoursKey: 'contatti.info.schedule.2.hours',  hours: 'Chiuso',         open: false },
+  {
+    dayKey: "contatti.info.schedule.0.day",
+    day: "Lunedì – Venerdì",
+    hoursKey: undefined,
+    hours: "08:30 – 18:00",
+    open: true,
+  },
+  {
+    dayKey: "contatti.info.schedule.1.day",
+    day: "Sabato",
+    hoursKey: undefined,
+    hours: "09:00 – 12:00",
+    open: true,
+  },
+  {
+    dayKey: "contatti.info.schedule.2.day",
+    day: "Domenica",
+    hoursKey: "contatti.info.schedule.2.hours",
+    hours: "Chiuso",
+    open: false,
+  },
 ];
 
 const temi = [
-  'Richiesta Informazioni Generali',
-  'Preventivo Servizi Ambientali',
-  'Segnalazione Ambientale Urgente',
-  'Appalti e Gare Pubbliche',
-  'Collaborazione Professionale',
-  'Altro',
+  "Richiesta Informazioni Generali",
+  "Preventivo Servizi Ambientali",
+  "Segnalazione Ambientale Urgente",
+  "Appalti e Gare Pubbliche",
+  "Collaborazione Professionale",
+  "Altro",
 ];
 ---
 
@@ -29,30 +64,62 @@ const temi = [
   title="Contatti"
   description="Contatta Buttò S.r.l. – Entra in contatto con il team di gestione ambientale di Assoro (EN) per preventivi, collaborazioni e segnalazioni urgenti."
 >
-
   <!-- ══════════════════════ HERO ══════════════════════ -->
-  <section class="relative h-[65vh] flex items-center bg-forest grain overflow-hidden">
-
+  <section
+    class="relative h-[65vh] flex items-center bg-forest grain overflow-hidden"
+  >
     <div class="absolute inset-0">
-      <Image src={garbageCleaning} alt="" class="w-full h-full object-cover opacity-15" loading="eager" fetchpriority="high" width={1200} aria-hidden="true" />
-      <div class="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/70 to-transparent"></div>
+      <Image
+        src={garbageCleaning}
+        alt=""
+        class="w-full h-full object-cover opacity-15"
+        loading="eager"
+        fetchpriority="high"
+        width={1200}
+        aria-hidden="true"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/70 to-transparent"
+      >
+      </div>
     </div>
 
-    <div class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden">
-      <span class="font-condensed font-800 text-[20vw] text-ivory/[0.04] leading-none tracking-tighter">CIAO</span>
+    <div
+      class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden"
+    >
+      <!-- <span
+        class="font-condensed font-800 text-[20vw] text-ivory/[0.04] leading-none tracking-tighter"
+        >CIAO</span -->
+      <!-- > -->
     </div>
 
-    <div class="absolute top-16 right-16 w-24 h-24 border border-ochre/15 rotate-45 pointer-events-none hidden lg:block"></div>
-    <div class="absolute top-24 right-24 w-12 h-12 border border-ochre/20 rotate-45 pointer-events-none hidden lg:block"></div>
+    <div
+      class="absolute top-16 right-16 w-24 h-24 border border-ochre/15 rotate-45 pointer-events-none hidden lg:block"
+    >
+    </div>
+    <div
+      class="absolute top-24 right-24 w-12 h-12 border border-ochre/20 rotate-45 pointer-events-none hidden lg:block"
+    >
+    </div>
 
     <div class="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-14 w-full">
-      <span data-i18n="contatti.hero.eyebrow" class="overline text-ochre mb-5 block reveal">Parliamo</span>
-      <h1 data-i18n-html="contatti.hero.h1html" class="display-xl text-ivory reveal delay-1">
-        Entra in<br/>
+      <span
+        data-i18n="contatti.hero.eyebrow"
+        class="overline text-ochre mb-5 block reveal">Parliamo</span
+      >
+      <h1
+        data-i18n-html="contatti.hero.h1html"
+        class="display-xl text-ivory reveal delay-1"
+      >
+        Entra in<br />
         <em class="text-sage not-italic">contatto</em>
       </h1>
-      <p data-i18n="contatti.hero.body" class="font-body text-ivory/45 max-w-lg text-xl leading-relaxed mt-8 reveal delay-2">
-        Siamo pronti ad ascoltare le tue esigenze e costruire insieme soluzioni ambientali su misura.
+      <p
+        data-i18n="contatti.hero.body"
+        class="font-body text-ivory/45 max-w-lg text-xl leading-relaxed mt-8 reveal delay-2"
+      >
+        Siamo pronti ad ascoltare le tue esigenze e costruire insieme soluzioni
+        ambientali su misura.
       </p>
     </div>
   </section>
@@ -61,48 +128,91 @@ const temi = [
   <section class="py-28 bg-ivory dot-grid">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
       <div class="grid lg:grid-cols-12 gap-12 items-start">
-
         <!-- LEFT: info panel -->
         <div class="lg:col-span-4 space-y-8">
           <div class="reveal">
-            <span data-i18n="contatti.info.eyebrow" class="overline text-ochre">Dove Siamo</span>
+            <span data-i18n="contatti.info.eyebrow" class="overline text-ochre"
+              >Dove Siamo</span
+            >
             <div class="rule-ochre"></div>
-            <h2 data-i18n="contatti.info.h2" class="display-sm text-ink italic mt-5">Informazioni</h2>
+            <h2
+              data-i18n="contatti.info.h2"
+              class="display-sm text-ink italic mt-5"
+            >
+              Informazioni
+            </h2>
           </div>
 
           <div class="space-y-0 border border-linen reveal delay-1">
-            {info.map(({ icon, titleKey, title, lines, noteKey, note }, i) => (
-              <div class={`group flex gap-5 items-start p-6 hover:bg-parchment transition-colors cursor-default ${i < info.length - 1 ? 'border-b border-linen' : ''}`}>
-                <div class="w-10 h-10 border border-linen group-hover:border-ochre/40 flex items-center justify-center shrink-0 transition-colors">
-                  <i class={`fa-solid ${icon} text-sm text-ochre/50 group-hover:text-ochre transition-colors`}></i>
+            {
+              info.map(({ icon, titleKey, title, lines, noteKey, note }, i) => (
+                <div
+                  class={`group flex gap-5 items-start p-6 hover:bg-parchment transition-colors cursor-default ${i < info.length - 1 ? "border-b border-linen" : ""}`}
+                >
+                  <div class="w-10 h-10 border border-linen group-hover:border-ochre/40 flex items-center justify-center shrink-0 transition-colors">
+                    <i
+                      class={`fa-solid ${icon} text-sm text-ochre/50 group-hover:text-ochre transition-colors`}
+                    />
+                  </div>
+                  <div>
+                    <p
+                      data-i18n={titleKey}
+                      class="font-condensed font-700 text-[0.7rem] uppercase tracking-[0.14em] text-ink mb-1"
+                    >
+                      {title}
+                    </p>
+                    {lines.map((l) => (
+                      <p class="font-body text-muted text-sm leading-snug">
+                        {l}
+                      </p>
+                    ))}
+                    {note && (
+                      <p
+                        data-i18n={noteKey}
+                        class="font-body text-muted/50 text-xs mt-1 italic"
+                      >
+                        {note}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <p data-i18n={titleKey} class="font-condensed font-700 text-[0.7rem] uppercase tracking-[0.14em] text-ink mb-1">{title}</p>
-                  {lines.map(l => (
-                    <p class="font-body text-muted text-sm leading-snug">{l}</p>
-                  ))}
-                  {note && <p data-i18n={noteKey} class="font-body text-muted/50 text-xs mt-1 italic">{note}</p>}
-                </div>
-              </div>
-            ))}
+              ))
+            }
           </div>
 
           <div class="border border-linen reveal delay-2">
             <div class="flex items-center gap-3 p-5 border-b border-linen">
               <i class="fa-solid fa-clock text-ochre text-sm"></i>
-              <p data-i18n="contatti.info.orari" class="font-condensed font-700 text-[0.7rem] uppercase tracking-[0.14em] text-ink">Orari di Apertura</p>
+              <p
+                data-i18n="contatti.info.orari"
+                class="font-condensed font-700 text-[0.7rem] uppercase tracking-[0.14em] text-ink"
+              >
+                Orari di Apertura
+              </p>
             </div>
             <div class="divide-y divide-linen">
-              {schedule.map(({ dayKey, day, hoursKey, hours, open }) => (
-                <div class="flex items-center justify-between px-5 py-3.5">
-                  <span data-i18n={dayKey} class="font-body text-muted text-sm">{day}</span>
-                  <span data-i18n={hoursKey} class={`font-condensed font-700 text-sm ${open ? 'text-forest-soft' : 'text-sienna'}`}>{hours}</span>
-                </div>
-              ))}
+              {
+                schedule.map(({ dayKey, day, hoursKey, hours, open }) => (
+                  <div class="flex items-center justify-between px-5 py-3.5">
+                    <span
+                      data-i18n={dayKey}
+                      class="font-body text-muted text-sm"
+                    >
+                      {day}
+                    </span>
+                    <span
+                      data-i18n={hoursKey}
+                      class={`font-condensed font-700 text-sm ${open ? "text-forest-soft" : "text-sienna"}`}
+                    >
+                      {hours}
+                    </span>
+                  </div>
+                ))
+              }
             </div>
           </div>
 
-          <div class="border-l-2 border-ochre bg-parchment p-6 reveal delay-3">
+          <!-- <div class="border-l-2 border-ochre bg-parchment p-6 reveal delay-3">
             <p class="overline text-ochre mb-3">
               <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>
               <span data-i18n="contatti.info.emergenze">Emergenze 24/7</span>
@@ -111,85 +221,189 @@ const temi = [
               Per segnalazioni urgenti di gestione rifiuti o bonifiche, il nostro team è sempre operativo.
             </p>
             <p class="font-display text-3xl text-ink leading-none">800 <span class="text-ochre">— — — —</span></p>
-          </div>
+          </div> -->
         </div>
 
         <!-- RIGHT: form -->
         <div class="lg:col-span-8 reveal-right delay-1">
           <div class="bg-white border border-linen p-8 lg:p-12 relative">
-            <div class="absolute top-0 right-0 w-20 h-20 border-b-0 border-l-0 border border-ochre/15 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-14 h-14 border-t-0 border-r-0 border border-ochre/10 pointer-events-none"></div>
+            <div
+              class="absolute top-0 right-0 w-20 h-20 border-b-0 border-l-0 border border-ochre/15 pointer-events-none"
+            >
+            </div>
+            <div
+              class="absolute bottom-0 left-0 w-14 h-14 border-t-0 border-r-0 border border-ochre/10 pointer-events-none"
+            >
+            </div>
 
             <div class="relative z-10">
-              <span data-i18n="contatti.form.eyebrow" class="overline text-ochre">Scrivici</span>
+              <span
+                data-i18n="contatti.form.eyebrow"
+                class="overline text-ochre">Scrivici</span
+              >
               <div class="rule-ochre"></div>
-              <h3 data-i18n="contatti.form.h3" class="font-serif text-3xl text-ink italic mt-4 mb-1">Inviaci un Messaggio</h3>
-              <p data-i18n="contatti.form.subNote" class="font-body text-muted text-sm mb-8">Risponderemo entro 24 ore lavorative.</p>
+              <h3
+                data-i18n="contatti.form.h3"
+                class="font-serif text-3xl text-ink italic mt-4 mb-1"
+              >
+                Inviaci un Messaggio
+              </h3>
+              <p
+                data-i18n="contatti.form.subNote"
+                class="font-body text-muted text-sm mb-8"
+              >
+                Risponderemo entro 24 ore lavorative.
+              </p>
 
               <form action="#" method="POST" class="space-y-6">
                 <div class="grid md:grid-cols-2 gap-5">
                   <div class="space-y-2">
-                    <label class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2">
+                    <label
+                      for="form-name"
+                      class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                    >
                       <i class="fa-solid fa-user text-ochre/60 text-[10px]"></i>
                       <span data-i18n="contatti.form.nome">Nome Completo</span>
                     </label>
-                    <input type="text" name="name" placeholder="Mario Rossi" autocomplete="name" required
-                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40" />
+                    <input
+                      id="form-name"
+                      type="text"
+                      name="name"
+                      placeholder="Mario Rossi"
+                      autocomplete="name"
+                      required
+                      aria-required="true"
+                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40"
+                    />
                   </div>
                   <div class="space-y-2">
-                    <label class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2">
+                    <label
+                      for="form-email"
+                      class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                    >
                       <i class="fa-solid fa-at text-ochre/60 text-[10px]"></i>
                       <span data-i18n="contatti.form.email">Email</span>
                     </label>
-                    <input type="email" name="email" placeholder="mario.rossi@azienda.it" autocomplete="email" required
-                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40" />
+                    <input
+                      id="form-email"
+                      type="email"
+                      name="email"
+                      placeholder="mario.rossi@azienda.it"
+                      autocomplete="email"
+                      required
+                      aria-required="true"
+                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40"
+                    />
                   </div>
                 </div>
 
                 <div class="space-y-2">
-                  <label class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2">
+                  <label
+                    for="form-subject"
+                    class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                  >
                     <i class="fa-solid fa-tag text-ochre/60 text-[10px]"></i>
                     <span data-i18n="contatti.form.oggetto">Oggetto</span>
                   </label>
                   <div class="relative">
-                    <select name="subject"
-                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors appearance-none cursor-pointer font-body text-ink text-sm">
-                      {temi.map((t, ti) => <option data-i18n={`contatti.form.temi.${ti}`} value={t}>{t}</option>)}
+                    <select
+                      id="form-subject"
+                      name="subject"
+                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors appearance-none cursor-pointer font-body text-ink text-sm"
+                    >
+                      {
+                        temi.map((t, ti) => (
+                          <option
+                            data-i18n={`contatti.form.temi.${ti}`}
+                            value={t}
+                          >
+                            {t}
+                          </option>
+                        ))
+                      }
                     </select>
-                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ochre/50 text-sm"></i>
+                    <i
+                      class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-ochre/50 text-sm"
+                    ></i>
                   </div>
                 </div>
 
                 <div class="space-y-2">
-                  <label class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2">
-                    <i class="fa-solid fa-building text-ochre/60 text-[10px]"></i>
-                    <span data-i18n="contatti.form.azienda">Azienda / Ente</span>
-                    <span data-i18n="contatti.form.opzionale" class="normal-case font-400 text-muted/50 tracking-normal">(opzionale)</span>
+                  <label
+                    for="form-company"
+                    class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                  >
+                    <i class="fa-solid fa-building text-ochre/60 text-[10px]"
+                    ></i>
+                    <span data-i18n="contatti.form.azienda">Azienda / Ente</span
+                    >
+                    <span
+                      data-i18n="contatti.form.opzionale"
+                      class="normal-case font-400 text-muted/50 tracking-normal"
+                      >(opzionale)</span
+                    >
                   </label>
-                  <input type="text" name="company" placeholder="Comune di…, Azienda XYZ"
-                    class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40" />
+                  <input
+                    id="form-company"
+                    type="text"
+                    name="company"
+                    placeholder="Comune di…, Azienda XYZ"
+                    class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40"
+                  />
                 </div>
 
                 <div class="space-y-2">
-                  <label class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2">
-                    <i class="fa-solid fa-comment text-ochre/60 text-[10px]"></i>
+                  <label
+                    for="form-message"
+                    class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                  >
+                    <i class="fa-solid fa-comment text-ochre/60 text-[10px]"
+                    ></i>
                     <span data-i18n="contatti.form.messaggio">Messaggio</span>
                   </label>
-                  <textarea name="message" rows="5" placeholder="Descrivi la tua richiesta…" required
-                    class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors resize-none font-body text-ink text-sm placeholder:text-muted/40"></textarea>
+                  <textarea
+                    id="form-message"
+                    name="message"
+                    rows="5"
+                    placeholder="Descrivi la tua richiesta…"
+                    required
+                    aria-required="true"
+                    class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors resize-none font-body text-ink text-sm placeholder:text-muted/40"
+                  ></textarea>
                 </div>
 
-                <div class="flex items-start gap-3 bg-ivory border border-linen p-4">
-                  <input id="privacy" type="checkbox" name="privacy" required
-                    class="mt-0.5 w-4 h-4 border-linen accent-ochre shrink-0 cursor-pointer" />
-                  <label for="privacy" class="font-body text-xs text-muted leading-snug cursor-pointer">
-                    <span data-i18n="contatti.form.privacy">Acconsento al trattamento dei dati personali ai sensi del</span>
-                    <a href="/privacy" class="text-ochre font-600 underline underline-offset-2 ml-1">GDPR</a>.
+                <div
+                  class="flex items-start gap-3 bg-ivory border border-linen p-4"
+                >
+                  <input
+                    id="privacy"
+                    type="checkbox"
+                    name="privacy"
+                    required
+                    aria-required="true"
+                    class="mt-0.5 w-4 h-4 border-linen accent-ochre shrink-0 cursor-pointer"
+                  />
+                  <label
+                    for="privacy"
+                    class="font-body text-xs text-muted leading-snug cursor-pointer"
+                  >
+                    <span data-i18n="contatti.form.privacy"
+                      >Acconsento al trattamento dei dati personali ai sensi del</span
+                    >
+                    <a
+                      href="/privacy"
+                      class="text-ochre font-600 underline underline-offset-2 ml-1"
+                      >GDPR</a
+                    >.
                   </label>
                 </div>
 
-                <button type="submit" class="btn-primary w-full justify-center text-base py-5">
-                  <span data-i18n="contatti.form.submit">Invia Messaggio</span> <i class="fa-solid fa-paper-plane text-[11px]"></i>
+                <button
+                  type="submit"
+                  class="btn-primary w-full justify-center text-base py-5"
+                >
+                  <span data-i18n="contatti.form.submit">Invia Messaggio</span>
+                  <i class="fa-solid fa-paper-plane text-[11px]"></i>
                 </button>
               </form>
             </div>
@@ -201,19 +415,22 @@ const temi = [
 
   <!-- ══════════════════════ MAP ══════════════════════ -->
   <section class="h-[520px] relative border-t border-linen overflow-hidden">
-
     <iframe
       src="https://maps.google.com/maps?q=Via+San+Giuseppe+42+Assoro+EN+Sicilia&output=embed&z=16&hl=it"
       class="absolute inset-0 w-full h-full border-0"
       loading="lazy"
       allowfullscreen
       referrerpolicy="no-referrer-when-downgrade"
-      title="Sede Buttò S.r.l. – Via San Giuseppe 42, Assoro (EN)"
-    ></iframe>
+      title="Sede Buttò S.r.l. – Via San Giuseppe 42, Assoro (EN)"></iframe>
 
-    <div class="absolute inset-y-0 left-0 w-72 bg-gradient-to-r from-forest/70 to-transparent pointer-events-none z-10"></div>
+    <div
+      class="absolute inset-y-0 left-0 w-72 bg-gradient-to-r from-forest/70 to-transparent pointer-events-none z-10"
+    >
+    </div>
 
-    <div class="absolute top-8 left-8 z-20 bg-forest border border-white/10 grain p-6 max-w-[260px] shadow-forest">
+    <div
+      class="absolute top-8 left-8 z-20 bg-forest border border-white/10 grain p-6 max-w-[260px] shadow-forest"
+    >
       <div class="h-px w-8 bg-ochre mb-5"></div>
 
       <div class="flex items-center gap-3 mb-4">
@@ -221,13 +438,26 @@ const temi = [
           <i class="fa-solid fa-location-dot text-forest text-sm"></i>
         </div>
         <div>
-          <p class="font-condensed font-700 text-[0.68rem] uppercase tracking-[0.16em] text-ivory">Buttò S.r.l.</p>
-          <p data-i18n="contatti.map.sede" class="font-body text-[0.7rem] text-ivory/40">Sede Operativa · Assoro (EN)</p>
+          <p
+            class="font-condensed font-700 text-[0.68rem] uppercase tracking-[0.16em] text-ivory"
+          >
+            Buttò S.r.l.
+          </p>
+          <p
+            data-i18n="contatti.map.sede"
+            class="font-body text-[0.7rem] text-ivory/40"
+          >
+            Sede Operativa · Assoro (EN)
+          </p>
         </div>
       </div>
 
-      <p class="font-body text-sm text-ivory/70 leading-snug mb-1">Via San Giuseppe, 42</p>
-      <p class="font-body text-sm text-ivory/50 leading-snug mb-5">Assoro (EN), 94010 · Sicilia</p>
+      <p class="font-body text-sm text-ivory/70 leading-snug mb-1">
+        Via S. Giuseppe N°42
+      </p>
+      <p class="font-body text-sm text-ivory/50 leading-snug mb-5">
+        Assoro (EN), 94010 · Sicilia
+      </p>
 
       <a
         href="https://maps.google.com/?q=Via+San+Giuseppe+42,+Assoro,+EN,+Sicilia"
@@ -240,5 +470,4 @@ const temi = [
       </a>
     </div>
   </section>
-
 </Layout>

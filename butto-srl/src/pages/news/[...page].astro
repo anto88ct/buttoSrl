@@ -1,0 +1,269 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Assets
+import garbageStock from '../../assets/garbage-stock.jpg';
+import cleaning from '../../assets/cleaning.jpg';
+
+export async function getStaticPaths({ paginate }) {
+  // Read and parse news.txt
+  const newsFilePath = path.join(process.cwd(), 'news.txt');
+  let rawItems = [];
+  
+  try {
+    const newsContent = fs.readFileSync(newsFilePath, 'utf-8');
+    const regex = /<a href="([^"]+)"[^>]*>(.*?)<\/a>/g;
+    let match;
+    while ((match = regex.exec(newsContent)) !== null) {
+      rawItems.push({
+        title: match[2],
+        link: match[1].replace(/&quot;/g, '').replace(/^\/\//, 'https://')
+      });
+    }
+  } catch (e) {
+    console.error("Error reading news.txt:", e);
+  }
+
+  // Map to our article structure
+  const baseArticles = rawItems.map((item, i) => ({
+    id: i + 1,
+    cat: ['Normative', 'Risorse', 'Sicurezza', 'Ambiente', 'Servizi', 'Guide'][i % 6],
+    date: ['24 Mag 2024', '22 Mag 2024', '20 Mag 2024', '18 Mag 2024', '15 Mag 2024', '12 Mag 2024'][i % 6],
+    readTime: ['5 min', '8 min', '10 min', '6 min', '4 min', '12 min'][i % 6],
+    title: item.title,
+    excerpt: [
+      'Accedi al portale per la ricerca delle imprese iscritte all\'Albo Nazionale Gestori Ambientali.',
+      'Consulta l\'elenco completo dei codici CER per la corretta classificazione dei tuoi rifiuti.',
+      'Tutto quello che c\'è da sapere sulla classificazione dei rifiuti pericolosi secondo la normativa ADR.',
+      'Guida alle classi di pericolo HP per i rifiuti e alle relative etichettature di sicurezza.',
+      'Strumenti pratici e calcolatori per facilitare la gestione ambientale della tua azienda.',
+      'Scopri come gestire correttamente lo smaltimento dei rifiuti aziendali seguendo le norme vigenti.'
+    ][i % 6],
+    link: item.link,
+    image: (i % 2 === 0) ? garbageStock : cleaning,
+    dark: i === 1
+  }));
+
+  // Create enough articles to demonstrate pagination (duplicating for demo purposes)
+  const allArticles = [
+    ...baseArticles,
+    ...baseArticles.map(a => ({ ...a, id: a.id + 6, title: a.title + ' (Archivio)' })),
+    ...baseArticles.map(a => ({ ...a, id: a.id + 12, title: a.title + ' (Aggiornamenti)' }))
+  ];
+
+  return paginate(allArticles, { pageSize: 6 });
+}
+
+const { page } = Astro.props;
+const articles = page.data;
+const isFirstPage = page.currentPage === 1;
+
+// Grid and featured items logic
+let featured, sideA, sideB, grid;
+
+if (isFirstPage) {
+  featured = articles[0];
+  sideA    = articles[1];
+  sideB    = articles[2];
+  grid     = articles.slice(3);
+} else {
+  grid     = articles;
+}
+---
+
+<Layout
+  title="News & Media"
+  description="Aggiornamenti, normative ambientali, certificazioni e news da Buttò S.r.l. – L'Archivio Organico della sostenibilità siciliana."
+>
+
+  <!-- ══════════════════════ EDITORIAL HEADER ══════════════════════ -->
+  <section class="pt-24 pb-8 bg-ivory">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="grid lg:grid-cols-12 gap-8 items-end pb-12 border-b border-linen">
+        <div class="lg:col-span-8 reveal">
+          <span class="overline text-ochre">L'Archivio Organico</span>
+          <div class="rule-ochre"></div>
+          <h1 class="display-xl text-ink mt-5">
+            Cronache della<br/>
+            <em class="text-forest-soft not-italic">Sostenibilità.</em>
+          </h1>
+        </div>
+        <div class="lg:col-span-4 reveal delay-2">
+          <p class="font-body text-muted leading-relaxed">
+            Aggiornamenti su normative ambientali, innovazioni nel settore dei rifiuti e news da Buttò S.r.l.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {isFirstPage && (
+    <!-- ══════════════════════ FEATURED LAYOUT (Only Page 1) ══════════════════════ -->
+    <section class="py-12 bg-ivory">
+      <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+        <div class="grid lg:grid-cols-12 gap-px bg-linen border border-linen">
+
+          <!-- Big feature -->
+          <a href={featured.link} target="_blank" rel="noopener" class="lg:col-span-7 group relative cursor-pointer overflow-hidden">
+            <article class="h-full">
+              <div class="img-zoom aspect-[16/10] h-full">
+                <Image src={featured.image} alt={featured.title} class="w-full h-full object-cover" loading="eager" fetchpriority="high" width={1200} />
+                <div class="absolute inset-0 bg-gradient-to-t from-forest/90 via-forest/40 to-transparent"></div>
+              </div>
+              <div class="absolute inset-x-0 bottom-0 p-8 lg:p-10">
+                <span class="overline text-ochre block mb-3">{featured.cat}</span>
+                <h2 class="font-serif text-2xl lg:text-3xl text-ivory leading-tight mb-4 group-hover:text-sage transition-colors">
+                  {featured.title}
+                </h2>
+                <p class="font-body text-ivory/50 text-sm mb-5 line-clamp-2">{featured.excerpt}</p>
+                <div class="flex items-center gap-4">
+                  <span class="font-condensed text-ivory/35 text-xs tracking-wide">{featured.date}</span>
+                  <span class="text-ivory/20">·</span>
+                  <span class="font-condensed text-ivory/25 text-xs">Lettura: {featured.readTime}</span>
+                </div>
+              </div>
+              <!-- Hover CTA -->
+              <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span class="bg-forest/60 backdrop-blur-sm text-ivory px-4 py-2 font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] flex items-center gap-2">
+                  Leggi <i class="fa-solid fa-arrow-right text-[9px]"></i>
+                </span>
+              </div>
+            </article>
+          </a>
+
+          <!-- Side stack -->
+          <div class="lg:col-span-5 grid grid-rows-2 gap-px bg-linen">
+            <!-- Dark card -->
+            <a href={sideA.link} target="_blank" rel="noopener" class="bg-forest grain group cursor-pointer p-8 flex flex-col justify-between hover:bg-forest-mid transition-colors duration-300 reveal delay-1">
+              <article>
+                <div>
+                  <span class="overline text-ochre block mb-4">{sideA.cat}</span>
+                  <h3 class="font-serif text-xl text-ivory leading-snug group-hover:text-sage transition-colors">{sideA.title}</h3>
+                </div>
+                <div class="mt-6 border-t border-white/8 pt-5">
+                  <p class="font-body text-ivory/40 text-sm mb-3">{sideA.excerpt}</p>
+                  <span class="font-condensed text-ivory/25 text-xs tracking-wide">{sideA.date}</span>
+                </div>
+              </article>
+            </a>
+
+            <!-- Light card -->
+            <a href={sideB.link} target="_blank" rel="noopener" class="bg-ivory group cursor-pointer p-8 flex flex-col justify-between hover:bg-parchment transition-colors duration-300 reveal delay-2">
+              <article>
+                <div>
+                  <span class="overline text-ochre block mb-4">{sideB.cat}</span>
+                  <h3 class="font-serif text-xl text-ink leading-snug group-hover:text-forest-soft transition-colors">{sideB.title}</h3>
+                </div>
+                <div class="mt-6 border-t border-linen pt-5">
+                  <p class="font-body text-muted text-sm mb-3">{sideB.excerpt}</p>
+                  <span class="font-condensed text-muted/50 text-xs tracking-wide">{sideB.date}</span>
+                </div>
+              </article>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ══════════════════════ NEWS GRID ══════════════════════ -->
+  <section class="py-20 bg-parchment" id="aggiornamenti">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="flex items-center justify-between mb-14 pb-6 border-b border-linen reveal">
+        <h2 class="display-sm text-ink italic">Ultimi Aggiornamenti</h2>
+        <div class="flex gap-2">
+          <div class="text-muted font-condensed text-sm mr-4 flex items-center">
+            Pagina {page.currentPage} di {page.lastPage}
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-x-8 gap-y-14">
+        {grid.map(({ cat, date, readTime, title, excerpt, link, image }, i) => (
+          <a href={link} target="_blank" rel="noopener" class={`group flex flex-col cursor-pointer reveal delay-${(i % 3) + 1}`}>
+            <article class="flex flex-col h-full">
+              <div class="img-zoom aspect-[16/10] mb-6">
+                <Image src={image} alt={title} class="w-full h-full object-cover" loading="lazy" width={600} />
+                <div class="absolute top-4 left-4">
+                  <span class="font-condensed font-700 text-[0.62rem] uppercase tracking-[0.18em] bg-ivory/90 text-ochre px-3 py-1.5">
+                    {cat}
+                  </span>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 mb-4">
+                <span class="font-condensed text-muted/50 text-xs tracking-wide">{date}</span>
+                <span class="text-muted/30">·</span>
+                <span class="font-condensed text-muted/40 text-xs">{readTime}</span>
+              </div>
+
+              <h3 class="font-serif text-xl text-ink leading-snug mb-3 group-hover:text-forest-soft transition-colors flex-1">
+                {title}
+              </h3>
+              <p class="font-body text-muted text-sm leading-relaxed mb-6">{excerpt}</p>
+              <span class="font-condensed font-700 text-[0.68rem] uppercase tracking-[0.18em] text-ochre flex items-center gap-2 group-hover:gap-4 transition-all self-start">
+                Approfondisci <i class="fa-solid fa-arrow-right text-[9px]"></i>
+              </span>
+            </article>
+          </a>
+        ))}
+      </div>
+
+      <!-- Pagination UI -->
+      <div class="mt-20 flex justify-center items-center gap-1 reveal">
+        {page.url.prev && (
+          <a href={page.url.prev} class="w-10 h-10 border border-linen hover:border-ochre text-muted hover:text-ochre transition-all flex items-center justify-center" aria-label="Precedente">
+            <i class="fa-solid fa-chevron-left text-sm"></i>
+          </a>
+        )}
+        
+        {Array.from({ length: page.lastPage }, (_, i) => i + 1).map(n => (
+          <a 
+            href={n === 1 ? '/news' : `/news/${n}`} 
+            class={`w-10 h-10 font-condensed font-700 text-sm transition-all flex items-center justify-center ${n === page.currentPage ? 'bg-ochre text-forest' : 'border border-linen text-muted hover:border-ochre hover:text-ochre'}`}
+          >
+            {n}
+          </a>
+        ))}
+
+        {page.url.next && (
+          <a href={page.url.next} class="w-10 h-10 border border-linen hover:border-ochre text-muted hover:text-ochre transition-all flex items-center justify-center" aria-label="Successiva">
+            <i class="fa-solid fa-chevron-right text-sm"></i>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ NEWSLETTER ══════════════════════ -->
+  <section class="py-24 bg-forest grain relative overflow-hidden">
+    <div class="absolute right-0 bottom-0 pointer-events-none select-none">
+      <span class="font-condensed font-800 text-[18vw] text-ivory/[0.03] leading-none tracking-tighter">NEWS</span>
+    </div>
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <div class="max-w-2xl mx-auto text-center reveal">
+        <span class="overline text-ochre">Newsletter</span>
+        <div class="h-px w-8 bg-ochre mx-auto mt-4"></div>
+        <h2 class="display-sm text-ivory italic mt-5 mb-4">Resta Aggiornato</h2>
+        <p class="font-body text-ivory/40 text-lg max-w-md mx-auto mb-10 leading-relaxed">
+          Iscriviti per ricevere aggiornamenti su normative ambientali, novità aziendali e iniziative sostenibili.
+        </p>
+        <form class="flex flex-col sm:flex-row gap-0 max-w-lg mx-auto border border-white/15">
+          <input type="email" placeholder="La tua email"
+            class="flex-1 px-6 py-4 bg-forest-mid border-0 text-ivory placeholder:text-ivory/30 focus:outline-none font-body text-sm" />
+          <button type="submit" class="btn-primary whitespace-nowrap border-0">
+            <i class="fa-solid fa-envelope text-[11px]"></i>
+            Iscriviti
+          </button>
+        </form>
+        <p class="font-condensed text-[0.62rem] text-ivory/20 uppercase tracking-[0.16em] mt-5">
+          Nessuno spam. Cancellazione sempre disponibile.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</Layout>

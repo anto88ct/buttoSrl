@@ -1,21 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import cleaning from '../assets/cleaning.jpg';
+
 
 const valori = [
-  { icon: 'fa-handshake',     title: 'Integrità',             desc: 'Ogni contratto e ogni operazione è gestita con la massima trasparenza verso la comunità e le istituzioni.' },
-  { icon: 'fa-leaf',          title: 'Rispetto Ambientale',   desc: "L'ambiente non è il nostro campo di lavoro, è il nostro mandato morale. Ogni azione mira a lasciare il territorio migliore di com'era." },
-  { icon: 'fa-users',         title: 'Radici Comunitarie',    desc: "Siamo un'azienda di Assoro. Conosciamo ogni strada, ogni borgo, ogni esigenza del territorio ennese." },
-  { icon: 'fa-arrow-trend-up',title: 'Innovazione Continua',  desc: 'Investiamo in tecnologie a basse emissioni, tracciabilità digitale e processi di economia circolare certificati.' },
+  { icon: 'fa-shield-halved', title: 'Affidabilità e Sicurezza', desc: 'Un impegno quotidiano basato su affidabilità, puntualità e rispetto rigoroso delle normative vigenti.' },
+  { icon: 'fa-leaf',          title: 'Sostenibilità Ambientale', desc: 'Ogni intervento è svolto con la consapevolezza che una corretta gestione dei rifiuti è essenziale per la salvaguardia dell’ambiente.' },
+  { icon: 'fa-truck-fast',    title: 'Efficienza Operativa',     desc: 'Un’organizzazione efficiente, con mezzi idonei e personale qualificato per rispondere alle esigenze con soluzioni personalizzate.' },
+  { icon: 'fa-arrow-trend-up',title: 'Innovazione Continua',     desc: 'La capacità di coniugare esperienza, innovazione e utilizzo di tecnologie moderne per garantire standard elevati in ogni fase.' },
 ];
 
 const timeline = [
-  { year: '1978', title: 'La Fondazione',         desc: "Carmelo Buttò avvia la prima attività di raccolta rifiuti ad Assoro, ponendo le fondamenta di quella che diventerà un punto di riferimento regionale." },
-  { year: '1990', title: 'Primo Appalto Pubblico', desc: "L'azienda si aggiudica il primo contratto di pulizia con un ente pubblico siciliano, aprendo la strada alla specializzazione istituzionale." },
-  { year: '2005', title: 'Certificazione ISO',    desc: "Buttò S.r.l. ottiene la certificazione ISO 14001, diventando una delle prime realtà del settore nella regione. <a href='/certificazioni' class='text-ochre hover:text-ochre/80 transition-colors underline decoration-ochre/30 underline-offset-2'>Scopri le certificazioni</a>" },
-  { year: '2018', title: 'Rinnovo della Flotta',  desc: "Investimento strategico in mezzi a basse emissioni e sistemi digitali di tracciamento per ridurre l'impatto ambientale del 30%." },
-  { year: 'Oggi', title: "L'Archivio Organico",   desc: '45 anni dopo, Buttò S.r.l. opera in oltre 120 comuni siciliani portando avanti la visione del fondatore: un territorio pulito è un territorio che vive.' },
+  { year: '1978', title: 'La Fondazione',         desc: "Carmelo Buttò avvia la prima attività di raccolta rifiuti ad Assoro, con la chiara visione di offrire servizi efficienti e sicuri nel settore della tutela ambientale." },
+  { year: '1990', title: 'Crescita Strutturata', desc: "L'azienda struttura la propria organizzazione operativa e investe progressivamente in mezzi idonei e personale qualificato." },
+  { year: '2005', title: 'Iscrizioni e Autorizzazioni',    desc: "Buttò Carmelo S.r.l. si iscrive all’Albo Nazionale Gestori Ambientali e all’Albo Trasportatori, garantendo competenza e conformità di legge." },
+  { year: '2018', title: 'Innovazione e Sostenibilità',  desc: "Costante utilizzo di tecnologie moderne e un approccio sempre più orientato alla qualità del servizio e alla sostenibilità ambientale." },
+  { year: 'Oggi', title: "Un Partner Affidabile",   desc: 'Oggi l’azienda si distingue come partner affidabile per la gestione dei rifiuti, con lo stesso spirito che ne ha segnato la nascita: impegno, serietà e volontà di innovare.' },
 ];
 ---
 
@@ -51,7 +51,7 @@ const timeline = [
           <div class="relative">
             <div class="absolute -top-4 -left-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
             <div class="img-zoom aspect-[3/4]">
-              <Image src={cleaning} alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" width={800} />
+              <Image src="/founder.jpg" alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" width={800} height={1067} />
               <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent"></div>
             </div>
             <div class="absolute top-6 right-6 bg-ochre text-forest px-4 py-2.5">
@@ -78,8 +78,9 @@ const timeline = [
           </blockquote>
 
           <div class="space-y-5 font-body text-muted leading-relaxed">
-            <p data-i18n="chiSiamo.founder.p1">Nato ad Assoro in una famiglia profondamente legata alla terra siciliana, Carmelo Buttò ha iniziato la sua attività nel 1978 con una visione semplice ma potente: lasciare il territorio migliore di come lo aveva trovato.</p>
-            <p data-i18n="chiSiamo.founder.p2">Quello che era un piccolo servizio di raccolta rifiuti si è trasformato, grazie alla sua dedizione, in un'azienda che oggi copre oltre 120 comuni con standard certificati a livello internazionale.</p>
+            <p data-i18n="chiSiamo.founder.p1">Fondata ad Assoro (EN) per iniziativa del sig. Carmelo Buttò, l'azienda nasce con una visione chiara: offrire servizi efficienti e sicuri nel settore della tutela ambientale. Fin dalle origini, l'obiettivo è stato coniugare esperienza e utilizzo di tecnologie moderne.</p>
+            <p data-i18n="chiSiamo.founder.p2">Oggi la Buttò Carmelo S.r.l. è specializzata nel trasporto e nella gestione dei rifiuti pericolosi e non, ed è regolarmente iscritta all’Albo Nazionale Gestori Ambientali (categorie 1F, 4F, 5F, 8F) e all’Albo Trasportatori.</p>
+            <p data-i18n="chiSiamo.founder.p3">Proiettata verso il futuro, l'azienda continua il proprio percorso di crescita con lo stesso spirito che ne ha segnato la nascita: impegno, serietà e volontà di innovare, con l'obiettivo di contribuire a un sistema ambientale più efficiente e sostenibile.</p>
           </div>
 
           <div class="grid grid-cols-2 gap-px bg-linen border border-linen mt-8">
