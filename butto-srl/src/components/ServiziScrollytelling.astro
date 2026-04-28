@@ -1,293 +1,167 @@
 ---
 // ServiziScrollytelling.astro
-// Scrollytelling canvas animation — servizi page, below hero
+// True scroll-hijack: body.position=fixed while section is active,
+// wheel/touch delta drives frame progress, unlock when done.
 ---
 
 <section
   id="servizi-scrollytelling"
-  class="relative"
-  style="height: 400vh; background: #111111;"
+  class="relative overflow-hidden"
+  style="background: #111111;"
   aria-label="Scrollytelling dei servizi Buttò"
 >
-  <!-- ── Sticky viewport ─────────────────────────────────────── -->
+  <!-- Grain texture -->
+  <div id="st-grain" class="absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+
+  <!-- ── Loader ──────────────────────────────────────────────── -->
   <div
-    id="st-sticky"
-    class="overflow-hidden"
-    style="position: sticky; top: 0; height: 100vh;"
+    id="st-loader"
+    class="absolute inset-0 flex flex-col items-center justify-center"
+    style="background: #111111; z-index: 20;"
   >
-    <!-- Grain texture (above canvas, below text) -->
+    <div class="flex flex-col items-center gap-6 w-full px-8" style="max-width: 280px;">
+      <div
+        id="st-spinner"
+        style="width:36px;height:36px;border:1.5px solid rgba(242,237,223,0.12);border-top-color:#8DB49A;border-radius:50%;animation:stSpin 0.9s linear infinite;"
+      ></div>
+      <div style="width:100%;height:3px;background:rgba(242,237,223,0.08);border-radius:2px;overflow:hidden;">
+        <div id="st-load-bar" style="height:100%;background:#8DB49A;width:0%;border-radius:2px;transition:width 0.12s linear;"></div>
+      </div>
+      <span class="overline" style="color:rgba(242,237,223,0.3);" data-i18n="servizi.scrollytelling.loading">Caricamento</span>
+    </div>
+  </div>
+
+  <!-- ── Canvas — always fills viewport, frames centered via cover ── -->
+  <canvas
+    id="st-canvas"
+    class="absolute inset-0 block"
+    style="width:100%;height:100%;background:#111111;z-index:1;"
+    aria-hidden="true"
+  ></canvas>
+
+  <!-- ── Text overlay ────────────────────────────────────────── -->
+  <div id="st-overlay" class="absolute inset-0 pointer-events-none" style="z-index:10;">
+
+    <!--
+      Mobile:  video (canvas) fills center; panels dock to bottom (A,B) or top (C,D).
+      Desktop: A=center, B=left-center, C=right-center, D=center.
+    -->
+
+    <!-- Beat A — mobile: bottom-center | desktop: center -->
     <div
-      id="st-grain"
-      class="absolute inset-0 pointer-events-none"
-      aria-hidden="true"
+      id="beat-a"
+      class="absolute inset-x-0 top-0 bottom-0 flex flex-col items-center text-center px-4
+             justify-end pb-10
+             md:justify-center md:pb-0 md:px-16"
+      style="opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;"
     >
+      <div class="p-6 md:p-14 rounded-2xl md:rounded-3xl flex flex-col items-center w-full"
+           style="max-width:min(95vw,1100px);background:rgba(14,12,9,0.88);box-shadow:0 10px 30px rgba(0,0,0,0.3);border:1px solid rgba(242,237,223,0.1);">
+        <span class="overline block mb-3 md:mb-5" style="color:#C4922A;letter-spacing:0.28em;" data-i18n="servizi.scrollytelling.beatA.overline">I NOSTRI SERVIZI</span>
+        <h2 class="display-xl" style="color:#C4922A;width:100%;text-wrap:balance;text-shadow:0 2px 10px rgba(0,0,0,0.5);font-size:clamp(1.7rem,6.5vw,7.5rem);" data-i18n="servizi.scrollytelling.beatA.title">
+          DA 45 ANNI AL SERVIZIO DELL'AMBIENTE.
+        </h2>
+        <div class="mx-auto mt-5 md:mt-8 mb-4 md:mb-7" style="width:3rem;height:1px;background:#8DB49A;"></div>
+        <p class="font-body leading-relaxed max-w-2xl mx-auto" style="color:#F2EDDF;font-size:clamp(0.85rem,1.3vw,1.15rem);opacity:0.9;" data-i18n="servizi.scrollytelling.beatA.sub">
+          Tre aree di competenza. Un unico impegno verso il territorio.
+        </p>
+      </div>
     </div>
 
-    <!-- ── Loader ──────────────────────────────────────────────── -->
+    <!-- Beat B — mobile: bottom-left | desktop: left-center -->
     <div
-      id="st-loader"
-      class="absolute inset-0 flex flex-col items-center justify-center"
-      style="background: #111111; z-index: 20;"
+      id="beat-b"
+      class="absolute inset-x-0 top-0 bottom-0 flex flex-col items-start
+             justify-end pb-10 px-4
+             md:justify-center md:pb-0 md:pl-24 md:pr-6"
+      style="opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;"
     >
-      <div
-        class="flex flex-col items-center gap-6 w-full px-8"
-        style="max-width: 280px;"
-      >
-        <div
-          id="st-spinner"
-          style="
-            width: 36px; height: 36px;
-            border: 1.5px solid rgba(242,237,223,0.12);
-            border-top-color: #8DB49A;
-            border-radius: 50%;
-            animation: stSpin 0.9s linear infinite;
-          "
-        >
-        </div>
-        <div
-          style="width: 100%; height: 3px; background: rgba(242,237,223,0.08); border-radius: 2px; overflow: hidden;"
-        >
-          <div
-            id="st-load-bar"
-            style="height: 100%; background: #8DB49A; width: 0%; border-radius: 2px; transition: width 0.12s linear;"
-          >
-          </div>
-        </div>
-        <span
-          class="overline"
-          style="color: rgba(242,237,223,0.3);"
-          data-i18n="servizi.scrollytelling.loading">Caricamento</span
-        >
+      <div class="p-6 md:p-12 rounded-2xl md:rounded-3xl w-full"
+           style="max-width:min(95vw,850px);background:rgba(14,12,9,0.88);box-shadow:0 10px 30px rgba(0,0,0,0.3);border:1px solid rgba(242,237,223,0.1);">
+        <span class="overline block mb-3 md:mb-5" style="color:#C4922A;letter-spacing:0.28em;" data-i18n="servizi.scrollytelling.beatB.overline">GESTIONE RIFIUTI</span>
+        <h2 class="display-lg" style="color:#C4922A;text-wrap:balance;text-shadow:0 2px 10px rgba(0,0,0,0.5);width:100%;font-size:clamp(1.5rem,5vw,5.2rem);" data-i18n="servizi.scrollytelling.beatB.title">
+          RACCOLTA. TRASPORTO. SMALTIMENTO.
+        </h2>
+        <div class="mt-5 md:mt-7 mb-4 md:mb-6" style="width:3rem;height:1px;background:#8DB49A;"></div>
+        <p class="font-body leading-relaxed" style="color:#F2EDDF;font-size:clamp(0.85rem,1.3vw,1.1rem);max-width:520px;opacity:0.9;" data-i18n="servizi.scrollytelling.beatB.sub">
+          Soluzioni integrate per rifiuti speciali, urbani e industriali. Tracciabilità totale, zero compromessi.
+        </p>
       </div>
     </div>
 
-    <!-- ── Canvas ─────────────────────────────────────────────── -->
-    <canvas
-      id="st-canvas"
-      class="absolute inset-0 block"
-      style="width: 100%; height: 100%; background: #111111; z-index: 1;"
-      aria-hidden="true"></canvas>
-
-    <!-- ── Text overlay ───────────────────────────────────────── -->
+    <!-- Beat C — mobile: top-right | desktop: right-center -->
     <div
-      id="st-overlay"
-      class="absolute inset-0 pointer-events-none"
-      style="z-index: 10;"
+      id="beat-c"
+      class="absolute inset-x-0 top-0 bottom-0 flex flex-col items-end
+             justify-start pt-10 px-4
+             md:justify-center md:pt-0 md:pr-24 md:pl-6"
+      style="opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;"
     >
-      <!-- Beat A — 0.00 – 0.22 — centred -->
-      <div
-        id="beat-a"
-        class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-16"
-        style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease;"
-      >
-        <div class="p-8 md:p-14 rounded-3xl flex flex-col items-center w-full max-w-[1100px]" style="background: rgba(14, 12, 9, 0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(242, 237, 223, 0.1);">
-          <span
-            class="overline block mb-5"
-            style="color: #C4922A; letter-spacing: 0.28em;"
-            data-i18n="servizi.scrollytelling.beatA.overline"
-            >I NOSTRI SERVIZI</span
-          >
-          <h2
-            class="display-xl"
-            style="color: #C4922A; width: 100%; text-wrap: balance; text-shadow: 0 2px 10px rgba(0,0,0,0.5); font-size: clamp(2.8rem, 6.5vw, 7.5rem);"
-            data-i18n="servizi.scrollytelling.beatA.title"
-          >
-            DA 45 ANNI AL SERVIZIO DELL'AMBIENTE.
-          </h2>
-          <div
-            class="mx-auto mt-8 mb-7"
-            style="width: 3rem; height: 1px; background: #8DB49A;"
-          >
-          </div>
-          <p
-            class="font-body leading-relaxed max-w-2xl mx-auto"
-            style="color: #F2EDDF; font-size: clamp(1rem, 1.3vw, 1.15rem); opacity: 0.9;"
-            data-i18n="servizi.scrollytelling.beatA.sub"
-          >
-            Tre aree di competenza. Un unico impegno verso il territorio.
-          </p>
-        </div>
+      <div class="text-right p-6 md:p-12 rounded-2xl md:rounded-3xl w-full"
+           style="max-width:min(95vw,850px);background:rgba(14,12,9,0.88);box-shadow:0 10px 30px rgba(0,0,0,0.3);border:1px solid rgba(242,237,223,0.1);">
+        <span class="overline block mb-3 md:mb-5" style="color:#C4922A;letter-spacing:0.28em;" data-i18n="servizi.scrollytelling.beatC.overline">PULIZIA E IGIENE</span>
+        <h2 class="display-lg" style="color:#C4922A;text-wrap:balance;text-shadow:0 2px 10px rgba(0,0,0,0.5);width:100%;font-size:clamp(1.5rem,5vw,5.2rem);" data-i18n="servizi.scrollytelling.beatC.title">
+          AMBIENTI IMPECCABILI.
+        </h2>
+        <div class="mt-5 md:mt-7 mb-4 md:mb-6 ml-auto" style="width:3rem;height:1px;background:#8DB49A;"></div>
+        <p class="font-body leading-relaxed" style="color:#F2EDDF;font-size:clamp(0.85rem,1.3vw,1.1rem);max-width:520px;margin-left:auto;opacity:0.9;" data-i18n="servizi.scrollytelling.beatC.sub">
+          Pulizia industriale, civile e sanitizzazione. Efficienza certificata per ogni contesto.
+        </p>
       </div>
-
-      <!-- Beat B — 0.25 – 0.47 — left -->
-      <div
-        id="beat-b"
-        class="absolute inset-0 flex flex-col justify-center pl-6 md:pl-24"
-        style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease;"
-      >
-        <div class="p-8 md:p-12 rounded-3xl w-full max-w-[850px]" style="background: rgba(14, 12, 9, 0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(242, 237, 223, 0.1);">
-          <span
-            class="overline block mb-5"
-            style="color: #C4922A; letter-spacing: 0.28em;"
-            data-i18n="servizi.scrollytelling.beatB.overline"
-            >GESTIONE RIFIUTI</span
-          >
-          <h2
-            class="display-lg"
-            style="color: #C4922A; text-wrap: balance; text-shadow: 0 2px 10px rgba(0,0,0,0.5); width: 100%; font-size: clamp(2.2rem, 5vw, 5.2rem);"
-            data-i18n="servizi.scrollytelling.beatB.title"
-          >
-            RACCOLTA. TRASPORTO. SMALTIMENTO.
-          </h2>
-          <div
-            class="mt-7 mb-6"
-            style="width: 3rem; height: 1px; background: #8DB49A;"
-          >
-          </div>
-          <p
-            class="font-body leading-relaxed"
-            style="color: #F2EDDF; font-size: clamp(0.95rem, 1.3vw, 1.1rem); max-width: 520px; opacity: 0.9;"
-            data-i18n="servizi.scrollytelling.beatB.sub"
-          >
-            Soluzioni integrate per rifiuti speciali, urbani e industriali.
-            Tracciabilità totale, zero compromessi.
-          </p>
-        </div>
-      </div>
-
-      <!-- Beat C — 0.50 – 0.72 — right -->
-      <div
-        id="beat-c"
-        class="absolute inset-0 flex flex-col justify-center items-end pr-6 md:pr-24"
-        style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease;"
-      >
-        <div class="text-right p-8 md:p-12 rounded-3xl w-full max-w-[850px]" style="background: rgba(14, 12, 9, 0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(242, 237, 223, 0.1);">
-          <span
-            class="overline block mb-5"
-            style="color: #C4922A; letter-spacing: 0.28em;"
-            data-i18n="servizi.scrollytelling.beatC.overline"
-            >PULIZIA E IGIENE</span
-          >
-          <h2
-            class="display-lg"
-            style="color: #C4922A; text-wrap: balance; text-shadow: 0 2px 10px rgba(0,0,0,0.5); width: 100%; font-size: clamp(2.2rem, 5vw, 5.2rem);"
-            data-i18n="servizi.scrollytelling.beatC.title"
-          >
-            AMBIENTI IMPECCABILI.
-          </h2>
-          <div
-            class="mt-7 mb-6 ml-auto"
-            style="width: 3rem; height: 1px; background: #8DB49A;"
-          >
-          </div>
-          <p
-            class="font-body leading-relaxed"
-            style="color: #F2EDDF; font-size: clamp(0.95rem, 1.3vw, 1.1rem); max-width: 520px; margin-left: auto; opacity: 0.9;"
-            data-i18n="servizi.scrollytelling.beatC.sub"
-          >
-            Pulizia industriale, civile e sanitizzazione. Efficienza certificata
-            per ogni contesto.
-          </p>
-        </div>
-      </div>
-
-      <!-- Beat D — 0.75 – 0.95 — centred + CTA -->
-      <div
-        id="beat-d"
-        class="absolute inset-0 flex flex-col items-center justify-center text-center px-4 md:px-16"
-        style="opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease;"
-      >
-        <div class="p-8 md:p-14 rounded-3xl flex flex-col items-center w-full max-w-[1100px]" style="background: rgba(14, 12, 9, 0.8); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid rgba(242, 237, 223, 0.1);">
-          <span
-            class="overline block mb-5"
-            style="color: #C4922A; letter-spacing: 0.28em;"
-            data-i18n="servizi.scrollytelling.beatD.overline"
-            >VERDE E TERRITORIO</span
-          >
-          <h2
-            class="display-xl"
-            style="color: #C4922A; width: 100%; text-wrap: balance; text-shadow: 0 2px 10px rgba(0,0,0,0.5); font-size: clamp(2.8rem, 6.5vw, 7.5rem);"
-            data-i18n="servizi.scrollytelling.beatD.title"
-          >
-            LA TERRA CHE CURIAMO.
-          </h2>
-          <div
-            class="mx-auto mt-8 mb-7"
-            style="width: 3rem; height: 1px; background: #8DB49A;"
-          >
-          </div>
-          <p
-            class="font-body leading-relaxed max-w-2xl mx-auto"
-            style="color: #F2EDDF; font-size: clamp(1rem, 1.3vw, 1.15rem); opacity: 0.9;"
-            data-i18n="servizi.scrollytelling.beatD.sub"
-          >
-            Manutenzione del verde urbano e privato. Perché prendersi cura
-            dell'ambiente inizia dal territorio.
-          </p>
-          <a
-            href="#gestione-rifiuti"
-            class="btn-primary mt-10"
-            style="pointer-events: auto;"
-            data-i18n="servizi.scrollytelling.beatD.cta"
-            >Scopri tutti i servizi →</a
-          >
-        </div>
-      </div>
-    </div><!-- /st-overlay -->
-
-    <!-- ── Scroll hint ─────────────────────────────────────────── -->
-    <div
-      id="st-hint"
-      class="absolute flex flex-col items-center gap-3"
-      style="bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 11; transition: opacity 0.4s ease;"
-      aria-hidden="true"
-    >
-      <span
-        class="overline"
-        style="color: rgba(242,237,223,0.4);"
-        data-i18n="servizi.scrollytelling.scrollHint">Scorri per scoprire</span
-      >
-      <svg
-        id="st-arrow"
-        width="14"
-        height="22"
-        viewBox="0 0 14 22"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M7 2V20M7 20L1.5 13.5M7 20L12.5 13.5"
-          stroke="rgba(242,237,223,0.3)"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"></path>
-      </svg>
     </div>
 
-    <!-- ── Scroll progress track ───────────────────────────────── -->
+    <!-- Beat D — mobile: top-center | desktop: center -->
     <div
-      class="absolute left-0 right-0 bottom-0"
-      style="height: 3px; background: rgba(242,237,223,0.06); z-index: 12;"
-      aria-hidden="true"
+      id="beat-d"
+      class="absolute inset-x-0 top-0 bottom-0 flex flex-col items-center text-center px-4
+             justify-start pt-10
+             md:justify-center md:pt-0 md:px-16"
+      style="opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;"
     >
-      <div
-        id="st-track"
-        style="height: 100%; background: #8DB49A; width: 0%; border-radius: 0 2px 2px 0; transition: width 0.08s linear;"
-      >
+      <div class="p-6 md:p-14 rounded-2xl md:rounded-3xl flex flex-col items-center w-full"
+           style="max-width:min(95vw,1100px);background:rgba(14,12,9,0.88);box-shadow:0 10px 30px rgba(0,0,0,0.3);border:1px solid rgba(242,237,223,0.1);">
+        <span class="overline block mb-3 md:mb-5" style="color:#C4922A;letter-spacing:0.28em;" data-i18n="servizi.scrollytelling.beatD.overline">VERDE E TERRITORIO</span>
+        <h2 class="display-xl" style="color:#C4922A;width:100%;text-wrap:balance;text-shadow:0 2px 10px rgba(0,0,0,0.5);font-size:clamp(1.7rem,6.5vw,7.5rem);" data-i18n="servizi.scrollytelling.beatD.title">
+          LA TERRA CHE CURIAMO.
+        </h2>
+        <div class="mx-auto mt-5 md:mt-8 mb-4 md:mb-7" style="width:3rem;height:1px;background:#8DB49A;"></div>
+        <p class="font-body leading-relaxed max-w-2xl mx-auto" style="color:#F2EDDF;font-size:clamp(0.85rem,1.3vw,1.15rem);opacity:0.9;" data-i18n="servizi.scrollytelling.beatD.sub">
+          Manutenzione del verde urbano e privato. Perché prendersi cura dell'ambiente inizia dal territorio.
+        </p>
+        <a href="#gestione-rifiuti" class="btn-primary mt-8 md:mt-10" style="pointer-events:auto;" data-i18n="servizi.scrollytelling.beatD.cta">Scopri tutti i servizi →</a>
       </div>
     </div>
-  </div><!-- /st-sticky -->
+
+  </div><!-- /st-overlay -->
+
+  <!-- ── Scroll hint ─────────────────────────────────────────── -->
+  <div
+    id="st-hint"
+    class="absolute flex flex-col items-center gap-3"
+    style="bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:11;transition:opacity 0.4s ease;"
+    aria-hidden="true"
+  >
+    <span class="overline" style="color:rgba(242,237,223,0.4);" data-i18n="servizi.scrollytelling.scrollHint">Scorri per scoprire</span>
+    <svg id="st-arrow" width="14" height="22" viewBox="0 0 14 22" fill="none">
+      <path d="M7 2V20M7 20L1.5 13.5M7 20L12.5 13.5" stroke="rgba(242,237,223,0.3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- ── Progress track ──────────────────────────────────────── -->
+  <div class="absolute left-0 right-0 bottom-0" style="height:3px;background:rgba(242,237,223,0.06);z-index:12;" aria-hidden="true">
+    <div id="st-track" style="height:100%;background:#8DB49A;width:0%;border-radius:0 2px 2px 0;transition:width 0.08s linear;"></div>
+  </div>
 </section>
 
 <style is:global>
   @keyframes stSpin {
-    to {
-      transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
   }
   @keyframes stBounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(5px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(5px); }
   }
-  #st-arrow {
-    animation: stBounce 2.2s ease-in-out infinite;
-  }
-  /* Grain texture inside sticky viewport */
+  #st-arrow { animation: stBounce 2.2s ease-in-out infinite; }
   #st-grain {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
     background-repeat: repeat;
@@ -295,42 +169,28 @@
     mix-blend-mode: screen;
     z-index: 4;
   }
-  /* Beat D CTA — allow hover scale inside pointer-events:none parent */
   #beat-d a.btn-primary {
     pointer-events: auto;
-    transition:
-      background 0.25s ease,
-      transform 0.25s ease,
-      box-shadow 0.25s ease !important;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease !important;
   }
   #beat-d a.btn-primary:hover {
     transform: scale(1.03) translateY(-2px) !important;
-    box-shadow: 0 16px 40px -8px rgba(196, 146, 42, 0.45) !important;
+    box-shadow: 0 16px 40px -8px rgba(196,146,42,0.45) !important;
   }
 </style>
 
 <script>
-  // Module-level cleanup ref — prevents stale RAF loop on re-navigation
   let _stCleanup: (() => void) | null = null;
 
   function initST() {
-    if (_stCleanup) {
-      _stCleanup();
-      _stCleanup = null;
-    }
+    if (_stCleanup) { _stCleanup(); _stCleanup = null; }
 
-    const section = document.getElementById(
-      "servizi-scrollytelling",
-    ) as HTMLElement | null;
-    const canvas = document.getElementById(
-      "st-canvas",
-    ) as HTMLCanvasElement | null;
-    const loader = document.getElementById("st-loader") as HTMLElement | null;
-    const loadBar = document.getElementById(
-      "st-load-bar",
-    ) as HTMLElement | null;
-    const hint = document.getElementById("st-hint") as HTMLElement | null;
-    const track = document.getElementById("st-track") as HTMLElement | null;
+    const section = document.getElementById("servizi-scrollytelling") as HTMLElement | null;
+    const canvas  = document.getElementById("st-canvas")   as HTMLCanvasElement | null;
+    const loader  = document.getElementById("st-loader")   as HTMLElement | null;
+    const loadBar = document.getElementById("st-load-bar") as HTMLElement | null;
+    const hint    = document.getElementById("st-hint")     as HTMLElement | null;
+    const track   = document.getElementById("st-track")    as HTMLElement | null;
 
     if (!section || !canvas) return;
     const ctx = canvas.getContext("2d");
@@ -338,66 +198,83 @@
 
     // ── Constants ─────────────────────────────────────────────────
     const TOTAL_FRAMES = 192;
+    // Total wheel-delta pixels required to play all frames.
+    // 4000 ≈ 33 standard wheel ticks on mouse, feels deliberate on trackpad.
+    const SCROLL_TOTAL = 4000;
 
     const BEATS = [
       { id: "beat-a", start: 0.05, end: 0.22 },
       { id: "beat-b", start: 0.25, end: 0.47 },
-      { id: "beat-c", start: 0.5, end: 0.72 },
+      { id: "beat-c", start: 0.50, end: 0.72 },
       { id: "beat-d", start: 0.75, end: 0.95 },
     ];
-
-    const beatEls = BEATS.map((b) => ({
+    const beatEls = BEATS.map(b => ({
       el: document.getElementById(b.id) as HTMLElement | null,
       start: b.start,
-      end: b.end,
+      end:   b.end,
     }));
 
-    // ── State ─────────────────────────────────────────────────────
+    // ── Image state ───────────────────────────────────────────────
     const images: HTMLImageElement[] = new Array(TOTAL_FRAMES);
     let loadedCount = 0;
-    let isReady = false;
+    let isReady  = false;
     let imagesOk = false;
-    let rafId = 0;
-    let rawProgress = 0;
-    let smoothProg = 0;
+
+    // ── Animation state ───────────────────────────────────────────
+    let rafId        = 0;
+    let rawProgress  = 0;
+    let smoothProg   = 0;
     let currentFrame = 0;
 
-    // ── Canvas resize ─────────────────────────────────────────────
+    // ── Scroll-lock state ─────────────────────────────────────────
+    let isLocked      = false;
+    let accumulated   = 0;   // accumulated wheel delta [0, SCROLL_TOTAL]
+    let savedScrollY  = 0;   // scrollY when lock engaged
+    let sectionAbsTop = 0;   // section's absolute top, refreshed on lock + resize
+    let touchStartY   = 0;
+
+    // ── Helpers ───────────────────────────────────────────────────
+    function setHeight() {
+      // Keep section exactly one viewport tall (avoids iOS 100vh / browser-chrome mismatch)
+      if (section) section.style.height = window.innerHeight + "px";
+    }
+
     function resize() {
+      setHeight();
       if (!canvas) return;
-      canvas.width = window.innerWidth;
+      canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
       draw(currentFrame);
     }
 
-    // ── Draw with contain scaling ─────────────────────────────────
     function draw(idx: number) {
       if (!canvas || !ctx) return;
       ctx.fillStyle = "#111111";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       if (!imagesOk) return;
-
       const img = images[idx];
       if (!img?.complete || img.naturalWidth === 0) return;
+      const cw = canvas.width,  ch = canvas.height;
+      const iw = img.naturalWidth, ih = img.naturalHeight;
 
-      const cw = canvas.width,
-        ch = canvas.height;
-      const iw = img.naturalWidth,
-        ih = img.naturalHeight;
-      const scale = Math.max(cw / iw, ch / ih); // cover: fills viewport, crops edges
-      const dw = iw * scale,
-        dh = ih * scale;
+      // Responsive scaling: 
+      // On mobile portrait, we make the "video" (truck) smaller to see it better.
+      // On desktop/landscape, we keep the impactful "cover" look.
+      const isMobilePortrait = cw < 768 && ch > cw;
+      const scale = isMobilePortrait 
+        ? (cw / iw) * 0.85  // 85% of screen width
+        : Math.max(cw / iw, ch / ih); 
+
+      const dw = iw * scale, dh = ih * scale;
       ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
     }
 
-    // ── Beat opacity with fade-in / fade-out ──────────────────────
-    function beatOp(p: number, start: number, end: number): number {
-      if (p <= start || p >= end) return 0;
-      const span = end - start;
-      const fadeIn = start + span * 0.12;
-      const fadeOut = end - span * 0.12;
-      if (p < fadeIn) return (p - start) / (fadeIn - start);
-      if (p > fadeOut) return 1 - (p - fadeOut) / (end - fadeOut);
+    function beatOp(p: number, s: number, e: number): number {
+      if (p <= s || p >= e) return 0;
+      const span = e - s;
+      const fi = s + span * 0.12, fo = e - span * 0.12;
+      if (p < fi) return (p - s) / (fi - s);
+      if (p > fo) return 1 - (p - fo) / (e - fo);
       return 1;
     }
 
@@ -405,79 +282,145 @@
       beatEls.forEach(({ el, start, end }) => {
         if (!el) return;
         const op = beatOp(p, start, end);
-        el.style.opacity = String(op);
-        el.style.transform =
-          op > 0.01
-            ? "translateY(0px)"
-            : p < start
-              ? "translateY(20px)"
-              : "translateY(-20px)";
+        el.style.opacity   = String(op);
+        el.style.transform = op > 0.01
+          ? "translateY(0px)"
+          : p < start ? "translateY(20px)" : "translateY(-20px)";
       });
     }
 
-    // ── RAF loop ──────────────────────────────────────────────────
     function tick() {
       rafId = requestAnimationFrame(tick);
-
-      const rect = section!.getBoundingClientRect();
-      const sTop = window.scrollY + rect.top;
-      const sH = section!.offsetHeight;
-      const vH = window.innerHeight;
-      rawProgress = Math.max(
-        0,
-        Math.min(1, (window.scrollY - sTop) / (sH - vH)),
-      );
-      smoothProg += (rawProgress - smoothProg) * 0.12;
-
-      const fi = Math.max(
-        0,
-        Math.min(TOTAL_FRAMES - 1, Math.floor(smoothProg * (TOTAL_FRAMES - 1))),
-      );
-      if (fi !== currentFrame) {
-        currentFrame = fi;
-        draw(currentFrame);
-      }
-
-      if (hint) hint.style.opacity = String(Math.max(0, 1 - smoothProg / 0.1));
-      if (track) track.style.width = `${smoothProg * 100}%`;
+      smoothProg += (rawProgress - smoothProg) * 0.14;
+      const fi = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.floor(smoothProg * (TOTAL_FRAMES - 1))));
+      if (fi !== currentFrame) { currentFrame = fi; draw(currentFrame); }
+      if (hint)  hint.style.opacity = String(Math.max(0, 1 - smoothProg / 0.1));
+      if (track) track.style.width  = `${smoothProg * 100}%`;
       updateBeats(smoothProg);
     }
+
+    // ── Scroll lock / unlock ──────────────────────────────────────
+
+    function lockScroll(fromBottom: boolean) {
+      if (isLocked) return;
+
+      // Refresh absolute top at lock time (content above may have shifted)
+      sectionAbsTop = window.scrollY + section!.getBoundingClientRect().top;
+
+      isLocked    = true;
+      accumulated = fromBottom ? SCROLL_TOTAL : 0;
+      rawProgress = fromBottom ? 1 : 0;
+      smoothProg  = rawProgress;
+      currentFrame = fromBottom ? TOTAL_FRAMES - 1 : 0;
+      draw(currentFrame);
+
+      // Snap to section top and freeze
+      savedScrollY = sectionAbsTop;
+      window.scrollTo(0, savedScrollY);
+
+      document.body.style.top      = `-${savedScrollY}px`;
+      document.body.style.position = "fixed";
+      document.body.style.left     = "0";
+      document.body.style.right    = "0";
+      document.body.style.overflow = "hidden";
+    }
+
+    function unlockScroll(forward: boolean) {
+      if (!isLocked) return;
+      isLocked = false;
+
+      // Restore body
+      document.body.style.position = "";
+      document.body.style.top      = "";
+      document.body.style.left     = "";
+      document.body.style.right    = "";
+      document.body.style.overflow = "";
+
+      const vh = window.innerHeight;
+      // forward → land just below section; backward → land just above section
+      const targetY = forward
+        ? sectionAbsTop + section!.offsetHeight + 2
+        : Math.max(0, sectionAbsTop - vh * 0.8);
+      window.scrollTo({ top: targetY, behavior: "instant" as ScrollBehavior });
+    }
+
+    function advanceProgress(delta: number) {
+      if (!isLocked) return;
+      const prev = accumulated;
+      accumulated = Math.max(0, Math.min(SCROLL_TOTAL, accumulated + delta));
+      rawProgress = accumulated / SCROLL_TOTAL;
+      // Unlock when hitting either boundary with continued intent
+      if (delta > 0 && prev >= SCROLL_TOTAL) { unlockScroll(true);  return; }
+      if (delta < 0 && prev <= 0)            { unlockScroll(false); return; }
+    }
+
+    // ── Event listeners ───────────────────────────────────────────
+
+    function onWheel(e: WheelEvent) {
+      if (!isLocked) return;
+      e.preventDefault();
+      advanceProgress(e.deltaY);
+    }
+
+    function onTouchStart(e: TouchEvent) {
+      if (!isLocked) return;
+      touchStartY = e.touches[0].clientY;
+    }
+
+    function onTouchMove(e: TouchEvent) {
+      if (!isLocked) return;
+      e.preventDefault();
+      const dy = touchStartY - e.touches[0].clientY;
+      touchStartY = e.touches[0].clientY; // update for incremental deltas
+      advanceProgress(dy * 5);            // scale: 1px touch ≈ 5px wheel
+    }
+
+    // Keyboard: allow Escape to bail out of the lock
+    function onKeyDown(e: KeyboardEvent) {
+      if (!isLocked) return;
+      if (e.key === "Escape") { unlockScroll(true); return; }
+      if (e.key === "ArrowDown" || e.key === "PageDown") advanceProgress(120);
+      if (e.key === "ArrowUp"   || e.key === "PageUp")   advanceProgress(-120);
+    }
+
+    // ── IntersectionObserver — triggers lock ──────────────────────
+    // Fires when section is ≥85% in viewport; direction determined by rect.top sign:
+    //   rect.top ≥ 0 → entering from top (scrolling down) → play forward
+    //   rect.top < 0 → entering from bottom (scrolling up) → play backward
+    const lockIO = new IntersectionObserver(entries => {
+      const entry = entries[0];
+      if (entry.isIntersecting && !isLocked) {
+        const fromBottom = entry.boundingClientRect.top < 0;
+        lockScroll(fromBottom);
+      }
+    }, { threshold: 0.85 });
+    lockIO.observe(section!);
 
     // ── Image preload ─────────────────────────────────────────────
     function loadImages() {
       for (let i = 0; i < TOTAL_FRAMES; i++) {
         const img = new Image();
-        const n = String(i).padStart(3, "0");
-        img.src = `/volvo_frames/frame_${n}_delay-0.041s.jpg`;
+        const n   = String(i).padStart(3, "0");
+        img.src   = `/volvo_frames/frame_${n}_delay-0.041s.jpg`;
         const onDone = () => {
           loadedCount++;
-          if (loadBar)
-            loadBar.style.width = `${(loadedCount / TOTAL_FRAMES) * 100}%`;
+          if (loadBar) loadBar.style.width = `${(loadedCount / TOTAL_FRAMES) * 100}%`;
           if (loadedCount === TOTAL_FRAMES) onReady(true);
         };
-        img.onload = onDone;
-        img.onerror = () => {
-          loadedCount++;
-          if (loadedCount === TOTAL_FRAMES) onReady(false);
-        };
-        images[i] = img;
+        img.onload  = onDone;
+        img.onerror = () => { loadedCount++; if (loadedCount === TOTAL_FRAMES) onReady(false); };
+        images[i]   = img;
       }
     }
 
     function onReady(ok: boolean) {
       if (isReady) return;
-      isReady = true;
+      isReady  = true;
       imagesOk = ok;
-      if (!loader) {
-        startExp();
-        return;
-      }
+      if (!loader) { startExp(); return; }
       loader.style.transition = "opacity 0.55s ease";
-      loader.style.opacity = "0";
-      setTimeout(() => {
-        if (loader) loader.style.display = "none";
-        startExp();
-      }, 600);
+      loader.style.opacity    = "0";
+      setTimeout(() => { if (loader) loader.style.display = "none"; startExp(); }, 600);
     }
 
     function startExp() {
@@ -485,28 +428,40 @@
       if (!rafId) tick();
     }
 
-    // ── Fallback: 8s timeout in case frames are missing ──────────
-    setTimeout(() => {
-      if (!isReady) onReady(false);
-    }, 8000);
+    setTimeout(() => { if (!isReady) onReady(false); }, 8000);
 
     // ── Boot ──────────────────────────────────────────────────────
+    setHeight();
     resize();
-    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("resize",     resize,       { passive: true  });
+    window.addEventListener("wheel",      onWheel,      { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true  });
+    window.addEventListener("touchmove",  onTouchMove,  { passive: false });
+    window.addEventListener("keydown",    onKeyDown);
     loadImages();
 
-    // ── Cleanup on Astro navigation ───────────────────────────────
     const cleanup = () => {
       cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize",     resize);
+      window.removeEventListener("wheel",      onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove",  onTouchMove);
+      window.removeEventListener("keydown",    onKeyDown);
+      lockIO.disconnect();
+      // Always restore body on navigation
+      if (isLocked) {
+        document.body.style.position = "";
+        document.body.style.top      = "";
+        document.body.style.left     = "";
+        document.body.style.right    = "";
+        document.body.style.overflow = "";
+      }
     };
     _stCleanup = cleanup;
     document.addEventListener("astro:before-swap", cleanup, { once: true });
   }
 
-  // Run immediately — module scripts are deferred so DOM is ready
   initST();
-  // Re-run on View Transitions navigation (if enabled)
   document.addEventListener("astro:page-load", () => {
     if (document.getElementById("servizi-scrollytelling")) initST();
   });
