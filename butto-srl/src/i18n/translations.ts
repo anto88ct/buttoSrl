@@ -117,6 +117,11 @@ export const translations = {
         esperienza: 'di esperienza',
         sedeStorica: 'sede storica',
       },
+      camion: {
+        eyebrow: '1978 — Il Primo Automezzo',
+        h2: 'Da Qui è Iniziato Tutto',
+        body: 'Prima di 120 comuni, prima delle certificazioni, prima della flotta di oggi: un solo camion e la volontà di fare le cose per bene.',
+      },
       timeline: {
         eyebrow: 'La Nostra Evoluzione',
         h2: '45 Anni di Storia',
@@ -486,6 +491,11 @@ export const translations = {
         fondazione: 'Founded',
         esperienza: 'of experience',
         sedeStorica: 'historic headquarters',
+      },
+      camion: {
+        eyebrow: '1978 — The First Vehicle',
+        h2: 'Where It All Began',
+        body: "Before 120 municipalities, before the certifications, before today's fleet: one truck and the will to do things right.",
       },
       timeline: {
         eyebrow: 'Our Evolution',

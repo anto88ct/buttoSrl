@@ -211,24 +211,31 @@ const clientiB = [
       {services.map(({ num, icon, href }, i) => (
         <a
           href={href}
-          class="custodi-card group bg-ivory border border-linen p-7 lg:p-9 flex flex-col gap-5 hover:bg-forest transition-colors duration-500"
-          style="box-shadow: 0 8px 40px rgba(22,44,27,0.10), 0 2px 8px rgba(22,44,27,0.06);"
+          class="custodi-card group block h-full rounded-none outline-none focus-visible:ring-2 focus-visible:ring-ochre focus-visible:ring-offset-2 focus-visible:ring-offset-white"
         >
-          <div class="flex items-start justify-between">
-            <span class="font-condensed font-800 text-[3rem] text-ink/6 group-hover:text-ivory/6 leading-none tracking-tighter transition-colors">{num}</span>
-            <div class="w-10 h-10 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors duration-300">
-              <i class={`fa-solid ${icon} text-base text-ochre/70 group-hover:text-ochre transition-colors`}></i>
+          <article
+            class="relative h-full flex flex-col overflow-hidden bg-ivory border border-linen/80 group-hover:border-forest group-hover:bg-forest shadow-[0_8px_40px_rgba(22,44,27,0.08),0_2px_8px_rgba(22,44,27,0.05)] group-hover:shadow-[0_22px_60px_rgba(22,44,27,0.24)] transition-[background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          >
+            <!-- accent rule: precision/manifest wipe on hover -->
+            <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] bg-ochre origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></span>
+
+            <div class="flex flex-col gap-6 p-7 lg:p-9 h-full">
+              <!-- ledger header: index N° + service mark, on a hairline -->
+              <div class="flex items-center justify-between pb-5 border-b border-linen group-hover:border-ivory/15 transition-colors duration-500">
+                <span class="font-condensed font-700 text-[0.72rem] uppercase tracking-[0.22em] text-muted group-hover:text-ochre transition-colors duration-500">N°&thinsp;{num}</span>
+                <i class={`fa-solid ${icon} text-[1.05rem] text-ochre group-hover:text-ochre-light transition-colors duration-500`}></i>
+              </div>
+
+              <div class="space-y-3">
+                <h3 data-i18n={`home.services.items.${i}.title`} class="font-serif text-2xl font-600 text-ink group-hover:text-ivory transition-colors duration-500 leading-tight text-balance">{services[i].title}</h3>
+                <p data-i18n={`home.services.items.${i}.desc`} class="font-body text-ink/75 group-hover:text-ivory/65 text-sm leading-relaxed transition-colors duration-500 text-pretty">{services[i].desc}</p>
+              </div>
+
+              <div class="flex items-center gap-2 font-condensed font-700 text-[0.7rem] uppercase tracking-[0.16em] text-ochre group-hover:gap-4 transition-all duration-300 mt-auto pt-1">
+                <span data-i18n="home.services.learnMore">Scopri di più</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </div>
             </div>
-          </div>
-
-          <div class="space-y-2">
-            <h3 data-i18n={`home.services.items.${i}.title`} class="font-serif text-xl font-600 text-ink group-hover:text-ivory transition-colors leading-tight">{services[i].title}</h3>
-            <p data-i18n={`home.services.items.${i}.desc`} class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{services[i].desc}</p>
-          </div>
-
-          <div class="flex items-center gap-2 font-condensed font-700 text-[0.7rem] uppercase tracking-[0.16em] text-ochre/70 group-hover:text-ochre group-hover:gap-4 transition-all duration-300 mt-auto">
-            <span data-i18n="home.services.learnMore">Scopri di più</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-          </div>
+          </article>
         </a>
       ))}
     </div>

@@ -10,6 +10,12 @@ const valori = [
   { icon: 'fa-arrow-trend-up',title: 'Innovazione Continua',     desc: 'La capacità di coniugare esperienza, innovazione e utilizzo di tecnologie moderne per garantire standard elevati in ogni fase.' },
 ];
 
+const primoCamion = [
+  '/sezione_camion_laterale.png',
+  '/sezione_camion_front.png',
+  '/sezione_camion_alto.png',
+];
+
 const timeline = [
   { year: '1978', title: 'La Fondazione',         desc: "Carmelo Buttò avvia la prima attività di raccolta rifiuti ad Assoro, con la chiara visione di offrire servizi efficienti e sicuri nel settore della tutela ambientale." },
   { year: '1990', title: 'Crescita Strutturata', desc: "L'azienda struttura la propria organizzazione operativa e investe progressivamente in mezzi idonei e personale qualificato." },
@@ -50,9 +56,10 @@ const timeline = [
         <div class="lg:col-span-5 reveal-left">
           <div class="relative">
             <div class="absolute -top-4 -left-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
-            <div class="img-zoom aspect-[3/4]">
-              <Image src="/founder.jpg" alt="Carmelo Buttò, fondatore" class="w-full h-full object-cover" loading="lazy" width={800} height={1067} />
-              <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent"></div>
+            <div class="founder-swap aspect-[3/4]">
+              <Image src="/owner_first.png" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-1 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
+              <Image src="/owner_second.png" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-2 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
+              <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent pointer-events-none"></div>
             </div>
             <div class="absolute top-6 right-6 bg-ochre text-forest px-4 py-2.5">
               <p data-i18n="chiSiamo.founder.fondazione" class="font-condensed font-800 text-xs uppercase tracking-[0.2em] text-forest/60">Fondazione</p>
@@ -96,6 +103,28 @@ const timeline = [
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ PRIMO CAMION ══════════════════════ -->
+  <section class="relative bg-white" id="camion-heritage">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 pt-28 pb-16 reveal">
+      <span data-i18n="chiSiamo.camion.eyebrow" class="overline text-ochre">1978 — Il Primo Automezzo</span>
+      <div class="rule-ochre"></div>
+      <h2 data-i18n="chiSiamo.camion.h2" class="display-sm text-ink mt-5 italic">Da Qui è Iniziato Tutto</h2>
+      <p data-i18n="chiSiamo.camion.body" class="font-body text-muted text-lg max-w-2xl leading-relaxed mt-6">
+        Prima di 120 comuni, prima delle certificazioni, prima della flotta di oggi: un solo camion e la volontà di fare le cose per bene.
+      </p>
+    </div>
+
+    <div id="camion-viewport" class="relative h-[90vh] overflow-hidden bg-white">
+      <div id="camion-track" class="flex h-full will-change-transform">
+        {primoCamion.map((src) => (
+          <div class="camion-panel h-full flex-shrink-0">
+            <img src={src} alt="Buttò, il primo camion" class="w-full h-full object-cover" loading="lazy" width="1792" height="2390" />
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -240,6 +269,25 @@ const timeline = [
     100% { opacity: 0;    transform: scale(4.5); }
   }
   .tl-mobile-dot { @apply bg-ochre; }
+
+  /* ── Founder photo swap ──────────────────────────────────── */
+  .founder-swap { position: relative; overflow: hidden; }
+  .founder-swap-img {
+    position: absolute;
+    inset: 0;
+    transition: opacity 3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .founder-swap-img-1 { opacity: 1; transform: scale(1); z-index: 2; }
+  .founder-swap-img-2 { opacity: 0; transform: scale(1.08); z-index: 1; }
+  .founder-swap:hover .founder-swap-img-1 { opacity: 0; transform: scale(1.08); }
+  .founder-swap:hover .founder-swap-img-2 { opacity: 1; transform: scale(1); }
+  @media (prefers-reduced-motion: reduce) {
+    .founder-swap-img { transition: opacity 0.3s ease; transform: none !important; }
+  }
+
+  /* ── Primo camion — horizontal scroll-linked panels ─────────── */
+  .camion-panel { width: 92vw; }
+  @media (min-width: 1024px) { .camion-panel { width: 60vw; } }
 </style>
 
 <script>
@@ -271,6 +319,41 @@ const timeline = [
     window.addEventListener('scroll', updateSpine, { passive: true });
     window.addEventListener('resize', updateSpine, { passive: true });
     updateSpine();
+  })();
+</script>
+
+<script>
+  (() => {
+    const viewport = document.getElementById('camion-viewport');
+    const track    = document.getElementById('camion-track');
+    if (!viewport || !track) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return; // static first frame, no motion — page scrolls normally either way
+
+    let ticking = false;
+
+    // Section is never pinned: the track just pans horizontally as the
+    // section drifts through the viewport during normal, uninterrupted
+    // vertical scrolling (no scroll-lock, no fixed positioning).
+    function update() {
+      ticking = false;
+      const rect  = viewport.getBoundingClientRect();
+      const vh    = window.innerHeight;
+      const total = rect.height + vh; // distance section takes to fully pass through
+      const scrolled = vh - rect.top;
+      const progress  = Math.max(0, Math.min(1, scrolled / total));
+      const maxShift  = track.scrollWidth - viewport.clientWidth;
+      track.style.transform = `translateX(-${progress * maxShift}px)`;
+    }
+
+    function onScroll() {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
   })();
 </script>
 

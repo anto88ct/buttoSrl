@@ -1,0 +1,8 @@
+{
+  "framework": "astro",
+  "devServer": "http://localhost:4321",
+  "files": ["src/pages/**/*.astro"],
+  "insertBefore": "</head>",
+  "commentSyntax": ["<!--", "-->"],
+  "cspChecked": true
+}

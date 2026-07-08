@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import leafeHeart from '../assets/leafe-heart.jpg';
-import garbageStock from '../assets/garbage-stock.jpg';
 
 const pilastri = [
   { icon: 'fa-arrows-rotate',  title: 'Economia Circolare', desc: 'Recupero massimo di ogni materia prima secondaria attraverso processi certificati e catene di fornitura tracciate.' },
@@ -94,8 +93,8 @@ const sdgs = [
 
         <div class="relative reveal-right delay-1">
           <div class="absolute -top-4 -right-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
-          <div class="img-zoom aspect-[4/5]">
-            <Image src={garbageStock} alt="Operatori Buttò al lavoro" class="w-full h-full object-cover" loading="lazy" width={900} />
+          <div class="aspect-[4/5] bg-linen flex items-center justify-center p-12">
+            <img src="/plant.svg" alt="Illustrazione di una pianta, simbolo del nostro impegno verde" class="w-full h-full object-contain" loading="lazy" />
           </div>
         </div>
       </div>

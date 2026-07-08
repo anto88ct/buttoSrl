@@ -1,0 +1,8 @@
+<ul>
+<li><a href="//labirintoambientale.it/ricerca-imprese/&quot;" target="&quot;_blank&quot;" rel="&quot;noopener&quot;">Ricerca imprese iscritte all’Albo Gestori Ambientali</a></li>
+<li><a href="//labirintoambientale.it/codici-cer/&quot;" target="&quot;_blank&quot;" rel="&quot;noopener&quot;">Elenco Codici CER (Catalogo Europeo Rifiuti)</a></li>
+<li><a href="//labirintoambientale.it/rifiuti-adr/&quot;" target="&quot;_blank&quot;" rel="&quot;noopener&quot;">Classificazione rifiuti pericolosi ADR</a></li>
+<li><a href="//labirintoambientale.it/etichette-hp/&quot;" target="&quot;_blank&quot;" rel="&quot;noopener&quot;">Etichette di pericolo HP (Hazardous Properties)</a></li>
+<li><a href="//labirintoambientale.it/calcolatori/&quot;" target="&quot;_blank&quot;" rel="&quot;noopener&quot;">Calcolatori ambientali e strumenti operativi</a></li>
+<li><a href="//labirintoambientale.it/smaltimento-rifiuti/&quot;" target="&quot;_blank&quot;" rel="&quot;noopener&quot;">Guida allo smaltimento corretto dei rifiuti</a></li>
+</ul>
