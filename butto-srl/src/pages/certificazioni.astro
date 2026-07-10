@@ -1,22 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import garbageStock from '../assets/garbage-stock.jpg';
 
 const alboCats = [
-  { cat: 'Cat. 1 - Classe F', desc: 'Raccolta e trasporto di rifiuti urbani (per popolazioni inferiori a 5.000 abitanti).' },
-  { cat: 'Cat. 4 - Classe F', desc: 'Raccolta e trasporto di rifiuti speciali non pericolosi (quantità annua inferiore a 3.000 tonnellate).' },
-  { cat: 'Cat. 5 - Classe F', desc: 'Raccolta e trasporto di rifiuti speciali pericolosi (quantità annua inferiore a 3.000 tonnellate).' },
-  { cat: 'Cat. 8 - Classe F', desc: 'Intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi.' },
+  { cat: 'Categoria 1',     desc: 'Raccolta e trasporto di rifiuti urbani. È suddivisa in classi in base alla popolazione complessivamente servita dal servizio.' },
+  { cat: 'Categoria 2-bis', desc: 'Raccolta e trasporto dei propri rifiuti non pericolosi effettuata dai produttori iniziali (es. artigiani o imprese che trasportano i propri scarti). Non è suddivisa in classi.' },
+  { cat: 'Categoria 3-bis', desc: 'Abrogata: in precedenza dedicata al trasporto di RAEE da parte di distributori e installatori.' },
+  { cat: 'Categoria 4',     desc: 'Raccolta e trasporto di rifiuti speciali non pericolosi. È suddivisa in 6 classi (da A a F) in base alla quantità annua gestita, da un massimo di 200.000 tonnellate (Classe A) a 3.000 tonnellate (Classe F).' },
+  { cat: 'Categoria 5',     desc: 'Raccolta e trasporto di rifiuti speciali pericolosi (quantità annua inferiore a 3.000 tonnellate, Classe F).' },
+  { cat: 'Categoria 8',     desc: 'Intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi.' },
 ];
 
 const macrocategorie = [
-  { icon: 'fa-box',              title: 'Imballaggi',       code: 'Cap. 15.01', desc: 'Gestione e avvio al recupero di imballaggi in carta, cartone, plastica, legno, metallo, vetro e materiali compositi.' },
-  { icon: 'fa-plug',             title: 'RAEE e Batterie',  code: 'Cap. 16',    desc: 'Ritiro e avvio a recupero di rifiuti di apparecchiature elettriche ed elettroniche e accumulatori esauriti.' },
-  { icon: 'fa-trowel-bricks',    title: 'Edilizia e Amianto', code: 'Cap. 17', desc: 'Smaltimento di scarti da costruzione, macerie, e materiali edili di varia natura.' },
-  { icon: 'fa-truck-medical',    title: 'Rifiuti Sanitari', code: 'Cap. 18',    desc: 'Gestione sicura di rifiuti derivanti da attività mediche, veterinarie e di ricerca scientifica.' },
-  { icon: 'fa-oil-can',          title: 'Oli e Solventi',   code: 'Cap. 13-14', desc: 'Trattamento e stoccaggio di oli esauriti, residui di combustibili, solventi e fluidi industriali.' },
-  { icon: 'fa-industry',         title: 'Rifiuti Industriali', code: 'Cap. 19',desc: 'Scarti prodotti da impianti di trattamento rifiuti, depurazione acque reflue e potabilizzazione.' },
+  { icon: 'fa-box',              title: 'Imballaggi',       code: 'Cap. 15.01', img: '/certificazioni/imballaggi.jpg',  desc: 'Gestione e avvio al recupero di imballaggi in carta, cartone, plastica, legno, metallo, vetro e materiali compositi.' },
+  { icon: 'fa-plug',             title: 'RAEE e Batterie',  code: 'Cap. 16',    img: '/certificazioni/raee.jpg',        desc: 'Ritiro e avvio a recupero di rifiuti di apparecchiature elettriche ed elettroniche e accumulatori esauriti.' },
+  { icon: 'fa-trowel-bricks',    title: 'Edilizia e Amianto', code: 'Cap. 17', img: '/certificazioni/edilizia.jpg',     desc: 'Smaltimento di scarti da costruzione, macerie, e materiali edili di varia natura.' },
+  { icon: 'fa-truck-medical',    title: 'Rifiuti Sanitari', code: 'Cap. 18',    img: '/certificazioni/sanitari.jpg',    desc: 'Gestione sicura di rifiuti derivanti da attività mediche, veterinarie e di ricerca scientifica.' },
+  { icon: 'fa-oil-can',          title: 'Oli e Solventi',   code: 'Cap. 13-14', img: '/certificazioni/oli.jpg',         desc: 'Trattamento e stoccaggio di oli esauriti, residui di combustibili, solventi e fluidi industriali.' },
+  { icon: 'fa-industry',         title: 'Rifiuti Industriali', code: 'Cap. 19',img: '/certificazioni/industriali.jpg', desc: 'Scarti prodotti da impianti di trattamento rifiuti, depurazione acque reflue e potabilizzazione.' },
+];
+
+const certSearchItems = [
+  ...macrocategorie.map(m => ({ label: m.title, tag: `CER ${m.code}`, desc: m.desc })),
+  ...alboCats.map(a => ({ label: a.cat, tag: 'Albo Gestori Ambientali', desc: a.desc })),
+  { label: 'ISO 14001', tag: 'Certificazione', desc: 'Sistema di gestione ambientale certificato secondo lo standard internazionale ISO 14001.' },
+  { label: 'Registrazione EMAS', tag: 'Certificazione', desc: 'Eco-Management and Audit Scheme, registrazione volontaria europea per la gestione ambientale.' },
 ];
 ---
 
@@ -59,9 +66,18 @@ const macrocategorie = [
 
         <div class="grid gap-4 reveal delay-1">
           {alboCats.map(({ cat, desc }, i) => (
-            <div class="bg-forest-mid p-6 border-l-4 border-ochre hover:bg-forest-soft transition-colors">
-              <h3 data-i18n={`certificazioni.albo.cats.${i}.cat`} class="font-serif text-xl italic text-ivory mb-2">{cat}</h3>
-              <p data-i18n={`certificazioni.albo.cats.${i}.desc`} class="font-body text-sm text-ivory/60">{desc}</p>
+            <div class="group relative overflow-hidden bg-forest-mid border border-white/8 hover:border-ochre/40 hover:bg-forest-soft shadow-[0_8px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_22px_60px_rgba(0,0,0,0.3)] transition-[background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+              <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] bg-ochre origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></span>
+              <div class="flex flex-col gap-4 p-6 lg:p-7">
+                <div class="flex items-center justify-between pb-4 border-b border-white/8 group-hover:border-ochre/20 transition-colors duration-500">
+                  <span class="font-condensed font-700 text-[0.68rem] uppercase tracking-[0.2em] text-ivory/40 group-hover:text-ochre transition-colors duration-500">Albo N°&thinsp;{String(i + 1).padStart(2, '0')}</span>
+                  <i class="fa-solid fa-clipboard-check text-[1rem] text-ochre group-hover:text-ochre-light transition-colors duration-500"></i>
+                </div>
+                <div class="space-y-2">
+                  <h3 data-i18n={`certificazioni.albo.cats.${i}.cat`} class="font-serif text-xl italic text-ivory leading-tight">{cat}</h3>
+                  <p data-i18n={`certificazioni.albo.cats.${i}.desc`} class="font-body text-sm text-ivory/60 leading-relaxed">{desc}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -70,9 +86,9 @@ const macrocategorie = [
   </section>
 
   <!-- TIPOLOGIE DI RIFIUTI -->
-  <section class="py-24 bg-ivory dot-grid">
+  <section class="pt-24 bg-ivory dot-grid">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
-      <div class="text-center mb-16 reveal">
+      <div class="text-center mb-4 reveal">
         <span data-i18n="certificazioni.macrocategorie.eyebrow" class="overline text-ochre">Classificazione EER/CER</span>
         <div class="rule-ochre mx-auto mt-4 mb-0"></div>
         <h2 data-i18n="certificazioni.macrocategorie.h2" class="display-sm text-ink italic mt-5">Macrocategorie di Rifiuti Gestiti</h2>
@@ -80,23 +96,125 @@ const macrocategorie = [
           Copriamo un ampio spettro di codifiche EER/CER, garantendo una gestione impeccabile per rifiuti urbani, speciali, pericolosi e non pericolosi.
         </p>
       </div>
+    </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-linen border border-linen reveal delay-1">
-        {macrocategorie.map(({ icon, title, code, desc }, i) => (
-          <div class="group bg-ivory p-8 hover:bg-forest transition-colors duration-500 flex flex-col gap-4">
-            <div class="w-11 h-11 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors">
-              <i class={`fa-solid ${icon} text-lg text-ochre/60 group-hover:text-ochre transition-colors`}></i>
+    <!-- ── PINNED SCROLL SEQUENCE (desktop) ──────────────────────── -->
+    <div
+      id="mc-wrap"
+      class="relative hidden lg:block"
+      style={`height: calc(100vh + ${macrocategorie.length} * 72vh)`}
+    >
+      <div class="mc-sticky sticky top-0 h-screen flex items-center overflow-hidden">
+        <div class="max-w-screen-2xl mx-auto w-full px-6 lg:px-14">
+          <div class="grid grid-cols-12 gap-16 items-center">
+
+            <!-- Locked material card -->
+            <div class="col-span-5">
+              <div class="aspect-[4/5] max-h-[68vh] bg-forest relative overflow-hidden shadow-forest">
+                <div
+                  id="mc-bg"
+                  data-img={macrocategorie[0].img}
+                  class="absolute inset-0 bg-cover bg-center"
+                  style={`background-image:url(${macrocategorie[0].img})`}
+                ></div>
+                <div class="absolute inset-0 bg-forest/80 mix-blend-multiply"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-forest via-forest/30 to-forest/60"></div>
+
+                <div class="absolute top-8 left-8 right-8 flex items-center justify-between z-10">
+                  <span id="mc-code" class="inline-block px-2.5 py-1 bg-ivory/10 border border-ochre/30 text-ochre text-xs font-condensed tracking-wider backdrop-blur-sm">
+                    CER {macrocategorie[0].code}
+                  </span>
+                  <span id="mc-counter" class="font-condensed text-ivory/40 text-xs tracking-[0.24em]">
+                    01 / {String(macrocategorie.length).padStart(2, '0')}
+                  </span>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center z-10">
+                  <i id="mc-icon" data-icon={macrocategorie[0].icon} class={`fa-solid ${macrocategorie[0].icon} text-ochre/85 text-[9rem] drop-shadow-[0_8px_24px_rgba(14,12,9,0.55)]`}></i>
+                </div>
+                <div class="absolute bottom-8 left-8 right-8 z-10">
+                  <div class="rule-ochre mb-4"></div>
+                  <h3 id="mc-title" class="font-serif italic text-4xl text-ivory">{macrocategorie[0].title}</h3>
+                </div>
+              </div>
             </div>
-            <div>
-              <span class="inline-block px-2 py-1 bg-linen group-hover:bg-forest-mid text-ink group-hover:text-ivory text-xs font-condensed tracking-wider mb-2 transition-colors">CER {code}</span>
-              <h3 data-i18n={`certificazioni.macrocategorie.items.${i}.title`} class="font-serif text-xl italic text-ink group-hover:text-ivory transition-colors mb-2">{title}</h3>
-              <p data-i18n={`certificazioni.macrocategorie.items.${i}.desc`} class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{desc}</p>
-            </div>
+
+            <!-- Vertical stepper -->
+            <ol class="col-span-7 flex flex-col gap-1">
+              {macrocategorie.map(({ icon, title, code, img, desc }, i) => (
+                <li
+                  class="mc-step group flex items-stretch gap-6"
+                  data-index={i}
+                  data-icon={icon}
+                  data-code={code}
+                  data-title={title}
+                  data-img={img}
+                  data-active={i === 0 ? 'true' : 'false'}
+                  data-passed="false"
+                >
+                  <div class="flex flex-col items-center shrink-0">
+                    <span class="w-11 h-11 rounded-full border-2 border-linen text-muted flex items-center justify-center font-condensed font-700 text-sm transition-all duration-500 group-data-[active=true]:border-ochre group-data-[active=true]:bg-ochre group-data-[active=true]:text-ivory group-data-[active=true]:scale-110 group-data-[passed=true]:border-ochre group-data-[passed=true]:text-ochre">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    {i < macrocategorie.length - 1 && (
+                      <span class="w-px flex-1 my-2 bg-linen relative overflow-hidden">
+                        <span class="absolute inset-0 bg-ochre origin-top scale-y-0 group-data-[passed=true]:scale-y-100 transition-transform duration-500"></span>
+                      </span>
+                    )}
+                  </div>
+
+                  <div class="flex-1 py-1 group-data-[active=true]:py-3 transition-all duration-500">
+                    <h3
+                      data-i18n={`certificazioni.macrocategorie.items.${i}.title`}
+                      class="font-serif italic leading-tight text-2xl text-ink/30 group-data-[active=true]:text-ink group-data-[active=true]:text-[2.4rem] transition-all duration-500"
+                    >
+                      {title}
+                    </h3>
+                    <div class="grid grid-rows-[0fr] group-data-[active=true]:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
+                      <div class="overflow-hidden">
+                        <p
+                          data-i18n={`certificazioni.macrocategorie.items.${i}.desc`}
+                          class="font-body text-lg text-ink/70 leading-relaxed mt-3 opacity-0 group-data-[active=true]:opacity-100 transition-opacity duration-500 delay-100 max-w-xl"
+                        >
+                          {desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
-        ))}
+        </div>
       </div>
+    </div>
 
-      <div class="mt-8 bg-parchment p-6 border border-linen text-center reveal delay-2">
+    <!-- ── MOBILE STACKED (no pin) ───────────────────────────────── -->
+    <div id="mc-stack" class="lg:hidden max-w-screen-2xl mx-auto px-6 lg:px-14 mt-12 flex flex-col">
+      {macrocategorie.map(({ icon, title, code, img, desc }, i) => (
+        <div class="flex items-start gap-5 py-8 reveal" data-index={i}>
+          <div class="flex flex-col items-center shrink-0 self-stretch">
+            <span
+              class="w-14 h-14 rounded-full relative overflow-hidden flex items-center justify-center bg-cover bg-center shadow-forest"
+              style={`background-image:url(${img})`}
+            >
+              <span class="absolute inset-0 bg-forest/80 mix-blend-multiply"></span>
+              <i class={`fa-solid ${icon} relative z-10 text-ochre/90 text-base`}></i>
+            </span>
+            {i < macrocategorie.length - 1 && (
+              <span class="w-px flex-1 mt-3 bg-linen"></span>
+            )}
+          </div>
+          <div class="flex-1">
+            <span class="inline-block px-2 py-0.5 bg-linen text-ink text-[11px] font-condensed tracking-wider mb-2">CER {code}</span>
+            <h3 data-i18n={`certificazioni.macrocategorie.items.${i}.title`} class="font-serif italic text-2xl text-ink leading-tight">{title}</h3>
+            <p data-i18n={`certificazioni.macrocategorie.items.${i}.desc`} class="font-body text-base text-muted mt-2 leading-relaxed">{desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 pb-24">
+      <div class="mt-12 bg-parchment p-6 border border-linen text-center reveal">
         <p class="font-body text-ink text-sm">
           <i class="fa-solid fa-circle-check text-ochre mr-2"></i>
           <span data-i18n-html="certificazioni.macrocategorie.note">Siamo inoltre autorizzati alla gestione di <strong>Rifiuti Spiaggiati (CER 20.01.99)</strong> e <strong>Rifiuti Cimiteriali (CER 20.03.99)</strong>.</span>
@@ -105,56 +223,187 @@ const macrocategorie = [
     </div>
   </section>
 
-  <!-- FOCUS SPECIALISTICO -->
-  <section class="py-24 bg-parchment">
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
-      <div class="grid lg:grid-cols-12 gap-12 items-center">
-        <div class="lg:col-span-5 reveal">
-          <div class="aspect-square bg-forest flex items-center justify-center p-12 relative overflow-hidden">
-             <Image src={garbageStock} alt="Rifiuti Speciali" class="absolute inset-0 w-full h-full object-cover opacity-20" loading="lazy" width={900} />
-             <div class="absolute inset-0 bg-forest/80 mix-blend-multiply"></div>
-             <i class="fa-solid fa-shield-virus text-[8rem] text-ochre/40 relative z-10"></i>
-          </div>
+  <script>
+    const wrap = document.getElementById('mc-wrap');
+    const steps = Array.from(document.querySelectorAll<HTMLElement>('.mc-step'));
+    const cardBg = document.getElementById('mc-bg');
+    const cardIcon = document.getElementById('mc-icon');
+    const cardCode = document.getElementById('mc-code');
+    const cardTitle = document.getElementById('mc-title');
+    const cardCounter = document.getElementById('mc-counter');
+    const total = steps.length;
+    let current = -1;
+
+    function setActive(index: number) {
+      if (index === current) return;
+      current = index;
+
+      steps.forEach((el, i) => {
+        el.dataset.active = i === index ? 'true' : 'false';
+        el.dataset.passed = i < index ? 'true' : 'false';
+      });
+
+      const step = steps[index];
+      if (!step || !cardIcon || !cardCode || !cardTitle || !cardCounter || !cardBg) return;
+
+      const icon = step.dataset.icon!;
+      cardIcon.classList.remove('icon-pop');
+      void cardIcon.offsetWidth;
+      cardIcon.className = `fa-solid ${icon} text-ochre/85 text-[9rem] drop-shadow-[0_8px_24px_rgba(14,12,9,0.55)] icon-pop`;
+      cardIcon.dataset.icon = icon;
+
+      const img = step.dataset.img!;
+      if (cardBg.dataset.img !== img) {
+        cardBg.classList.remove('bg-fade');
+        void cardBg.offsetWidth;
+        cardBg.style.backgroundImage = `url(${img})`;
+        cardBg.dataset.img = img;
+        cardBg.classList.add('bg-fade');
+      }
+
+      cardCode.textContent = `CER ${step.dataset.code}`;
+      cardTitle.textContent = step.dataset.title ?? '';
+      cardCounter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+    }
+
+    if (wrap && steps.length && window.matchMedia('(min-width: 1024px)').matches) {
+      function update() {
+        const rect = wrap!.getBoundingClientRect();
+        const usable = Math.max(1, wrap!.offsetHeight - window.innerHeight);
+        // progress 0→1 across the pinned track
+        const p = Math.min(Math.max(-rect.top / usable, 0), 1);
+        const idx = Math.min(total - 1, Math.floor(p * total));
+        setActive(idx);
+      }
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    } else {
+      setActive(0);
+    }
+  </script>
+
+  <style>
+    @keyframes icon-pop {
+      from { opacity: 0; transform: scale(0.72) rotate(-6deg); }
+      to   { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+    .icon-pop {
+      animation: icon-pop 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes bg-fade {
+      from { opacity: 0; transform: scale(1.06); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .bg-fade {
+      animation: bg-fade 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      /* scroll-jack needs motion; fall back to the stacked list on every width */
+      #mc-wrap { display: none !important; }
+      #mc-stack { display: flex !important; }
+      .icon-pop { animation: none; }
+      .bg-fade { animation: none; }
+    }
+  </style>
+
+  <!-- RICERCA CERTIFICAZIONE -->
+  <section class="py-24 bg-forest grain relative overflow-hidden">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <div class="max-w-2xl mx-auto text-center reveal">
+        <h2 class="display-sm text-ivory italic">Cerca una certificazione o un codice CER</h2>
+        <p class="font-body text-ivory/60 text-lg mt-4 leading-relaxed">
+          Digita il nome del materiale, il codice CER o la certificazione che ti interessa.
+        </p>
+      </div>
+
+      <div class="max-w-2xl mx-auto mt-10 reveal delay-1">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-ivory/30 text-sm pointer-events-none"></i>
+          <input
+            id="cert-search-input"
+            type="search"
+            autocomplete="off"
+            placeholder="Es. amianto, ISO 14001, CER 17…"
+            class="w-full bg-forest-mid border border-white/10 focus:border-ochre text-ivory placeholder:text-ivory/35 font-body text-base pl-12 pr-5 py-4 outline-none transition-colors duration-300"
+            aria-label="Cerca certificazione o codice CER"
+          />
         </div>
-        <div class="lg:col-span-7 space-y-6 reveal delay-1">
-          <span data-i18n="certificazioni.focus.eyebrow" class="overline text-ochre">Focus Specialistico</span>
-          <h2 data-i18n="certificazioni.focus.h2" class="display-sm text-ink italic">Interventi ad Alto Profilo Tecnico</h2>
-          <p data-i18n="certificazioni.focus.body" class="font-body text-muted text-lg leading-relaxed">
-            La nostra azienda è altamente specializzata nella gestione e nel trasporto di flussi di rifiuti che richiedono particolari e rigorose misure di sicurezza:
-          </p>
-          <ul class="space-y-4 mt-6">
-            <li class="flex items-start gap-4">
-              <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center shrink-0 mt-1">
-                <i class="fa-solid fa-virus text-ochre text-sm"></i>
-              </div>
-              <div>
-                <strong data-i18n="certificazioni.focus.item1Title" class="font-condensed uppercase tracking-wide text-ink text-sm">Rifiuti a Rischio Infettivo (CER 18.01.03*)</strong>
-                <p data-i18n="certificazioni.focus.item1Desc" class="font-body text-muted text-sm mt-1">Procedure rigide per il contenimento, il trasporto e il conferimento sicuro dei materiali sanitari a rischio biologico e infettivo.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center shrink-0 mt-1">
-                <i class="fa-solid fa-house-chimney-crack text-ochre text-sm"></i>
-              </div>
-              <div>
-                <strong data-i18n="certificazioni.focus.item2Title" class="font-condensed uppercase tracking-wide text-ink text-sm">Materiali Contenenti Amianto (CER 17.06.xx*)</strong>
-                <p data-i18n="certificazioni.focus.item2Desc" class="font-body text-muted text-sm mt-1">Supporto qualificato nel ritiro e nel trasporto in totale sicurezza di manufatti contenenti amianto, a seguito di bonifiche certificate.</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-4">
-              <div class="w-8 h-8 rounded-full bg-linen flex items-center justify-center shrink-0 mt-1">
-                <i class="fa-solid fa-baby text-ochre text-sm"></i>
-              </div>
-              <div>
-                <strong data-i18n="certificazioni.focus.item3Title" class="font-condensed uppercase tracking-wide text-ink text-sm">Prodotti Assorbenti Persona (PAP)</strong>
-                <p data-i18n="certificazioni.focus.item3Desc" class="font-body text-muted text-sm mt-1">Servizio dedicato e strutturato per la raccolta e l'avvio allo smaltimento sostenibile di pannolini e pannoloni, ideale per enti comunali e strutture sanitarie e socio-assistenziali.</p>
-              </div>
-            </li>
-          </ul>
-        </div>
+
+        <div id="cert-search-results" class="hidden flex-col divide-y divide-white/8 bg-forest-mid border border-t-0 border-white/10" role="listbox" aria-label="Risultati ricerca"></div>
+        <p id="cert-search-empty" class="hidden font-body text-ivory/50 text-sm mt-5 text-center"></p>
+      </div>
+
+      <div class="max-w-2xl mx-auto mt-14 pt-10 border-t border-white/8 text-center reveal delay-2">
+        <a href="/contatti" class="btn-primary px-8 py-4 inline-flex">
+          <i class="fa-solid fa-envelope text-[11px]"></i>
+          <span>Non trovi la certificazione? Contattaci</span>
+        </a>
       </div>
     </div>
+
+    <script type="application/json" id="cert-search-data" set:html={JSON.stringify(certSearchItems)} />
   </section>
+
+  <script>
+    const searchData = document.getElementById('cert-search-data');
+    const searchItems: { label: string; tag: string; desc: string }[] = searchData
+      ? JSON.parse(searchData.textContent || '[]')
+      : [];
+    const searchInput = document.getElementById('cert-search-input') as HTMLInputElement | null;
+    const searchResults = document.getElementById('cert-search-results');
+    const searchEmpty = document.getElementById('cert-search-empty');
+
+    function normalize(s: string) {
+      const NFD = s.toLowerCase().normalize('NFD');
+      let out = '';
+      for (const ch of NFD) {
+        const code = ch.codePointAt(0) ?? 0;
+        if (code < 0x0300 || code > 0x036f) out += ch;
+      }
+      return out;
+    }
+
+    function renderResults(query: string) {
+      if (!searchResults || !searchEmpty) return;
+      const q = normalize(query.trim());
+
+      if (q.length < 2) {
+        searchResults.classList.add('hidden');
+        searchResults.classList.remove('flex');
+        searchEmpty.classList.add('hidden');
+        return;
+      }
+
+      const matches = searchItems
+        .filter((it) => normalize(it.label).includes(q) || normalize(it.tag).includes(q) || normalize(it.desc).includes(q))
+        .slice(0, 8);
+
+      if (!matches.length) {
+        searchResults.classList.add('hidden');
+        searchResults.classList.remove('flex');
+        searchEmpty.textContent = `Nessuna certificazione trovata per "${query.trim()}".`;
+        searchEmpty.classList.remove('hidden');
+        return;
+      }
+
+      searchEmpty.classList.add('hidden');
+      searchResults.classList.remove('hidden');
+      searchResults.classList.add('flex');
+      searchResults.innerHTML = matches.map((it) => `
+        <div class="flex items-start justify-between gap-4 px-5 py-4" role="option">
+          <div>
+            <h3 class="font-serif italic text-lg text-ivory">${it.label}</h3>
+            <p class="font-body text-sm text-ivory/55 mt-1 leading-relaxed">${it.desc}</p>
+          </div>
+          <span class="shrink-0 inline-block px-2.5 py-1 bg-ivory/10 border border-ochre/30 text-ochre text-[11px] font-condensed tracking-wider">${it.tag}</span>
+        </div>
+      `).join('');
+    }
+
+    searchInput?.addEventListener('input', () => renderResults(searchInput.value));
+  </script>
 
   <!-- CTA -->
   <section class="py-24 bg-forest relative overflow-hidden">

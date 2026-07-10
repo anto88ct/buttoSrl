@@ -157,6 +157,10 @@ export const translations = {
         body: 'Soluzioni integrate per l\'ambiente attraverso una gestione consapevole delle risorse e la cura meticolosa degli spazi pubblici siciliani.',
       },
       learnMore: 'Informazioni',
+      intro: {
+        h2: 'I Nostri Servizi',
+        body: "Quattro aree di competenza integrate, pensate per rispondere con precisione normativa alle esigenze di enti pubblici e imprese in tutta la Sicilia.",
+      },
       scrollytelling: {
         loading: 'Caricamento',
         scrollHint: 'Scorri per scoprire',
@@ -196,31 +200,31 @@ export const translations = {
         {
           title: 'Gestione Rifiuti',
           servizi: [
-            { title: 'Logistica Industriale',  desc: "Trasporto e smaltimento certificato di rifiuti speciali e pericolosi, con tracciabilità digitale completa e conformità normativa." },
-            { title: 'Economia Circolare',     desc: 'Consulenza strategica per la riduzione degli scarti e ottimizzazione del recupero materie prime in ottica Zero Waste.' },
-            { title: 'Raccolta Differenziata', desc: 'Pianificazione e gestione di sistemi di raccolta differenziata per comuni e aziende, con obiettivi superiori al 65%.' },
+            { title: 'Logistica Industriale',  desc: "Trasporto e smaltimento certificato di rifiuti speciali e pericolosi, con tracciabilità digitale completa e conformità normativa.", tags: ['Rifiuti speciali e pericolosi', 'Tracciabilità digitale'] },
+            { title: 'Economia Circolare',     desc: 'Consulenza strategica per la riduzione degli scarti e ottimizzazione del recupero materie prime in ottica Zero Waste.', tags: ['Riduzione degli scarti', 'Strategia Zero Waste'] },
+            { title: 'Raccolta Differenziata', desc: 'Pianificazione e gestione di sistemi di raccolta differenziata per comuni e aziende, con obiettivi superiori al 65%.', tags: ['Comuni e aziende', 'Oltre il 65% raccolto'] },
           ],
         },
         {
           title: 'Pulizie Enti Pubblici',
           servizi: [
-            { title: 'Patrimonio Istituzionale', desc: 'Sanificazione di sedi istituzionali, uffici comunali e archivi storici con prodotti a ridotto impatto ambientale.' },
-            { title: 'Istituti Scolastici',      desc: 'Pulizia e igienizzazione di scuole di ogni ordine e grado, con protocolli dedicati alla sicurezza dei bambini.' },
-            { title: 'Strutture Sanitarie',      desc: 'Sanificazione specializzata di strutture ospedaliere con metodologie certificate di controllo infezioni.' },
+            { title: 'Patrimonio Istituzionale', desc: 'Sanificazione di sedi istituzionali, uffici comunali e archivi storici con prodotti a ridotto impatto ambientale.', tags: ['Uffici comunali e archivi', 'Prodotti a basso impatto'] },
+            { title: 'Istituti Scolastici',      desc: 'Pulizia e igienizzazione di scuole di ogni ordine e grado, con protocolli dedicati alla sicurezza dei bambini.', tags: ['Ogni ordine e grado', 'Protocolli di sicurezza'] },
+            { title: 'Strutture Sanitarie',      desc: 'Sanificazione specializzata di strutture ospedaliere con metodologie certificate di controllo infezioni.', tags: ['Ambienti ospedalieri', 'Controllo infezioni certificato'] },
           ],
         },
         {
           title: 'Verde Urbano',
           servizi: [
-            { title: 'Spazi Pubblici',        desc: 'Gestione del verde pubblico, parchi gioco e aree ricreative per il decoro urbano e la sicurezza cittadina.' },
-            { title: 'Manutenzione Stradale', desc: 'Pulizia e decoro di viali, marciapiedi, aree pedonali e spazi condivisi nelle aree urbane e periurbane.' },
+            { title: 'Spazi Pubblici',        desc: 'Gestione del verde pubblico, parchi gioco e aree ricreative per il decoro urbano e la sicurezza cittadina.', tags: ['Parchi e aree gioco', 'Sicurezza cittadina'] },
+            { title: 'Manutenzione Stradale', desc: 'Pulizia e decoro di viali, marciapiedi, aree pedonali e spazi condivisi nelle aree urbane e periurbane.', tags: ['Viali e marciapiedi', 'Aree urbane e periurbane'] },
           ],
         },
         {
           title: 'Sostenibilità & Consulenza',
           servizi: [
-            { title: 'Audit Ambientale', desc: "Analisi dei processi aziendali per identificare opportunità di riduzione degli sprechi e miglioramento dell'efficienza ambientale." },
-            { title: 'Piano Zero Waste', desc: 'Strategie personalizzate per raggiungere obiettivi di zero conferimento in discarica attraverso recupero e riciclo.' },
+            { title: 'Audit Ambientale', desc: "Analisi dei processi aziendali per identificare opportunità di riduzione degli sprechi e miglioramento dell'efficienza ambientale.", tags: ['Analisi dei processi', 'Efficienza ambientale'] },
+            { title: 'Piano Zero Waste', desc: 'Strategie personalizzate per raggiungere obiettivi di zero conferimento in discarica attraverso recupero e riciclo.', tags: ['Zero conferimento in discarica', 'Recupero e riciclo'] },
           ],
         },
       ],
@@ -532,6 +536,10 @@ export const translations = {
         body: 'Integrated environmental solutions through conscious resource management and meticulous care of Sicilian public spaces.',
       },
       learnMore: 'Information',
+      intro: {
+        h2: 'Our Services',
+        body: 'Four integrated areas of expertise, built to meet the needs of public bodies and businesses across Sicily with regulatory precision.',
+      },
       scrollytelling: {
         loading: 'Loading',
         scrollHint: 'Scroll to discover',
@@ -571,31 +579,31 @@ export const translations = {
         {
           title: 'Waste Management',
           servizi: [
-            { title: 'Industrial Logistics',     desc: "Certified transport and disposal of special and hazardous waste, with full digital traceability and regulatory compliance." },
-            { title: 'Circular Economy',          desc: 'Strategic consulting to reduce waste and optimise raw material recovery in a Zero Waste approach.' },
-            { title: 'Separate Waste Collection', desc: 'Planning and management of separate collection systems for municipalities and businesses, with targets above 65%.' },
+            { title: 'Industrial Logistics',     desc: "Certified transport and disposal of special and hazardous waste, with full digital traceability and regulatory compliance.", tags: ['Special & hazardous waste', 'Digital traceability'] },
+            { title: 'Circular Economy',          desc: 'Strategic consulting to reduce waste and optimise raw material recovery in a Zero Waste approach.', tags: ['Waste reduction', 'Zero Waste strategy'] },
+            { title: 'Separate Waste Collection', desc: 'Planning and management of separate collection systems for municipalities and businesses, with targets above 65%.', tags: ['Municipalities & businesses', 'Over 65% collected'] },
           ],
         },
         {
           title: 'Public Entity Cleaning',
           servizi: [
-            { title: 'Institutional Heritage', desc: 'Sanitisation of institutional buildings, municipal offices and historical archives with low-impact products.' },
-            { title: 'Educational Institutes',  desc: 'Cleaning and sanitisation of schools of all levels, with protocols dedicated to children\'s safety.' },
-            { title: 'Healthcare Facilities',   desc: 'Specialised sanitisation of hospital facilities with certified infection control methodologies.' },
+            { title: 'Institutional Heritage', desc: 'Sanitisation of institutional buildings, municipal offices and historical archives with low-impact products.', tags: ['Municipal offices & archives', 'Low-impact products'] },
+            { title: 'Educational Institutes',  desc: 'Cleaning and sanitisation of schools of all levels, with protocols dedicated to children\'s safety.', tags: ['Schools of every level', 'Safety protocols'] },
+            { title: 'Healthcare Facilities',   desc: 'Specialised sanitisation of hospital facilities with certified infection control methodologies.', tags: ['Hospital environments', 'Certified infection control'] },
           ],
         },
         {
           title: 'Urban Green Spaces',
           servizi: [
-            { title: 'Public Spaces',       desc: 'Management of public green areas, playgrounds and recreational zones for urban decor and citizen safety.' },
-            { title: 'Road Maintenance',    desc: 'Cleaning and upkeep of avenues, pavements, pedestrian areas and shared spaces in urban and peri-urban zones.' },
+            { title: 'Public Spaces',       desc: 'Management of public green areas, playgrounds and recreational zones for urban decor and citizen safety.', tags: ['Parks & playgrounds', 'Citizen safety'] },
+            { title: 'Road Maintenance',    desc: 'Cleaning and upkeep of avenues, pavements, pedestrian areas and shared spaces in urban and peri-urban zones.', tags: ['Avenues & pavements', 'Urban & peri-urban areas'] },
           ],
         },
         {
           title: 'Sustainability & Consulting',
           servizi: [
-            { title: 'Environmental Audit', desc: "Analysis of business processes to identify opportunities for waste reduction and improvement of environmental efficiency." },
-            { title: 'Zero Waste Plan',     desc: 'Personalised strategies to achieve zero landfill objectives through recovery and recycling.' },
+            { title: 'Environmental Audit', desc: "Analysis of business processes to identify opportunities for waste reduction and improvement of environmental efficiency.", tags: ['Process analysis', 'Environmental efficiency'] },
+            { title: 'Zero Waste Plan',     desc: 'Personalised strategies to achieve zero landfill objectives through recovery and recycling.', tags: ['Zero landfill target', 'Recovery & recycling'] },
           ],
         },
       ],

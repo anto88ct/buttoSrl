@@ -26,14 +26,14 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100%;
   }
 
   body {
     @apply bg-ivory font-body text-ink antialiased;
     font-feature-settings: "kern" 1, "liga" 1;
-    overflow-x: hidden;
+    overflow-x: clip;
     max-width: 100%;
   }
 

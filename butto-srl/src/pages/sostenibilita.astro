@@ -161,15 +161,19 @@ const sdgs = [
         <div class="rule-ochre"></div>
         <h2 data-i18n="sostenibilita.pilastri.h2" class="display-sm text-ink italic mt-5">I 4 Pilastri Ambientali</h2>
       </div>
-      <div class="grid md:grid-cols-2 gap-px bg-linen border border-linen">
+      <div class="grid sm:grid-cols-2 gap-4">
         {pilastri.map(({ icon, title, desc }, i) => (
-          <div class={`group bg-ivory p-10 hover:bg-forest transition-colors duration-500 flex flex-col gap-6 cursor-default reveal delay-${(i % 4) + 1}`}>
-            <div class="w-11 h-11 border border-linen group-hover:border-ochre/30 flex items-center justify-center transition-colors">
-              <i class={`fa-solid ${icon} text-lg text-ochre/60 group-hover:text-ochre transition-colors`}></i>
-            </div>
-            <div>
-              <h3 data-i18n={`sostenibilita.pilastri.items.${i}.title`} class="font-serif text-2xl italic text-ink group-hover:text-ivory transition-colors mb-3">{title}</h3>
-              <p data-i18n={`sostenibilita.pilastri.items.${i}.desc`} class="font-body text-muted group-hover:text-ivory/55 text-sm leading-relaxed transition-colors">{desc}</p>
+          <div class={`group relative overflow-hidden bg-ivory border border-linen/80 hover:border-forest hover:bg-forest shadow-[0_8px_40px_rgba(22,44,27,0.08),0_2px_8px_rgba(22,44,27,0.05)] hover:shadow-[0_22px_60px_rgba(22,44,27,0.24)] transition-[background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default reveal delay-${(i % 4) + 1}`}>
+            <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] bg-ochre origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></span>
+            <div class="flex flex-col gap-6 p-7 lg:p-9">
+              <div class="flex items-center justify-between pb-5 border-b border-linen group-hover:border-ivory/15 transition-colors duration-500">
+                <span class="font-condensed font-700 text-[0.72rem] uppercase tracking-[0.22em] text-muted group-hover:text-ochre transition-colors duration-500">N°&thinsp;{String(i + 1).padStart(2, '0')}</span>
+                <i class={`fa-solid ${icon} text-[1.05rem] text-ochre group-hover:text-ochre-light transition-colors duration-500`}></i>
+              </div>
+              <div class="space-y-3">
+                <h3 data-i18n={`sostenibilita.pilastri.items.${i}.title`} class="font-serif text-2xl italic text-ink group-hover:text-ivory transition-colors duration-500 leading-tight text-balance">{title}</h3>
+                <p data-i18n={`sostenibilita.pilastri.items.${i}.desc`} class="font-body text-ink/75 group-hover:text-ivory/65 text-sm leading-relaxed transition-colors duration-500 text-pretty">{desc}</p>
+              </div>
             </div>
           </div>
         ))}

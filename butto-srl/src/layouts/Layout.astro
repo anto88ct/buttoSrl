@@ -87,7 +87,7 @@ const fullTitle = title === 'Home'
     <title>{fullTitle}</title>
   </head>
 
-  <body class="overflow-x-hidden">
+  <body class="overflow-x-clip">
     <!-- Scroll progress -->
     <div id="scroll-progress"></div>
 
@@ -181,6 +181,13 @@ const fullTitle = title === 'Home'
       window.addEventListener('scroll', () => {
         header.classList.toggle('nav-scrolled', window.scrollY > 50);
       }, { passive: true });
+
+      /* ── Header height var (pinned full-screen sections dock below it) ── */
+      const setHeaderH = () => {
+        document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+      };
+      setHeaderH();
+      new ResizeObserver(setHeaderH).observe(header);
 
       /* ── Mobile menu ── */
       document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
