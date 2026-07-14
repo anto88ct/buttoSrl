@@ -27,27 +27,33 @@ function asTrimmedString(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
 }
 
-export function validateContactSubmission(payload: ContactFormPayload): ValidationResult {
-  if (asTrimmedString(payload.website) !== '') {
+export function validateContactSubmission(payload: unknown): ValidationResult {
+  if (typeof payload !== 'object' || payload === null) {
+    return { kind: 'invalid', error: 'Richiesta non valida.' };
+  }
+
+  const data = payload as ContactFormPayload;
+
+  if (asTrimmedString(data.website) !== '') {
     return { kind: 'honeypot' };
   }
 
-  const name = asTrimmedString(payload.name);
+  const name = asTrimmedString(data.name);
   if (!name) {
     return { kind: 'invalid', error: 'Il nome è obbligatorio.' };
   }
 
-  const email = asTrimmedString(payload.email);
+  const email = asTrimmedString(data.email);
   if (!EMAIL_PATTERN.test(email)) {
     return { kind: 'invalid', error: 'Inserisci un indirizzo email valido.' };
   }
 
-  const message = asTrimmedString(payload.message);
+  const message = asTrimmedString(data.message);
   if (!message) {
     return { kind: 'invalid', error: 'Il messaggio è obbligatorio.' };
   }
 
-  if (payload.privacy !== true) {
+  if (data.privacy !== true) {
     return { kind: 'invalid', error: 'Devi accettare il trattamento dei dati personali.' };
   }
 
@@ -57,8 +63,8 @@ export function validateContactSubmission(payload: ContactFormPayload): Validati
       name,
       email,
       message,
-      subject: asTrimmedString(payload.subject) || 'Non specificato',
-      company: asTrimmedString(payload.company) || 'Non specificata',
+      subject: asTrimmedString(data.subject) || 'Non specificato',
+      company: asTrimmedString(data.company) || 'Non specificata',
     },
   };
 }

@@ -31,6 +31,11 @@ describe('validateContactSubmission', () => {
     expect(result).toEqual({ kind: 'honeypot' });
   });
 
+  it('rejects a non-object payload', () => {
+    expect(validateContactSubmission(null)).toEqual({ kind: 'invalid', error: 'Richiesta non valida.' });
+    expect(validateContactSubmission(undefined)).toEqual({ kind: 'invalid', error: 'Richiesta non valida.' });
+  });
+
   it('rejects a missing name', () => {
     const result = validateContactSubmission({ ...validPayload, name: '  ' });
     expect(result).toEqual({ kind: 'invalid', error: 'Il nome è obbligatorio.' });
