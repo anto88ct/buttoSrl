@@ -255,7 +255,17 @@ const temi = [
                 Risponderemo entro 24 ore lavorative.
               </p>
 
-              <form action="#" method="POST" class="space-y-6">
+              <form id="contact-form" method="POST" class="space-y-6">
+                <div class="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
+                  <label for="form-website">Lascia vuoto questo campo</label>
+                  <input
+                    id="form-website"
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                  />
+                </div>
                 <div class="grid md:grid-cols-2 gap-5">
                   <div class="space-y-2">
                     <label
@@ -398,11 +408,20 @@ const temi = [
                   </label>
                 </div>
 
+                <div
+                  id="contact-form-status"
+                  role="status"
+                  aria-live="polite"
+                  class="hidden font-body text-sm px-4 py-3 border"
+                >
+                </div>
+
                 <button
                   type="submit"
+                  id="contact-form-submit"
                   class="btn-primary w-full justify-center text-base py-5"
                 >
-                  <span data-i18n="contatti.form.submit">Invia Messaggio</span>
+                  <span id="contact-form-submit-label" data-i18n="contatti.form.submit">Invia Messaggio</span>
                   <i class="fa-solid fa-paper-plane text-[11px]"></i>
                 </button>
               </form>
@@ -470,4 +489,82 @@ const temi = [
       </a>
     </div>
   </section>
+
+  <script>
+    import { translations } from '../i18n/translations';
+
+    type Lang = keyof typeof translations;
+
+    function resolveKey(obj: any, dotPath: string): string | undefined {
+      const val = dotPath.split('.').reduce((o, k) => o?.[k], obj);
+      return typeof val === 'string' ? val : undefined;
+    }
+
+    function currentLang(): Lang {
+      return (localStorage.getItem('lang') as Lang) || 'it';
+    }
+
+    function t(key: string): string {
+      const dict = translations[currentLang()] ?? translations.it;
+      return resolveKey(dict, key) ?? key;
+    }
+
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const statusEl = document.getElementById('contact-form-status');
+    const submitLabel = document.getElementById('contact-form-submit-label');
+    const submitBtn = document.getElementById('contact-form-submit') as HTMLButtonElement | null;
+
+    function showStatus(message: string, variant: 'success' | 'error') {
+      if (!statusEl) return;
+      statusEl.textContent = message;
+      statusEl.classList.remove('hidden', 'border-forest-soft', 'text-forest-soft', 'border-sienna', 'text-sienna');
+      statusEl.classList.add(
+        variant === 'success' ? 'border-forest-soft' : 'border-sienna',
+        variant === 'success' ? 'text-forest-soft' : 'text-sienna'
+      );
+    }
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get('name') ?? ''),
+        email: String(formData.get('email') ?? ''),
+        subject: String(formData.get('subject') ?? ''),
+        company: String(formData.get('company') ?? ''),
+        message: String(formData.get('message') ?? ''),
+        privacy: formData.get('privacy') === 'on',
+        website: String(formData.get('website') ?? ''),
+      };
+
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitLabel) {
+        submitLabel.dataset.originalText = submitLabel.dataset.originalText ?? submitLabel.textContent ?? '';
+        submitLabel.textContent = t('contatti.form.sending');
+      }
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const json = await res.json();
+
+        if (json.ok) {
+          showStatus(t('contatti.form.success'), 'success');
+          form.reset();
+        } else {
+          showStatus(json.error || t('contatti.form.error'), 'error');
+        }
+      } catch {
+        showStatus(t('contatti.form.error'), 'error');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = submitLabel.dataset.originalText ?? 'Invia Messaggio';
+      }
+    });
+  </script>
 </Layout>

@@ -362,6 +362,9 @@ export const translations = {
         messaggio: 'Messaggio',
         privacy: 'Acconsento al trattamento dei dati personali ai sensi del',
         submit: 'Invia Messaggio',
+        sending: 'Invio in corso…',
+        success: 'Messaggio inviato! Ti risponderemo entro 24 ore lavorative.',
+        error: 'Invio non riuscito. Riprova o scrivi a buttosrl@gmail.com.',
         temi: [
           'Richiesta Informazioni Generali',
           'Preventivo Servizi Ambientali',
@@ -741,6 +744,9 @@ export const translations = {
         messaggio: 'Message',
         privacy: 'I consent to the processing of personal data pursuant to the',
         submit: 'Send Message',
+        sending: 'Sending…',
+        success: 'Message sent! We will reply within 24 working hours.',
+        error: 'Sending failed. Please try again or email buttosrl@gmail.com.',
         temi: [
           'General Information Request',
           'Environmental Services Quote',
