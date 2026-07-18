@@ -557,7 +557,7 @@ const temi = [
           showStatus(t('contatti.form.success'), 'success');
           form.reset();
         } else {
-          showStatus(json.error || t('contatti.form.error'), 'error');
+          showStatus(t('contatti.form.error'), 'error');
         }
       } catch {
         showStatus(t('contatti.form.error'), 'error');

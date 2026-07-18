@@ -2,3 +2,4 @@ butto-srl/node_modules
 .claude
 ./stitch_carmelo_butt_srl
 butto-srl/.env
+butto-srl/.vercel
