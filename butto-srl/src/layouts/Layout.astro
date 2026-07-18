@@ -8,6 +8,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -15,12 +16,20 @@ const {
   description = 'Buttò S.r.l. – Eccellenza nella gestione integrata dei servizi ambientali ad Assoro (EN). Smaltimento rifiuti, appalti pubblici di pulizia e sostenibilità circolare.',
   ogImage = '/og-default.jpg',  // static file in public/
   canonicalURL = Astro.url.pathname,
+  noindex = false,
 } = Astro.props;
 
 const siteURL = 'https://butto-srl.it';
 const fullTitle = title === 'Home'
   ? 'Buttò S.r.l. | Eccellenza nella Gestione Ambientale'
   : `${title} | Buttò S.r.l.`;
+
+const breadcrumbItems = title === 'Home'
+  ? []
+  : [
+      { name: 'Home', url: `${siteURL}/` },
+      { name: title, url: `${siteURL}${canonicalURL}` },
+    ];
 ---
 
 <!doctype html>
@@ -29,7 +38,7 @@ const fullTitle = title === 'Home'
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${siteURL}${ogImage}`} />
@@ -41,17 +50,18 @@ const fullTitle = title === 'Home'
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${siteURL}${ogImage}`} />
     <link rel="canonical" href={`${siteURL}${canonicalURL}`} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/logo.ico" />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
       "name": "Buttò S.r.l.",
+      "legalName": "Buttò Carmelo S.r.l.",
       "description": "Dal 1978, leader nella gestione integrata dei servizi ambientali ad Assoro (EN). Smaltimento rifiuti, appalti pubblici di pulizia, sostenibilità circolare.",
       "url": siteURL,
       "logo": `${siteURL}/logo.png`,
       "image": `${siteURL}${ogImage}`,
       "telephone": "+39 375 927 8085",
-      "email": "servizi.butto@gmail.com",
+      "email": "buttosrl@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via S. Giuseppe N°42",
@@ -72,6 +82,18 @@ const fullTitle = title === 'Home'
       },
       "sameAs": []
     })} />
+    {breadcrumbItems.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": breadcrumbItems.map((item, i) => ({
+          "@type": "ListItem",
+          "position": i + 1,
+          "name": item.name,
+          "item": item.url,
+        })),
+      })} />
+    )}
     <!-- i18n: apply stored language before paint to avoid FOUC -->
     <script is:inline>
       (function() {

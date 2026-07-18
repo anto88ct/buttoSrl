@@ -1,0 +1,89 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sections = [
+  {
+    title: '1. Titolare del Trattamento',
+    body: [
+      'Il Titolare del trattamento dei dati raccolti tramite questo sito è Buttò Carmelo S.r.l., con sede legale in Via S. Giuseppe N°42, 94010 Assoro (EN) — P.IVA e C.F. 01208350866.',
+      'Contatti del Titolare: email buttosrl@gmail.com · PEC impresabutto@pec.it · telefono +39 375 927 8085.',
+    ],
+  },
+  {
+    title: '2. Dati Raccolti e Finalità del Trattamento',
+    body: [
+      "Dati forniti volontariamente tramite il modulo di contatto (nome, email, azienda/ente se indicato, oggetto e testo del messaggio): raccolti solo quando l'utente compila e invia il modulo nella pagina Contatti, al fine di rispondere a richieste di informazioni, preventivi, segnalazioni o collaborazioni. La base giuridica è l'esecuzione di misure precontrattuali richieste dall'interessato (art. 6.1.b GDPR) e il consenso esplicito prestato tramite l'apposita casella di spunta (art. 6.1.a GDPR).",
+      'Dati di navigazione: come per la generalità dei siti web, il server che ospita il sito può registrare log tecnici (indirizzo IP, tipo di browser, pagine visitate, data e ora) per finalità di sicurezza e corretto funzionamento tecnico. Questo sito non utilizza cookie di profilazione né strumenti di analisi statistica di terze parti (es. Google Analytics).',
+      'Preferenza di lingua: la lingua selezionata dall\'utente viene salvata localmente nel browser (localStorage) per ricordarne la scelta tra una visita e l\'altra. Questo dato resta sul dispositivo dell\'utente, non viene trasmesso al Titolare né condiviso con terzi.',
+    ],
+  },
+  {
+    title: '3. Servizi di Terze Parti',
+    body: [
+      'Per il corretto funzionamento del sito vengono caricate risorse da fornitori terzi: Google Fonts e Font Awesome (caratteri tipografici e icone) e Google Maps (mappa interattiva della sede operativa, pagina Contatti). Il caricamento di queste risorse può comportare la trasmissione dell\'indirizzo IP del visitatore ai rispettivi fornitori, secondo le loro informative privacy.',
+    ],
+  },
+  {
+    title: '4. Conservazione dei Dati',
+    body: [
+      "I dati raccolti tramite il modulo di contatto sono conservati per il tempo necessario a gestire la richiesta e per l'eventuale instaurazione di un rapporto contrattuale, e comunque non oltre 24 mesi dall'ultimo contatto, salvi diversi obblighi di legge.",
+    ],
+  },
+  {
+    title: '5. Comunicazione e Diffusione dei Dati',
+    body: [
+      "I dati personali non vengono diffusi e non sono comunicati a terzi, salvo quando necessario per obblighi di legge o per l'erogazione tecnica del servizio (es. fornitore di hosting o posta elettronica), che agiscono in qualità di responsabili del trattamento ove applicabile.",
+    ],
+  },
+  {
+    title: "6. Diritti dell'Interessato",
+    body: [
+      "Ai sensi degli artt. 15-22 del Regolamento UE 2016/679, l'interessato ha diritto di richiedere in qualsiasi momento l'accesso ai propri dati, la rettifica, la cancellazione, la limitazione del trattamento, la portabilità dei dati, nonché di opporsi al trattamento, scrivendo a buttosrl@gmail.com o alla PEC impresabutto@pec.it.",
+      "È inoltre possibile proporre reclamo all'Autorità Garante per la Protezione dei Dati Personali (www.garanteprivacy.it) qualora si ritenga che il trattamento violi la normativa vigente.",
+    ],
+  },
+  {
+    title: "7. Modifiche alla Presente Informativa",
+    body: [
+      "Il Titolare si riserva il diritto di aggiornare la presente informativa in caso di modifiche normative o dei servizi offerti dal sito. Ultimo aggiornamento: 15 luglio 2026.",
+    ],
+  },
+];
+---
+
+<Layout
+  title="Privacy Policy"
+  description="Informativa sulla privacy di Buttò S.r.l. ai sensi del Regolamento UE 2016/679 (GDPR): titolare del trattamento, dati raccolti, finalità e diritti dell'interessato."
+>
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="relative py-32 bg-ivory dot-grid overflow-hidden">
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
+      <span class="font-condensed font-800 text-[20vw] text-ink/[0.04] leading-none tracking-tighter">GDPR</span>
+    </div>
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <span class="overline text-ochre mb-5 block reveal">Trattamento Dati Personali</span>
+      <h1 class="display-xl text-ink reveal delay-1">
+        Informativa sulla <em class="text-forest-soft not-italic">Privacy</em>
+      </h1>
+      <p class="font-body text-muted text-lg max-w-2xl leading-relaxed mt-8 reveal delay-2">
+        Ai sensi degli artt. 13-14 del Regolamento UE 2016/679 (GDPR), Buttò Carmelo S.r.l. informa gli utenti del sito butto-srl.it sulle modalità di trattamento dei loro dati personali.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CONTENT ══════════════════════ -->
+  <section class="py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-6 lg:px-14 space-y-14">
+      {sections.map(({ title, body }) => (
+        <div class="reveal">
+          <h2 class="font-serif text-2xl italic text-ink mb-4">{title}</h2>
+          <div class="space-y-4">
+            {body.map((p) => (
+              <p class="font-body text-muted leading-relaxed">{p}</p>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

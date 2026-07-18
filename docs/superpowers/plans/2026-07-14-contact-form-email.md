@@ -395,19 +395,24 @@ git commit -m "feat: add branded HTML email template for contact form"
 
 - [ ] **Step 1: Install the Vercel adapter**
 
-Run: `npm install @astrojs/vercel`
+Run: `npm install @astrojs/vercel@^7.8.2`
+
+(Pin the 7.x line specifically — `@astrojs/vercel` v8+ requires Astro ^5, but this project is pinned to Astro ^4.16. Only 7.x declares `peerDependencies: { astro: "^4.2.0" }`. Verify before installing: `npm view @astrojs/vercel@7.8.2 peerDependencies` should print `{ astro: '^4.2.0' }`.)
 
 - [ ] **Step 2: Update the Astro config**
 
-Modify `butto-srl/astro.config.mjs` — replace the whole file:
+Note: the live `butto-srl/astro.config.mjs` has diverged from what this plan originally assumed — it now also imports and registers `@astrojs/sitemap` (`sitemap()`), added outside this plan (uncommitted, in-progress work already present in the working tree; `@astrojs/sitemap` is also already in `package.json` dependencies). `public/robots.txt` references the sitemap it generates. That integration is unrelated to this feature and must be preserved — do not drop it. Layer hybrid output + the Vercel adapter on top of the current file instead of replacing it wholesale. If the live file differs from the snippet below in some other way not anticipated here, stop and ask rather than guessing which parts to keep.
+
+Modify `butto-srl/astro.config.mjs` to end up as:
 
 ```js
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel/serverless';
 
 export default defineConfig({
-  integrations: [tailwind()],
+  integrations: [tailwind(), sitemap()],
   site: 'https://butto-srl.it',
   output: 'hybrid',
   adapter: vercel(),
@@ -807,7 +812,7 @@ Modify the same file — right before the final `</Layout>` closing tag, add:
 - [ ] **Step 6: Verify the build still succeeds**
 
 Run: `npm run build`
-Expected: exit code 0, no TypeScript/Astro compile errors.
+Expected: exit code 0, no TypeScript/Astro compile errors. (Since Task 3, output goes to `butto-srl/.vercel/output/` via the Vercel adapter, not `dist/` — this step only needs the exit code, no file spot-check.)
 
 - [ ] **Step 7: Commit**
 
@@ -861,7 +866,7 @@ Expected: red-bordered status message "Invio non riuscito. Riprova o scrivi a bu
 - [ ] **Step 6: Full site build**
 
 Run: `npm run build`
-Expected: exit code 0; spot-check that `dist/contatti/index.html` (or the hybrid-mode equivalent output) still contains the full page markup — the rest of the site is unaffected by the new API route.
+Expected: exit code 0. Since Task 3, the Vercel adapter is active and the build no longer writes to `dist/` at all — `dist/` is stale leftover output from before Task 3 and must not be used to verify anything. Spot-check `butto-srl/.vercel/output/static/contatti/index.html` instead (confirmed path — this is where the prerendered page actually lands) and confirm it still contains the full page markup — the rest of the site is unaffected by the new API route.
 
 - [ ] **Step 7: Final commit (only if Step 5 required restoring a file)**
 

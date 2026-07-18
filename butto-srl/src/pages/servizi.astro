@@ -12,7 +12,7 @@ const categorie = [
     dark: true,
     servizi: [
       { icon: 'fa-industry',      title: 'Logistica Industriale',   bento: 'lg:col-span-3 lg:row-span-2', desc: "Trasporto e smaltimento certificato di rifiuti speciali e pericolosi, con tracciabilità digitale completa e conformità normativa.",  tags: ['Rifiuti speciali e pericolosi', 'Tracciabilità digitale'], img: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=900&q=75' },
-      { icon: 'fa-arrows-rotate', title: 'Economia Circolare',      bento: 'lg:col-span-2',               desc: 'Consulenza strategica per la riduzione degli scarti e ottimizzazione del recupero materie prime in ottica Zero Waste.',              tags: ['Riduzione degli scarti', 'Strategia Zero Waste'], img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-biohazard',     title: 'Smaltimento Rifiuti Speciali', bento: 'lg:col-span-2',          desc: 'Ritiro e smaltimento a norma di rifiuti speciali pericolosi e non pericolosi, con gestione documentale e formulari conformi.',      tags: ['Pericolosi e non pericolosi', 'Formulari conformi'], img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=900&q=75' },
       { icon: 'fa-truck',         title: 'Raccolta Differenziata',  bento: 'lg:col-span-2',               desc: 'Pianificazione e gestione di sistemi di raccolta differenziata per comuni e aziende, con obiettivi superiori al 65%.',              tags: ['Comuni e aziende', 'Oltre il 65% raccolto'], img: 'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=900&q=75' },
     ],
   },
@@ -42,7 +42,7 @@ const categorie = [
     ],
   },
   {
-    id: 'economia-circolare',
+    id: 'smaltimento-rifiuti-speciali',
     num: '04',
     icon: 'fa-earth-europe',
     title: 'Sostenibilità & Consulenza',
@@ -74,8 +74,9 @@ const faqs = [
 ---
 
 <Layout
-  title="Servizi"
-  description="I servizi di Buttò S.r.l.: gestione rifiuti speciali, pulizie enti pubblici, verde urbano ed economia circolare per il territorio siciliano."
+  title="Servizi Ambientali e Gestione Rifiuti"
+  description="I servizi di Buttò S.r.l.: gestione e smaltimento rifiuti speciali, pulizie enti pubblici e verde urbano per il territorio siciliano."
+  ogImage="/garbage_cleaning.jpg"
 >
 
   <!-- ══════════════════════ HERO ══════════════════════ -->
@@ -211,10 +212,12 @@ const faqs = [
               style={`transition-delay: ${si * 0.1}s`}
             >
               {/* Background image layer — clips to card via overflow-hidden on parent */}
-              <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+              <div class="absolute inset-0 pointer-events-none">
                 <div
                   class="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 scale-100 group-hover:scale-110 bento-bg-img"
                   style={`background-image: url('${img}');`}
+                  role="img"
+                  aria-label={sTitle}
                 ></div>
               </div>
               {/* Gradient overlay — stronger at bottom for text legibility */}
@@ -369,6 +372,19 @@ const faqs = [
 
     </div>
   </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map(({ q, a }) => ({
+      "@type": "Question",
+      "name": q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": a,
+      },
+    })),
+  })} />
 
 </Layout>
 

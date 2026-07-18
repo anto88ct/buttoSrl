@@ -1,0 +1,4 @@
+# Secrets — MAI committare le chiavi API
+.env
+.env.*
+!.env.example

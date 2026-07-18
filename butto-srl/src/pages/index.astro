@@ -1,16 +1,29 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import GoogleBusiness from '../components/GoogleBusiness.astro';
 import { Image } from 'astro:assets';
-import garbageCleaning from '../assets/garbage-cleaning.jpg';
 import leafeHeart from '../assets/leafe-heart.jpg';
-import garbageStock from '../assets/garbage-stock.jpg';
-import cleaning from '../assets/cleaning.jpg';
+import clientLogo1 from '../assets/clienti/2018.jpeg';
+import clientLogo2 from '../assets/clienti/Autogrill-logo-cuadrado.png';
+import clientLogo3 from '../assets/clienti/Decathlon-Logo.png';
+import clientLogo4 from '../assets/clienti/images.png';
+import clientLogo5 from '../assets/clienti/logoDesk.png';
+import clientLogo6 from '../assets/clienti/logo-gruppoarena-60e7224024a4b.jpeg';
+
+const clientLogos = [
+  { src: clientLogo1, big: true },
+  { src: clientLogo2, big: true },
+  { src: clientLogo3 },
+  { src: clientLogo4 },
+  { src: clientLogo5 },
+  { src: clientLogo6 },
+];
 
 const services = [
   { num: '01', icon: 'fa-recycle',      title: 'Gestione Rifiuti',      desc: 'Trasporto e smaltimento certificato con tracciabilità digitale e piena conformità normativa.',   href: '/servizi#gestione-rifiuti' },
   { num: '02', icon: 'fa-broom',        title: 'Pulizie Enti Pubblici',  desc: 'Sanificazione di sedi istituzionali, scuole e ospedali con protocolli a impatto minimo.',       href: '/servizi#pulizie-pubbliche' },
   { num: '03', icon: 'fa-tree',         title: 'Verde Urbano',           desc: 'Manutenzione di parchi, giardini pubblici e aree verdi per il decoro dei comuni siciliani.',    href: '/servizi#verde-urbano' },
-  { num: '04', icon: 'fa-arrows-rotate',title: 'Economia Circolare',     desc: 'Consulenza Zero Waste per ottimizzare il recupero delle materie prime e azzerare gli sprechi.', href: '/servizi#economia-circolare' },
+  { num: '04', icon: 'fa-biohazard',     title: 'Smaltimento Rifiuti Speciali', desc: 'Trasporto e smaltimento certificato di rifiuti speciali e pericolosi con tracciabilità digitale completa.', href: '/servizi#smaltimento-rifiuti-speciali' },
 ];
 
 const ticker = [
@@ -23,27 +36,6 @@ const ticker = [
   '— Flotta a Basse Emissioni',
 ];
 
-const clientiA = [
-  { name: 'Comune di Assoro',              tipo: 'Comune' },
-  { name: 'Provincia di Enna',             tipo: 'Ente Provinciale' },
-  { name: 'Comune di Leonforte',           tipo: 'Comune' },
-  { name: 'Comune di Agira',               tipo: 'Comune' },
-  { name: 'ASP Enna',                      tipo: 'Sanità' },
-  { name: 'Comune di Troina',              tipo: 'Comune' },
-  { name: 'Ente Parco dei Nebrodi',        tipo: 'Ente Pubblico' },
-  { name: 'Comune di Nicosia',             tipo: 'Comune' },
-];
-
-const clientiB = [
-  { name: 'Comune di Piazza Armerina',     tipo: 'Comune' },
-  { name: 'Istituto Comprensivo Assoro',   tipo: 'Scuola' },
-  { name: 'Comune di Calascibetta',        tipo: 'Comune' },
-  { name: 'Gestioni Municipali S.p.A.',    tipo: 'Partecipata' },
-  { name: 'Comune di Regalbuto',           tipo: 'Comune' },
-  { name: 'Comune di Gagliano C.F.',       tipo: 'Comune' },
-  { name: 'Liceo Scientifico E. Medi',     tipo: 'Scuola' },
-  { name: 'Comune di Valguarnera',         tipo: 'Comune' },
-];
 ---
 
 <Layout
@@ -70,68 +62,46 @@ const clientiB = [
       <div class="absolute top-0 right-1/4 w-px h-2/3 bg-gradient-to-b from-white/5 to-transparent"></div>
     </div>
 
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 w-full pt-0 pb-6 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-8 items-center">
-
-        <div class="space-y-3">
-          <div class="reveal">
-            <span data-i18n="home.hero.eyebrow" class="overline text-ochre tracking-[0.28em]">
-              <i class="fa-solid fa-circle-dot text-[6px] align-middle mr-2"></i>
-              Assoro · Sicilia · Dal 1978
-            </span>
-          </div>
-
-          <div class="space-y-1 reveal delay-1">
-            <h1 data-i18n="home.hero.h1l1" class="display-xl text-ivory">Custodi</h1>
-            <h1 data-i18n-html="home.hero.h1l2html" class="display-xl text-ivory italic">dell'<span class="text-sage">Ambiente</span>,</h1>
-          </div>
-
-          <p data-i18n="home.hero.body" class="font-body text-ivory/50 text-base leading-relaxed max-w-lg reveal delay-2">
-            Leader nella gestione integrata delle risorse ambientali nel territorio siciliano. Trasformiamo le sfide ecologiche in soluzioni sostenibili per oltre 120 comuni.
-          </p>
-
-          <div class="flex flex-wrap gap-4 reveal delay-3">
-            <a href="/servizi" class="btn-primary">
-              <span data-i18n="home.hero.cta1">I Nostri Servizi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-            </a>
-            <a href="/chi-siamo" class="btn-ghost-dark">
-              <span data-i18n="home.hero.cta2">La Nostra Storia</span>
-            </a>
-          </div>
-
-          <div class="flex flex-wrap gap-6 pt-3 border-t border-white/8 reveal delay-4">
-            {[
-              { icon: 'fa-certificate', text: 'ISO 14001' },
-              { icon: 'fa-shield-halved', text: 'Albo Gestori' },
-              { icon: 'fa-truck', text: 'Flotta ECO' },
-            ].map(({ icon, text }) => (
-              <span class="flex items-center gap-2 font-condensed font-600 text-[0.7rem] text-ivory/35 uppercase tracking-[0.12em]">
-                <i class={`fa-solid ${icon} text-ochre/60 text-xs`}></i>
-                {text}
-              </span>
-            ))}
-          </div>
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 w-full -mt-16 pb-6 relative z-10">
+      <div class="flex flex-col items-start text-left gap-3 max-w-4xl">
+        <div class="reveal">
+          <span data-i18n="home.hero.eyebrow" class="overline text-ochre tracking-[0.28em]">
+            <i class="fa-solid fa-circle-dot text-[6px] align-middle mr-2"></i>
+            Assoro · Sicilia · Dal 1978
+          </span>
         </div>
 
-        <div class="reveal-right delay-2">
-          <div class="relative">
-            <div class="absolute -top-4 -right-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
+        <div class="space-y-1 reveal delay-1">
+          <h1 class="display-xl text-ivory text-5xl md:text-7xl lg:text-8xl leading-[1.02]">
+            <span data-i18n="home.hero.h1l1" class="block">Soluzioni Concrete</span>
+            <span data-i18n-html="home.hero.h1l2html" class="block italic">per l'<span class="text-sage">Ambiente</span> e il Territorio.</span>
+          </h1>
+        </div>
 
-            <div class="img-zoom aspect-[3/2] bg-forest-mid relative max-h-[55vh]">
-              <Image src={garbageCleaning} alt="Flotta Buttò S.r.l." class="w-full h-full object-cover" loading="eager" fetchpriority="high" width={1200} />
-              <div class="absolute inset-0 bg-gradient-to-t from-forest/60 to-transparent"></div>
-            </div>
+        <p data-i18n="home.hero.body" class="font-body text-ivory/50 text-base leading-relaxed max-w-lg reveal delay-2">
+          Da Assoro, operiamo in tutta la Sicilia offrendo soluzioni certificate per lo smaltimento dei rifiuti, la manutenzione del verde urbano e l'igiene pubblica. Partner affidabile per il decoro e la sostenibilità del territorio.
+        </p>
 
-            <div class="absolute -bottom-6 -left-6 bg-ochre text-forest px-6 py-4 float z-10">
-              <p data-i18n="home.hero.co2Label" class="overline text-forest/60 mb-1">CO₂ Risparmiata</p>
-              <p class="font-display text-3xl leading-none">4.200 <span class="text-base font-body font-600">Ton</span></p>
-            </div>
+        <div class="flex flex-wrap justify-start gap-4 reveal delay-3">
+          <a href="/servizi" class="btn-primary text-base px-8 py-4">
+            <span data-i18n="home.hero.cta1">I Nostri Servizi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+          <a href="/chi-siamo" class="btn-ghost-dark text-base px-8 py-4">
+            <span data-i18n="home.hero.cta2">La Nostra Storia</span>
+          </a>
+        </div>
 
-            <div class="absolute -top-5 -right-5 bg-forest-mid border border-ochre/30 text-ivory px-5 py-4 float-alt z-10">
-              <p data-i18n="home.hero.yearLabel" class="overline text-ivory/40 mb-1">Fondazione</p>
-              <p class="font-display text-3xl leading-none">1978</p>
-            </div>
-          </div>
+        <div class="flex flex-wrap justify-start gap-6 pt-3 border-t border-white/8 reveal delay-4">
+          {[
+            { icon: 'fa-certificate', text: 'ISO 14001' },
+            { icon: 'fa-shield-halved', text: 'Albo Gestori' },
+            { icon: 'fa-truck', text: 'Flotta ECO' },
+          ].map(({ icon, text }) => (
+            <span class="flex items-center gap-2 font-condensed font-600 text-[0.7rem] text-ivory/35 uppercase tracking-[0.12em]">
+              <i class={`fa-solid ${icon} text-ochre/60 text-xs`}></i>
+              {text}
+            </span>
+          ))}
         </div>
       </div>
     </div>
@@ -291,6 +261,28 @@ const clientiB = [
     </script>
   </section>
 
+  <!-- ══════════════════════ CHI HA SCELTO BUTTÒ ══════════════════════ -->
+  <section class="py-20 bg-white relative overflow-hidden border-b border-linen">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mb-12 text-center reveal">
+      <span data-i18n="home.trustedBy.eyebrow" class="overline text-ochre">Fiducia Consolidata</span>
+      <div class="rule-ochre mx-auto"></div>
+      <h2 data-i18n-html="home.trustedBy.h2html" class="display-sm text-ink mt-5">
+        Chi ha scelto<br/>
+        <em class="text-forest-soft not-italic">Buttò S.r.l.</em>
+      </h2>
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="flex flex-wrap items-center justify-center gap-x-16 gap-y-10">
+        {clientLogos.map(({ src, big }, i) => (
+          <div class={`${big ? 'h-56 w-96' : 'h-32 w-56'} flex items-center justify-center reveal-scale delay-${(i % 5) + 1} transition-transform duration-500 hover:-translate-y-2 hover:scale-105`}>
+            <Image src={src} alt="Logo cliente" class="max-h-full max-w-full object-contain" width={400} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ══════════════════════ FOUNDER ══════════════════════ -->
   <section class="py-28 bg-parchment relative overflow-hidden">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
@@ -417,158 +409,8 @@ const clientiB = [
     </div>
   </section>
 
-  <!-- ══════════════════════ NEWS TEASER ══════════════════════ -->
-  <section class="py-28 bg-ivory">
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
-
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-16">
-        <div class="reveal">
-          <span data-i18n="home.news.eyebrow" class="overline text-ochre">L'Archivio Organico</span>
-          <div class="rule-ochre"></div>
-          <h2 data-i18n-html="home.news.h2html" class="display-lg text-ink mt-5">
-            Cronache della<br/>
-            <em class="text-forest-soft not-italic">Sostenibilità</em>
-          </h2>
-        </div>
-        <a href="/news" class="font-condensed font-700 text-[0.75rem] uppercase tracking-[0.16em] text-ochre flex items-center gap-2 hover:gap-4 transition-all duration-300 self-start reveal delay-2">
-          <span data-i18n="home.news.viewAll">Tutte le news</span> <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-
-      <div class="grid md:grid-cols-12 gap-px bg-linen">
-
-        <article class="md:col-span-5 bg-forest grain group cursor-pointer">
-          <div class="img-zoom aspect-[4/3]">
-            <Image src={garbageStock} alt="News" class="w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity" loading="lazy" width={800} />
-          </div>
-          <div class="p-8">
-            <span class="overline text-ochre">Normative 2024</span>
-            <h3 class="font-serif text-xl text-ivory leading-snug mt-3 mb-5 group-hover:text-sage transition-colors">
-              Nuovo Albo Gestori Ambientali: le novità del decreto legislativo.
-            </h3>
-            <div class="flex items-center justify-between border-t border-white/8 pt-4">
-              <span class="font-condensed text-ivory/30 text-xs tracking-wide">14 Maggio 2024</span>
-              <span class="font-condensed font-700 text-ochre text-xs uppercase tracking-[0.14em] flex items-center gap-2 group-hover:gap-3 transition-all">
-                <span data-i18n="home.news.read">Leggi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-              </span>
-            </div>
-          </div>
-        </article>
-
-        <div class="md:col-span-7 grid grid-rows-2 gap-px bg-linen">
-          {[
-            { cat: 'Interno',       title: 'Nuovi mezzi a basse emissioni per la flotta aziendale.',    date: '02 Maggio 2024', icon: 'fa-truck' },
-            { cat: 'Certificazioni',title: 'Ottenuta la certificazione ISO 14001:2015.',                 date: '28 Aprile 2024', icon: 'fa-certificate' },
-          ].map(({ cat, title, date, icon }, i) => (
-            <article class={`bg-ivory group flex items-center gap-6 p-8 hover:bg-parchment transition-colors duration-300 cursor-pointer reveal delay-${i + 2}`}>
-              <div class="w-14 h-14 border border-linen group-hover:border-ochre/40 flex items-center justify-center shrink-0 transition-colors">
-                <i class={`fa-solid ${icon} text-xl text-ochre/50 group-hover:text-ochre transition-colors`}></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <span class="overline text-ochre block mb-2">{cat}</span>
-                <h3 class="font-serif text-lg text-ink leading-snug group-hover:text-forest-soft transition-colors line-clamp-2">{title}</h3>
-                <span class="font-condensed text-muted/50 text-xs mt-2 block">{date}</span>
-              </div>
-              <i class="fa-solid fa-arrow-right text-linen group-hover:text-ochre group-hover:translate-x-1 transition-all text-sm shrink-0"></i>
-            </article>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════ CLIENTI ══════════════════════ -->
-  <section class="py-24 bg-forest-mid grain overflow-hidden relative">
-
-    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ochre/40 to-transparent"></div>
-
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mb-14 relative z-10">
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 reveal">
-        <div>
-          <span data-i18n="home.clients.eyebrow" class="overline text-ochre">I Nostri Clienti</span>
-          <div class="rule-ochre"></div>
-          <h2 data-i18n-html="home.clients.h2" class="display-sm text-ivory italic mt-5">
-            Comuni e Istituzioni<br/>
-            <span class="text-sage">che ci affidano il territorio</span>
-          </h2>
-        </div>
-        <p data-i18n="home.clients.body" class="font-body text-ivory/30 text-sm max-w-xs lg:text-right leading-relaxed reveal delay-2">
-          Dal 1978 al fianco di oltre 120 comuni, province ed enti pubblici della Sicilia centro-orientale.
-        </p>
-      </div>
-    </div>
-
-    <div class="overflow-hidden mb-px">
-      <div class="flex w-max" style="animation: marquee-clients-l 36s linear infinite;">
-        {[...clientiA, ...clientiA].map(({ name, tipo }) => (
-          <div class="flex items-center gap-0 shrink-0">
-            <div class="flex items-center gap-4 px-8 py-5 border-r border-white/6 group hover:bg-white/4 transition-colors cursor-default">
-              <div class="w-10 h-10 shrink-0 overflow-hidden border border-white/10 group-hover:border-ochre/30 transition-colors">
-                <Image src={cleaning} alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" loading="lazy" width={600} />
-              </div>
-              <div>
-                <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">{name}</p>
-                <p class="font-condensed text-[0.58rem] uppercase tracking-[0.18em] text-ochre/40 group-hover:text-ochre/60 transition-colors whitespace-nowrap leading-none">{tipo}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="h-px bg-white/5 mx-0"></div>
-
-    <div class="overflow-hidden mt-px">
-      <div class="flex w-max" style="animation: marquee-clients-r 44s linear infinite;">
-        {[...clientiB, ...clientiB].map(({ name, tipo }) => (
-          <div class="flex items-center gap-0 shrink-0">
-            <div class="flex items-center gap-4 px-8 py-5 border-r border-white/6 group hover:bg-white/4 transition-colors cursor-default">
-              <div class="w-10 h-10 shrink-0 overflow-hidden border border-white/10 group-hover:border-ochre/30 transition-colors">
-                <Image src={cleaning} alt={name} class="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity grayscale" loading="lazy" width={600} />
-              </div>
-              <div>
-                <p class="font-condensed font-700 text-[0.78rem] uppercase tracking-[0.12em] text-ivory/70 group-hover:text-ivory transition-colors whitespace-nowrap leading-none mb-1">{name}</p>
-                <p class="font-condensed text-[0.58rem] uppercase tracking-[0.18em] text-ochre/40 group-hover:text-ochre/60 transition-colors whitespace-nowrap leading-none">{tipo}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mt-14 relative z-10">
-      <div class="flex flex-wrap gap-0 border border-white/8 w-fit reveal">
-        {[
-          { count: '120', suffix: '+', lKey: 'home.clients.clientiAttivi', l: 'Clienti attivi' },
-          { count: '45',  suffix: '+', lKey: 'home.clients.anniFiducia',   l: 'Anni di fiducia' },
-          { count: '100', suffix: '%', lKey: 'home.clients.rinnovi',       l: 'Rinnovi contratto' },
-        ].map(({ count, suffix, lKey, l }, i) => (
-          <div class={`px-8 py-5 ${i < 2 ? 'border-r border-white/8' : ''}`}>
-            <p class="font-display text-2xl text-ochre leading-none">
-              <span data-count={count + suffix}>{count}{suffix}</span>
-            </p>
-            <p data-i18n={lKey} class="font-condensed text-[0.6rem] uppercase tracking-[0.18em] text-ivory/25 mt-1">{l}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-ochre/30 to-transparent"></div>
-
-    <style>
-      @keyframes marquee-clients-l {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-50%); }
-      }
-      @keyframes marquee-clients-r {
-        from { transform: translateX(-50%); }
-        to   { transform: translateX(0); }
-      }
-      section:has(.flex:hover) .flex[style*="marquee-clients"] {
-        animation-play-state: paused;
-      }
-    </style>
-  </section>
+  <!-- ══════════════════════ RECENSIONI GOOGLE ══════════════════════ -->
+  <GoogleBusiness />
 
   <!-- ══════════════════════ FINAL CTA ══════════════════════ -->
   <section class="py-28 bg-forest grain relative overflow-hidden">
@@ -581,7 +423,7 @@ const clientiB = [
     <div class="absolute top-20 right-20 w-16 h-16 border border-ochre/15 rotate-45 pointer-events-none"></div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
-      <div class="max-w-2xl reveal">
+      <div class="max-w-2xl mx-auto reveal">
         <span data-i18n="home.cta.eyebrow" class="overline text-ochre">Parliamo del tuo Territorio</span>
         <div class="rule-ochre"></div>
         <h2 data-i18n-html="home.cta.h2html" class="display-lg text-ivory mt-5 mb-6">

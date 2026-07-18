@@ -1,0 +1,367 @@
+---
+/*
+  GoogleBusiness.astro — scheda Google Business Profile
+  ------------------------------------------------------
+  Fetch lato server (build-time, sito statico) su Google Places Details API.
+  Se le variabili d'ambiente mancano o l'API fallisce, mostra un fallback
+  statico con i dati aziendali reali — la build non si rompe mai.
+
+  Attribuzione Google (obbligatoria per i dati Places) inclusa in fondo.
+*/
+
+// ── Tipi risposta Google Places Details ────────────────────────────
+interface PlaceReview {
+  author_name: string;
+  author_url?: string;
+  profile_photo_url?: string;
+  rating: number;
+  relative_time_description: string;
+  text: string;
+  time: number;
+}
+
+interface PlaceOpeningHours {
+  open_now?: boolean;
+  weekday_text?: string[]; // "lunedì: 08:00–18:00", indice 0 = lunedì
+}
+
+interface PlaceResult {
+  name?: string;
+  rating?: number;
+  user_ratings_total?: number;
+  formatted_address?: string;
+  formatted_phone_number?: string;
+  opening_hours?: PlaceOpeningHours;
+  reviews?: PlaceReview[];
+  website?: string;
+  url?: string; // link scheda Google Maps
+}
+
+interface PlacesDetailsResponse {
+  status: string;
+  result?: PlaceResult;
+  error_message?: string;
+}
+
+// ── Config / props ─────────────────────────────────────────────────
+interface Props {
+  /** Numero massimo di recensioni da mostrare (default 6). */
+  maxReviews?: number;
+  /** Solo recensioni con almeno N stelle (default 4). */
+  minRating?: number;
+}
+const { maxReviews = 6, minRating = 4 } = Astro.props;
+
+const PLACE_ID = import.meta.env.PUBLIC_GOOGLE_PLACE_ID;
+const API_KEY = import.meta.env.GOOGLE_PLACES_API_KEY;
+
+// Dati di fallback (dai documenti aziendali) — usati se l'API non è configurata.
+const FALLBACK: PlaceResult = {
+  name: 'Buttò S.r.l.',
+  formatted_address: 'Via San Giuseppe 42, 94010 Assoro (EN)',
+  formatted_phone_number: '+39 375 927 8085',
+  opening_hours: {
+    weekday_text: [
+      'lunedì: 08:00–13:00, 15:00–18:00',
+      'martedì: 08:00–13:00, 15:00–18:00',
+      'mercoledì: 08:00–13:00, 15:00–18:00',
+      'giovedì: 08:00–13:00, 15:00–18:00',
+      'venerdì: 08:00–13:00, 15:00–18:00',
+      'sabato: Chiuso',
+      'domenica: Chiuso',
+    ],
+  },
+  url: 'https://www.google.com/maps/search/?api=1&query=Butt%C3%B2+S.r.l.+Assoro',
+};
+
+const FIELDS = [
+  'name', 'rating', 'user_ratings_total', 'formatted_address',
+  'formatted_phone_number', 'opening_hours', 'reviews', 'website', 'url',
+].join(',');
+
+let place: PlaceResult | null = null;
+let liveData = false;   // true = dati reali da Google
+let errored = false;    // true = configurato ma fetch/risposta KO
+
+if (PLACE_ID && API_KEY) {
+  try {
+    const endpoint = new URL('https://maps.googleapis.com/maps/api/place/details/json');
+    endpoint.searchParams.set('place_id', PLACE_ID);
+    endpoint.searchParams.set('fields', FIELDS);
+    endpoint.searchParams.set('language', 'it');
+    endpoint.searchParams.set('reviews_sort', 'newest');
+    endpoint.searchParams.set('key', API_KEY);
+
+    const res = await fetch(endpoint.toString());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = (await res.json()) as PlacesDetailsResponse;
+    if (data.status !== 'OK' || !data.result) {
+      throw new Error(data.error_message || data.status);
+    }
+    place = data.result;
+    liveData = true;
+  } catch (err) {
+    console.error('[GoogleBusiness] fetch fallito, uso fallback:', err);
+    errored = true;
+    place = FALLBACK;
+  }
+} else {
+  // Chiavi non configurate → fallback statico, nessun errore.
+  place = FALLBACK;
+}
+
+// ── Derivazioni ────────────────────────────────────────────────────
+const rating = place?.rating ?? null;
+const totalRatings = place?.user_ratings_total ?? null;
+const weekdayText = place?.opening_hours?.weekday_text ?? [];
+const mapsUrl =
+  place?.url ??
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place?.name ?? 'Buttò S.r.l. Assoro')}`;
+const phone = place?.formatted_phone_number ?? null;
+const telHref = phone ? `tel:${phone.replace(/[^0-9+]/g, '')}` : null;
+
+const reviews = (place?.reviews ?? [])
+  .filter((r) => r.rating >= minRating && r.text?.trim())
+  .slice(0, maxReviews);
+
+// Stelle: ritorna array di 5 stati ('full' | 'half' | 'empty').
+function starStates(value: number | null): Array<'full' | 'half' | 'empty'> {
+  const v = value ?? 0;
+  return Array.from({ length: 5 }, (_, i) => {
+    const diff = v - i;
+    if (diff >= 0.75) return 'full';
+    if (diff >= 0.25) return 'half';
+    return 'empty';
+  });
+}
+const headerStars = starStates(rating);
+
+// Iniziali per avatar di fallback (se manca la foto profilo).
+function initials(name: string): string {
+  return name.trim().split(/\s+/).slice(0, 2).map((w) => w[0]?.toUpperCase() ?? '').join('');
+}
+---
+
+<!-- ══════════════════════ GOOGLE BUSINESS ══════════════════════ -->
+<section
+  id="recensioni-google"
+  class="py-24 lg:py-28 bg-white dark:bg-forest dot-grid relative overflow-hidden"
+  aria-labelledby="recensioni-heading"
+>
+  <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+
+    <!-- Intestazione -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 reveal">
+      <div>
+        <span class="overline text-ochre">
+          <i class="fa-brands fa-google text-[0.75em] mr-1.5"></i>Recensioni Verificate
+        </span>
+        <div class="rule-ochre"></div>
+        <h2 id="recensioni-heading" class="display-sm text-ink dark:text-ivory mt-5">
+          La voce di chi<br/>
+          <em class="text-forest-soft dark:text-sage not-italic">ci ha scelto</em>
+        </h2>
+      </div>
+
+      {rating != null && (
+        <div class="flex items-center gap-4 shrink-0">
+          <span class="font-display text-5xl leading-none text-ink dark:text-ivory">
+            {rating.toFixed(1).replace('.', ',')}
+          </span>
+          <div>
+            <div class="flex gap-0.5 text-ochre text-sm" aria-hidden="true">
+              {headerStars.map((s) => (
+                <i class={
+                  s === 'full' ? 'fa-solid fa-star'
+                  : s === 'half' ? 'fa-solid fa-star-half-stroke'
+                  : 'fa-regular fa-star text-ochre/35'
+                }></i>
+              ))}
+            </div>
+            {totalRatings != null && (
+              <p class="font-condensed font-600 text-[0.7rem] uppercase tracking-[0.14em] text-muted dark:text-ivory/45 mt-1">
+                {totalRatings.toLocaleString('it-IT')} recensioni Google
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-px bg-linen dark:bg-white/10 border border-linen dark:border-white/10">
+
+      <!-- ── Colonna laterale: contatti + orari ── -->
+      <aside class="lg:col-span-4 bg-forest dark:bg-forest-mid grain text-ivory p-8 lg:p-9 flex flex-col gap-8">
+        <div>
+          <h3 class="font-serif text-2xl text-ivory leading-tight">{place?.name ?? 'Buttò S.r.l.'}</h3>
+          {place?.formatted_address && (
+            <p class="font-body text-ivory/60 text-sm leading-relaxed mt-2 flex items-start gap-2.5">
+              <i class="fa-solid fa-location-dot text-ochre mt-0.5 shrink-0"></i>
+              <span>{place.formatted_address}</span>
+            </p>
+          )}
+        </div>
+
+        <!-- Orari (giorno corrente evidenziato lato client) -->
+        {weekdayText.length > 0 && (
+          <div>
+            <p class="overline text-ochre mb-3">
+              <i class="fa-regular fa-clock text-[0.85em] mr-1.5"></i>Orari di apertura
+            </p>
+            <ul class="space-y-1.5" data-hours-list>
+              {weekdayText.map((line, i) => {
+                const [day, ...rest] = line.split(': ');
+                const hours = rest.join(': ');
+                const closed = /chius/i.test(hours);
+                return (
+                  <li
+                    data-day-index={i}
+                    class="flex items-baseline justify-between gap-4 py-1.5 px-2.5 -mx-2.5 rounded-sm border-b border-white/8 last:border-b-0 transition-colors"
+                  >
+                    <span class="font-condensed font-600 text-[0.82rem] uppercase tracking-[0.08em] text-ivory/70 capitalize">
+                      {day}
+                    </span>
+                    <span class={`font-body text-[0.82rem] tabular-nums ${closed ? 'text-ivory/35' : 'text-ivory/85'}`}>
+                      {hours}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+
+        <!-- CTA contatto -->
+        <div class="mt-auto flex flex-col gap-3">
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary justify-center"
+          >
+            <i class="fa-solid fa-diamond-turn-right text-[11px]"></i>
+            <span>Indicazioni stradali</span>
+          </a>
+          {telHref && (
+            <a href={telHref} class="btn-ghost-dark justify-center">
+              <i class="fa-solid fa-phone text-[11px]"></i>
+              <span>{phone}</span>
+            </a>
+          )}
+        </div>
+      </aside>
+
+      <!-- ── Griglia recensioni ── -->
+      <div class="lg:col-span-8 bg-ivory dark:bg-forest p-6 lg:p-9">
+        {reviews.length > 0 ? (
+          <div class="grid sm:grid-cols-2 gap-px bg-linen dark:bg-white/10 border border-linen dark:border-white/10">
+            {reviews.map((r) => {
+              const stars = starStates(r.rating);
+              return (
+                <article class="bg-white dark:bg-forest-mid p-6 flex flex-col gap-4 reveal">
+                  <header class="flex items-center gap-3">
+                    {r.profile_photo_url ? (
+                      <img
+                        src={r.profile_photo_url}
+                        alt={`Foto di ${r.author_name}`}
+                        width="44" height="44" loading="lazy"
+                        class="w-11 h-11 rounded-full object-cover ring-1 ring-linen dark:ring-white/15"
+                      />
+                    ) : (
+                      <span
+                        class="w-11 h-11 rounded-full bg-forest text-ivory grid place-items-center font-condensed font-700 text-sm shrink-0"
+                        aria-hidden="true"
+                      >{initials(r.author_name)}</span>
+                    )}
+                    <div class="min-w-0">
+                      {r.author_url ? (
+                        <a
+                          href={r.author_url}
+                          target="_blank" rel="noopener noreferrer"
+                          class="font-serif font-600 text-lg text-ink dark:text-ivory leading-tight link-line truncate block"
+                        >{r.author_name}</a>
+                      ) : (
+                        <p class="font-serif font-600 text-lg text-ink dark:text-ivory leading-tight truncate">{r.author_name}</p>
+                      )}
+                      <span class="font-condensed text-[0.72rem] uppercase tracking-[0.12em] text-muted dark:text-ivory/40">
+                        {r.relative_time_description}
+                      </span>
+                    </div>
+                  </header>
+
+                  <div class="flex gap-0.5 text-ochre text-[0.8rem]" role="img" aria-label={`${r.rating} su 5 stelle`}>
+                    {stars.map((s) => (
+                      <i class={
+                        s === 'full' ? 'fa-solid fa-star'
+                        : s === 'half' ? 'fa-solid fa-star-half-stroke'
+                        : 'fa-regular fa-star text-ochre/30'
+                      }></i>
+                    ))}
+                  </div>
+
+                  <p class="font-body text-ink/75 dark:text-ivory/65 text-sm leading-relaxed text-pretty line-clamp-6">
+                    {r.text}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <!-- Nessuna recensione disponibile / non configurato -->
+          <div class="h-full min-h-[16rem] grid place-items-center text-center p-8">
+            <div class="max-w-sm">
+              <i class="fa-brands fa-google text-3xl text-ochre/60 mb-4 block"></i>
+              <p class="font-serif text-xl text-ink dark:text-ivory leading-snug">
+                {errored
+                  ? 'Recensioni Google momentaneamente non disponibili.'
+                  : 'Le recensioni Google appariranno qui.'}
+              </p>
+              <p class="font-body text-sm text-muted dark:text-ivory/50 mt-3 leading-relaxed">
+                {liveData
+                  ? 'Nessuna recensione con il punteggio richiesto al momento.'
+                  : 'Configura PUBLIC_GOOGLE_PLACE_ID e GOOGLE_PLACES_API_KEY nel file .env per mostrare le recensioni reali.'}
+              </p>
+              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" class="btn-primary justify-center inline-flex mt-6">
+                <i class="fa-brands fa-google text-[11px]"></i>
+                <span>Vedi su Google</span>
+              </a>
+            </div>
+          </div>
+        )}
+
+        <!-- Attribuzione Google (obbligatoria per i dati Places) -->
+        {liveData && (
+          <div class="flex items-center justify-between gap-4 mt-6 pt-5 border-t border-linen dark:border-white/10">
+            <span class="font-condensed text-[0.72rem] uppercase tracking-[0.14em] text-muted dark:text-ivory/40">
+              <i class="fa-brands fa-google mr-1.5"></i>Dati forniti da Google
+            </span>
+            <a
+              href={mapsUrl}
+              target="_blank" rel="noopener noreferrer"
+              class="font-condensed font-700 text-[0.72rem] uppercase tracking-[0.14em] text-ochre inline-flex items-center gap-2 hover:gap-3 transition-all"
+            >
+              Scrivi una recensione <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <!-- Evidenzia il giorno corrente lato client (build statica: la data va calcolata nel browser) -->
+  <script is:inline>
+    (function () {
+      // Google weekday_text: indice 0 = lunedì … 6 = domenica.
+      var jsDay = new Date().getDay();          // 0 = domenica … 6 = sabato
+      var todayIndex = (jsDay + 6) % 7;          // → 0 = lunedì … 6 = domenica
+      document.querySelectorAll('[data-day-index]').forEach(function (li) {
+        if (parseInt(li.getAttribute('data-day-index'), 10) === todayIndex) {
+          li.classList.add('bg-ochre/15', 'ring-1', 'ring-inset', 'ring-ochre/40');
+          var label = li.querySelector('span');
+          if (label) label.classList.add('text-ochre');
+        }
+      });
+    })();
+  </script>
+</section>

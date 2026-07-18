@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import leafeHeart from '../assets/leafe-heart.jpg';
 
 const pilastri = [
-  { icon: 'fa-arrows-rotate',  title: 'Economia Circolare', desc: 'Recupero massimo di ogni materia prima secondaria attraverso processi certificati e catene di fornitura tracciate.' },
+  { icon: 'fa-biohazard',      title: 'Smaltimento Rifiuti Speciali', desc: 'Trattamento e smaltimento a norma di rifiuti speciali pericolosi e non pericolosi, con tracciabilità completa della filiera.' },
   { icon: 'fa-solar-panel',    title: 'Energia Pulita',     desc: "Utilizzo crescente di fonti rinnovabili per i nostri impianti e ottimizzazione dei consumi energetici della flotta." },
   { icon: 'fa-droplet',        title: 'Gestione Idrica',    desc: "Protocolli di risparmio idrico nelle operazioni di pulizia e sanificazione per ridurre l'impatto sulle risorse locali." },
   { icon: 'fa-tree',           title: 'Riforestazione',     desc: "Programma di piantumazione per compensare le emissioni residue: 120.000 alberi equivalenti ogni anno." },
@@ -19,8 +19,9 @@ const sdgs = [
 ---
 
 <Layout
-  title="Sostenibilità"
-  description="L'impegno ambientale di Buttò S.r.l.: 4.200 tonnellate di CO₂ risparmiate, 85% di rifiuti recuperati e un piano di economia circolare certificato."
+  title="Sostenibilità e Impatto Ambientale in Sicilia"
+  description="L'impegno ambientale di Buttò S.r.l.: 4.200 tonnellate di CO₂ risparmiate, 85% di rifiuti recuperati e uno smaltimento rifiuti speciali certificato."
+  ogImage="/leafe_heart.jpg"
 >
 
   <!-- ══════════════════════ HERO ══════════════════════ -->
@@ -79,7 +80,7 @@ const sdgs = [
           </div>
           <div class="grid grid-cols-2 gap-px bg-linen border border-linen">
             {[
-              { icon: 'fa-leaf',       tKey: 'sostenibilita.commitment.ec', lKey: 'sostenibilita.commitment.ecLabel', t: 'Economia Circolare', l: 'Recupero al 100%' },
+              { icon: 'fa-biohazard',  tKey: 'sostenibilita.commitment.ec', lKey: 'sostenibilita.commitment.ecLabel', t: 'Smaltimento Rifiuti Speciali', l: 'Tracciabilità completa' },
               { icon: 'fa-solar-panel',tKey: 'sostenibilita.commitment.ep', lKey: 'sostenibilita.commitment.epLabel', t: 'Energia Pulita',     l: 'Fonti rinnovabili' },
             ].map(({ icon, tKey, lKey, t, l }) => (
               <div class="bg-ivory p-6">
@@ -132,7 +133,7 @@ const sdgs = [
             <p class="stat-xl text-forest leading-none mb-3"><span data-count="85%">85%</span></p>
             <h3 data-i18n="sostenibilita.metrics.rifiutiTitle" class="font-serif text-xl text-forest italic mb-3">Rifiuti Recuperati</h3>
             <p data-i18n="sostenibilita.metrics.rifiutiNote" class="font-body text-forest/50 text-sm border-t border-forest/10 pt-4">
-              Economia circolare certificata.
+              Smaltimento rifiuti speciali certificato.
             </p>
           </div>
         </div>

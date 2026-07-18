@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sections = [
+  {
+    title: '1. Cosa Sono i Cookie',
+    body: [
+      "I cookie sono piccoli file di testo che i siti visitati inviano al dispositivo dell'utente, dove vengono memorizzati per essere ritrasmessi agli stessi siti alla visita successiva. Esistono anche tecnologie simili, come il local storage del browser, con funzioni analoghe.",
+    ],
+  },
+  {
+    title: '2. Cookie Utilizzati da Questo Sito',
+    body: [
+      'Questo sito non installa cookie di profilazione né cookie di terze parti a fini pubblicitari o statistici (ad esempio Google Analytics).',
+      "Utilizza esclusivamente il local storage del browser (non un cookie in senso stretto) per memorizzare la lingua di visualizzazione scelta dall'utente (chiave \"lang\"). Questo dato resta sul dispositivo dell'utente, ha finalità puramente tecnica, non contiene informazioni personali e non viene condiviso con terzi.",
+    ],
+  },
+  {
+    title: '3. Servizi di Terze Parti',
+    body: [
+      "Alcune pagine incorporano risorse fornite da terzi, che potrebbero installare propri cookie secondo le rispettive informative:",
+    ],
+    list: [
+      'Google Maps — mappa interattiva della sede operativa, nella pagina Contatti.',
+      'Google Fonts — caratteri tipografici caricati da server Google.',
+      'Font Awesome (CDN) — set di icone caricato da CDN esterno.',
+    ],
+  },
+  {
+    title: '4. Come Gestire i Cookie',
+    body: [
+      "È possibile gestire, bloccare o eliminare i cookie in qualsiasi momento tramite le impostazioni del proprio browser. La disabilitazione dei cookie di terze parti non pregiudica la normale navigazione delle pagine di questo sito, poiché nessuna funzionalità propria dipende da cookie di profilazione.",
+    ],
+  },
+  {
+    title: '5. Aggiornamenti',
+    body: [
+      "Questa cookie policy può essere aggiornata in caso di modifiche ai servizi utilizzati dal sito. Ultimo aggiornamento: 15 luglio 2026.",
+    ],
+  },
+];
+---
+
+<Layout
+  title="Cookie Policy"
+  description="Cookie policy di Buttò S.r.l.: quali cookie e tecnologie simili utilizza il sito butto-srl.it e come gestirli dal proprio browser."
+>
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <section class="relative py-32 bg-ivory dot-grid overflow-hidden">
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
+      <span class="font-condensed font-800 text-[20vw] text-ink/[0.04] leading-none tracking-tighter">COOKIE</span>
+    </div>
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <span class="overline text-ochre mb-5 block reveal">Tecnologie di Tracciamento</span>
+      <h1 class="display-xl text-ink reveal delay-1">
+        Cookie <em class="text-forest-soft not-italic">Policy</em>
+      </h1>
+      <p class="font-body text-muted text-lg max-w-2xl leading-relaxed mt-8 reveal delay-2">
+        Quali cookie e tecnologie simili utilizza il sito butto-srl.it, e come gestirli.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════ CONTENT ══════════════════════ -->
+  <section class="py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-6 lg:px-14 space-y-14">
+      {sections.map(({ title, body, list }) => (
+        <div class="reveal">
+          <h2 class="font-serif text-2xl italic text-ink mb-4">{title}</h2>
+          <div class="space-y-4">
+            {body.map((p) => (
+              <p class="font-body text-muted leading-relaxed">{p}</p>
+            ))}
+          </div>
+          {list && (
+            <ul class="list-disc pl-6 space-y-2 mt-4">
+              {list.map((item) => (
+                <li class="font-body text-muted leading-relaxed">{item}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

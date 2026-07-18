@@ -1,13 +1,49 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { translations } from '../i18n/translations';
 
-const alboCats = [
-  { cat: 'Categoria 1',     desc: 'Raccolta e trasporto di rifiuti urbani. È suddivisa in classi in base alla popolazione complessivamente servita dal servizio.' },
-  { cat: 'Categoria 2-bis', desc: 'Raccolta e trasporto dei propri rifiuti non pericolosi effettuata dai produttori iniziali (es. artigiani o imprese che trasportano i propri scarti). Non è suddivisa in classi.' },
-  { cat: 'Categoria 3-bis', desc: 'Abrogata: in precedenza dedicata al trasporto di RAEE da parte di distributori e installatori.' },
-  { cat: 'Categoria 4',     desc: 'Raccolta e trasporto di rifiuti speciali non pericolosi. È suddivisa in 6 classi (da A a F) in base alla quantità annua gestita, da un massimo di 200.000 tonnellate (Classe A) a 3.000 tonnellate (Classe F).' },
-  { cat: 'Categoria 5',     desc: 'Raccolta e trasporto di rifiuti speciali pericolosi (quantità annua inferiore a 3.000 tonnellate, Classe F).' },
-  { cat: 'Categoria 8',     desc: 'Intermediazione e commercio di rifiuti senza detenzione dei rifiuti stessi.' },
+// Visual metadata only — all text (cat/tag/short/rows/paragraph) lives in
+// translations.ts so the rendered card and the modal (both languages) share one source.
+const alboMeta = [
+  { kind: 'albo', icon: 'fa-truck-fast',
+    img: 'https://images.unsplash.com/photo-1574974671999-24b7dfbb0d53?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Camion per la raccolta di rifiuti urbani lungo una strada cittadina' },
+  { kind: 'albo', icon: 'fa-boxes-stacked',
+    img: 'https://images.unsplash.com/photo-1535923430552-0ce3cd477cc7?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Nastro trasportatore in un impianto di selezione rifiuti' },
+  { kind: 'albo', icon: 'fa-biohazard',
+    img: 'https://images.unsplash.com/photo-1558617867-659c667b6809?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Fusti di stoccaggio per rifiuti pericolosi' },
+  { kind: 'albo', icon: 'fa-file-contract',
+    img: 'https://images.unsplash.com/photo-1549923746-c502d488b3ea?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Firma di un contratto commerciale' },
+  { kind: 'cert', icon: 'fa-certificate',
+    img: 'https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Documento ufficiale con sigillo di certificazione' },
+  { kind: 'cert', icon: 'fa-leaf',
+    img: 'https://images.unsplash.com/photo-1580133318324-f2f76d987dd8?auto=format&fit=crop&w=1000&q=80',
+    alt: 'Foglia verde in primo piano' },
+];
+
+const albiIt = translations.it.certificazioni.albo.cats;
+const albiEn = translations.en.certificazioni.albo.cats;
+
+const alboCarousel = alboMeta.map((meta, i) => ({
+  ...meta,
+  num: String(i + 1).padStart(2, '0'),
+  cat: albiIt[i].cat, tag: albiIt[i].tag, short: albiIt[i].short,
+}));
+
+const modalData = alboMeta.map((meta, i) => ({
+  ...meta,
+  num: String(i + 1).padStart(2, '0'),
+  it: albiIt[i], en: albiEn[i],
+}));
+
+const loopSlides = [
+  { ...alboCarousel[alboCarousel.length - 1], clone: true, origIndex: alboCarousel.length - 1 },
+  ...alboCarousel.map((item, origIndex) => ({ ...item, clone: false, origIndex })),
+  { ...alboCarousel[0], clone: true, origIndex: 0 },
 ];
 
 const macrocategorie = [
@@ -21,15 +57,14 @@ const macrocategorie = [
 
 const certSearchItems = [
   ...macrocategorie.map(m => ({ label: m.title, tag: `CER ${m.code}`, desc: m.desc })),
-  ...alboCats.map(a => ({ label: a.cat, tag: 'Albo Gestori Ambientali', desc: a.desc })),
-  { label: 'ISO 14001', tag: 'Certificazione', desc: 'Sistema di gestione ambientale certificato secondo lo standard internazionale ISO 14001.' },
-  { label: 'Registrazione EMAS', tag: 'Certificazione', desc: 'Eco-Management and Audit Scheme, registrazione volontaria europea per la gestione ambientale.' },
+  ...alboCarousel.map((a, i) => ({ label: a.cat, tag: a.kind === 'cert' ? 'Certificazione' : 'Albo Gestori Ambientali', desc: albiIt[i].paragraph })),
 ];
 ---
 
 <Layout
-  title="Certificazioni e Rifiuti"
+  title="Certificazioni, Albo Gestori e Codici CER"
   description="Scopri le autorizzazioni, certificazioni ISO e i codici CER gestiti da Buttò S.r.l. per una gestione ambientale sicura e tracciabile."
+  ogImage="/certificazioni/industriali.jpg"
 >
 
   <!-- HERO -->
@@ -64,26 +99,411 @@ const certSearchItems = [
           </div>
         </div>
 
-        <div class="grid gap-4 reveal delay-1">
-          {alboCats.map(({ cat, desc }, i) => (
-            <div class="group relative overflow-hidden bg-forest-mid border border-white/8 hover:border-ochre/40 hover:bg-forest-soft shadow-[0_8px_40px_rgba(0,0,0,0.15)] hover:shadow-[0_22px_60px_rgba(0,0,0,0.3)] transition-[background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-              <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] bg-ochre origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></span>
-              <div class="flex flex-col gap-4 p-6 lg:p-7">
-                <div class="flex items-center justify-between pb-4 border-b border-white/8 group-hover:border-ochre/20 transition-colors duration-500">
-                  <span class="font-condensed font-700 text-[0.68rem] uppercase tracking-[0.2em] text-ivory/40 group-hover:text-ochre transition-colors duration-500">Albo N°&thinsp;{String(i + 1).padStart(2, '0')}</span>
-                  <i class="fa-solid fa-clipboard-check text-[1rem] text-ochre group-hover:text-ochre-light transition-colors duration-500"></i>
-                </div>
-                <div class="space-y-2">
-                  <h3 data-i18n={`certificazioni.albo.cats.${i}.cat`} class="font-serif text-xl italic text-ivory leading-tight">{cat}</h3>
-                  <p data-i18n={`certificazioni.albo.cats.${i}.desc`} class="font-body text-sm text-ivory/60 leading-relaxed">{desc}</p>
-                </div>
+        <div class="reveal delay-1">
+          <div id="albo-carousel" class="relative" role="region" aria-roledescription="carrello" aria-label="Categorie Albo Gestori Ambientali e certificazioni">
+
+            <div id="albo-viewport" class="overflow-hidden cursor-grab active:cursor-grabbing">
+              <div id="albo-track" class="flex gap-5">
+                {loopSlides.map(({ kind, num, icon, img, alt, cat, tag, short, clone, origIndex }) => (
+                  <div class="albo-slide shrink-0 w-[82%] sm:w-[64%]" data-clone={clone ? 'true' : 'false'}>
+                    <button
+                      type="button"
+                      class="albo-card group/card relative block w-full h-[440px] text-left bg-forest-mid border border-white/8 hover:border-ochre/40 overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-ochre transition-colors duration-500"
+                      data-cat-index={origIndex}
+                      aria-haspopup="dialog"
+                      aria-label={`${cat}: apri dettaglio`}
+                    >
+                      <div class="relative h-[56%] overflow-hidden">
+                            <div
+                              class="absolute inset-0 bg-cover bg-center transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110"
+                              style={`background-image:url(${img})`}
+                              role="img"
+                              aria-label={alt}
+                            ></div>
+                            <div class="absolute inset-0 bg-forest/50 mix-blend-multiply"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-forest-mid via-forest-mid/5 to-transparent"></div>
+
+                            <span class="absolute top-4 left-4 inline-block px-2.5 py-1 bg-ivory/10 border border-ochre/30 text-ochre text-[0.65rem] font-condensed tracking-wider backdrop-blur-sm">
+                              {kind === 'cert' ? 'Certificazione' : `Albo N° ${num}`}
+                            </span>
+
+                            <span class="albo-icon-badge absolute -bottom-6 left-6 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-lg shadow-ochre transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110 group-hover/card:rotate-[12deg]">
+                              <i class={`fa-solid ${icon}`}></i>
+                            </span>
+                          </div>
+
+                      <div class="h-[44%] flex flex-col justify-center gap-1 px-6 pt-6 pb-5">
+                        <span data-i18n={`certificazioni.albo.cats.${origIndex}.tag`} class="font-condensed font-700 text-[0.64rem] uppercase tracking-[0.18em] text-ochre/70">{tag}</span>
+                        <h3 data-i18n={`certificazioni.albo.cats.${origIndex}.cat`} class="font-serif italic text-xl text-ivory leading-tight text-balance">{cat}</h3>
+                        <p data-i18n={`certificazioni.albo.cats.${origIndex}.short`} class="font-body text-[0.8rem] text-ivory/55 leading-snug mt-0.5 text-pretty line-clamp-2">{short}</p>
+                        <span class="inline-flex items-center gap-1.5 font-condensed text-[0.64rem] uppercase tracking-[0.14em] text-ochre/60 mt-1.5 group-hover/card:gap-2.5 transition-all duration-300">
+                          <i class="fa-solid fa-expand text-[0.55rem]"></i> Vedi dettaglio
+                        </span>
+                      </div>
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
+
+            <div class="flex items-center justify-between gap-4 mt-7 flex-wrap">
+              <span id="albo-current-label" class="font-condensed font-700 text-[0.72rem] uppercase tracking-[0.16em] text-ivory/50">
+                {alboCarousel[0].cat}
+              </span>
+
+              <div class="flex items-center gap-5">
+                <button id="albo-prev" type="button" class="albo-nav w-9 h-9 rounded-full border border-white/15 text-ivory/50 flex items-center justify-center transition-colors duration-300 hover:border-ochre hover:text-ochre focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Categoria precedente">
+                  <i class="fa-solid fa-arrow-left text-xs"></i>
+                </button>
+
+                <div class="flex items-center gap-2" role="tablist" aria-label="Vai a una categoria">
+                  {alboCarousel.map(({ cat }, i) => (
+                    <button
+                      type="button"
+                      class="albo-dot h-2 rounded-full bg-ivory/20 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:ring-2 focus-visible:ring-ochre outline-none"
+                      data-goto={i}
+                      data-label={cat}
+                      role="tab"
+                      aria-label={`Vai a ${cat}`}
+                      aria-selected={i === 0 ? 'true' : 'false'}
+                    ></button>
+                  ))}
+                </div>
+
+                <button id="albo-next" type="button" class="albo-nav w-9 h-9 rounded-full border border-white/15 text-ivory/50 flex items-center justify-center transition-colors duration-300 hover:border-ochre hover:text-ochre focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Categoria successiva">
+                  <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+              </div>
+            </div>
+
+            <p id="albo-live" class="sr-only" aria-live="polite"></p>
+
+            <dialog id="albo-modal" aria-labelledby="albo-modal-title">
+              <div class="relative h-44 sm:h-52 overflow-hidden shrink-0">
+                <div id="albo-modal-img" class="absolute inset-0 bg-cover bg-center"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-ivory via-ivory/15 to-transparent"></div>
+                <button type="button" id="albo-modal-close" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-ivory/95 text-ink flex items-center justify-center hover:bg-ochre hover:text-ivory transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Chiudi dettaglio">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+                <span id="albo-modal-icon-badge" class="absolute -bottom-6 left-7 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-lg shadow-ochre">
+                  <i id="albo-modal-icon" class="fa-solid"></i>
+                </span>
+              </div>
+              <div class="px-7 pt-9 pb-8 overflow-y-auto">
+                <span id="albo-modal-tag" class="font-condensed font-700 text-[0.68rem] uppercase tracking-[0.2em] text-ochre"></span>
+                <h3 id="albo-modal-title" class="font-serif italic text-2xl sm:text-3xl text-ink mt-2 text-balance"></h3>
+                <dl id="albo-modal-rows" class="mt-6 space-y-3 border-t border-linen pt-6"></dl>
+                <p id="albo-modal-paragraph" class="font-body text-sm text-muted leading-relaxed mt-6 pt-6 border-t border-linen text-pretty"></p>
+              </div>
+            </dialog>
+
+            <script type="application/json" id="albo-modal-data" set:html={JSON.stringify(modalData)} />
+          </div>
+        </div>
+
+        <!-- Semantic duplicate of the carousel/modal data — same content, static
+             markup so it's readable without the click-to-open dialog interaction. -->
+        <div class="sr-only">
+          <h3>Elenco completo — Albo Gestori Ambientali e Certificazioni</h3>
+          {alboCarousel.map((item, i) => {
+            const detail = albiIt[i];
+            return (
+              <article>
+                <h4>{item.kind === 'cert' ? 'Certificazione' : `Albo Gestori Ambientali N° ${item.num}`} — {item.cat}</h4>
+                <p>{item.short}</p>
+                {detail.paragraph && <p>{detail.paragraph}</p>}
+                {detail.rows && (
+                  <dl>
+                    {detail.rows.map((row: { label: string; value: string }) => (
+                      <>
+                        <dt>{row.label}</dt>
+                        <dd>{row.value}</dd>
+                      </>
+                    ))}
+                  </dl>
+                )}
+              </article>
+            );
+          })}
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    (function initAlboCarousel() {
+      const root = document.getElementById('albo-carousel');
+      const viewport = document.getElementById('albo-viewport');
+      const track = document.getElementById('albo-track');
+      const prevBtn = document.getElementById('albo-prev');
+      const nextBtn = document.getElementById('albo-next');
+      const label = document.getElementById('albo-current-label');
+      const live = document.getElementById('albo-live');
+      const modal = document.getElementById('albo-modal') as HTMLDialogElement | null;
+      const modalImg = document.getElementById('albo-modal-img');
+      const modalIconBadge = document.getElementById('albo-modal-icon-badge');
+      const modalIcon = document.getElementById('albo-modal-icon');
+      const modalTag = document.getElementById('albo-modal-tag');
+      const modalTitle = document.getElementById('albo-modal-title');
+      const modalRows = document.getElementById('albo-modal-rows');
+      const modalParagraph = document.getElementById('albo-modal-paragraph');
+      const modalClose = document.getElementById('albo-modal-close');
+      const modalDataEl = document.getElementById('albo-modal-data');
+      const modalData: Array<{ icon: string; img: string; alt: string; kind: string; it: any; en: any }> = modalDataEl
+        ? JSON.parse(modalDataEl.textContent || '[]')
+        : [];
+      if (!root || !viewport || !track || !prevBtn || !nextBtn) return;
+
+      const dots = Array.from(root.querySelectorAll<HTMLElement>('.albo-dot'));
+      const slides = Array.from(track.children) as HTMLElement[];
+      const total = dots.length;
+      if (total === 0 || slides.length === 0) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let pos = 1;
+      let stepPx = 0;
+      let autoplayId: number | null = null;
+      let wrapTimerId: number | null = null;
+      let inView = false;
+      let isDragging = false;
+      let dragMoved = false;
+      let dragStartX = 0;
+      let dragBaseX = 0;
+      let dragTargetCard: HTMLElement | null = null;
+
+      function measure() {
+        const gap = parseFloat(window.getComputedStyle(track!).columnGap || '0') || 0;
+        stepPx = slides[0].getBoundingClientRect().width + gap;
+      }
+
+      function applyTransform(withTransition: boolean) {
+        track!.style.transition = withTransition && !reduceMotion ? 'transform 0.7s cubic-bezier(0.16,1,0.3,1)' : 'none';
+        track!.style.transform = `translateX(${-pos * stepPx}px)`;
+      }
+
+      function realIndex(p: number) {
+        return ((p - 1) % total + total) % total;
+      }
+
+      function updateUI() {
+        const idx = realIndex(pos);
+        dots.forEach((d, i) => {
+          const active = i === idx;
+          d.setAttribute('aria-selected', active ? 'true' : 'false');
+          d.classList.toggle('w-6', active);
+          d.classList.toggle('w-2', !active);
+          d.classList.toggle('bg-ochre', active);
+          d.classList.toggle('bg-ivory/20', !active);
+        });
+        const current = slides[pos]?.querySelector<HTMLElement>('.albo-card h3')?.textContent ?? dots[idx]?.dataset.label ?? '';
+        const of = document.documentElement.lang === 'en' ? 'of' : 'di';
+        if (label) label.textContent = current;
+        if (live) live.textContent = `${current} — ${idx + 1} ${of} ${total}`;
+      }
+
+      function goTo(newPos: number, withTransition = true) {
+        pos = newPos;
+        applyTransform(withTransition);
+        updateUI();
+
+        if (wrapTimerId !== null) { window.clearTimeout(wrapTimerId); wrapTimerId = null; }
+        if (withTransition && !reduceMotion) {
+          wrapTimerId = window.setTimeout(() => {
+            wrapTimerId = null;
+            if (pos >= slides.length - 1) { pos = 1; applyTransform(false); }
+            else if (pos <= 0) { pos = total; applyTransform(false); }
+          }, 720);
+        } else if (pos >= slides.length - 1) { pos = 1; applyTransform(false); }
+        else if (pos <= 0) { pos = total; applyTransform(false); }
+      }
+
+      function next() { goTo(pos + 1); }
+      function prev() { goTo(pos - 1); }
+
+      function stopAutoplay() {
+        if (autoplayId !== null) { window.clearInterval(autoplayId); autoplayId = null; }
+      }
+      function startAutoplay() {
+        stopAutoplay();
+        if (reduceMotion || !inView || modal?.open) return;
+        autoplayId = window.setInterval(() => { if (!isDragging) next(); }, 4800);
+      }
+
+      prevBtn.addEventListener('click', () => { prev(); startAutoplay(); });
+      nextBtn.addEventListener('click', () => { next(); startAutoplay(); });
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          goTo(pos + (i - realIndex(pos)));
+          startAutoplay();
+        });
+      });
+
+      root.addEventListener('mouseenter', stopAutoplay);
+      root.addEventListener('mouseleave', () => { if (!isDragging) startAutoplay(); });
+      root.addEventListener('focusin', stopAutoplay);
+      root.addEventListener('focusout', (e: FocusEvent) => {
+        if (!root!.contains(e.relatedTarget as Node)) startAutoplay();
+      });
+
+      viewport.addEventListener('pointerdown', (e: PointerEvent) => {
+        isDragging = true;
+        dragMoved = false;
+        dragStartX = e.clientX;
+        dragBaseX = -pos * stepPx;
+        dragTargetCard = (e.target as HTMLElement)?.closest<HTMLElement>('.albo-card');
+        track!.style.transition = 'none';
+        stopAutoplay();
+        viewport.setPointerCapture(e.pointerId);
+      });
+      viewport.addEventListener('pointermove', (e: PointerEvent) => {
+        if (!isDragging) return;
+        const dx = e.clientX - dragStartX;
+        if (Math.abs(dx) > 4) dragMoved = true;
+        track!.style.transform = `translateX(${dragBaseX + dx}px)`;
+      });
+      function endDrag(e: PointerEvent) {
+        if (!isDragging) return;
+        isDragging = false;
+        const dx = e.clientX - dragStartX;
+        const threshold = stepPx * 0.18;
+        if (dx <= -threshold) next();
+        else if (dx >= threshold) prev();
+        else {
+          applyTransform(true);
+          // setPointerCapture retargets the synthesized click to `viewport`, so a real
+          // tap never reaches the card's own click listener — resolve it here instead.
+          if (!dragMoved && dragTargetCard) openCardModal(dragTargetCard);
+        }
+        dragTargetCard = null;
+        startAutoplay();
+      }
+      viewport.addEventListener('pointerup', endDrag);
+      viewport.addEventListener('pointercancel', endDrag);
+
+      document.addEventListener('langchange', updateUI);
+
+      function renderModal(index: number) {
+        const item = modalData[index];
+        if (!item || !modal) return;
+        const lang = document.documentElement.lang === 'en' ? 'en' : 'it';
+        const text = item[lang];
+
+        if (modalImg) modalImg.style.backgroundImage = `url(${item.img})`;
+        if (modalIcon) modalIcon.className = `fa-solid ${item.icon}`;
+        if (modalIconBadge) modalIconBadge.setAttribute('aria-hidden', 'true');
+        if (modalTag) modalTag.textContent = text.tag;
+        if (modalTitle) modalTitle.textContent = text.cat;
+        if (modalParagraph) modalParagraph.textContent = text.paragraph;
+        if (modalRows) {
+          modalRows.innerHTML = '';
+          (text.rows as Array<{ label: string; value: string }>).forEach((row) => {
+            const rowEl = document.createElement('div');
+            rowEl.className = 'flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-3';
+            const dt = document.createElement('dt');
+            dt.className = 'shrink-0 sm:w-40 font-condensed font-700 text-[0.68rem] uppercase tracking-[0.12em] text-muted';
+            dt.textContent = row.label;
+            const dd = document.createElement('dd');
+            dd.className = 'font-body text-sm text-ink';
+            dd.textContent = row.value;
+            rowEl.append(dt, dd);
+            modalRows.append(rowEl);
+          });
+        }
+        modal.dataset.index = String(index);
+      }
+
+      function openCardModal(card: HTMLElement) {
+        const index = Number(card.dataset.catIndex);
+        if (Number.isNaN(index) || !modal) return;
+        renderModal(index);
+        stopAutoplay();
+        modal.showModal();
+      }
+
+      // Reached by keyboard activation (Enter/Space) — pointer-driven taps are
+      // resolved in endDrag() instead, since pointer capture retargets their click.
+      const cards = Array.from(root.querySelectorAll<HTMLElement>('.albo-card'));
+      cards.forEach((card) => {
+        card.addEventListener('click', () => {
+          if (dragMoved) return;
+          openCardModal(card);
+        });
+      });
+
+      modal?.addEventListener('click', (e: MouseEvent) => {
+        if (e.target === modal) modal.close();
+      });
+      modalClose?.addEventListener('click', () => modal?.close());
+      modal?.addEventListener('close', startAutoplay);
+      document.addEventListener('langchange', () => {
+        if (modal?.open && modal.dataset.index) renderModal(Number(modal.dataset.index));
+      });
+
+      window.addEventListener('resize', () => { measure(); applyTransform(false); }, { passive: true });
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          inView = entry.isIntersecting;
+          if (inView) startAutoplay(); else stopAutoplay();
+        });
+      }, { threshold: 0.25 });
+      io.observe(root);
+
+      measure();
+      applyTransform(false);
+      updateUI();
+    })();
+  </script>
+
+  <style>
+    #albo-modal {
+      padding: 0;
+      border: none;
+      width: min(560px, 92vw);
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--ivory);
+      box-shadow: 0 32px 80px -16px rgba(14, 12, 9, 0.45);
+      opacity: 0;
+      transform: scale(0.96) translateY(12px);
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        overlay 0.4s allow-discrete,
+        display 0.4s allow-discrete;
+    }
+    #albo-modal[open] {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    @starting-style {
+      #albo-modal[open] {
+        opacity: 0;
+        transform: scale(0.96) translateY(12px);
+      }
+    }
+    #albo-modal::backdrop {
+      background: rgba(14, 12, 9, 0);
+      transition: background 0.4s ease, overlay 0.4s allow-discrete, display 0.4s allow-discrete;
+    }
+    #albo-modal[open]::backdrop {
+      background: rgba(14, 12, 9, 0.6);
+      backdrop-filter: blur(3px);
+    }
+    @starting-style {
+      #albo-modal[open]::backdrop {
+        background: rgba(14, 12, 9, 0);
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #albo-track,
+      #albo-modal,
+      #albo-modal::backdrop {
+        transition: none !important;
+      }
+    }
+  </style>
 
   <!-- TIPOLOGIE DI RIFIUTI -->
   <section class="pt-24 bg-ivory dot-grid">
