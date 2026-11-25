@@ -1,0 +1,91 @@
+---
+interface Props {
+  word: string;
+  dark?: boolean;
+  bottom?: boolean;
+}
+
+const { word, dark = false, bottom = false } = Astro.props;
+const letters = Array.from(word);
+const typingKeyframes = letters.map((_, index) => {
+  const appear = 6 + index * 4;
+  const disappear = 72 + (letters.length - 1 - index) * 3;
+  return `@keyframes watermark-type-${index} {
+    0%, ${appear - 0.01}% { opacity: 0; }
+    ${appear}%, ${disappear - 0.01}% { opacity: 1; }
+    ${disappear}%, 100% { opacity: 0; }
+  }`;
+}).join('\n');
+---
+
+<div class="hero-watermark" data-dark={dark} data-bottom={bottom} aria-hidden="true">
+  <span class="watermark-word font-condensed font-800 leading-none">
+    {letters.map((letter, index) => (
+      <span class="watermark-letter" style={`animation-name: watermark-type-${index}`}>{letter}</span>
+    ))}
+  </span>
+</div>
+
+<style is:global set:html={typingKeyframes} />
+
+<style>
+  .hero-watermark {
+    position: absolute;
+    right: -2%;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .watermark-word {
+    display: block;
+    font-size: 24vw;
+    color: var(--ink);
+    opacity: 0.055;
+  }
+
+  .hero-watermark[data-dark='true'] .watermark-word {
+    color: var(--ivory);
+    opacity: 0.065;
+    font-size: 22vw;
+  }
+
+  .hero-watermark[data-bottom='true'] {
+    top: auto;
+    bottom: 0;
+    transform: none;
+  }
+
+  .watermark-letter {
+    animation-duration: 6.5s;
+    animation-timing-function: steps(1, end);
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+  }
+
+  .hero-watermark.is-running .watermark-letter { animation-play-state: running; }
+
+  @media (max-width: 767px) {
+    .watermark-word { font-size: 30vw; }
+    .hero-watermark[data-dark='true'] .watermark-word { font-size: 30vw; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .watermark-letter { animation: none; opacity: 1; }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.hero-watermark').forEach(watermark => {
+    let inView = false;
+    const sync = () => watermark.classList.toggle('is-running', inView && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      sync();
+    });
+    observer.observe(watermark);
+    document.addEventListener('visibilitychange', sync);
+  });
+</script>

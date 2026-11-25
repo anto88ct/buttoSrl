@@ -19,16 +19,22 @@ const {
   noindex = false,
 } = Astro.props;
 
-const siteURL = 'https://butto-srl.it';
+const siteURL = Astro.site!.origin;
+const canonical = new URL(canonicalURL, siteURL);
+canonical.search = '';
+canonical.hash = '';
+canonical.pathname = canonical.pathname === '/' ? '/' : canonical.pathname.replace(/\/+$/, '');
+const canonicalHref = canonical.href;
+const imageURL = new URL(ogImage, siteURL).href;
 const fullTitle = title === 'Home'
-  ? 'Buttò S.r.l. | Eccellenza nella Gestione Ambientale'
+  ? 'Buttò S.r.l. | Servizi ambientali e rifiuti in Sicilia'
   : `${title} | Buttò S.r.l.`;
 
 const breadcrumbItems = title === 'Home'
   ? []
   : [
       { name: 'Home', url: `${siteURL}/` },
-      { name: title, url: `${siteURL}${canonicalURL}` },
+      { name: title, url: canonicalHref },
     ];
 ---
 
@@ -38,30 +44,35 @@ const breadcrumbItems = title === 'Home'
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={`${siteURL}${ogImage}`} />
-    <meta property="og:url" content={`${siteURL}${canonicalURL}`} />
+    <meta property="og:image" content={imageURL} />
+    <meta property="og:url" content={canonicalHref} />
+    <meta property="og:site_name" content="Buttò S.r.l." />
+    <meta property="og:image:alt" content="Buttò S.r.l. — servizi ambientali in Sicilia" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Informazioni per assistenti AI" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteURL}${ogImage}`} />
-    <link rel="canonical" href={`${siteURL}${canonicalURL}`} />
+    <meta name="twitter:image" content={imageURL} />
+    <link rel="canonical" href={canonicalHref} />
     <link rel="icon" type="image/x-icon" href="/logo.ico" />
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
+      "@id": `${siteURL}/#organization`,
+      "vatID": "IT01208350866",
       "name": "Buttò S.r.l.",
       "legalName": "Buttò Carmelo S.r.l.",
       "description": "Dal 1978, leader nella gestione integrata dei servizi ambientali ad Assoro (EN). Smaltimento rifiuti, appalti pubblici di pulizia, sostenibilità circolare.",
       "url": siteURL,
       "logo": `${siteURL}/logo.png`,
-      "image": `${siteURL}${ogImage}`,
+      "image": imageURL,
       "telephone": "+39 375 927 8085",
-      "email": "buttosrl@gmail.com",
+      "email": "servizi.butto@gmail.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via S. Giuseppe N°42",
@@ -70,11 +81,6 @@ const breadcrumbItems = title === 'Home'
         "postalCode": "94010",
         "addressCountry": "IT"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 37.6317,
-        "longitude": 14.4197
-      },
       "foundingDate": "1978",
       "areaServed": {
         "@type": "AdministrativeArea",
@@ -82,6 +88,12 @@ const breadcrumbItems = title === 'Home'
       },
       "sameAs": []
     })} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org", "@graph": [
+        { "@type": "WebSite", "@id": `${siteURL}/#website`, "url": `${siteURL}/`, "name": "Buttò S.r.l.", "inLanguage": "it", "publisher": { "@id": `${siteURL}/#organization` } },
+        { "@type": "WebPage", "@id": `${canonicalHref}#webpage`, "url": canonicalHref, "name": fullTitle, "description": description, "inLanguage": "it", "isPartOf": { "@id": `${siteURL}/#website` }, "about": { "@id": `${siteURL}/#organization` } }
+      ]
+    }).replace(/</g, "\\u003c")} />
     {breadcrumbItems.length > 0 && (
       <script type="application/ld+json" set:html={JSON.stringify({
         "@context": "https://schema.org",
@@ -97,15 +109,18 @@ const breadcrumbItems = title === 'Home'
     <!-- i18n: apply stored language before paint to avoid FOUC -->
     <script is:inline>
       (function() {
-        var lang = localStorage.getItem('lang') || 'it';
+        var lang = 'it';
+        try { lang = localStorage.getItem('lang') === 'en' ? 'en' : 'it'; } catch {}
         document.documentElement.setAttribute('data-lang', lang);
         document.documentElement.lang = lang;
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" />
     <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <noscript><style>.reveal,.reveal-left,.reveal-right,.reveal-scale { opacity: 1 !important; transform: none !important; }</style></noscript>
     <title>{fullTitle}</title>
   </head>
 
@@ -118,7 +133,7 @@ const breadcrumbItems = title === 'Home'
     <div id="cursor-ring"></div>
 
     <Navbar />
-    <main>
+    <main class="page-content">
       <slot />
     </main>
     <Footer />
@@ -206,18 +221,10 @@ const breadcrumbItems = title === 'Home'
 
       /* ── Header height var (pinned full-screen sections dock below it) ── */
       const setHeaderH = () => {
-        document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+        document.documentElement.style.setProperty('--header-h', (header.offsetHeight + (parseFloat(getComputedStyle(header).top) || 0)) + 'px');
       };
       setHeaderH();
       new ResizeObserver(setHeaderH).observe(header);
-
-      /* ── Mobile menu ── */
-      document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-        const menu = document.getElementById('mobile-menu');
-        const isOpen = menu?.classList.toggle('is-open');
-        document.getElementById('icon-bars')?.classList.toggle('hidden', !!isOpen);
-        document.getElementById('icon-close')?.classList.toggle('hidden', !isOpen);
-      });
 
       /* ── i18n ── */
       import { translations } from '../i18n/translations';
@@ -244,16 +251,10 @@ const breadcrumbItems = title === 'Home'
         document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
       };
 
-      (window as any).__applyLang(localStorage.getItem('lang') || 'it');
+      let storedLang = 'it';
+      try { storedLang = localStorage.getItem('lang') === 'en' ? 'en' : 'it'; } catch {}
+      (window as any).__applyLang(storedLang);
     </script>
 
-    <style is:global>
-      header.nav-scrolled {
-        box-shadow: 0 1px 32px rgba(22, 44, 27, 0.18);
-        background: rgba(22, 44, 27, 0.97) !important;
-      }
-      #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.45s cubic-bezier(0.16,1,0.3,1); }
-      #mobile-menu.is-open { max-height: 480px; }
-    </style>
   </body>
 </html>

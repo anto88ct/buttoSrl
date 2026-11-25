@@ -1,7 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
-import garbageCleaning from "../assets/garbage-cleaning.jpg";
 
 const info = [
   {
@@ -9,12 +7,14 @@ const info = [
     titleKey: "contatti.info.sedeLabel",
     title: "Sede Operativa",
     lines: ["Via S. Giuseppe N°42", "Assoro (EN), 94010 · Sicilia"],
+    links: ["https://maps.google.com/?q=Via+San+Giuseppe+42,+Assoro,+EN,+Sicilia"],
   },
   {
     icon: "fa-phone",
     titleKey: "contatti.info.telLabel",
     title: "Telefono",
     lines: ["+39 375 927 8085"],
+    links: ["tel:+393759278085"],
     noteKey: "contatti.info.telNote",
     note: "Lun–Ven 08:30–18:00",
   },
@@ -22,7 +22,8 @@ const info = [
     icon: "fa-envelope",
     titleKey: "contatti.info.emailLabel",
     title: "Email",
-    lines: ["buttosrl@gmail.com", "impresabutto@pec.it"],
+    lines: ["servizi.butto@gmail.com", "impresabutto@pec.it"],
+    links: ["mailto:servizi.butto@gmail.com", "mailto:impresabutto@pec.it"],
   },
 ];
 
@@ -65,112 +66,45 @@ const temi = [
   description="Contatta Buttò S.r.l. – Entra in contatto con il team di gestione ambientale di Assoro (EN) per preventivi, collaborazioni e segnalazioni urgenti."
   ogImage="/cleaning.jpg"
 >
-  <!-- ══════════════════════ HERO ══════════════════════ -->
-  <section
-    class="relative h-[65vh] flex items-center bg-forest grain overflow-hidden"
-  >
-    <div class="absolute inset-0">
-      <Image
-        src={garbageCleaning}
-        alt=""
-        class="w-full h-full object-cover opacity-15"
-        loading="eager"
-        fetchpriority="high"
-        width={1200}
-        aria-hidden="true"
-      />
-      <div
-        class="absolute inset-0 bg-gradient-to-r from-forest/95 via-forest/70 to-transparent"
-      >
-      </div>
-    </div>
-
-    <div
-      class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden"
-    >
-      <!-- <span
-        class="font-condensed font-800 text-[20vw] text-ivory/[0.04] leading-none tracking-tighter"
-        >CIAO</span -->
-      <!-- > -->
-    </div>
-
-    <div
-      class="absolute top-16 right-16 w-24 h-24 border border-ochre/15 rotate-45 pointer-events-none hidden lg:block"
-    >
-    </div>
-    <div
-      class="absolute top-24 right-24 w-12 h-12 border border-ochre/20 rotate-45 pointer-events-none hidden lg:block"
-    >
-    </div>
-
-    <div class="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-14 w-full">
-      <span
-        data-i18n="contatti.hero.eyebrow"
-        class="overline text-ochre mb-5 block reveal">Parliamo</span
-      >
-      <h1
-        data-i18n-html="contatti.hero.h1html"
-        class="display-xl text-ivory reveal delay-1"
-      >
-        Entra in<br />
-        <em class="text-sage not-italic">contatto</em>
-      </h1>
-      <p
-        data-i18n="contatti.hero.body"
-        class="font-body text-ivory/45 max-w-lg text-xl leading-relaxed mt-8 reveal delay-2"
-      >
-        Siamo pronti ad ascoltare le tue esigenze e costruire insieme soluzioni
-        ambientali su misura.
-      </p>
-    </div>
-  </section>
-
   <!-- ══════════════════════ MAIN CONTENT ══════════════════════ -->
-  <section class="py-28 bg-ivory dot-grid">
+  <section class="pb-20 lg:pb-28 bg-ivory dot-grid" style="padding-top: calc(var(--header-h, 5.5rem) + 2rem);">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
-      <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <div class="grid lg:grid-cols-12 gap-8 xl:gap-12 items-start">
         <!-- LEFT: info panel -->
-        <div class="lg:col-span-4 space-y-8">
-          <div class="reveal">
-            <span data-i18n="contatti.info.eyebrow" class="overline text-ochre"
-              >Dove Siamo</span
-            >
-            <div class="rule-ochre"></div>
-            <h2
-              data-i18n="contatti.info.h2"
-              class="display-sm text-ink italic mt-5"
-            >
-              Informazioni
-            </h2>
+        <div class="order-2 lg:order-1 lg:col-span-4 space-y-6">
+          <div>
+            <h2 data-i18n="contatti.info.h2" class="font-serif text-4xl text-forest italic text-balance mb-3">Informazioni</h2>
           </div>
 
-          <div class="space-y-0 border border-linen reveal delay-1">
+          <div class="overflow-hidden rounded-2xl border border-linen bg-white shadow-sm">
             {
-              info.map(({ icon, titleKey, title, lines, noteKey, note }, i) => (
+              info.map(({ icon, titleKey, title, lines, links, noteKey, note }, i) => (
                 <div
-                  class={`group flex gap-5 items-start p-6 hover:bg-parchment transition-colors cursor-default ${i < info.length - 1 ? "border-b border-linen" : ""}`}
+                  class={`group flex gap-4 items-start p-6 ${i < info.length - 1 ? "border-b border-linen" : ""}`}
                 >
-                  <div class="w-10 h-10 border border-linen group-hover:border-ochre/40 flex items-center justify-center shrink-0 transition-colors">
+                  <div class="size-11 rounded-xl bg-forest/5 flex items-center justify-center shrink-0 text-forest-soft">
                     <i
-                      class={`fa-solid ${icon} text-sm text-ochre/50 group-hover:text-ochre transition-colors`}
+                      aria-hidden="true" class={`fa-solid ${icon} text-lg`}
                     />
                   </div>
-                  <div>
+                  <div class="min-w-0">
                     <p
                       data-i18n={titleKey}
-                      class="font-condensed font-700 text-[0.7rem] uppercase tracking-[0.14em] text-ink mb-1"
+                      class="font-body font-semibold text-base text-forest mb-2"
                     >
                       {title}
                     </p>
-                    {lines.map((l) => (
-                      <p class="font-body text-muted text-sm leading-snug">
-                        {l}
+                    {lines.map((line, lineIndex) => (
+                      <p class="font-body text-ink/80 text-base leading-relaxed break-words">
+                        {links[lineIndex] ? (
+                          <a href={links[lineIndex]} class="contact-info-link">{line}</a>
+                        ) : line}
                       </p>
                     ))}
                     {note && (
                       <p
                         data-i18n={noteKey}
-                        class="font-body text-muted/50 text-xs mt-1 italic"
+                        class="font-body text-muted text-sm mt-2"
                       >
                         {note}
                       </p>
@@ -181,29 +115,29 @@ const temi = [
             }
           </div>
 
-          <div class="border border-linen reveal delay-2">
-            <div class="flex items-center gap-3 p-5 border-b border-linen">
+          <div class="overflow-hidden rounded-2xl bg-forest text-ivory p-6 shadow-sm">
+            <div class="flex items-center gap-3 pb-5 border-b border-ivory/15">
               <i class="fa-solid fa-clock text-ochre text-sm"></i>
               <p
                 data-i18n="contatti.info.orari"
-                class="font-condensed font-700 text-[0.7rem] uppercase tracking-[0.14em] text-ink"
+                class="font-body font-semibold text-lg text-ivory"
               >
                 Orari di Apertura
               </p>
             </div>
-            <div class="divide-y divide-linen">
+            <div class="divide-y divide-ivory/10">
               {
                 schedule.map(({ dayKey, day, hoursKey, hours, open }) => (
-                  <div class="flex items-center justify-between px-5 py-3.5">
+                  <div class="flex flex-wrap items-center justify-between gap-3 py-4 last:pb-0">
                     <span
                       data-i18n={dayKey}
-                      class="font-body text-muted text-sm"
+                      class="font-body text-ivory/80 text-base"
                     >
                       {day}
                     </span>
                     <span
                       data-i18n={hoursKey}
-                      class={`font-condensed font-700 text-sm ${open ? "text-forest-soft" : "text-sienna"}`}
+                      class={`font-body font-semibold text-base tabular-nums ${open ? "text-ivory" : "text-ochre-light"}`}
                     >
                       {hours}
                     </span>
@@ -213,50 +147,27 @@ const temi = [
             </div>
           </div>
 
-          <!-- <div class="border-l-2 border-ochre bg-parchment p-6 reveal delay-3">
-            <p class="overline text-ochre mb-3">
-              <i class="fa-solid fa-triangle-exclamation mr-1.5"></i>
-              <span data-i18n="contatti.info.emergenze">Emergenze 24/7</span>
-            </p>
-            <p data-i18n="contatti.info.emergBody" class="font-body text-muted text-sm leading-relaxed mb-4">
-              Per segnalazioni urgenti di gestione rifiuti o bonifiche, il nostro team è sempre operativo.
-            </p>
-            <p class="font-display text-3xl text-ink leading-none">800 <span class="text-ochre">— — — —</span></p>
-          </div> -->
+
         </div>
 
         <!-- RIGHT: form -->
-        <div class="lg:col-span-8 reveal-right delay-1">
-          <div class="bg-white border border-linen p-8 lg:p-12 relative">
-            <div
-              class="absolute top-0 right-0 w-20 h-20 border-b-0 border-l-0 border border-ochre/15 pointer-events-none"
-            >
-            </div>
-            <div
-              class="absolute bottom-0 left-0 w-14 h-14 border-t-0 border-r-0 border border-ochre/10 pointer-events-none"
-            >
-            </div>
-
+        <div class="order-1 lg:order-2 lg:col-span-8">
+          <div class="rounded-2xl bg-white border border-linen p-6 sm:p-8 xl:p-12 shadow-sm">
             <div class="relative z-10">
-              <span
-                data-i18n="contatti.form.eyebrow"
-                class="overline text-ochre">Scrivici</span
-              >
-              <div class="rule-ochre"></div>
-              <h3
+              <h1
                 data-i18n="contatti.form.h3"
-                class="font-serif text-3xl text-ink italic mt-4 mb-1"
+                class="font-serif text-4xl sm:text-5xl text-forest italic leading-tight text-balance mb-4"
               >
                 Inviaci un Messaggio
-              </h3>
+              </h1>
               <p
                 data-i18n="contatti.form.subNote"
-                class="font-body text-muted text-sm mb-8"
+                class="font-body text-ink/70 text-lg leading-relaxed text-pretty mb-8 pb-8 border-b border-linen"
               >
                 Risponderemo entro 24 ore lavorative.
               </p>
 
-              <form id="contact-form" method="POST" class="space-y-6">
+              <form id="contact-form" method="POST" class="space-y-7">
                 <div class="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
                   <label for="form-website">Lascia vuoto questo campo</label>
                   <input
@@ -267,13 +178,12 @@ const temi = [
                     autocomplete="off"
                   />
                 </div>
-                <div class="grid md:grid-cols-2 gap-5">
+                <div class="grid md:grid-cols-2 gap-6">
                   <div class="space-y-2">
                     <label
                       for="form-name"
-                      class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                      class="font-body font-semibold text-base text-ink flex flex-wrap items-center gap-2"
                     >
-                      <i class="fa-solid fa-user text-ochre/60 text-[10px]"></i>
                       <span data-i18n="contatti.form.nome">Nome Completo</span>
                     </label>
                     <input
@@ -284,15 +194,14 @@ const temi = [
                       autocomplete="name"
                       required
                       aria-required="true"
-                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40"
+                      class="contact-field"
                     />
                   </div>
                   <div class="space-y-2">
                     <label
                       for="form-email"
-                      class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                      class="font-body font-semibold text-base text-ink flex flex-wrap items-center gap-2"
                     >
-                      <i class="fa-solid fa-at text-ochre/60 text-[10px]"></i>
                       <span data-i18n="contatti.form.email">Email</span>
                     </label>
                     <input
@@ -303,7 +212,7 @@ const temi = [
                       autocomplete="email"
                       required
                       aria-required="true"
-                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40"
+                      class="contact-field"
                     />
                   </div>
                 </div>
@@ -311,16 +220,15 @@ const temi = [
                 <div class="space-y-2">
                   <label
                     for="form-subject"
-                    class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                    class="font-body font-semibold text-base text-ink flex flex-wrap items-center gap-2"
                   >
-                    <i class="fa-solid fa-tag text-ochre/60 text-[10px]"></i>
                     <span data-i18n="contatti.form.oggetto">Oggetto</span>
                   </label>
                   <div class="relative">
                     <select
                       id="form-subject"
                       name="subject"
-                      class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors appearance-none cursor-pointer font-body text-ink text-sm"
+                      class="contact-field"
                     >
                       {
                         temi.map((t, ti) => (
@@ -342,15 +250,13 @@ const temi = [
                 <div class="space-y-2">
                   <label
                     for="form-company"
-                    class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                    class="font-body font-semibold text-base text-ink flex flex-wrap items-center gap-2"
                   >
-                    <i class="fa-solid fa-building text-ochre/60 text-[10px]"
-                    ></i>
                     <span data-i18n="contatti.form.azienda">Azienda / Ente</span
                     >
                     <span
                       data-i18n="contatti.form.opzionale"
-                      class="normal-case font-400 text-muted/50 tracking-normal"
+                      class="font-normal text-muted text-sm"
                       >(opzionale)</span
                     >
                   </label>
@@ -359,32 +265,31 @@ const temi = [
                     type="text"
                     name="company"
                     placeholder="Comune di…, Azienda XYZ"
-                    class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors font-body text-ink text-sm placeholder:text-muted/40"
+                    autocomplete="organization"
+                    class="contact-field"
                   />
                 </div>
 
                 <div class="space-y-2">
                   <label
                     for="form-message"
-                    class="font-condensed font-700 text-[0.65rem] uppercase tracking-[0.16em] text-ink flex items-center gap-2"
+                    class="font-body font-semibold text-base text-ink flex flex-wrap items-center gap-2"
                   >
-                    <i class="fa-solid fa-comment text-ochre/60 text-[10px]"
-                    ></i>
                     <span data-i18n="contatti.form.messaggio">Messaggio</span>
                   </label>
                   <textarea
                     id="form-message"
                     name="message"
-                    rows="5"
+                    rows="6"
                     placeholder="Descrivi la tua richiesta…"
                     required
                     aria-required="true"
-                    class="w-full bg-ivory border border-linen px-4 py-3.5 focus:border-ochre focus:outline-none transition-colors resize-none font-body text-ink text-sm placeholder:text-muted/40"
+                    class="contact-field"
                   ></textarea>
                 </div>
 
                 <div
-                  class="flex items-start gap-3 bg-ivory border border-linen p-4"
+                  class="flex items-start gap-3 rounded-lg bg-ivory/60 p-5"
                 >
                   <input
                     id="privacy"
@@ -392,18 +297,18 @@ const temi = [
                     name="privacy"
                     required
                     aria-required="true"
-                    class="mt-0.5 w-4 h-4 border-linen accent-ochre shrink-0 cursor-pointer"
+                    class="mt-0.5 size-5 border-linen accent-forest shrink-0 cursor-pointer"
                   />
                   <label
                     for="privacy"
-                    class="font-body text-xs text-muted leading-snug cursor-pointer"
+                    class="font-body text-sm text-ink/80 leading-relaxed cursor-pointer"
                   >
                     <span data-i18n="contatti.form.privacy"
                       >Acconsento al trattamento dei dati personali ai sensi del</span
                     >
                     <a
                       href="/privacy"
-                      class="text-ochre font-600 underline underline-offset-2 ml-1"
+                      class="text-forest font-semibold underline underline-offset-2 ml-1"
                       >GDPR</a
                     >.
                   </label>
@@ -413,14 +318,14 @@ const temi = [
                   id="contact-form-status"
                   role="status"
                   aria-live="polite"
-                  class="hidden font-body text-sm px-4 py-3 border"
+                  class="hidden rounded-lg font-body text-base leading-relaxed px-5 py-4 border"
                 >
                 </div>
 
                 <button
                   type="submit"
                   id="contact-form-submit"
-                  class="btn-primary w-full justify-center text-base py-5"
+                  class="inline-flex min-h-14 w-full items-center justify-center gap-3 rounded-lg bg-forest px-6 py-4 font-body text-lg font-semibold text-ivory hover:bg-forest-mid disabled:opacity-60 disabled:cursor-wait"
                 >
                   <span id="contact-form-submit-label" data-i18n="contatti.form.submit">Invia Messaggio</span>
                   <i class="fa-solid fa-paper-plane text-[11px]"></i>
@@ -540,6 +445,8 @@ const temi = [
         website: String(formData.get('website') ?? ''),
       };
 
+      form.setAttribute('aria-busy', 'true');
+      statusEl?.classList.add('hidden');
       if (submitBtn) submitBtn.disabled = true;
       if (submitLabel) {
         submitLabel.dataset.originalText = submitLabel.dataset.originalText ?? submitLabel.textContent ?? '';
@@ -547,14 +454,14 @@ const temi = [
       }
 
       try {
-        const res = await fetch('/api/contact', {
+        const res = await fetch('/api/contact.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
         const json = await res.json();
 
-        if (json.ok) {
+        if (res.ok && json.ok) {
           showStatus(t('contatti.form.success'), 'success');
           form.reset();
         } else {
@@ -563,9 +470,34 @@ const temi = [
       } catch {
         showStatus(t('contatti.form.error'), 'error');
       } finally {
+        form.removeAttribute('aria-busy');
         if (submitBtn) submitBtn.disabled = false;
         if (submitLabel) submitLabel.textContent = submitLabel.dataset.originalText ?? 'Invia Messaggio';
       }
     });
   </script>
 </Layout>
+
+
+<style>
+  .contact-field {
+    @apply block min-h-14 w-full rounded-lg border border-linen bg-ivory/40 px-4 py-3 font-body text-base text-ink;
+  }
+  .contact-field::placeholder { color: var(--muted); }
+  .contact-field:focus-visible {
+    outline: 2px solid var(--forest-soft);
+    outline-offset: 2px;
+    border-color: var(--forest-soft);
+    background: white;
+  }
+  select.contact-field { appearance: none; padding-right: 2.5rem; }
+  textarea.contact-field { resize: vertical; }
+  .contact-info-link:hover { color: var(--forest-soft); text-decoration: underline; text-underline-offset: 4px; }
+  .contact-info-link:focus-visible,
+  #contact-form a:focus-visible,
+  #contact-form button:focus-visible,
+  #contact-form input[type='checkbox']:focus-visible {
+    outline: 2px solid var(--forest-soft);
+    outline-offset: 4px;
+  }
+</style>

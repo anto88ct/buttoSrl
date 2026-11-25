@@ -6,46 +6,64 @@ const sections = [
     title: '1. Titolare del Trattamento',
     body: [
       'Il Titolare del trattamento dei dati raccolti tramite questo sito è Buttò Carmelo S.r.l., con sede legale in Via S. Giuseppe N°42, 94010 Assoro (EN) — P.IVA e C.F. 01208350866.',
-      'Contatti del Titolare: email buttosrl@gmail.com · PEC impresabutto@pec.it · telefono +39 375 927 8085.',
+      'Contatti del Titolare: email servizi.butto@gmail.com · PEC impresabutto@pec.it · telefono +39 375 927 8085.',
     ],
   },
   {
-    title: '2. Dati Raccolti e Finalità del Trattamento',
+    title: '2. Dati Inviati con il Modulo di Contatto',
     body: [
-      "Dati forniti volontariamente tramite il modulo di contatto (nome, email, azienda/ente se indicato, oggetto e testo del messaggio): raccolti solo quando l'utente compila e invia il modulo nella pagina Contatti, al fine di rispondere a richieste di informazioni, preventivi, segnalazioni o collaborazioni. La base giuridica è l'esecuzione di misure precontrattuali richieste dall'interessato (art. 6.1.b GDPR) e il consenso esplicito prestato tramite l'apposita casella di spunta (art. 6.1.a GDPR).",
-      'Dati di navigazione: come per la generalità dei siti web, il server che ospita il sito può registrare log tecnici (indirizzo IP, tipo di browser, pagine visitate, data e ora) per finalità di sicurezza e corretto funzionamento tecnico. Questo sito non utilizza cookie di profilazione né strumenti di analisi statistica di terze parti (es. Google Analytics).',
-      'Preferenza di lingua: la lingua selezionata dall\'utente viene salvata localmente nel browser (localStorage) per ricordarne la scelta tra una visita e l\'altra. Questo dato resta sul dispositivo dell\'utente, non viene trasmesso al Titolare né condiviso con terzi.',
+      "Il modulo della pagina Contatti raccoglie nome, indirizzo email, azienda o ente (facoltativo), oggetto e testo del messaggio. I dati sono usati solo per rispondere a richieste di informazioni, preventivi, segnalazioni o collaborazioni. La base giuridica è l'esecuzione di misure precontrattuali richieste dall'interessato (art. 6.1.b GDPR) e il consenso prestato tramite l'apposita casella (art. 6.1.a GDPR). Il consenso può essere revocato in qualsiasi momento, senza pregiudicare i trattamenti già effettuati.",
+      "Nome, email, messaggio e consenso sono necessari per inviare la richiesta: senza di essi il modulo non può essere trasmesso. Si invita a non inserire nel messaggio categorie particolari di dati (ad esempio dati sulla salute).",
+      "Il messaggio è elaborato dal server che ospita il sito e inoltrato per email alla casella servizi.butto@gmail.com, gestita tramite il servizio Gmail di Google. Il sito non conserva i messaggi in un proprio database.",
     ],
   },
   {
-    title: '3. Servizi di Terze Parti',
+    title: '3. Dati di Navigazione e Protezione dagli Abusi',
     body: [
-      'Per il corretto funzionamento del sito vengono caricate risorse da fornitori terzi: Google Fonts e Font Awesome (caratteri tipografici e icone) e Google Maps (mappa interattiva della sede operativa, pagina Contatti). Il caricamento di queste risorse può comportare la trasmissione dell\'indirizzo IP del visitatore ai rispettivi fornitori, secondo le loro informative privacy.',
+      'Il sito è ospitato su servizi di OVHcloud. Il server può registrare log tecnici (indirizzo IP, tipo di browser, pagine richieste, data e ora) per finalità di sicurezza e corretto funzionamento, sulla base del legittimo interesse del Titolare (art. 6.1.f GDPR).',
+      "Per limitare l'invio automatizzato o abusivo di messaggi, a ogni invio del modulo il server registra l'orario e un'impronta (hash SHA-256) dell'indirizzo IP. L'impronta è un dato pseudonimo, non anonimo. È considerata per un'ora e viene cancellata al primo invio del modulo successivo a tale periodo. La base giuridica è il legittimo interesse alla sicurezza del sito (art. 6.1.f GDPR).",
+      "Il sito non utilizza strumenti di analisi statistica o di profilazione propri o di terze parti (ad esempio Google Analytics) e non adotta processi decisionali automatizzati che producano effetti sull'interessato.",
+      "La lingua scelta dall'utente è salvata nel browser (localStorage, chiave \"lang\") e non viene trasmessa al Titolare.",
     ],
   },
   {
-    title: '4. Conservazione dei Dati',
+    title: '4. Risorse di Terze Parti',
     body: [
-      "I dati raccolti tramite il modulo di contatto sono conservati per il tempo necessario a gestire la richiesta e per l'eventuale instaurazione di un rapporto contrattuale, e comunque non oltre 24 mesi dall'ultimo contatto, salvi diversi obblighi di legge.",
+      "Alcune pagine caricano risorse direttamente dai server di fornitori terzi, che in questo modo ricevono l'indirizzo IP e i dati tecnici del browser e li trattano secondo le proprie informative:",
+    ],
+    links: [
+      { text: 'Google Fonts (caratteri tipografici) e Google Maps (mappa nella pagina Contatti)', url: 'https://policies.google.com/privacy' },
+      { text: 'Cloudflare, rete cdnjs (icone Font Awesome)', url: 'https://www.cloudflare.com/privacypolicy/' },
+      { text: 'Unsplash (fotografie nelle pagine Servizi e Certificazioni)', url: 'https://unsplash.com/privacy' },
+    ],
+    after: [
+      'Quando la sezione delle recensioni Google è attiva, anche le foto profilo degli autori sono caricate dai server di Google. I collegamenti verso siti esterni sono soggetti alle informative dei rispettivi gestori.',
     ],
   },
   {
-    title: '5. Comunicazione e Diffusione dei Dati',
+    title: '5. Destinatari e Trasferimenti fuori dallo Spazio Economico Europeo',
     body: [
-      "I dati personali non vengono diffusi e non sono comunicati a terzi, salvo quando necessario per obblighi di legge o per l'erogazione tecnica del servizio (es. fornitore di hosting o posta elettronica), che agiscono in qualità di responsabili del trattamento ove applicabile.",
+      "I dati personali non vengono diffusi. Possono essere trattati da personale autorizzato del Titolare, dai fornitori tecnici di hosting e posta elettronica (che agiscono come responsabili del trattamento ove applicabile) e comunicati a terzi quando richiesto dalla legge.",
+      'Google, Cloudflare e Unsplash possono trattare dati anche fuori dallo Spazio Economico Europeo. In tal caso il trasferimento avviene secondo le garanzie previste dagli artt. 44 e seguenti GDPR, descritte nelle rispettive informative.',
     ],
   },
   {
-    title: "6. Diritti dell'Interessato",
+    title: '6. Conservazione dei Dati',
     body: [
-      "Ai sensi degli artt. 15-22 del Regolamento UE 2016/679, l'interessato ha diritto di richiedere in qualsiasi momento l'accesso ai propri dati, la rettifica, la cancellazione, la limitazione del trattamento, la portabilità dei dati, nonché di opporsi al trattamento, scrivendo a buttosrl@gmail.com o alla PEC impresabutto@pec.it.",
-      "È inoltre possibile proporre reclamo all'Autorità Garante per la Protezione dei Dati Personali (www.garanteprivacy.it) qualora si ritenga che il trattamento violi la normativa vigente.",
+      "I dati ricevuti tramite il modulo di contatto sono conservati per il tempo necessario a gestire la richiesta e l'eventuale rapporto contrattuale, e comunque non oltre 24 mesi dall'ultimo contatto, salvi diversi obblighi di legge. I log tecnici sono conservati per i tempi previsti dal fornitore di hosting e dagli obblighi di legge.",
     ],
   },
   {
-    title: "7. Modifiche alla Presente Informativa",
+    title: "7. Diritti dell'Interessato",
     body: [
-      "Il Titolare si riserva il diritto di aggiornare la presente informativa in caso di modifiche normative o dei servizi offerti dal sito. Ultimo aggiornamento: 15 luglio 2026.",
+      "Ai sensi degli artt. 15-22 del Regolamento UE 2016/679, l'interessato può chiedere l'accesso ai propri dati, la rettifica, la cancellazione, la limitazione del trattamento e la portabilità, e opporsi al trattamento fondato sul legittimo interesse, scrivendo a servizi.butto@gmail.com o alla PEC impresabutto@pec.it.",
+      "È inoltre possibile proporre reclamo al Garante per la protezione dei dati personali (www.garanteprivacy.it).",
+    ],
+  },
+  {
+    title: '8. Modifiche alla Presente Informativa',
+    body: [
+      'Il Titolare può aggiornare questa informativa in caso di modifiche normative o dei servizi del sito. Ultimo aggiornamento: 25 novembre 2026.',
     ],
   },
 ];
@@ -66,7 +84,7 @@ const sections = [
         Informativa sulla <em class="text-forest-soft not-italic">Privacy</em>
       </h1>
       <p class="font-body text-muted text-lg max-w-2xl leading-relaxed mt-8 reveal delay-2">
-        Ai sensi degli artt. 13-14 del Regolamento UE 2016/679 (GDPR), Buttò Carmelo S.r.l. informa gli utenti del sito butto-srl.it sulle modalità di trattamento dei loro dati personali.
+        Ai sensi degli artt. 13-14 del Regolamento UE 2016/679 (GDPR), Buttò Carmelo S.r.l. informa gli utenti del sito buttocarmelo.it sulle modalità di trattamento dei loro dati personali.
       </p>
     </div>
   </section>
@@ -74,7 +92,7 @@ const sections = [
   <!-- ══════════════════════ CONTENT ══════════════════════ -->
   <section class="py-24 bg-white">
     <div class="max-w-3xl mx-auto px-6 lg:px-14 space-y-14">
-      {sections.map(({ title, body }) => (
+      {sections.map(({ title, body, links, after }) => (
         <div class="reveal">
           <h2 class="font-serif text-2xl italic text-ink mb-4">{title}</h2>
           <div class="space-y-4">
@@ -82,6 +100,16 @@ const sections = [
               <p class="font-body text-muted leading-relaxed">{p}</p>
             ))}
           </div>
+          {links && (
+            <ul class="list-disc pl-6 space-y-2 mt-4">
+              {links.map(({ text, url }) => (
+                <li class="font-body text-muted leading-relaxed">
+                  {text}: <a href={url} target="_blank" rel="noopener noreferrer" class="underline break-words">informativa</a>
+                </li>
+              ))}
+            </ul>
+          )}
+          {after && after.map((p) => <p class="font-body text-muted leading-relaxed mt-4">{p}</p>)}
         </div>
       ))}
     </div>

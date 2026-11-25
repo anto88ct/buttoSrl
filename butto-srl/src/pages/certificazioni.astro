@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroWatermark from '../components/HeroWatermark.astro';
 import { translations } from '../i18n/translations';
 
 // Visual metadata only — all text (cat/tag/short/rows/paragraph) lives in
@@ -69,9 +70,7 @@ const certSearchItems = [
 
   <!-- HERO -->
   <section class="relative py-36 bg-ivory dot-grid overflow-hidden">
-    <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
-      <span class="font-condensed font-800 text-[24vw] text-ink/[0.04] leading-none tracking-tighter">QUALITÀ</span>
-    </div>
+    <HeroWatermark word="QUALITÀ" />
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
       <span data-i18n="certificazioni.hero.eyebrow" class="overline text-ochre mb-5 block reveal">Trasparenza e Normative</span>
@@ -826,19 +825,28 @@ const certSearchItems = [
   </script>
 
   <!-- CTA -->
-  <section class="py-24 bg-forest relative overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <div class="absolute inset-0 bg-gradient-to-r from-forest to-transparent z-10"></div>
+  <section class="py-32 md:py-40 lg:py-48 bg-forest grain relative overflow-hidden">
+    <div class="absolute right-0 bottom-0 pointer-events-none select-none" aria-hidden="true">
+      <span class="font-condensed font-800 text-[20vw] text-ivory/[0.1] leading-none tracking-tighter">TALK</span>
     </div>
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10 text-center reveal">
-      <span data-i18n="certificazioni.cta.eyebrow" class="overline text-ochre">Hai bisogno di consulenza?</span>
-      <h2 data-i18n="certificazioni.cta.h2" class="display-sm text-ivory italic mt-4 mb-5">Assistenza Normativa e Classificazione CER</h2>
-      <p data-i18n="certificazioni.cta.body" class="font-body text-ivory/60 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-        Hai dubbi sulla corretta codifica dei tuoi rifiuti o cerchi un partner affidabile e certificato per lo smaltimento? I nostri specialisti sono a tua disposizione.
-      </p>
-      <a href="/contatti" class="btn-primary px-10 py-5 inline-flex">
-        <span data-i18n="certificazioni.cta.btn">Contatta per consulenza sui codici CER</span> <i class="fa-solid fa-arrow-right text-[10px] ml-2 mt-1"></i>
-      </a>
+    <div class="absolute top-12 right-12 w-32 h-32 border border-ochre/10 rotate-45 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-20 right-20 w-16 h-16 border border-ochre/15 rotate-45 pointer-events-none" aria-hidden="true"></div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <div class="max-w-6xl mx-auto reveal">
+        <h2 data-i18n-html="certificazioni.cta.h2html" class="display-xl text-ivory text-balance mb-10">
+          Assistenza Normativa<br/>
+          <em class="text-sage not-italic">e Classificazione CER</em>
+        </h2>
+        <p data-i18n="certificazioni.cta.body" class="font-body text-ivory/70 text-xl text-pretty leading-relaxed mb-12 max-w-2xl">
+          Hai dubbi sulla corretta codifica dei tuoi rifiuti o cerchi un partner affidabile e certificato per lo smaltimento? I nostri specialisti sono a tua disposizione.
+        </p>
+        <div class="flex flex-wrap gap-5">
+          <a href="/contatti" class="btn-primary text-base px-10 py-5">
+            <span data-i18n="certificazioni.cta.btn">Contatta per consulenza sui codici CER</span> <i aria-hidden="true" class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 

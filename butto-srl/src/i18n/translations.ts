@@ -35,8 +35,8 @@ export const translations = {
       stats: {
         anni: 'Anni',
         anniSub: 'di esperienza sul campo',
-        comuni: 'Comuni',
-        comuniSub: 'serviti in Sicilia',
+        clienti: 'Clienti in evidenza',
+        clientiSub: 'nella sezione clienti',
         co2Label: 'Ton CO₂',
         co2Sub: 'risparmiate ogni anno',
         rifiutiLabel: 'Rifiuti',
@@ -60,7 +60,7 @@ export const translations = {
         p1: 'Fondata da Carmelo Buttò ad Assoro, in provincia di Enna, la nostra azienda è cresciuta dal nucleo familiare fino a diventare un punto di riferimento nella gestione ambientale per la Sicilia centro-orientale.',
         p2: "Quattro decenni di esperienza ci hanno insegnato che prendersi cura dell'ambiente non è un servizio — è una vocazione che si tramanda di generazione in generazione.",
         anni: 'Anni',
-        comuni: 'Comuni',
+        clienti: 'Clienti in evidenza',
         passione: 'Passione',
         co2Label: 'CO₂ Risparmiata',
         yearLabel: 'Fondazione',
@@ -76,7 +76,7 @@ export const translations = {
         co2Sub: 'Tonnellate CO₂ Risparmiate',
         co2Note: 'Equivalente a 120.000 alberi piantati ogni anno',
         rifiutiLabel: 'Rifiuti Recuperati',
-        comuniLabel: 'Comuni Serviti',
+        clientiLabel: 'Clienti in evidenza',
         annoPer: 'Anno su Anno',
       },
       news: {
@@ -108,7 +108,7 @@ export const translations = {
         h2: 'Il Custode',
         quote: '"Un territorio pulito è il regalo più grande che possiamo fare alle generazioni future."',
         p1: "Nato ad Assoro in una famiglia profondamente legata alla terra siciliana, Carmelo Buttò ha iniziato la sua attività nel 1978 con una visione semplice ma potente: lasciare il territorio migliore di come lo aveva trovato.",
-        p2: "Quello che era un piccolo servizio di raccolta rifiuti si è trasformato, grazie alla sua dedizione, in un'azienda che oggi copre oltre 120 comuni con standard certificati a livello internazionale.",
+        p2: "Quello che era un piccolo servizio di raccolta rifiuti si è trasformato, grazie alla sua dedizione, in un'azienda al servizio di enti pubblici e imprese in Sicilia.",
         fondazione: 'Fondazione',
         esperienza: 'di esperienza',
         sedeStorica: 'sede storica',
@@ -116,7 +116,7 @@ export const translations = {
       camion: {
         eyebrow: '1978 — Il Primo Automezzo',
         h2: 'Da Qui è Iniziato Tutto',
-        body: 'Prima di 120 comuni, prima delle certificazioni, prima della flotta di oggi: un solo camion e la volontà di fare le cose per bene.',
+        body: 'Prima delle certificazioni, prima della flotta di oggi: un solo camion e la volontà di fare le cose per bene.',
       },
       timeline: {
         eyebrow: 'La Nostra Evoluzione',
@@ -126,7 +126,7 @@ export const translations = {
           { year: '1990', title: 'Primo Appalto Pubblico', desc: "L'azienda si aggiudica il primo contratto di pulizia con un ente pubblico siciliano, aprendo la strada alla specializzazione istituzionale." },
           { year: '2005', title: 'Certificazione ISO',    desc: "Buttò S.r.l. ottiene la certificazione ISO 14001, diventando una delle prime realtà del settore nella regione. <a href='/certificazioni' class='text-ochre hover:text-ochre/80 transition-colors underline decoration-ochre/30 underline-offset-2'>Scopri le certificazioni</a>" },
           { year: '2018', title: 'Rinnovo della Flotta',  desc: "Investimento strategico in mezzi a basse emissioni e sistemi digitali di tracciamento per ridurre l'impatto ambientale del 30%." },
-          { year: 'Oggi', title: "L'Archivio Organico",   desc: "45 anni dopo, Buttò S.r.l. opera in oltre 120 comuni siciliani portando avanti la visione del fondatore: un territorio pulito è un territorio che vive." },
+          { year: 'Oggi', title: "L'Archivio Organico",   desc: "45 anni dopo, Buttò S.r.l. affianca enti pubblici e imprese in Sicilia portando avanti la visione del fondatore: un territorio pulito è un territorio che vive." },
         ],
       },
       valori: {
@@ -189,6 +189,7 @@ export const translations = {
       cta: {
         eyebrow: 'Serve una soluzione su misura?',
         h2: 'Ogni territorio è unico',
+        h2html: 'Ogni territorio<br/><em class="text-sage not-italic">è unico</em>',
         body: 'Il nostro team è pronto ad ascoltarti e progettare il servizio più adatto alla tua realtà.',
         btn: 'Richiedi un preventivo',
       },
@@ -252,8 +253,8 @@ export const translations = {
         co2Note: 'Ogni tonnellata risparmiata rappresenta il nostro impegno diretto — l\'equivalente di 120.000 alberi piantati.',
         rifiutiTitle: 'Rifiuti Recuperati',
         rifiutiNote: 'Smaltimento rifiuti speciali certificato.',
-        comuniLabel: 'Comuni Serviti',
-        comuniSub: 'Sicilia centro-orientale',
+        clientiLabel: 'Clienti in evidenza',
+        clientiSub: 'nella sezione clienti',
         emissioniLabel: 'Emissioni Flotta',
         emissioniSub: 'Con nuovi mezzi eco',
         traccLabel: 'Tracciabilità',
@@ -383,6 +384,7 @@ export const translations = {
       cta: {
         eyebrow: 'Hai bisogno di consulenza?',
         h2: 'Assistenza Normativa e Classificazione CER',
+        h2html: 'Assistenza Normativa<br/><em class="text-sage not-italic">e Classificazione CER</em>',
         body: 'Hai dubbi sulla corretta codifica dei tuoi rifiuti o cerchi un partner affidabile e certificato per lo smaltimento? I nostri specialisti sono a tua disposizione.',
         btn: 'Contatta per consulenza sui codici CER',
       },
@@ -423,7 +425,7 @@ export const translations = {
         submit: 'Invia Messaggio',
         sending: 'Invio in corso…',
         success: 'Messaggio inviato! Ti risponderemo entro 24 ore lavorative.',
-        error: 'Invio non riuscito. Riprova o scrivi a buttosrl@gmail.com.',
+        error: 'Invio non riuscito. Riprova o scrivi a servizi.butto@gmail.com.',
         temi: [
           'Richiesta Informazioni Generali',
           'Preventivo Servizi Ambientali',
@@ -476,8 +478,8 @@ export const translations = {
       stats: {
         anni: 'Years',
         anniSub: 'of field experience',
-        comuni: 'Municipalities',
-        comuniSub: 'served across Sicily',
+        clienti: 'Featured clients',
+        clientiSub: 'in our client section',
         co2Label: 'Ton CO₂',
         co2Sub: 'saved every year',
         rifiutiLabel: 'Waste',
@@ -501,7 +503,7 @@ export const translations = {
         p1: 'Founded by Carmelo Buttò in Assoro, in the province of Enna, our company has grown from a family business to become a reference point in environmental management for central-eastern Sicily.',
         p2: "Four decades of experience have taught us that caring for the environment is not a service — it is a vocation passed down from generation to generation.",
         anni: 'Years',
-        comuni: 'Municipalities',
+        clienti: 'Featured clients',
         passione: 'Passion',
         co2Label: 'CO₂ Saved',
         yearLabel: 'Founded',
@@ -517,7 +519,7 @@ export const translations = {
         co2Sub: 'Tonnes of CO₂ Saved',
         co2Note: 'Equivalent to 120,000 trees planted every year',
         rifiutiLabel: 'Waste Recovered',
-        comuniLabel: 'Municipalities Served',
+        clientiLabel: 'Featured clients',
         annoPer: 'Year on Year',
       },
       news: {
@@ -549,7 +551,7 @@ export const translations = {
         h2: 'The Guardian',
         quote: '"A clean territory is the greatest gift we can give to future generations."',
         p1: "Born in Assoro in a family deeply rooted in Sicilian land, Carmelo Buttò began his business in 1978 with a simple yet powerful vision: to leave the territory better than he found it.",
-        p2: "What was a small waste collection service was transformed, through his dedication, into a company that today covers over 120 municipalities with internationally certified standards.",
+        p2: "What was a small waste collection service was transformed, through his dedication, into a company serving public bodies and businesses across Sicily.",
         fondazione: 'Founded',
         esperienza: 'of experience',
         sedeStorica: 'historic headquarters',
@@ -557,7 +559,7 @@ export const translations = {
       camion: {
         eyebrow: '1978 — The First Vehicle',
         h2: 'Where It All Began',
-        body: "Before 120 municipalities, before the certifications, before today's fleet: one truck and the will to do things right.",
+        body: "Before the certifications, before today's fleet: one truck and the will to do things right.",
       },
       timeline: {
         eyebrow: 'Our Evolution',
@@ -567,7 +569,7 @@ export const translations = {
           { year: '1990', title: 'First Public Contract',  desc: "The company wins its first cleaning contract with a Sicilian public body, paving the way for institutional specialisation." },
           { year: '2005', title: 'ISO Certification',     desc: "Buttò S.r.l. obtains ISO 14001 certification, becoming one of the first companies in the sector in the region. <a href='/certificazioni' class='text-ochre hover:text-ochre/80 transition-colors underline decoration-ochre/30 underline-offset-2'>Discover certifications</a>" },
           { year: '2018', title: 'Fleet Renewal',         desc: "Strategic investment in low-emission vehicles and digital tracking systems to reduce environmental impact by 30%." },
-          { year: 'Today', title: "The Organic Archive",  desc: "45 years on, Buttò S.r.l. operates in over 120 Sicilian municipalities, carrying forward the founder's vision: a clean territory is a living territory." },
+          { year: 'Today', title: "The Organic Archive",  desc: "45 years on, Buttò S.r.l. supports public bodies and businesses across Sicily, carrying forward the founder's vision: a clean territory is a living territory." },
         ],
       },
       valori: {
@@ -630,6 +632,7 @@ export const translations = {
       cta: {
         eyebrow: 'Need a tailored solution?',
         h2: 'Every territory is unique',
+        h2html: 'Every territory<br/><em class="text-sage not-italic">is unique</em>',
         body: 'Our team is ready to listen and design the service best suited to your reality.',
         btn: 'Request a quote',
       },
@@ -693,8 +696,8 @@ export const translations = {
         co2Note: 'Every tonne saved represents our direct commitment — equivalent to 120,000 trees planted.',
         rifiutiTitle: 'Waste Recovered',
         rifiutiNote: 'Certified special waste disposal.',
-        comuniLabel: 'Municipalities Served',
-        comuniSub: 'Central-eastern Sicily',
+        clientiLabel: 'Featured clients',
+        clientiSub: 'in our client section',
         emissioniLabel: 'Fleet Emissions',
         emissioniSub: 'With new eco vehicles',
         traccLabel: 'Traceability',
@@ -824,6 +827,7 @@ export const translations = {
       cta: {
         eyebrow: 'Need advice?',
         h2: 'Regulatory Assistance and EWC Classification',
+        h2html: 'Regulatory Assistance<br/><em class="text-sage not-italic">and EWC Classification</em>',
         body: 'Have questions about correct waste classification or need a reliable certified disposal partner? Our specialists are at your disposal.',
         btn: 'Contact for EWC code advice',
       },
@@ -864,7 +868,7 @@ export const translations = {
         submit: 'Send Message',
         sending: 'Sending…',
         success: 'Message sent! We will reply within 24 working hours.',
-        error: 'Sending failed. Please try again or email buttosrl@gmail.com.',
+        error: 'Sending failed. Please try again or email servizi.butto@gmail.com.',
         temi: [
           'General Information Request',
           'Environmental Services Quote',

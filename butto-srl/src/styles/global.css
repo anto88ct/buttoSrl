@@ -1,5 +1,5 @@
 /* ── Fonts ─────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Barlow:wght@300;400;500;600&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -424,4 +424,52 @@
   background: transparent;
   transition: transform 0.1s linear;
   will-change: transform;
+}
+
+/* Native page transitions preserve the normal page/script lifecycle. */
+@view-transition {
+  navigation: auto;
+}
+
+.page-content {
+  view-transition-name: page-content;
+}
+
+::view-transition-group(root),
+::view-transition-group(site-navigation),
+::view-transition-group(page-content) {
+  animation: none;
+}
+
+::view-transition-old(root),
+::view-transition-old(site-navigation) {
+  display: none;
+}
+
+::view-transition-new(root),
+::view-transition-new(site-navigation) {
+  animation: none;
+}
+
+::view-transition-old(page-content) {
+  animation: page-leave 120ms ease-out both;
+}
+
+::view-transition-new(page-content) {
+  animation: page-enter 180ms ease-out both;
+}
+
+@keyframes page-leave {
+  to { opacity: 0; }
+}
+
+@keyframes page-enter {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition { navigation: none; }
+  ::view-transition-old(page-content),
+  ::view-transition-new(page-content) { animation: none; }
 }

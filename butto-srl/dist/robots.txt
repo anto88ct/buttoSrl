@@ -1,4 +1,21 @@
+# Search engines and AI assistants are welcome. These are voluntary crawler rules.
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://butto-srl.it/sitemap-index.xml
+# AI search, assistants and model training crawlers, listed explicitly.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+Allow: /
+Disallow: /api/
+
+Sitemap: https://buttocarmelo.it/sitemap-index.xml

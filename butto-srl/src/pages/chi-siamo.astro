@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroWatermark from '../components/HeroWatermark.astro';
 import { Image } from 'astro:assets';
 
 
@@ -11,9 +12,9 @@ const valori = [
 ];
 
 const primoCamion = [
-  '/sezione_camion_laterale.png',
-  '/sezione_camion_front.png',
-  '/sezione_camion_alto.png',
+  '/sezione_camion_laterale.webp',
+  '/sezione_camion_front.webp',
+  '/sezione_camion_alto.webp',
 ];
 
 const timeline = [
@@ -33,9 +34,7 @@ const timeline = [
 
   <!-- ══════════════════════ HERO ══════════════════════ -->
   <section class="relative py-36 bg-ivory dot-grid overflow-hidden">
-    <div class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
-      <span class="font-condensed font-800 text-[24vw] text-ink/[0.04] leading-none tracking-tighter">STORIA</span>
-    </div>
+    <HeroWatermark word="STORIA" />
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
       <span data-i18n="chiSiamo.hero.eyebrow" class="overline text-ochre mb-5 block reveal">La Nostra Storia</span>
@@ -58,8 +57,8 @@ const timeline = [
           <div class="relative">
             <div class="absolute -top-4 -left-4 w-full h-full border border-ochre/20 pointer-events-none"></div>
             <div class="founder-swap aspect-[3/4]">
-              <Image src="/owner_first.png" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-1 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
-              <Image src="/owner_second.png" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-2 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
+              <Image src="/owner_first.webp" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-1 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
+              <Image src="/owner_second.webp" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-2 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
               <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent pointer-events-none"></div>
             </div>
             <div class="absolute top-6 right-6 bg-ochre text-forest px-4 py-2.5">
@@ -115,7 +114,7 @@ const timeline = [
       <div class="rule-ochre"></div>
       <h2 data-i18n="chiSiamo.camion.h2" class="display-sm text-ink mt-5 italic">Da Qui è Iniziato Tutto</h2>
       <p data-i18n="chiSiamo.camion.body" class="font-body text-muted text-lg max-w-2xl leading-relaxed mt-6">
-        Prima di 120 comuni, prima delle certificazioni, prima della flotta di oggi: un solo camion e la volontà di fare le cose per bene.
+        Prima delle certificazioni, prima della flotta di oggi: un solo camion e la volontà di fare le cose per bene.
       </p>
     </div>
 
@@ -150,12 +149,12 @@ const timeline = [
 
             <div class="hidden lg:grid tl-grid items-start">
 
-              <div class="py-16 pr-20 xl:pr-28">
+              <div class="py-10 pr-12 xl:pr-16">
                 {i % 2 === 0 && (
-                  <div class="tl-card text-right">
-                    <span class="overline text-ochre mb-4 block">{year}</span>
-                    <h3 data-i18n={`chiSiamo.timeline.items.${i}.title`} class="font-serif text-3xl text-ink italic mb-4 leading-snug">{title}</h3>
-                    <p data-i18n-html={`chiSiamo.timeline.items.${i}.desc`} class="font-body text-muted text-sm leading-relaxed ml-auto tl-desc" set:html={desc}></p>
+                  <div class="tl-card tl-surface text-right">
+                    <span class="tl-year block border-b border-linen pb-5 mb-6 font-condensed font-semibold text-5xl text-forest-soft tabular-nums">{year}</span>
+                    <h3 data-i18n={`chiSiamo.timeline.items.${i}.title`} class="font-serif text-3xl xl:text-4xl text-ink italic mb-5 leading-tight text-balance">{title}</h3>
+                    <p data-i18n-html={`chiSiamo.timeline.items.${i}.desc`} class="font-body text-ink/75 text-lg leading-relaxed text-pretty ml-auto tl-desc" set:html={desc}></p>
                   </div>
                 )}
               </div>
@@ -167,26 +166,26 @@ const timeline = [
                 </div>
               </div>
 
-              <div class="py-16 pl-20 xl:pl-28">
+              <div class="py-10 pl-12 xl:pl-16">
                 {i % 2 !== 0 && (
-                  <div class="tl-card">
-                    <span class="overline text-ochre mb-4 block">{year}</span>
-                    <h3 data-i18n={`chiSiamo.timeline.items.${i}.title`} class="font-serif text-3xl text-ink italic mb-4 leading-snug">{title}</h3>
-                    <p data-i18n-html={`chiSiamo.timeline.items.${i}.desc`} class="font-body text-muted text-sm leading-relaxed tl-desc" set:html={desc}></p>
+                  <div class="tl-card tl-surface">
+                    <span class="tl-year block border-b border-linen pb-5 mb-6 font-condensed font-semibold text-5xl text-forest-soft tabular-nums">{year}</span>
+                    <h3 data-i18n={`chiSiamo.timeline.items.${i}.title`} class="font-serif text-3xl xl:text-4xl text-ink italic mb-5 leading-tight text-balance">{title}</h3>
+                    <p data-i18n-html={`chiSiamo.timeline.items.${i}.desc`} class="font-body text-ink/75 text-lg leading-relaxed text-pretty tl-desc" set:html={desc}></p>
                   </div>
                 )}
               </div>
             </div>
 
-            <div class="lg:hidden flex gap-6 py-10 border-b border-linen/50 last:border-0">
+            <div class="lg:hidden flex gap-4 py-5">
               <div class="flex flex-col items-center flex-shrink-0 w-4">
-                <div class="w-2.5 h-2.5 rounded-full flex-shrink-0 mt-1 tl-mobile-dot"></div>
+                <div class="w-2.5 h-2.5 rounded-full flex-shrink-0 mt-8 tl-mobile-dot"></div>
                 <div class="w-px bg-linen grow mt-3"></div>
               </div>
-              <div class="pb-4 flex-1 min-w-0">
-                <span class="overline text-ochre mb-3 block">{year}</span>
-                <h3 data-i18n={`chiSiamo.timeline.items.${i}.title`} class="font-serif text-xl text-ink italic mb-3 leading-snug">{title}</h3>
-                <p data-i18n-html={`chiSiamo.timeline.items.${i}.desc`} class="font-body text-muted text-sm leading-relaxed" set:html={desc}></p>
+              <div class="tl-surface flex-1 min-w-0">
+                <span class="tl-year block border-b border-linen pb-4 mb-5 font-condensed font-semibold text-4xl text-forest-soft tabular-nums">{year}</span>
+                <h3 data-i18n={`chiSiamo.timeline.items.${i}.title`} class="font-serif text-3xl text-ink italic mb-4 leading-tight text-balance">{title}</h3>
+                <p data-i18n-html={`chiSiamo.timeline.items.${i}.desc`} class="font-body text-ink/75 text-lg leading-relaxed text-pretty" set:html={desc}></p>
               </div>
             </div>
 
@@ -243,8 +242,27 @@ const timeline = [
 <style>
   .tl-spine-color { @apply bg-ochre; }
   .tl-grid { grid-template-columns: 1fr 5rem 1fr; }
-  .tl-node-col { padding-top: 4.375rem; }
-  .tl-desc { max-width: 30ch; }
+  .tl-node-col { padding-top: 5rem; }
+  .tl-desc { max-width: 38ch; }
+  .tl-surface {
+    @apply relative rounded-lg border border-linen bg-ivory p-6 shadow-sm xl:p-8;
+    border-top: 3px solid var(--ochre);
+  }
+  @media (min-width: 1024px) {
+    .tl-card::after {
+      content: '';
+      position: absolute;
+      top: 2.5rem;
+      width: 3rem;
+      height: 1px;
+      background: var(--linen);
+    }
+    .tl-even .tl-card::after { left: 100%; }
+    .tl-odd .tl-card::after { right: 100%; }
+    @media (min-width: 1280px) {
+      .tl-card::after { width: 4rem; }
+    }
+  }
   .tl-card {
     opacity: 0;
     transition:

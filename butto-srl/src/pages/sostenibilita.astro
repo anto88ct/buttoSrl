@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { clientLogos } from '../data/clients';
+import HeroWatermark from '../components/HeroWatermark.astro';
 import { Image } from 'astro:assets';
 import leafeHeart from '../assets/leafe-heart.jpg';
 
@@ -32,9 +34,7 @@ const sdgs = [
       <div class="absolute inset-0 bg-gradient-to-r from-forest via-forest/80 to-transparent"></div>
     </div>
 
-    <div class="absolute right-0 bottom-0 pointer-events-none select-none overflow-hidden">
-      <span class="font-condensed font-800 text-[22vw] text-ivory/[0.04] leading-none tracking-tighter">TERRA</span>
-    </div>
+    <HeroWatermark word="TERRA" dark bottom />
 
     <div class="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-14 w-full py-32">
       <div class="max-w-3xl">
@@ -139,7 +139,7 @@ const sdgs = [
         </div>
 
         {[
-          { icon: 'fa-city',         v: '120+', lKey: 'sostenibilita.metrics.comuniLabel',    sKey: 'sostenibilita.metrics.comuniSub',    l: 'Comuni Serviti',   s: 'Sicilia centro-orientale' },
+          { icon: 'fa-handshake', v: String(clientLogos.length), lKey: 'sostenibilita.metrics.clientiLabel',    sKey: 'sostenibilita.metrics.clientiSub',    l: 'Clienti in evidenza', s: 'nella sezione clienti' },
           { icon: 'fa-truck',        v: '-30%', lKey: 'sostenibilita.metrics.emissioniLabel', sKey: 'sostenibilita.metrics.emissioniSub', l: 'Emissioni Flotta', s: 'Con nuovi mezzi eco' },
           { icon: 'fa-circle-check', v: '100%', lKey: 'sostenibilita.metrics.traccLabel',     sKey: 'sostenibilita.metrics.traccSub',     l: 'Tracciabilità',    s: 'Ogni operazione certificata' },
         ].map(({ icon, v, lKey, sKey, l, s }, i) => (

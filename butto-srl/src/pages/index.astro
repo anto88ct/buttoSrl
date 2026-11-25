@@ -1,23 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import GoogleBusiness from '../components/GoogleBusiness.astro';
+import BotanicalBackground from '../components/BotanicalBackground.astro';
 import { Image } from 'astro:assets';
 import leafeHeart from '../assets/leafe-heart.jpg';
-import clientLogo1 from '../assets/clienti/2018.jpeg';
-import clientLogo2 from '../assets/clienti/Autogrill-logo-cuadrado.png';
-import clientLogo3 from '../assets/clienti/Decathlon-Logo.png';
-import clientLogo4 from '../assets/clienti/images.png';
-import clientLogo5 from '../assets/clienti/logoDesk.png';
-import clientLogo6 from '../assets/clienti/logo-gruppoarena-60e7224024a4b.jpeg';
-
-const clientLogos = [
-  { src: clientLogo1, big: true },
-  { src: clientLogo2, big: true },
-  { src: clientLogo3 },
-  { src: clientLogo4 },
-  { src: clientLogo5 },
-  { src: clientLogo6 },
-];
+import { clientLogos } from '../data/clients';
 
 const services = [
   { num: '01', icon: 'fa-recycle',      title: 'Gestione Rifiuti',      desc: 'Trasporto e smaltimento certificato con tracciabilità digitale e piena conformità normativa.',   href: '/servizi#gestione-rifiuti' },
@@ -30,7 +17,7 @@ const ticker = [
   '— ISO 14001:2015',
   '— Albo Gestori Ambientali',
   '— ISO 9001:2015',
-  '— 120+ Comuni Serviti',
+  `— ${clientLogos.length} Clienti in evidenza`,
   '— Dal 1978 ad Assoro (EN)',
   '— Zero Waste Strategy',
   '— Flotta a Basse Emissioni',
@@ -44,26 +31,13 @@ const ticker = [
 >
 
   <!-- ══════════════════════ HERO ══════════════════════ -->
-  <section class="relative h-screen flex items-center overflow-hidden">
+  <section class="relative min-h-dvh flex items-center overflow-hidden bg-forest py-32 lg:py-36">
 
-    <video
-      class="absolute inset-0 w-full h-full object-cover"
-      autoplay muted loop playsinline preload="none"
-      poster="/og-default.jpg"
-    >
-      <source src="/video.mp4" type="video/mp4" />
-    </video>
+    <BotanicalBackground />
+    <div class="absolute inset-0 grain pointer-events-none" aria-hidden="true"></div>
 
-    <div class="absolute inset-0 bg-forest/75"></div>
-    <div class="absolute inset-0 grain pointer-events-none"></div>
-
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-ochre/20 via-ochre/5 to-transparent"></div>
-      <div class="absolute top-0 right-1/4 w-px h-2/3 bg-gradient-to-b from-white/5 to-transparent"></div>
-    </div>
-
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 w-full -mt-16 pb-6 relative z-10">
-      <div class="flex flex-col items-start text-left gap-3 max-w-4xl">
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 w-full relative z-10">
+      <div class="flex flex-col items-center text-center gap-6 max-w-6xl mx-auto">
         <div class="reveal">
           <span data-i18n="home.hero.eyebrow" class="overline text-ochre tracking-[0.28em]">
             <i class="fa-solid fa-circle-dot text-[6px] align-middle mr-2"></i>
@@ -71,18 +45,18 @@ const ticker = [
           </span>
         </div>
 
-        <div class="space-y-1 reveal delay-1">
-          <h1 class="display-xl text-ivory text-5xl md:text-7xl lg:text-8xl leading-[1.02]">
+        <div class="w-full reveal delay-1">
+          <h1 class="hero-title font-serif font-semibold text-ivory text-balance">
             <span data-i18n="home.hero.h1l1" class="block">Soluzioni Concrete</span>
             <span data-i18n-html="home.hero.h1l2html" class="block italic">per l'<span class="text-sage">Ambiente</span> e il Territorio.</span>
           </h1>
         </div>
 
-        <p data-i18n="home.hero.body" class="font-body text-ivory/50 text-base leading-relaxed max-w-lg reveal delay-2">
+        <p data-i18n="home.hero.body" class="font-body text-ivory/80 text-lg md:text-xl leading-relaxed max-w-3xl text-pretty reveal delay-2">
           Da Assoro, operiamo in tutta la Sicilia offrendo soluzioni certificate per lo smaltimento dei rifiuti, la manutenzione del verde urbano e l'igiene pubblica. Partner affidabile per il decoro e la sostenibilità del territorio.
         </p>
 
-        <div class="flex flex-wrap justify-start gap-4 reveal delay-3">
+        <div class="flex flex-wrap justify-center gap-4 reveal delay-3">
           <a href="/servizi" class="btn-primary text-base px-8 py-4">
             <span data-i18n="home.hero.cta1">I Nostri Servizi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </a>
@@ -91,13 +65,13 @@ const ticker = [
           </a>
         </div>
 
-        <div class="flex flex-wrap justify-start gap-6 pt-3 border-t border-white/8 reveal delay-4">
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-3 pt-6 border-t border-white/15 reveal delay-4">
           {[
             { icon: 'fa-certificate', text: 'ISO 14001' },
             { icon: 'fa-shield-halved', text: 'Albo Gestori' },
             { icon: 'fa-truck', text: 'Flotta ECO' },
           ].map(({ icon, text }) => (
-            <span class="flex items-center gap-2 font-condensed font-600 text-[0.7rem] text-ivory/35 uppercase tracking-[0.12em]">
+            <span class="flex items-center gap-2 font-condensed font-600 text-[0.7rem] text-ivory/65 uppercase tracking-[0.12em]">
               <i class={`fa-solid ${icon} text-ochre/60 text-xs`}></i>
               {text}
             </span>
@@ -129,7 +103,7 @@ const ticker = [
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-0 border border-linen">
         {[
           { count: '45',   suffix: '+', lKey: 'home.stats.anni',       sKey: 'home.stats.anniSub',      label: 'Anni',    sub: 'di esperienza sul campo' },
-          { count: '120',  suffix: '+', lKey: 'home.stats.comuni',      sKey: 'home.stats.comuniSub',    label: 'Comuni',  sub: 'serviti in Sicilia' },
+          { count: String(clientLogos.length), suffix: '', lKey: 'home.stats.clienti',      sKey: 'home.stats.clientiSub',    label: 'Clienti in evidenza', sub: 'nella sezione clienti' },
           { count: '4200', suffix: '',  lKey: 'home.stats.co2Label',    sKey: 'home.stats.co2Sub',       label: 'Ton CO₂', sub: 'risparmiate ogni anno' },
           { count: '85',   suffix: '%', lKey: 'home.stats.rifiutiLabel',sKey: 'home.stats.rifiutiSub',   label: 'Rifiuti', sub: 'recuperati e riciclati' },
         ].map(({ count, suffix, lKey, sKey, label, sub }, i) => (
@@ -165,7 +139,8 @@ const ticker = [
     <div id="globe-wrapper" class="w-full h-[52vh] md:h-[70vh]">
       <video
         id="globe-video"
-        src="/videos/world-spinning.mp4"
+        data-src="/videos/world-spinning.mp4"
+        preload="none"
         autoplay
         loop
         muted
@@ -218,6 +193,21 @@ const ticker = [
           var cards = document.querySelectorAll('.custodi-card');
 
           if (!video || cards.length === 0) return;
+          var videoObserver = new IntersectionObserver(function (entries) {
+            if (!entries.some(function (entry) { return entry.isIntersecting; })) return;
+            videoObserver.disconnect();
+            video.src = video.dataset.src;
+            video.load();
+            var playback = video.play();
+            if (playback) playback.catch(function () {
+              cards.forEach(function (card) { card.style.opacity = '1'; card.style.transform = 'none'; });
+            });
+          }, { rootMargin: '300px' });
+          videoObserver.observe(video);
+          video.addEventListener('error', function () {
+            cards.forEach(function (card) { card.style.opacity = '1'; card.style.transform = 'none'; });
+          });
+
 
           cards.forEach(function (card) {
             card.style.opacity = '0';
@@ -297,12 +287,6 @@ const ticker = [
               <p data-i18n="home.founder.fondato" class="font-condensed font-800 text-xs uppercase tracking-[0.2em] text-forest/60">Fondato</p>
               <p class="font-display text-2xl leading-none">1978</p>
             </div>
-            <div class="absolute -bottom-6 -right-4 bg-forest text-ivory p-6 max-w-[230px] grain">
-              <p data-i18n="home.founder.quote" class="font-serif italic text-sm leading-relaxed text-ivory/80">
-                "Un territorio pulito è il regalo più grande."
-              </p>
-              <p class="font-condensed text-[0.62rem] uppercase tracking-[0.18em] text-ochre mt-3">— Carmelo Buttò</p>
-            </div>
           </div>
         </div>
 
@@ -328,7 +312,7 @@ const ticker = [
           <div class="grid grid-cols-3 gap-0 border border-linen mt-8">
             {[
               { v: '45', suf: '+', lKey: 'home.founder.anni',   l: 'Anni' },
-              { v: '120', suf: '+', lKey: 'home.founder.comuni', l: 'Comuni' },
+              { v: String(clientLogos.length), suf: '', lKey: 'home.founder.clienti', l: 'Clienti in evidenza' },
               { v: '∞', suf: '',   lKey: 'home.founder.passione',l: 'Passione' },
             ].map(({ v, suf, lKey, l }, i) => (
               <div class={`p-6 text-center ${i < 2 ? 'border-r border-linen' : ''}`}>
@@ -397,11 +381,11 @@ const ticker = [
             </div>
 
             <div class="bg-forest-mid p-10 group hover:bg-forest-soft transition-colors">
-              <i class="fa-solid fa-city text-sage/50 text-2xl mb-6 block"></i>
+              <i class="fa-solid fa-handshake text-sage/50 text-2xl mb-6 block"></i>
               <p class="stat-xl text-ivory leading-none mb-2">
-                <span data-count="120+">120+</span>
+                <span data-count={String(clientLogos.length)}>{clientLogos.length}</span>
               </p>
-              <p data-i18n="home.sustainability.comuniLabel" class="font-condensed font-700 text-ivory/40 text-xs uppercase tracking-[0.18em]">Comuni Serviti</p>
+              <p data-i18n="home.sustainability.clientiLabel" class="font-condensed font-700 text-ivory/40 text-xs uppercase tracking-[0.18em]">Clienti in evidenza</p>
             </div>
           </div>
         </div>
@@ -413,7 +397,7 @@ const ticker = [
   <GoogleBusiness />
 
   <!-- ══════════════════════ FINAL CTA ══════════════════════ -->
-  <section class="py-28 bg-forest grain relative overflow-hidden">
+  <section class="py-32 md:py-40 lg:py-48 bg-forest grain relative overflow-hidden">
 
     <div class="absolute right-0 bottom-0 pointer-events-none select-none">
       <span class="font-condensed font-800 text-[20vw] text-ivory/[0.1] leading-none tracking-tighter">TALK</span>
@@ -423,14 +407,12 @@ const ticker = [
     <div class="absolute top-20 right-20 w-16 h-16 border border-ochre/15 rotate-45 pointer-events-none"></div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
-      <div class="max-w-2xl mx-auto reveal">
-        <span data-i18n="home.cta.eyebrow" class="overline text-ochre">Parliamo del tuo Territorio</span>
-        <div class="rule-ochre"></div>
-        <h2 data-i18n-html="home.cta.h2html" class="display-lg text-ivory mt-5 mb-6">
+      <div class="max-w-6xl mx-auto reveal">
+        <h2 data-i18n-html="home.cta.h2html" class="display-xl text-ivory text-balance mb-10">
           Costruiamo insieme<br/>
           <em class="text-sage not-italic">la soluzione su misura</em>
         </h2>
-        <p data-i18n="home.cta.body" class="font-body text-ivory/40 text-lg leading-relaxed mb-12 max-w-xl">
+        <p data-i18n="home.cta.body" class="font-body text-ivory/70 text-xl text-pretty leading-relaxed mb-12 max-w-2xl">
           Ente pubblico o azienda privata: il nostro team è pronto ad ascoltarti e progettare il servizio ambientale più adatto alla tua realtà.
         </p>
         <div class="flex flex-wrap gap-5">
@@ -446,3 +428,11 @@ const ticker = [
   </section>
 
 </Layout>
+
+
+<style>
+  .hero-title {
+    font-size: clamp(3rem, 6.5vw, 7rem);
+    line-height: 1;
+  }
+</style>

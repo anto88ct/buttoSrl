@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroWatermark from '../components/HeroWatermark.astro';
+import BotanicalBackground from '../components/BotanicalBackground.astro';
 import ServiziScrollytelling from '../components/ServiziScrollytelling.astro';
 
 const categorie = [
@@ -11,9 +13,9 @@ const categorie = [
     bg: 'bg-forest',
     dark: true,
     servizi: [
-      { icon: 'fa-industry',      title: 'Logistica Industriale',   bento: 'lg:col-span-3 lg:row-span-2', desc: "Trasporto e smaltimento certificato di rifiuti speciali e pericolosi, con tracciabilità digitale completa e conformità normativa.",  tags: ['Rifiuti speciali e pericolosi', 'Tracciabilità digitale'], img: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=900&q=75' },
-      { icon: 'fa-biohazard',     title: 'Smaltimento Rifiuti Speciali', bento: 'lg:col-span-2',          desc: 'Ritiro e smaltimento a norma di rifiuti speciali pericolosi e non pericolosi, con gestione documentale e formulari conformi.',      tags: ['Pericolosi e non pericolosi', 'Formulari conformi'], img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=900&q=75' },
-      { icon: 'fa-truck',         title: 'Raccolta Differenziata',  bento: 'lg:col-span-2',               desc: 'Pianificazione e gestione di sistemi di raccolta differenziata per comuni e aziende, con obiettivi superiori al 65%.',              tags: ['Comuni e aziende', 'Oltre il 65% raccolto'], img: 'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-industry',      title: 'Logistica Industriale',   desc: "Trasporto e smaltimento certificato di rifiuti speciali e pericolosi, con tracciabilità digitale completa e conformità normativa.",  tags: ['Rifiuti speciali e pericolosi', 'Tracciabilità digitale'], img: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-biohazard',     title: 'Smaltimento Rifiuti Speciali', desc: 'Ritiro e smaltimento a norma di rifiuti speciali pericolosi e non pericolosi, con gestione documentale e formulari conformi.',      tags: ['Pericolosi e non pericolosi', 'Formulari conformi'], img: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-truck',         title: 'Raccolta Differenziata',  desc: 'Pianificazione e gestione di sistemi di raccolta differenziata per comuni e aziende, con obiettivi superiori al 65%.',              tags: ['Comuni e aziende', 'Oltre il 65% raccolto'], img: 'https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?auto=format&fit=crop&w=900&q=75' },
     ],
   },
   {
@@ -24,9 +26,9 @@ const categorie = [
     bg: 'bg-parchment',
     dark: false,
     servizi: [
-      { icon: 'fa-building-columns', title: 'Patrimonio Istituzionale', bento: 'lg:col-span-2',  desc: 'Sanificazione di sedi istituzionali, uffici comunali e archivi storici con prodotti a ridotto impatto ambientale.',    tags: ['Uffici comunali e archivi', 'Prodotti a basso impatto'], img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=75' },
-      { icon: 'fa-school',           title: 'Istituti Scolastici',      bento: 'lg:col-span-3',  desc: 'Pulizia e igienizzazione di scuole di ogni ordine e grado, con protocolli dedicati alla sicurezza dei bambini.',       tags: ['Ogni ordine e grado', 'Protocolli di sicurezza'], img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=75' },
-      { icon: 'fa-hospital',         title: 'Strutture Sanitarie',      bento: 'lg:col-span-5',  desc: 'Sanificazione specializzata di strutture ospedaliere con metodologie certificate di controllo infezioni.',            tags: ['Ambienti ospedalieri', 'Controllo infezioni certificato'], img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-building-columns', title: 'Patrimonio Istituzionale', desc: 'Sanificazione di sedi istituzionali, uffici comunali e archivi storici con prodotti a ridotto impatto ambientale.',    tags: ['Uffici comunali e archivi', 'Prodotti a basso impatto'], img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-school',           title: 'Istituti Scolastici',      desc: 'Pulizia e igienizzazione di scuole di ogni ordine e grado, con protocolli dedicati alla sicurezza dei bambini.',       tags: ['Ogni ordine e grado', 'Protocolli di sicurezza'], img: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-hospital',         title: 'Strutture Sanitarie',      desc: 'Sanificazione specializzata di strutture ospedaliere con metodologie certificate di controllo infezioni.',            tags: ['Ambienti ospedalieri', 'Controllo infezioni certificato'], img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=900&q=75' },
     ],
   },
   {
@@ -37,8 +39,8 @@ const categorie = [
     bg: 'bg-forest',
     dark: true,
     servizi: [
-      { icon: 'fa-seedling', title: 'Spazi Pubblici',        bento: 'lg:col-span-3', desc: 'Gestione del verde pubblico, parchi gioco e aree ricreative per il decoro urbano e la sicurezza cittadina.', tags: ['Parchi e aree gioco', 'Sicurezza cittadina'], img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=75' },
-      { icon: 'fa-road',     title: 'Manutenzione Stradale', bento: 'lg:col-span-2', desc: 'Pulizia e decoro di viali, marciapiedi, aree pedonali e spazi condivisi nelle aree urbane e periurbane.',  tags: ['Viali e marciapiedi', 'Aree urbane e periurbane'], img: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-seedling', title: 'Spazi Pubblici',        desc: 'Gestione del verde pubblico, parchi gioco e aree ricreative per il decoro urbano e la sicurezza cittadina.', tags: ['Parchi e aree gioco', 'Sicurezza cittadina'], img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-road',     title: 'Manutenzione Stradale', desc: 'Pulizia e decoro di viali, marciapiedi, aree pedonali e spazi condivisi nelle aree urbane e periurbane.',  tags: ['Viali e marciapiedi', 'Aree urbane e periurbane'], img: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=900&q=75' },
     ],
   },
   {
@@ -49,8 +51,8 @@ const categorie = [
     bg: 'bg-parchment',
     dark: false,
     servizi: [
-      { icon: 'fa-chart-bar',  title: 'Audit Ambientale', bento: 'lg:col-span-2', desc: "Analisi dei processi aziendali per identificare opportunità di riduzione degli sprechi e miglioramento dell'efficienza ambientale.", tags: ['Analisi dei processi', 'Efficienza ambientale'], img: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=75' },
-      { icon: 'fa-circle-dot', title: 'Piano Zero Waste',  bento: 'lg:col-span-3', desc: 'Strategie personalizzate per raggiungere obiettivi di zero conferimento in discarica attraverso recupero e riciclo.',           tags: ['Zero conferimento in discarica', 'Recupero e riciclo'], img: 'https://images.unsplash.com/photo-1542601098-3adb3baeb1ec?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-chart-bar',  title: 'Audit Ambientale', desc: "Analisi dei processi aziendali per identificare opportunità di riduzione degli sprechi e miglioramento dell'efficienza ambientale.", tags: ['Analisi dei processi', 'Efficienza ambientale'], img: 'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=900&q=75' },
+      { icon: 'fa-circle-dot', title: 'Piano Zero Waste',  desc: 'Strategie personalizzate per raggiungere obiettivi di zero conferimento in discarica attraverso recupero e riciclo.',           tags: ['Zero conferimento in discarica', 'Recupero e riciclo'], img: 'https://images.unsplash.com/photo-1542601098-3adb3baeb1ec?auto=format&fit=crop&w=900&q=75' },
     ],
   },
 ];
@@ -70,6 +72,26 @@ const faqs = [
     q: 'Come viene garantita la tracciabilità?',
     a: 'Attraverso registri digitali, formulari elettronici e integrazione completa con il sistema RENTRI per la massima trasparenza operativa.',
   },
+  {
+    q: 'In quali zone operate e a chi vi rivolgete?',
+    a: 'La nostra sede è ad Assoro, in provincia di Enna, e operiamo in Sicilia per enti pubblici e aziende private. Contattaci indicando il luogo e il servizio richiesto: valuteremo insieme le esigenze del tuo territorio.',
+  },
+  {
+    q: 'Come posso richiedere un preventivo?',
+    a: 'Puoi utilizzare il modulo nella pagina Contatti oppure contattarci telefonicamente o via email. Per aiutarci a valutare la richiesta, indica il luogo di intervento, il servizio, le quantità o le superfici interessate e le tempistiche desiderate.',
+  },
+  {
+    q: 'Quali informazioni servono per richiedere il ritiro dei rifiuti?',
+    a: 'Indica la tipologia di rifiuto, la quantità stimata, il luogo di ritiro e le condizioni di accesso. Se disponibili, aggiungi il codice CER/EER e la documentazione relativa al rifiuto. Se non disponi di tutti i dati, segnalalo nella richiesta: il team ti aiuterà a capire quali informazioni approfondire prima di organizzare il servizio.',
+  },
+  {
+    q: 'Posso concordare interventi periodici?',
+    a: 'Puoi richiedere una programmazione per raccolta rifiuti, pulizie o manutenzione del verde. Frequenza, modalità e disponibilità vengono valutate con il nostro team in base al servizio, alla sede e alle necessità operative.',
+  },
+  {
+    q: 'Dove posso consultare le vostre certificazioni e autorizzazioni?',
+    a: 'La pagina Certificazioni presenta le iscrizioni, le certificazioni e le categorie di rifiuti trattate. Per documentazione relativa a un servizio specifico o a una richiesta di fornitura, contatta il nostro team.',
+  },
 ];
 ---
 
@@ -82,9 +104,7 @@ const faqs = [
   <!-- ══════════════════════ HERO ══════════════════════ -->
   <section class="relative py-36 bg-ivory dot-grid overflow-hidden">
 
-    <div id="lavoro-wm" class="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none select-none overflow-hidden">
-      <span class="font-condensed font-800 text-[24vw] text-ink/[0.04] leading-none tracking-tighter">LAVORO</span>
-    </div>
+    <HeroWatermark word="LAVORO" />
 
     <div class="absolute top-8 right-14 hidden lg:flex items-center gap-3 pointer-events-none select-none">
       <span class="font-condensed text-[0.6rem] tracking-[0.3em] uppercase text-muted/40">Catalogo Servizi</span>
@@ -155,6 +175,7 @@ const faqs = [
         dark ? 'grain grain-anim spotlight-section' : '',
       ]}
     >
+      {(id === 'gestione-rifiuti' || id === 'verde-urbano') && <BotanicalBackground ambient={false} />}
       <div
         class:list={[
           'absolute top-1/2 -translate-y-1/2 pointer-events-none select-none hidden xl:flex flex-col items-center gap-4',
@@ -176,7 +197,7 @@ const faqs = [
         ></span>
       </div>
 
-      <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
+      <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
 
         <div class:list={[
           'flex items-center gap-6 mb-16 pb-8 border-b reveal-blur',
@@ -199,14 +220,14 @@ const faqs = [
         </div>
 
         <div class:list={[
-          'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-px',
+          'grid grid-cols-1 md:grid-cols-2 gap-px',
+          servizi.length === 3 ? 'lg:grid-cols-3' : '',
           dark ? 'bg-white/10' : 'bg-black/[0.06]',
         ]}>
-          {servizi.map(({ icon: sIcon, title: sTitle, desc, tags, bento, img }, si) => (
+          {servizi.map(({ icon: sIcon, title: sTitle, desc, tags, img }, si) => (
             <div
               class:list={[
                 'group relative p-10 flex flex-col gap-6 cursor-default bento-card reveal-blur overflow-hidden',
-                bento,
                 dark ? 'bg-forest-mid' : 'bg-ivory',
               ]}
               style={`transition-delay: ${si * 0.1}s`}
@@ -280,7 +301,7 @@ const faqs = [
   ))}
 
   <!-- ══════════════════════ CERTIFICATIONS ══════════════════════ -->
-  <section class="py-24 bg-forest grain grain-anim overflow-hidden">
+  <section id="qualita-certificata" class="py-24 bg-forest grain grain-anim overflow-hidden">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 mb-16">
       <div class="text-center reveal-blur">
         <span data-i18n="servizi.certs.eyebrow" class="overline text-ochre">Le Nostre Garanzie</span>
@@ -300,8 +321,8 @@ const faqs = [
             class="group cert-card flex-shrink-0 mx-5 flex flex-col items-center gap-5 px-14 py-10 border border-white/8 hover:border-ochre/35 transition-all duration-500 hover:bg-forest-mid"
             style="min-width: 230px;"
           >
-            <i class="fa-solid fa-certificate text-3xl text-ochre/50 group-hover:text-ochre transition-colors duration-300"></i>
-            <p class="font-serif text-base text-ivory/75 group-hover:text-ivory text-center leading-tight transition-colors">{c}</p>
+            <i aria-hidden="true" class="cert-icon fa-solid fa-certificate text-4xl text-ochre/70 group-hover:text-ochre transition-colors duration-200"></i>
+            <p class="font-serif text-2xl md:text-3xl font-medium text-ivory/90 group-hover:text-ivory text-center text-balance leading-tight transition-colors">{c}</p>
           </a>
         ))}
       </div>
@@ -309,16 +330,28 @@ const faqs = [
   </section>
 
   <!-- ══════════════════════ CTA ══════════════════════ -->
-  <section class="py-24 bg-ivory">
-    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 text-center reveal-blur">
-      <span data-i18n="servizi.cta.eyebrow" class="overline text-ochre">Serve una soluzione su misura?</span>
-      <h2 data-i18n="servizi.cta.h2" class="display-sm text-ink italic mt-4 mb-5" style="text-wrap: balance;">Ogni territorio è unico</h2>
-      <p data-i18n="servizi.cta.body" class="font-body text-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-        Il nostro team è pronto ad ascoltarti e progettare il servizio più adatto alla tua realtà.
-      </p>
-      <a href="/contatti" class="btn-primary px-10 py-5">
-        <span data-i18n="servizi.cta.btn">Richiedi un preventivo</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-      </a>
+  <section class="py-32 md:py-40 lg:py-48 bg-forest grain relative overflow-hidden">
+    <div class="absolute right-0 bottom-0 pointer-events-none select-none" aria-hidden="true">
+      <span class="font-condensed font-800 text-[20vw] text-ivory/[0.1] leading-none tracking-tighter">TALK</span>
+    </div>
+    <div class="absolute top-12 right-12 w-32 h-32 border border-ochre/10 rotate-45 pointer-events-none" aria-hidden="true"></div>
+    <div class="absolute top-20 right-20 w-16 h-16 border border-ochre/15 rotate-45 pointer-events-none" aria-hidden="true"></div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 relative z-10">
+      <div class="max-w-6xl mx-auto reveal">
+        <h2 data-i18n-html="servizi.cta.h2html" class="display-xl text-ivory text-balance mb-10">
+          Ogni territorio<br/>
+          <em class="text-sage not-italic">è unico</em>
+        </h2>
+        <p data-i18n="servizi.cta.body" class="font-body text-ivory/70 text-xl text-pretty leading-relaxed mb-12 max-w-2xl">
+          Il nostro team è pronto ad ascoltarti e progettare il servizio più adatto alla tua realtà.
+        </p>
+        <div class="flex flex-wrap gap-5">
+          <a href="/contatti" class="btn-primary text-base px-10 py-5">
+            <span data-i18n="servizi.cta.btn">Richiedi un preventivo</span> <i aria-hidden="true" class="fa-solid fa-arrow-right text-[10px]"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -346,28 +379,32 @@ const faqs = [
         </div>
       </div>
 
-      <div class="max-w-4xl">
+      <div class="max-w-5xl mx-auto space-y-4">
         {faqs.map(({ q, a }, i) => (
-          <div
-            class="faq-item border-b border-linen reveal-blur"
-            style={`transition-delay: ${i * 0.12}s`}
-          >
-            <button class="faq-trigger w-full flex items-start gap-6 py-8 text-left group" aria-expanded="false">
-              <span class="font-condensed font-700 text-[0.6rem] tracking-[0.25em] text-ochre/60 group-hover:text-ochre transition-colors flex-shrink-0 pt-1">
+          <details class="faq-item rounded-lg border border-linen bg-ivory shadow-sm" name="service-faq" open={i === 0}>
+            <summary class="faq-trigger flex items-start gap-4 sm:gap-6 p-6 sm:p-8 text-left group">
+              <span aria-hidden="true" class="font-condensed font-semibold text-lg text-forest-soft tabular-nums shrink-0 pt-1">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span class="font-serif text-xl italic text-ink leading-snug flex-1 group-hover:text-forest transition-colors duration-300">
+              <span class="font-body text-xl sm:text-2xl font-semibold text-ink leading-snug flex-1 text-pretty">
                 {q}
               </span>
-              <span class="faq-icon-box flex-shrink-0 w-8 h-8 border border-linen group-hover:border-ochre/50 flex items-center justify-center transition-all duration-300 mt-0.5">
-                <i class="fa-solid fa-plus text-[9px] text-ochre/50 group-hover:text-ochre faq-icon-svg transition-all duration-300"></i>
+              <span aria-hidden="true" class="faq-icon-box shrink-0 size-8 rounded-full border border-linen flex items-center justify-center text-forest mt-0.5">
+                <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <path d="M5 12h14" stroke-linecap="round" />
+                  <path class="faq-plus" d="M12 5v14" stroke-linecap="round" />
+                </svg>
               </span>
-            </button>
-            <div class="faq-body" style="max-height: 0; overflow: hidden;">
-              <p class="font-body text-muted text-base leading-relaxed pb-8 pl-12">{a}</p>
+            </summary>
+            <div class="px-6 pb-7 sm:px-8 sm:pb-8">
+              <p class="font-body text-ink/80 text-lg sm:text-xl leading-relaxed text-pretty max-w-3xl sm:ml-11">{a}</p>
             </div>
-          </div>
+          </details>
         ))}
+        <div class="flex flex-wrap items-center justify-between gap-5 px-1 pt-6">
+          <p class="font-body text-lg text-ink/80 text-pretty">Hai una richiesta specifica? Parliamone insieme.</p>
+          <a href="/contatti" class="btn-primary"><span data-i18n="nav.contattaci">Contattaci</span></a>
+        </div>
       </div>
 
     </div>
@@ -444,8 +481,23 @@ const faqs = [
   .cert-track {
     animation-duration: 26s;
   }
-  @media (min-width: 1024px) {
-    .lg\:row-span-2 { min-height: 360px; }
+
+  .cert-icon {
+    animation: certificate-float 3.6s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  .cert-card:nth-child(4n + 2) .cert-icon { animation-delay: -0.9s; }
+  .cert-card:nth-child(4n + 3) .cert-icon { animation-delay: -1.8s; }
+  .cert-card:nth-child(4n + 4) .cert-icon { animation-delay: -2.7s; }
+  .cert-card.is-in-view .cert-icon { animation-play-state: running; }
+  .cert-motion-paused .cert-icon { animation-play-state: paused; }
+  @keyframes certificate-float {
+    0%, 100% { transform: translateY(0) rotate(-4deg) scale(1); }
+    50% { transform: translateY(-6px) rotate(4deg) scale(1.06); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cert-icon { animation: none; }
+    .cert-track { animation: none; }
   }
 
   /* Bento card image hover */
@@ -472,26 +524,37 @@ const faqs = [
     color: var(--ochre);
   }
 
-  /* FAQ accordion */
-  .faq-body {
-    transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  .faq-trigger {
+    cursor: pointer;
+    list-style: none;
   }
-  .faq-item.faq-open .faq-icon-svg {
-    transform: rotate(45deg);
-    color: var(--ochre);
+  .faq-trigger::-webkit-details-marker { display: none; }
+  .faq-trigger:focus-visible {
+    outline: 2px solid var(--forest-soft);
+    outline-offset: 4px;
+    border-radius: 0.5rem;
   }
-  .faq-item.faq-open .faq-icon-box {
-    border-color: rgba(196, 146, 42, 0.5);
+  .faq-trigger:hover { background: rgb(196 146 42 / 5%); }
+  .faq-item[open] { border-color: var(--forest-soft); }
+  .faq-item[open] .faq-plus { display: none; }
+  .faq-item[open] .faq-icon-box {
+    background: var(--forest);
+    color: var(--ivory);
+    border-color: var(--forest);
   }
-  .faq-trigger { cursor: pointer; background: none; border: none; }
 </style>
 
 <script>
-  const lavoro = document.getElementById('lavoro-wm');
-  window.addEventListener('scroll', () => {
-    if (!lavoro) return;
-    lavoro.style.transform = `translateY(calc(-50% + ${window.scrollY * 0.13}px))`;
-  }, { passive: true });
+  const certificates = document.getElementById('qualita-certificata');
+  if (certificates) {
+    const syncCertificateMotion = () => certificates.classList.toggle('cert-motion-paused', document.hidden);
+    syncCertificateMotion();
+    document.addEventListener('visibilitychange', syncCertificateMotion);
+    const certificateIO = new IntersectionObserver(entries => {
+      entries.forEach(entry => entry.target.classList.toggle('is-in-view', entry.isIntersecting));
+    });
+    certificates.querySelectorAll('.cert-card').forEach(card => certificateIO.observe(card));
+  }
 
   const blurIO = new IntersectionObserver(
     entries => entries.forEach(e => {
@@ -534,24 +597,4 @@ const faqs = [
   );
   document.querySelectorAll<HTMLElement>('.service-section').forEach(s => activeIO.observe(s));
 
-  // FAQ accordion
-  document.querySelectorAll<HTMLButtonElement>('.faq-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const item = trigger.closest<HTMLElement>('.faq-item')!;
-      const body = item.querySelector<HTMLElement>('.faq-body')!;
-      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
-
-      document.querySelectorAll<HTMLElement>('.faq-item').forEach(i => {
-        i.querySelector<HTMLButtonElement>('.faq-trigger')!.setAttribute('aria-expanded', 'false');
-        i.querySelector<HTMLElement>('.faq-body')!.style.maxHeight = '0';
-        i.classList.remove('faq-open');
-      });
-
-      if (!isOpen) {
-        trigger.setAttribute('aria-expanded', 'true');
-        body.style.maxHeight = body.scrollHeight + 'px';
-        item.classList.add('faq-open');
-      }
-    });
-  });
 </script>

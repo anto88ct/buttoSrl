@@ -1,0 +1,228 @@
+---
+interface Props {
+  ambient?: boolean;
+}
+const { ambient = true } = Astro.props;
+
+const leaves = [
+  { x: 110, y: 805, angle: -16, scale: 1.15 },
+  { x: 151, y: 735, angle: 84, scale: 1.2 },
+  { x: 180, y: 655, angle: -12, scale: 1.3 },
+  { x: 219, y: 585, angle: 86, scale: 1.2 },
+  { x: 246, y: 502, angle: -20, scale: 1.15 },
+  { x: 264, y: 426, angle: 77, scale: 1.1 },
+  { x: 280, y: 348, angle: -18, scale: 1 },
+  { x: 284, y: 278, angle: 70, scale: 0.9 },
+  { x: 288, y: 211, angle: -15, scale: 0.78 },
+  { x: 298, y: 150, angle: 63, scale: 0.65 },
+  { x: 314, y: 94, angle: 20, scale: 0.62 },
+];
+---
+
+<div class="botanical-background" aria-hidden="true">
+  {ambient && <svg class="ambient-field" viewBox="0 0 1600 1000" preserveAspectRatio="none" fill="none">
+    <g class="ambient-current ambient-current-left">
+      <path d="M-180 1120C260 970 495 810 330 510S120 180 420-130H-180Z" fill="var(--forest-soft)" opacity=".5" />
+      <path d="M-180 1120C190 860 365 780 210 480S100 130 290-130H-180Z" fill="var(--sage)" opacity=".16" />
+    </g>
+    <g class="ambient-current ambient-current-right">
+      <path d="M1780-120C1260 80 1140 290 1370 540S1450 850 1180 1130H1780Z" fill="var(--forest-soft)" opacity=".46" />
+      <path d="M1780-120C1450 120 1280 300 1470 560S1570 890 1370 1130H1780Z" fill="var(--sage)" opacity=".14" />
+    </g>
+    <g class="ambient-current ambient-current-bottom">
+      <path d="M-150 1150C200 750 440 1010 720 930S1210 790 1760 1070V1190H-150Z" fill="var(--sage)" opacity=".13" />
+    </g>
+  </svg>}
+  {['left', 'right'].map(side => (
+    <svg class={`botanical-plant botanical-${side}`} viewBox="0 0 480 960" fill="none">
+      <g class="plant-canopy">
+      <path class="plant-stem" d="M53 970C65 874 122 799 163 710S246 545 270 400S274 210 329 58" />
+      <path class="plant-stem stem-secondary" d="M69 925C41 799 55 664 25 540M104 824C212 814 310 755 386 652" />
+      {leaves.map(({ x, y, angle, scale }, index) => (
+        <g transform={`translate(${x} ${y}) rotate(${angle}) scale(${scale})`}>
+          <g class="plant-leaf" style={`animation-delay: ${-index * 0.85}s; animation-duration: ${6 + index % 4}s;`}>
+            <g class="leaf-wind">
+            <path class="leaf-surface" d="M0 0C-64-3-129-56-139-127C-65-128-7-73 0 0Z" />
+            <path class="leaf-vein" d="M0 0C-36-42-77-83-125-117M-35-40L-39-74M-57-62L-90-65M-78-83L-82-104" />
+          </g>
+          </g>
+        </g>
+      ))}
+      <g transform="translate(64 763) rotate(-32) scale(.65)">
+        <g class="plant-leaf leaf-secondary">
+          <g class="leaf-wind">
+            <path class="leaf-surface" d="M0 0C-64-3-129-56-139-127C-65-128-7-73 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-67-80-125-117" />
+          </g>
+        </g>
+      </g>
+      <g transform="translate(300 740) rotate(90) scale(.8)">
+        <g class="plant-leaf leaf-secondary">
+          <g class="leaf-wind">
+            <path class="leaf-surface" d="M0 0C-64-3-129-56-139-127C-65-128-7-73 0 0Z" />
+          <path class="leaf-vein" d="M0 0Q-67-80-125-117" />
+          </g>
+        </g>
+      </g>
+      </g>
+    </svg>
+  ))}
+
+</div>
+
+<style>
+  .botanical-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    contain: paint;
+  }
+  .botanical-plant {
+    position: absolute;
+    bottom: -3rem;
+    width: clamp(20rem, 34vw, 34rem);
+    height: 94%;
+    opacity: 0.65;
+    overflow: visible;
+  }
+  .botanical-left { left: -5rem; }
+  .botanical-right { right: -5rem; transform: scaleX(-1); }
+  .plant-stem { stroke: var(--sage); stroke-width: 1.5; opacity: 0.25; }
+  .stem-secondary { opacity: 0.15; }
+  .leaf-surface { fill: var(--forest-soft); fill-opacity: 0.65; stroke: var(--sage); stroke-opacity: 0.2; stroke-width: 0.8; }
+  .leaf-vein { stroke: var(--sage); stroke-opacity: 0.22; stroke-width: 0.8; }
+  .plant-leaf {
+    transform-origin: 0 0;
+    animation: leaf-sway 9s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+  .botanical-right .leaf-surface { fill: var(--forest-mid); }
+  .botanical-right .plant-leaf { animation-direction: reverse; }
+  .leaf-secondary { opacity: 0.65; }
+  .plant-canopy {
+    transform-origin: 53px 960px;
+    animation: branch-breeze 14s ease-in-out infinite;
+  }
+  .botanical-right .plant-canopy { animation-delay: -7s; animation-direction: reverse; }
+
+  .ambient-field {
+    --ambient-gutter: clamp(15rem, 28vw, 28rem);
+    position: absolute;
+    top: 0;
+    left: var(--ambient-gutter);
+    width: calc(100% - var(--ambient-gutter) - var(--ambient-gutter));
+    height: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);
+  }
+  .ambient-current {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ambient-flow 22s ease-in-out infinite alternate;
+  }
+  .ambient-current-right { animation-duration: 28s; animation-delay: -11s; animation-direction: alternate-reverse; }
+  .ambient-current-bottom { animation-duration: 18s; animation-delay: -6s; }
+  @keyframes ambient-flow {
+    from { transform: translate(-35px, -25px) rotate(-4deg) scale(0.96); opacity: 0.6; }
+    to { transform: translate(45px, 30px) rotate(4deg) scale(1.07); opacity: 1; }
+  }
+
+  .botanical-background :is(.plant-leaf, .plant-canopy, .ambient-current, .leaf-wind) {
+    animation-play-state: paused;
+  }
+  .botanical-background.is-running :is(.plant-leaf, .plant-canopy, .ambient-current, .leaf-wind) {
+    animation-play-state: running;
+  }
+
+  .leaf-wind { transform-origin: 0 0; }
+  .leaf-wind.is-windy { animation: leaf-gust 1.2s ease-out both; }
+  @keyframes leaf-gust {
+    0%, 100% { transform: rotate(0deg) skewX(0deg); }
+    14% { transform: rotate(16deg) skewX(4deg); }
+    36% { transform: rotate(-9deg) skewX(-2deg); }
+    59% { transform: rotate(5deg) skewX(1deg); }
+    80% { transform: rotate(-2deg); }
+  }
+
+  @keyframes leaf-sway {
+    0%, 100% { transform: rotate(-4deg) skewX(-1deg) scaleY(0.98); }
+    35% { transform: rotate(7deg) skewX(2deg) scaleY(1.02); }
+    65% { transform: rotate(2deg) skewX(-1deg) scaleY(1); }
+    82% { transform: rotate(5deg) skewX(1deg) scaleY(1.01); }
+  }
+  @keyframes branch-breeze {
+    0%, 100% { transform: rotate(-1.5deg); }
+    45% { transform: rotate(2deg); }
+    75% { transform: rotate(0.5deg); }
+  }
+  @media (max-width: 767px) {
+    .botanical-plant { width: 20rem; height: 80%; opacity: 0.3; }
+    .botanical-left { left: -12rem; }
+    .botanical-right { right: -12rem; }
+    .ambient-field { --ambient-gutter: 7rem; opacity: 0.7; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .botanical-background :is(.plant-leaf, .plant-canopy, .ambient-current, .leaf-wind) {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.botanical-background').forEach(background => {
+    let inView = false;
+    const sync = () => background.classList.toggle('is-running', inView && !document.hidden);
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      sync();
+    });
+    observer.observe(background);
+    document.addEventListener('visibilitychange', sync);
+
+    const hero = background.closest('section');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const leafPaths = Array.from(background.querySelectorAll<SVGPathElement>('.leaf-surface'));
+    let hoverFrame = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+
+    // Detect the SVG shapes through the content layer, keeping links clickable.
+    function stirLeaves() {
+      hoverFrame = 0;
+      if (!inView || document.hidden || reducedMotion.matches) return;
+      const point = new DOMPoint(pointerX, pointerY);
+      const hovered = leafPaths.find(path => {
+        const matrix = path.getScreenCTM();
+        return matrix && path.isPointInFill(point.matrixTransform(matrix.inverse()));
+      });
+      if (!hovered) return;
+      const plant = hovered.closest('svg');
+      const nearby = leafPaths.filter(path => path.closest('svg') === plant);
+      const index = nearby.indexOf(hovered);
+      nearby.slice(Math.max(0, index - 1), index + 2).forEach(path => {
+        path.closest('.leaf-wind')?.classList.add('is-windy');
+      });
+    }
+
+    hero?.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'mouse' || reducedMotion.matches) return;
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      if (!hoverFrame) hoverFrame = requestAnimationFrame(stirLeaves);
+    }, { passive: true });
+    hero?.addEventListener('pointerleave', () => {
+      cancelAnimationFrame(hoverFrame);
+      hoverFrame = 0;
+    });
+    background.addEventListener('animationend', event => {
+      if (event.animationName === 'leaf-gust' && event.target instanceof Element) {
+        event.target.classList.remove('is-windy');
+      }
+    });
+    reducedMotion.addEventListener('change', () => {
+      background.querySelectorAll('.is-windy').forEach(leaf => leaf.classList.remove('is-windy'));
+    });
+  });
+</script>

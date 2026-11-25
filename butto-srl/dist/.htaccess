@@ -1,0 +1,34 @@
+Options -Indexes -MultiViews
+DirectorySlash Off
+ErrorDocument 404 /404.html
+# Accented characters in llms.txt and robots.txt.
+AddCharset UTF-8 .txt .xml
+
+RewriteEngine On
+
+# One canonical origin: https://buttocarmelo.it
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://buttocarmelo.it%{REQUEST_URI} [R=301,L]
+
+# No hidden files, except certificate validation.
+RewriteRule (^|/)\.(?!well-known/) - [F]
+
+# Canonical URLs have no trailing slash. Leading slashes are dropped to avoid open redirects.
+RewriteRule ^/*(.+?)/+$ /$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.+)$ $1/index.html [L]
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://images.unsplash.com https://*.googleusercontent.com; frame-src https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+  SetEnvIf Request_URI "^/_astro/" ASSET_HASHED
+  SetEnvIf Request_URI "^/(volvo_webp|videos)/" ASSET_MEDIA
+  Header set Cache-Control "public, max-age=31536000, immutable" env=ASSET_HASHED
+  Header set Cache-Control "public, max-age=86400, stale-while-revalidate=604800" env=ASSET_MEDIA
+</IfModule>
