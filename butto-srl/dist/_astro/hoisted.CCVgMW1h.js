@@ -1,1 +1,0 @@
-import"./hoisted.Lfkompw-.js";document.querySelectorAll(".hero-watermark").forEach(e=>{let n=!1;const s=()=>e.classList.toggle("is-running",n&&!document.hidden);new IntersectionObserver(([t])=>{n=t.isIntersecting,s()}).observe(e),document.addEventListener("visibilitychange",s)});

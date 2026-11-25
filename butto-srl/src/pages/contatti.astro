@@ -340,13 +340,27 @@ const temi = [
 
   <!-- ══════════════════════ MAP ══════════════════════ -->
   <section class="h-[520px] relative border-t border-linen overflow-hidden">
-    <iframe
-      src="https://maps.google.com/maps?q=Via+San+Giuseppe+42+Assoro+EN+Sicilia&output=embed&z=16&hl=it"
-      class="absolute inset-0 w-full h-full border-0"
-      loading="lazy"
-      allowfullscreen
-      referrerpolicy="no-referrer-when-downgrade"
-      title="Sede Buttò S.r.l. – Via San Giuseppe 42, Assoro (EN)"></iframe>
+    <!-- Google receives no request and sets no cookie until the visitor asks for the map. -->
+    <div
+      id="map-consent"
+      class="absolute inset-0 flex flex-col items-center justify-end gap-4 bg-parchment dot-grid px-6 pb-10 text-center md:justify-center md:pb-0 md:pl-80"
+    >
+      <p data-i18n="contatti.map.notice" class="font-body text-sm text-ink/80 max-w-sm leading-relaxed">
+        Caricando la mappa, Google riceve il tuo indirizzo IP e può impostare cookie.
+      </p>
+      <button type="button" id="map-load" class="btn-primary">
+        <span data-i18n="contatti.map.load">Mostra la mappa</span>
+      </button>
+      <a href="/cookie" class="font-body text-sm text-ink underline">Cookie Policy</a>
+    </div>
+    <template id="map-template">
+      <iframe
+        src="https://maps.google.com/maps?q=Via+San+Giuseppe+42+Assoro+EN+Sicilia&output=embed&z=16&hl=it"
+        class="absolute inset-0 w-full h-full border-0"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Sede Buttò S.r.l. – Via San Giuseppe 42, Assoro (EN)"></iframe>
+    </template>
 
     <div
       class="absolute inset-y-0 left-0 w-72 bg-gradient-to-r from-forest/70 to-transparent pointer-events-none z-10"
@@ -414,6 +428,17 @@ const temi = [
       const dict = translations[currentLang()] ?? translations.it;
       return resolveKey(dict, key) ?? key;
     }
+
+    // The choice is not stored: the map is requested again on every visit.
+    document.getElementById('map-load')?.addEventListener('click', () => {
+      const template = document.getElementById('map-template') as HTMLTemplateElement | null;
+      const placeholder = document.getElementById('map-consent');
+      if (!template || !placeholder) return;
+      const frame = template.content.firstElementChild!.cloneNode(true) as HTMLIFrameElement;
+      frame.tabIndex = 0;
+      placeholder.replaceWith(frame);
+      frame.focus();
+    });
 
     const form = document.getElementById('contact-form') as HTMLFormElement | null;
     const statusEl = document.getElementById('contact-form-status');

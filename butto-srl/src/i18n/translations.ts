@@ -437,6 +437,8 @@ export const translations = {
       },
       map: {
         directions: 'Ottieni Indicazioni',
+        notice: 'Caricando la mappa, Google riceve il tuo indirizzo IP e può impostare cookie.',
+        load: 'Mostra la mappa',
         sede: 'Sede Operativa · Assoro (EN)',
       },
     },
@@ -880,6 +882,8 @@ export const translations = {
       },
       map: {
         directions: 'Get Directions',
+        notice: 'If you load the map, Google receives your IP address and may set cookies.',
+        load: 'Show the map',
         sede: 'Operational HQ · Assoro (EN)',
       },
     },
