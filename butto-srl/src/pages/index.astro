@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import GoogleBusiness from '../components/GoogleBusiness.astro';
 import BotanicalBackground from '../components/BotanicalBackground.astro';
 import { Image } from 'astro:assets';
 import leafeHeart from '../assets/leafe-heart.jpg';
@@ -33,7 +32,7 @@ const ticker = [
   <!-- ══════════════════════ HERO ══════════════════════ -->
   <section class="relative min-h-dvh flex items-center overflow-hidden bg-forest py-32 lg:py-36">
 
-    <BotanicalBackground />
+    <BotanicalBackground singleLeafOnMobile />
     <div class="absolute inset-0 grain pointer-events-none" aria-hidden="true"></div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 w-full relative z-10">
@@ -60,8 +59,8 @@ const ticker = [
           <a href="/servizi" class="btn-primary text-base px-8 py-4">
             <span data-i18n="home.hero.cta1">I Nostri Servizi</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
           </a>
-          <a href="/chi-siamo" class="btn-ghost-dark text-base px-8 py-4">
-            <span data-i18n="home.hero.cta2">La Nostra Storia</span>
+          <a href="/contatti" class="btn-ghost-dark text-base px-8 py-4">
+            <span data-i18n="home.hero.cta2">Contattaci</span>
           </a>
         </div>
 
@@ -107,12 +106,12 @@ const ticker = [
           { count: '4200', suffix: '',  lKey: 'home.stats.co2Label',    sKey: 'home.stats.co2Sub',       label: 'Ton CO₂', sub: 'risparmiate ogni anno' },
           { count: '85',   suffix: '%', lKey: 'home.stats.rifiutiLabel',sKey: 'home.stats.rifiutiSub',   label: 'Rifiuti', sub: 'recuperati e riciclati' },
         ].map(({ count, suffix, lKey, sKey, label, sub }, i) => (
-          <div class={`p-10 lg:p-14 text-center ${i < 3 ? 'border-r border-linen' : ''} ${i >= 2 ? 'border-t lg:border-t-0 border-linen' : ''} reveal delay-${i + 1}`}>
+          <div class={`p-10 max-lg:px-3 max-lg:py-8 lg:p-14 text-center ${i < 3 ? 'border-r border-linen' : ''} ${i >= 2 ? 'border-t lg:border-t-0 border-linen' : ''} reveal delay-${i + 1}`}>
             <p class="stat-xl text-ochre mb-1">
               <span data-count={count + suffix}>{count}{suffix}</span>
             </p>
-            <p data-i18n={lKey} class="font-condensed font-700 text-ink text-base uppercase tracking-[0.12em]">{label}</p>
-            <p data-i18n={sKey} class="font-body text-muted text-xs mt-1">{sub}</p>
+            <p data-i18n={lKey} class="font-condensed font-700 text-ink text-base max-lg:text-sm uppercase tracking-[0.12em]">{label}</p>
+            <p data-i18n={sKey} class="font-body text-muted text-xs max-lg:text-sm max-lg:text-ink/80 mt-1">{sub}</p>
           </div>
         ))}
       </div>
@@ -358,43 +357,40 @@ const ticker = [
         <div class="lg:col-span-7 reveal-right delay-1">
           <div class="grid grid-cols-2 gap-px bg-white/8">
 
-            <div class="col-span-2 bg-forest-mid p-10 group hover:bg-forest-soft transition-colors duration-300">
+            <div class="col-span-2 bg-forest-mid p-10 max-lg:p-6 group hover:bg-forest-soft transition-colors duration-300">
               <div class="flex items-start justify-between mb-6">
                 <i class="fa-solid fa-leaf text-sage text-2xl"></i>
-                <span data-i18n="home.sustainability.annoPer" class="overline text-ivory/25">Anno su Anno</span>
+                <span data-i18n="home.sustainability.annoPer" class="overline text-ivory/25 max-lg:text-ivory/75">Anno su Anno</span>
               </div>
               <p class="stat-xl text-ivory mb-2">
                 <span data-count="4200">4.200</span>
               </p>
-              <p data-i18n="home.sustainability.co2Sub" class="font-condensed font-700 text-ivory/40 text-sm uppercase tracking-[0.18em]">Tonnellate CO₂ Risparmiate</p>
-              <p data-i18n="home.sustainability.co2Note" class="font-body text-ivory/25 text-xs mt-4 pt-4 border-t border-white/8">
+              <p data-i18n="home.sustainability.co2Sub" class="font-condensed font-700 text-ivory/40 max-lg:text-ivory/90 text-sm uppercase tracking-[0.18em]">Tonnellate CO₂ Risparmiate</p>
+              <p data-i18n="home.sustainability.co2Note" class="font-body text-ivory/25 max-lg:text-ivory/80 text-xs max-lg:text-sm mt-4 pt-4 border-t border-white/8 max-lg:border-white/15">
                 Equivalente a 120.000 alberi piantati ogni anno
               </p>
             </div>
 
-            <div class="bg-ochre p-10">
+            <div class="bg-ochre p-10 max-lg:p-5">
               <i class="fa-solid fa-recycle text-forest text-2xl mb-6 block"></i>
               <p class="stat-xl text-forest leading-none mb-2">
                 <span data-count="85%">85%</span>
               </p>
-              <p data-i18n="home.sustainability.rifiutiLabel" class="font-condensed font-700 text-forest/60 text-xs uppercase tracking-[0.18em]">Rifiuti Recuperati</p>
+              <p data-i18n="home.sustainability.rifiutiLabel" class="font-condensed font-700 text-forest/60 max-lg:text-forest text-xs max-lg:text-base max-lg:leading-tight uppercase tracking-[0.18em] max-lg:tracking-[0.08em]">Rifiuti Recuperati</p>
             </div>
 
-            <div class="bg-forest-mid p-10 group hover:bg-forest-soft transition-colors">
+            <div class="bg-forest-mid p-10 max-lg:p-5 group hover:bg-forest-soft transition-colors">
               <i class="fa-solid fa-handshake text-sage/50 text-2xl mb-6 block"></i>
               <p class="stat-xl text-ivory leading-none mb-2">
                 <span data-count={String(clientLogos.length)}>{clientLogos.length}</span>
               </p>
-              <p data-i18n="home.sustainability.clientiLabel" class="font-condensed font-700 text-ivory/40 text-xs uppercase tracking-[0.18em]">Clienti in evidenza</p>
+              <p data-i18n="home.sustainability.clientiLabel" class="font-condensed font-700 text-ivory/40 max-lg:text-ivory/90 text-xs max-lg:text-base max-lg:leading-tight uppercase tracking-[0.18em] max-lg:tracking-[0.08em]">Clienti in evidenza</p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ══════════════════════ RECENSIONI GOOGLE ══════════════════════ -->
-  <GoogleBusiness />
 
   <!-- ══════════════════════ FINAL CTA ══════════════════════ -->
   <section class="py-32 md:py-40 lg:py-48 bg-forest grain relative overflow-hidden">
@@ -431,6 +427,11 @@ const ticker = [
 
 
 <style>
+  /* Four-digit figures must fit half of a phone screen. */
+  @media (max-width: 1023px) {
+    .stat-xl { font-size: clamp(2.25rem, 11vw, 4rem); }
+  }
+
   .hero-title {
     font-size: clamp(3rem, 6.5vw, 7rem);
     line-height: 1;

@@ -52,11 +52,18 @@ const macrocategorie = [
   { icon: 'fa-plug',             title: 'RAEE e Batterie',  code: 'Cap. 16',    img: '/certificazioni/raee.jpg',        desc: 'Ritiro e avvio a recupero di rifiuti di apparecchiature elettriche ed elettroniche e accumulatori esauriti.' },
   { icon: 'fa-trowel-bricks',    title: 'Edilizia e Amianto', code: 'Cap. 17', img: '/certificazioni/edilizia.jpg',     desc: 'Smaltimento di scarti da costruzione, macerie, e materiali edili di varia natura.' },
   { icon: 'fa-truck-medical',    title: 'Rifiuti Sanitari', code: 'Cap. 18',    img: '/certificazioni/sanitari.jpg',    desc: 'Gestione sicura di rifiuti derivanti da attività mediche, veterinarie e di ricerca scientifica.' },
-  { icon: 'fa-oil-can',          title: 'Oli e Solventi',   code: 'Cap. 13-14', img: '/certificazioni/oli.jpg',         desc: 'Trattamento e stoccaggio di oli esauriti, residui di combustibili, solventi e fluidi industriali.' },
+  { icon: 'fa-oil-can',          title: 'Oli e Solventi',   code: 'Cap. 13-14', img: '/certificazioni/oli.jpg',         desc: 'Raccolta e trasporto di oli esauriti, residui di combustibili, solventi e fluidi industriali.' },
   { icon: 'fa-industry',         title: 'Rifiuti Industriali', code: 'Cap. 19',img: '/certificazioni/industriali.jpg', desc: 'Scarti prodotti da impianti di trattamento rifiuti, depurazione acque reflue e potabilizzazione.' },
 ];
 
+// Category 1 entries with their own wording in the registration, shown as a short reminder.
+const specifiche = [
+  { id: 'spiaggiati', code: '20.01.99', icon: 'fa-water', title: 'Rifiuti spiaggiati avviati al recupero' },
+  { id: 'cimiteriali', code: '20.03.99', icon: 'fa-monument', title: 'Rifiuti cimiteriali' },
+];
+
 const certSearchItems = [
+  ...specifiche.map(s => ({ label: s.title, tag: `CER ${s.code}`, desc: "Autorizzazione compresa nell'iscrizione all'Albo, categoria 1." })),
   ...macrocategorie.map(m => ({ label: m.title, tag: `CER ${m.code}`, desc: m.desc })),
   ...alboCarousel.map((a, i) => ({ label: a.cat, tag: a.kind === 'cert' ? 'Certificazione' : 'Albo Gestori Ambientali', desc: albiIt[i].paragraph })),
 ];
@@ -87,11 +94,11 @@ const certSearchItems = [
   <!-- CERTIFICAZIONI E ALBO GESTORI -->
   <section class="py-24 bg-forest grain">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
-      <div class="grid lg:grid-cols-2 gap-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 max-lg:gap-10">
         <div class="reveal">
           <span data-i18n="certificazioni.albo.eyebrow" class="overline text-ochre">Le nostre garanzie</span>
           <h2 data-i18n="certificazioni.albo.h2" class="display-sm text-ivory italic mt-4 mb-6">Albo Nazionale Gestori Ambientali e Certificazioni</h2>
-          <div class="font-body text-ivory/60 leading-relaxed space-y-4">
+          <div class="font-body text-ivory/60 max-lg:text-ivory/85 leading-relaxed space-y-4">
             <p data-i18n="certificazioni.albo.body">
               Per BUTTÒ CARMELO S.R.L. la conformità non è solo un obbligo di legge, ma la solida base di ogni partnership. Il possesso di specifiche iscrizioni all'Albo e delle certificazioni ambientali (come la norma ISO 14001 o la registrazione EMAS) rappresenta una garanzia assoluta di qualità, trasparenza e costante miglioramento, tutelando sia i partner pubblici che privati.
             </p>
@@ -112,7 +119,7 @@ const certSearchItems = [
                       aria-haspopup="dialog"
                       aria-label={`${cat}: apri dettaglio`}
                     >
-                      <div class="relative h-[56%] overflow-hidden">
+                      <div class="relative h-[56%] max-lg:h-[46%] overflow-hidden">
                             <div
                               class="absolute inset-0 bg-cover bg-center transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110"
                               style={`background-image:url(${img})`}
@@ -122,20 +129,20 @@ const certSearchItems = [
                             <div class="absolute inset-0 bg-forest/50 mix-blend-multiply"></div>
                             <div class="absolute inset-0 bg-gradient-to-t from-forest-mid via-forest-mid/5 to-transparent"></div>
 
-                            <span class="absolute top-4 left-4 inline-block px-2.5 py-1 bg-ivory/10 border border-ochre/30 text-ochre text-[0.65rem] font-condensed tracking-wider backdrop-blur-sm">
+                            <span class="absolute top-4 left-4 inline-block px-2.5 py-1 bg-ivory/10 border border-ochre/30 text-ochre text-[0.65rem] max-lg:text-xs max-lg:bg-forest/85 font-condensed tracking-wider backdrop-blur-sm">
                               {kind === 'cert' ? 'Certificazione' : `Albo N° ${num}`}
                             </span>
 
-                            <span class="albo-icon-badge absolute -bottom-6 left-6 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-lg shadow-ochre transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110 group-hover/card:rotate-[12deg]">
+                            <span class="albo-icon-badge absolute -bottom-6 max-lg:bottom-1 left-6 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-lg shadow-ochre transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110 group-hover/card:rotate-[12deg]">
                               <i class={`fa-solid ${icon}`}></i>
                             </span>
                           </div>
 
-                      <div class="h-[44%] flex flex-col justify-center gap-1 px-6 pt-6 pb-5">
-                        <span data-i18n={`certificazioni.albo.cats.${origIndex}.tag`} class="font-condensed font-700 text-[0.64rem] uppercase tracking-[0.18em] text-ochre/70">{tag}</span>
-                        <h3 data-i18n={`certificazioni.albo.cats.${origIndex}.cat`} class="font-serif italic text-xl text-ivory leading-tight text-balance">{cat}</h3>
-                        <p data-i18n={`certificazioni.albo.cats.${origIndex}.short`} class="font-body text-[0.8rem] text-ivory/55 leading-snug mt-0.5 text-pretty line-clamp-2">{short}</p>
-                        <span class="inline-flex items-center gap-1.5 font-condensed text-[0.64rem] uppercase tracking-[0.14em] text-ochre/60 mt-1.5 group-hover/card:gap-2.5 transition-all duration-300">
+                      <div class="h-[44%] max-lg:h-[54%] flex flex-col justify-center gap-1 max-lg:gap-2 px-6 pt-6 pb-5">
+                        <span data-i18n={`certificazioni.albo.cats.${origIndex}.tag`} class="font-condensed font-700 text-[0.64rem] max-lg:text-xs uppercase tracking-[0.18em] text-ochre/70 max-lg:text-ochre-light">{tag}</span>
+                        <h3 data-i18n={`certificazioni.albo.cats.${origIndex}.cat`} class="font-serif italic text-xl max-lg:text-2xl text-ivory leading-tight text-balance">{cat}</h3>
+                        <p data-i18n={`certificazioni.albo.cats.${origIndex}.short`} class="font-body text-[0.8rem] max-lg:text-sm text-ivory/55 max-lg:text-ivory/85 leading-snug mt-0.5 text-pretty line-clamp-2 max-lg:line-clamp-3">{short}</p>
+                        <span class="inline-flex items-center gap-1.5 font-condensed text-[0.64rem] max-lg:text-xs uppercase tracking-[0.14em] text-ochre/60 max-lg:text-ochre-light mt-1.5 group-hover/card:gap-2.5 transition-all duration-300">
                           <i class="fa-solid fa-expand text-[0.55rem]"></i> Vedi dettaglio
                         </span>
                       </div>
@@ -145,13 +152,13 @@ const certSearchItems = [
               </div>
             </div>
 
-            <div class="flex items-center justify-between gap-4 mt-7 flex-wrap">
-              <span id="albo-current-label" class="font-condensed font-700 text-[0.72rem] uppercase tracking-[0.16em] text-ivory/50">
+            <div class="flex items-center justify-between max-lg:justify-center gap-4 mt-7 flex-wrap">
+              <span id="albo-current-label" class="font-condensed font-700 text-[0.72rem] max-lg:text-sm max-lg:w-full max-lg:text-center uppercase tracking-[0.16em] text-ivory/50 max-lg:text-ivory/90">
                 {alboCarousel[0].cat}
               </span>
 
               <div class="flex items-center gap-5">
-                <button id="albo-prev" type="button" class="albo-nav w-9 h-9 rounded-full border border-white/15 text-ivory/50 flex items-center justify-center transition-colors duration-300 hover:border-ochre hover:text-ochre focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Categoria precedente">
+                <button id="albo-prev" type="button" class="albo-nav w-9 h-9 max-lg:w-11 max-lg:h-11 rounded-full border border-white/15 max-lg:border-white/40 text-ivory/50 max-lg:text-ivory flex items-center justify-center transition-colors duration-300 hover:border-ochre hover:text-ochre focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Categoria precedente">
                   <i class="fa-solid fa-arrow-left text-xs"></i>
                 </button>
 
@@ -169,7 +176,7 @@ const certSearchItems = [
                   ))}
                 </div>
 
-                <button id="albo-next" type="button" class="albo-nav w-9 h-9 rounded-full border border-white/15 text-ivory/50 flex items-center justify-center transition-colors duration-300 hover:border-ochre hover:text-ochre focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Categoria successiva">
+                <button id="albo-next" type="button" class="albo-nav w-9 h-9 max-lg:w-11 max-lg:h-11 rounded-full border border-white/15 max-lg:border-white/40 text-ivory/50 max-lg:text-ivory flex items-center justify-center transition-colors duration-300 hover:border-ochre hover:text-ochre focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Categoria successiva">
                   <i class="fa-solid fa-arrow-right text-xs"></i>
                 </button>
               </div>
@@ -633,12 +640,20 @@ const certSearchItems = [
     </div>
 
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14 pb-24">
-      <div class="mt-12 bg-parchment p-6 border border-linen text-center reveal">
-        <p class="font-body text-ink text-sm">
-          <i class="fa-solid fa-circle-check text-ochre mr-2"></i>
-          <span data-i18n-html="certificazioni.macrocategorie.note">Siamo inoltre autorizzati alla gestione di <strong>Rifiuti Spiaggiati (CER 20.01.99)</strong> e <strong>Rifiuti Cimiteriali (CER 20.03.99)</strong>.</span>
-        </p>
-      </div>
+      <aside class="mt-16 lg:mt-24 max-w-4xl mx-auto" aria-labelledby="specifiche-heading">
+        <h2 id="specifiche-heading" data-i18n="certificazioni.specifiche.h2" class="font-serif italic text-3xl lg:text-4xl text-ink text-center leading-tight reveal">Autorizzati anche per</h2>
+        <ul class="grid md:grid-cols-2 gap-5 mt-10">
+          {specifiche.map((s, i) => (
+            <li class={`flex flex-col bg-forest grain text-ivory p-8 lg:p-10 shadow-forest reveal delay-${i + 1}`}>
+              <span class="relative z-10 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-xl" aria-hidden="true">
+                <i class={`fa-solid ${s.icon}`}></i>
+              </span>
+              <p data-i18n={`certificazioni.specifiche.${s.id}`} class="relative z-10 font-serif italic text-2xl lg:text-3xl text-ivory leading-tight text-balance mt-7 mb-8">{s.title}</p>
+              <p class="relative z-10 mt-auto pt-5 border-t border-ivory/15 font-condensed font-700 text-xl tracking-wider text-ochre-light tabular-nums">CER {s.code}</p>
+            </li>
+          ))}
+        </ul>
+      </aside>
     </div>
   </section>
 

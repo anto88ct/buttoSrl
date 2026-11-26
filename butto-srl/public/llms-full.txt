@@ -37,10 +37,11 @@ Fondata ad Assoro per iniziativa di Carmelo Buttò, che nel 1978 avvia la prima 
 - Piano Zero Waste: Strategie personalizzate per raggiungere obiettivi di zero conferimento in discarica attraverso recupero e riciclo.
 
 ## Albo Nazionale Gestori Ambientali (iscrizione N° PA00492)
-- Categoria 1, classe F: raccolta e trasporto di rifiuti urbani. Rinnovo Prot. 32112/2024 del 05/11/2024. Esclusa la raccolta di rifiuti abbandonati su spiagge, aree lacuali e rive dei corsi d’acqua.
-- Categoria 4, classe F: raccolta e trasporto di rifiuti speciali non pericolosi. Rinnovo Prot. 32112/2024 del 05/11/2024.
-- Categoria 5, classe F: raccolta e trasporto di rifiuti speciali pericolosi, quantità annua inferiore a 3.000 t. Rinnovo Prot. 3587/2024 del 09/02/2024.
-- Categoria 8: intermediazione e commercio di rifiuti senza detenzione. Iscrizione Prot. 23868/2022 del 18/07/2022.
+- Categoria 1, classe F (popolazione servita inferiore a 5.000 abitanti, 2.999 t/anno di rifiuti urbani pericolosi): raccolta e trasporto di rifiuti urbani. Rinnovo Prot. 32112/2024 del 05/11/2024, valido dal 18/12/2024 al 18/12/2029. Esclusi la raccolta e il trasporto di rifiuti abbandonati sulle spiagge marittime e lacuali e sulle rive dei corsi d’acqua.
+- Categoria 1, voci specifiche: 20.01.99 rifiuti spiaggiati avviati al recupero (tipologia 45-bis D.M. 8 aprile 2008); 20.03.99 rifiuti cimiteriali.
+- Categoria 4, classe F: raccolta e trasporto di rifiuti speciali non pericolosi, quantità annua inferiore a 3.000 t. Rinnovo Prot. 32112/2024 del 05/11/2024, valido dal 18/12/2024 al 18/12/2029.
+- Categoria 5, classe F: raccolta e trasporto di rifiuti speciali pericolosi, quantità annua inferiore a 3.000 t. Rinnovo Prot. 3587/2024 del 09/02/2024, valido dal 27/03/2024 al 27/03/2029.
+- Categoria 8, classe F: intermediazione e commercio di rifiuti pericolosi e non pericolosi senza detenzione. Iscrizione Prot. 23868/2022 del 18/07/2022, valida dal 18/07/2022 al 18/07/2027.
 
 ## Macrocategorie EER/CER indicate sul sito
 - Cap. 15.01: imballaggi

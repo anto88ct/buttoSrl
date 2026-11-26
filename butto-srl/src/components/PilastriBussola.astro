@@ -1,0 +1,183 @@
+---
+// The four environmental pillars set around a compass. The needle turns towards the chosen card.
+interface Props {
+  items: { icon: string; title: string; desc: string }[];
+}
+const { items } = Astro.props;
+
+// Reading order of the cards: top left, top right, bottom left, bottom right.
+const bearings = [-45, 45, -135, 135];
+const corners = ['nw', 'ne', 'sw', 'se'];
+const at = (bearing: number, radius: number) => {
+  const rad = (bearing * Math.PI) / 180;
+  return { x: +(Math.sin(rad) * radius).toFixed(2), y: +(-Math.cos(rad) * radius).toFixed(2) };
+};
+const ticks = Array.from({ length: 60 }, (_, i) => i * 6);
+const cardinals = [
+  { bearing: 0, letter: 'N' }, { bearing: 90, letter: 'E' },
+  { bearing: 180, letter: 'S' }, { bearing: 270, letter: 'O', key: 'sostenibilita.pilastri.ovest' },
+];
+---
+
+<div class="bussola" data-bussola>
+  <div class="bussola-dial" aria-hidden="true">
+    <svg viewBox="-200 -200 400 400" class="w-full h-full">
+      <circle r="198" class="dial-face" />
+      <circle r="190" class="dial-ring" />
+      {ticks.map((bearing) => {
+        const major = bearing % 30 === 0;
+        const a = at(bearing, 190);
+        const b = at(bearing, major ? 174 : 182);
+        return <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} class={major ? 'tick tick-major' : 'tick'} />;
+      })}
+      <circle r="132" class="dial-ring" />
+
+      {/* Rose: each point is split in a light and a dark half. */}
+      {[45, 135, 225, 315, 0, 90, 180, 270].map((bearing) => (
+        <g transform={`rotate(${bearing})`}>
+          <path d={bearing % 90 ? 'M0 0L-13 -13L0 -78Z' : 'M0 0L-19 -19L0 -126Z'} class="rose-light" />
+          <path d={bearing % 90 ? 'M0 0L13 -13L0 -78Z' : 'M0 0L19 -19L0 -126Z'} class="rose-dark" />
+        </g>
+      ))}
+
+      {cardinals.map(({ bearing, letter, key }) => (
+        <text {...at(bearing, 154)} data-i18n={key} class={bearing === 0 ? 'cardinal cardinal-north' : 'cardinal'}>{letter}</text>
+      ))}
+      {bearings.map((bearing, i) => {
+        const p = at(bearing, 154);
+        return <circle cx={p.x} cy={p.y} r="6" class="mark" data-pillar={i} />;
+      })}
+
+      <g class="needle">
+        <path d="M0 -122L14 0H-14Z" class="needle-head" />
+        <path d="M0 96L14 0H-14Z" class="needle-tail" />
+      </g>
+      <circle r="13" class="hub" />
+      <circle r="4" class="hub-pin" />
+    </svg>
+  </div>
+
+  <ul class="bussola-cards">
+    {items.map(({ icon, title, desc }, i) => (
+      <li class={`bussola-card bussola-${corners[i]}`} data-pillar={i} data-bearing={bearings[i]}>
+        <i class={`fa-solid ${icon} card-icon`} aria-hidden="true"></i>
+        <h3 data-i18n={`sostenibilita.pilastri.items.${i}.title`} class="card-title font-serif text-2xl xl:text-3xl italic leading-tight text-balance">{title}</h3>
+        <p data-i18n={`sostenibilita.pilastri.items.${i}.desc`} class="card-desc font-body leading-relaxed text-pretty">{desc}</p>
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .bussola { display: grid; gap: 2.5rem; }
+  .bussola-dial { width: min(100%, 22rem); aspect-ratio: 1; margin-inline: auto; }
+  .bussola-dial svg { filter: drop-shadow(0 24px 40px rgb(22 44 27 / 0.28)); }
+  .bussola-cards { display: grid; gap: 1rem; }
+  @media (min-width: 640px) { .bussola-cards { grid-template-columns: 1fr 1fr; } }
+
+  /* Wide screens: the compass in the middle, one card in each corner. */
+  @media (min-width: 1024px) {
+    .bussola {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 20rem) minmax(0, 1fr);
+      grid-template-rows: repeat(2, minmax(15rem, auto));
+      column-gap: 2rem;
+      row-gap: 3rem;
+    }
+    .bussola-cards { display: contents; }
+    .bussola-dial { grid-column: 2; grid-row: 1 / span 2; align-self: center; width: 100%; }
+    .bussola-nw { grid-column: 1; grid-row: 1; }
+    .bussola-ne { grid-column: 3; grid-row: 1; }
+    .bussola-sw { grid-column: 1; grid-row: 2; }
+    .bussola-se { grid-column: 3; grid-row: 2; }
+  }
+  @media (min-width: 1280px) {
+    .bussola { grid-template-columns: minmax(0, 1fr) minmax(0, 29rem) minmax(0, 1fr); column-gap: 3rem; }
+  }
+
+  .dial-face { fill: var(--forest); }
+  .dial-ring { fill: none; stroke: rgb(242 237 223 / 0.16); stroke-width: 1; }
+  .tick { stroke: rgb(242 237 223 / 0.35); stroke-width: 1; }
+  .tick-major { stroke: #D9A83F; stroke-width: 2; }
+  .rose-light { fill: rgb(242 237 223 / 0.16); }
+  .rose-dark  { fill: rgb(242 237 223 / 0.06); }
+  .cardinal {
+    fill: var(--ivory);
+    font: 700 26px 'Barlow Condensed', sans-serif;
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+  .cardinal-north { fill: #D9A83F; }
+  .mark { fill: rgb(242 237 223 / 0.3); transition: fill 0.4s ease; }
+  .mark.is-active { fill: #D9A83F; }
+  .needle {
+    transform: rotate(0deg);
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .needle-head { fill: #D9A83F; }
+  .needle-tail { fill: var(--sage); }
+  .hub { fill: var(--ivory); }
+  .hub-pin { fill: var(--forest); }
+
+  .bussola-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    justify-content: center;
+    padding: 1.75rem;
+    background: var(--ivory);
+    border: 1px solid var(--linen);
+    box-shadow: 0 8px 40px rgb(22 44 27 / 0.08), 0 2px 8px rgb(22 44 27 / 0.05);
+    transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .card-icon { color: #C4922A; font-size: 1.5rem; align-self: flex-start; }
+  .card-title { color: #1E1C17; transition: color 0.4s ease; }
+  .card-desc { color: rgb(30 28 23 / 0.78); transition: color 0.4s ease; }
+  .bussola-card.is-active {
+    background: var(--forest);
+    border-color: var(--forest);
+    box-shadow: 0 22px 60px rgb(22 44 27 / 0.24);
+  }
+  .bussola-card.is-active .card-icon { color: #D9A83F; }
+  .bussola-card.is-active .card-title { color: var(--ivory); }
+  .bussola-card.is-active .card-desc { color: rgb(242 237 223 / 0.82); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .needle { transition: none; }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.querySelector<HTMLElement>('[data-bussola]');
+    if (!root) return;
+    const needle = root.querySelector<SVGGElement>('.needle')!;
+    const cards = root.querySelectorAll<HTMLElement>('.bussola-card');
+    let angle = 0;
+
+    // Turn by the shortest way round, so the needle never spins almost a full circle.
+    const point = (bearing: number) => {
+      angle += ((((bearing - angle) % 360) + 540) % 360) - 180;
+      needle.style.transform = `rotate(${angle}deg)`;
+    };
+    const choose = (card: HTMLElement) => {
+      root.querySelectorAll('[data-pillar]').forEach((el) => {
+        el.classList.toggle('is-active', el.getAttribute('data-pillar') === card.dataset.pillar);
+      });
+      point(Number(card.dataset.bearing));
+    };
+
+    // The last chosen card stays selected, like a needle that holds its bearing.
+    cards.forEach((card) => {
+      card.addEventListener('pointerenter', () => choose(card));
+      card.addEventListener('click', () => choose(card));
+    });
+
+    // When the compass first comes into view, the needle settles on the first pillar.
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      if (!root.querySelector('.is-active')) choose(cards[0]);
+    }, { threshold: 0.4 });
+    observer.observe(root.querySelector('.bussola-dial')!);
+  })();
+</script>

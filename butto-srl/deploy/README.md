@@ -27,8 +27,6 @@ Caricare via SFTP o FTPS il **contenuto** di `dist/` dentro `www`, compresi i fi
 
 La cartella `contact-data` viene creata da sola accanto a `www`.
 
-Le recensioni Google vengono lette durante la build: per mostrarle, `PUBLIC_GOOGLE_PLACE_ID` e `GOOGLE_PLACES_API_KEY` devono essere nel file `.env` locale.
-
 ## 4. Controlli dopo la pubblicazione
 
 - `http://www.buttocarmelo.it/servizi/` deve portare a `https://buttocarmelo.it/servizi`.

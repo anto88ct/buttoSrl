@@ -2,10 +2,9 @@
 interface Props {
   word: string;
   dark?: boolean;
-  bottom?: boolean;
 }
 
-const { word, dark = false, bottom = false } = Astro.props;
+const { word, dark = false } = Astro.props;
 const letters = Array.from(word);
 const typingKeyframes = letters.map((_, index) => {
   const appear = 6 + index * 4;
@@ -18,7 +17,7 @@ const typingKeyframes = letters.map((_, index) => {
 }).join('\n');
 ---
 
-<div class="hero-watermark" data-dark={dark} data-bottom={bottom} aria-hidden="true">
+<div class="hero-watermark" data-dark={dark} aria-hidden="true">
   <span class="watermark-word font-condensed font-800 leading-none">
     {letters.map((letter, index) => (
       <span class="watermark-letter" style={`animation-name: watermark-type-${index}`}>{letter}</span>
@@ -46,16 +45,10 @@ const typingKeyframes = letters.map((_, index) => {
     opacity: 0.055;
   }
 
-  .hero-watermark[data-dark='true'] .watermark-word {
+  /* On dark heroes: same size and position, slightly stronger so it stays readable. */
+  .hero-watermark[data-dark] .watermark-word {
     color: var(--ivory);
-    opacity: 0.065;
-    font-size: 22vw;
-  }
-
-  .hero-watermark[data-bottom='true'] {
-    top: auto;
-    bottom: 0;
-    transform: none;
+    opacity: 0.11;
   }
 
   .watermark-letter {
@@ -67,9 +60,10 @@ const typingKeyframes = letters.map((_, index) => {
 
   .hero-watermark.is-running .watermark-letter { animation-play-state: running; }
 
-  @media (max-width: 767px) {
-    .watermark-word { font-size: 30vw; }
-    .hero-watermark[data-dark='true'] .watermark-word { font-size: 30vw; }
+  /* Phones and tablets: the word sits in the empty space under the hero text, never behind it. */
+  @media (max-width: 1023px) {
+    .hero-watermark { top: auto; bottom: 0.5rem; right: 1rem; transform: none; }
+    .watermark-word { font-size: min(24vw, 6.5rem); }
   }
 
   @media (prefers-reduced-motion: reduce) {

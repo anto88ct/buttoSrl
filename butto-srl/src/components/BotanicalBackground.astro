@@ -1,8 +1,10 @@
 ---
 interface Props {
   ambient?: boolean;
+  /** Below 1024px show one leaf only, instead of the two plants and the flowing shapes. */
+  singleLeafOnMobile?: boolean;
 }
-const { ambient = true } = Astro.props;
+const { ambient = true, singleLeafOnMobile = false } = Astro.props;
 
 const leaves = [
   { x: 110, y: 805, angle: -16, scale: 1.15 },
@@ -19,7 +21,14 @@ const leaves = [
 ];
 ---
 
-<div class="botanical-background" aria-hidden="true">
+<div class:list={['botanical-background', { 'single-leaf': singleLeafOnMobile }]} aria-hidden="true">
+  {singleLeafOnMobile && <svg class="mobile-leaf" viewBox="-150 -140 175 165" fill="none">
+    <g class="plant-leaf">
+      <path class="leaf-stem" d="M0 0Q10 6 20 20" />
+      <path class="leaf-surface" d="M0 0C-64-3-129-56-139-127C-65-128-7-73 0 0Z" />
+      <path class="leaf-vein" d="M0 0C-36-42-77-83-125-117M-35-40L-39-74M-57-62L-90-65M-78-83L-82-104" />
+    </g>
+  </svg>}
   {ambient && <svg class="ambient-field" viewBox="0 0 1600 1000" preserveAspectRatio="none" fill="none">
     <g class="ambient-current ambient-current-left">
       <path d="M-180 1120C260 970 495 810 330 510S120 180 420-130H-180Z" fill="var(--forest-soft)" opacity=".5" />
@@ -134,6 +143,24 @@ const leaves = [
   }
   .botanical-background.is-running :is(.plant-leaf, .plant-canopy, .ambient-current, .leaf-wind) {
     animation-play-state: running;
+  }
+
+  .mobile-leaf { display: none; }
+  @media (max-width: 1023px) {
+    .single-leaf .botanical-plant,
+    .single-leaf .ambient-field { display: none; }
+    /* Top right, inside the first screen: the old bottom position fell below the fold on phones. */
+    .single-leaf .mobile-leaf {
+      display: block;
+      position: absolute;
+      top: 5.25rem;
+      right: -0.75rem;
+      width: clamp(5.5rem, 28vw, 12rem);
+      overflow: visible;
+    }
+    .mobile-leaf .leaf-surface { fill-opacity: 0.8; stroke-opacity: 0.65; stroke-width: 1.2; }
+    .mobile-leaf .leaf-vein { stroke-opacity: 0.55; stroke-width: 1; }
+    .mobile-leaf .leaf-stem { stroke: var(--sage); stroke-opacity: 0.65; stroke-width: 1.5; }
   }
 
   .leaf-wind { transform-origin: 0 0; }

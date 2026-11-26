@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { clientLogos } from '../data/clients';
 import HeroWatermark from '../components/HeroWatermark.astro';
+import PilastriBussola from '../components/PilastriBussola.astro';
 import { Image } from 'astro:assets';
 import leafeHeart from '../assets/leafe-heart.jpg';
 
@@ -34,7 +35,7 @@ const sdgs = [
       <div class="absolute inset-0 bg-gradient-to-r from-forest via-forest/80 to-transparent"></div>
     </div>
 
-    <HeroWatermark word="TERRA" dark bottom />
+    <HeroWatermark word="TERRA" dark />
 
     <div class="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-14 w-full py-32">
       <div class="max-w-3xl">
@@ -46,19 +47,6 @@ const sdgs = [
         <p data-i18n="sostenibilita.hero.body" class="font-body text-ivory/45 text-xl max-w-xl leading-relaxed mt-8 reveal delay-2">
           La sostenibilità non è un obiettivo, ma il respiro della nostra azienda. Trasformiamo la gestione dei rifiuti in un atto di amore per il territorio siciliano.
         </p>
-
-        <div class="flex flex-wrap gap-0 mt-12 border border-white/10 reveal delay-3">
-          {[
-            { v: '4.200', suf: ' Ton', lKey: 'sostenibilita.hero.co2Label',       l: 'CO₂ risparmiate' },
-            { v: '85',    suf: '%',    lKey: 'sostenibilita.hero.rifiutiLabel',    l: 'rifiuti recuperati' },
-            { v: '-30',   suf: '%',    lKey: 'sostenibilita.hero.emissioniLabel',  l: 'emissioni flotta' },
-          ].map(({ v, suf, lKey, l }, i) => (
-            <div class={`px-8 py-6 ${i < 2 ? 'border-r border-white/10' : ''}`}>
-              <p class="font-display text-2xl text-ivory leading-none">{v}<span class="text-ochre">{suf}</span></p>
-              <p data-i18n={lKey} class="font-condensed text-[0.65rem] uppercase tracking-[0.18em] text-ivory/35 mt-1.5">{l}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   </section>
@@ -162,23 +150,7 @@ const sdgs = [
         <div class="rule-ochre"></div>
         <h2 data-i18n="sostenibilita.pilastri.h2" class="display-sm text-ink italic mt-5">I 4 Pilastri Ambientali</h2>
       </div>
-      <div class="grid sm:grid-cols-2 gap-4">
-        {pilastri.map(({ icon, title, desc }, i) => (
-          <div class={`group relative overflow-hidden bg-ivory border border-linen/80 hover:border-forest hover:bg-forest shadow-[0_8px_40px_rgba(22,44,27,0.08),0_2px_8px_rgba(22,44,27,0.05)] hover:shadow-[0_22px_60px_rgba(22,44,27,0.24)] transition-[background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default reveal delay-${(i % 4) + 1}`}>
-            <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] bg-ochre origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></span>
-            <div class="flex flex-col gap-6 p-7 lg:p-9">
-              <div class="flex items-center justify-between pb-5 border-b border-linen group-hover:border-ivory/15 transition-colors duration-500">
-                <span class="font-condensed font-700 text-[0.72rem] uppercase tracking-[0.22em] text-muted group-hover:text-ochre transition-colors duration-500">N°&thinsp;{String(i + 1).padStart(2, '0')}</span>
-                <i class={`fa-solid ${icon} text-[1.05rem] text-ochre group-hover:text-ochre-light transition-colors duration-500`}></i>
-              </div>
-              <div class="space-y-3">
-                <h3 data-i18n={`sostenibilita.pilastri.items.${i}.title`} class="font-serif text-2xl italic text-ink group-hover:text-ivory transition-colors duration-500 leading-tight text-balance">{title}</h3>
-                <p data-i18n={`sostenibilita.pilastri.items.${i}.desc`} class="font-body text-ink/75 group-hover:text-ivory/65 text-sm leading-relaxed transition-colors duration-500 text-pretty">{desc}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <PilastriBussola items={pilastri} />
     </div>
   </section>
 

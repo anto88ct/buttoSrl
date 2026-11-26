@@ -53,7 +53,7 @@ const docLinks = [
 
         <p
           data-i18n="footer.descrizione"
-          class="font-body text-ivory/40 text-sm leading-relaxed max-w-xs"
+          class="font-body text-ivory/40 text-base leading-relaxed max-w-xs"
         >
           Dal 1978, custodi dell'ambiente siciliano. Leader nella gestione
           integrata dei rifiuti e servizi pubblici.
@@ -63,7 +63,7 @@ const docLinks = [
         <div class="flex flex-wrap gap-2">
           {
             ["ISO 14001", "ISO 9001", "Albo Gestori"].map((c) => (
-              <span class="font-condensed text-[0.6rem] font-700 uppercase tracking-[0.18em] px-3 py-1.5 border border-white/10 text-ivory/35">
+              <span class="font-condensed text-[0.72rem] font-700 uppercase tracking-[0.18em] px-3 py-1.5 border border-white/10 text-ivory/35">
                 {c}
               </span>
             ))
@@ -92,7 +92,7 @@ const docLinks = [
 
       <!-- Navigation -->
       <div class="lg:col-span-2">
-        <p data-i18n="footer.navigazione" class="overline text-ivory/25 mb-7">
+        <p data-i18n="footer.navigazione" class="overline !text-[0.8rem] text-ivory/25 mb-7">
           Navigazione
         </p>
         <ul class="space-y-3">
@@ -101,7 +101,7 @@ const docLinks = [
               <li>
                 <a
                   href={href}
-                  class="font-body text-ivory/45 hover:text-ivory text-sm transition-colors duration-200 link-line"
+                  class="font-body text-ivory/45 hover:text-ivory text-base transition-colors duration-200 link-line"
                 >
                   {label}
                 </a>
@@ -113,7 +113,7 @@ const docLinks = [
 
       <!-- Documents -->
       <div class="lg:col-span-2">
-        <p data-i18n="footer.documenti" class="overline text-ivory/25 mb-7">
+        <p data-i18n="footer.documenti" class="overline !text-[0.8rem] text-ivory/25 mb-7">
           Documenti
         </p>
         <ul class="space-y-3">
@@ -122,7 +122,7 @@ const docLinks = [
               <li>
                 <a
                   href={href}
-                  class="font-body text-ivory/45 hover:text-ivory text-sm transition-colors duration-200 link-line"
+                  class="font-body text-ivory/45 hover:text-ivory text-base transition-colors duration-200 link-line"
                 >
                   {label}
                 </a>
@@ -134,42 +134,42 @@ const docLinks = [
 
       <!-- Contact -->
       <div class="lg:col-span-4">
-        <p data-i18n="footer.contatti" class="overline text-ivory/25 mb-7">
+        <p data-i18n="footer.contatti" class="overline !text-[0.8rem] text-ivory/25 mb-7">
           Contatti
         </p>
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
             <i
-              class="fa-solid fa-location-dot text-ochre/50 text-sm mt-0.5 shrink-0 w-4"
+              class="fa-solid fa-location-dot text-ochre/50 text-base mt-0.5 shrink-0 w-4"
             ></i>
-            <span class="text-ivory/45 text-sm leading-snug">
+            <span class="text-ivory/45 text-base leading-snug">
               Via S. Giuseppe N°42, Assoro (EN), Sicilia
             </span>
           </li>
           <li class="flex items-start gap-3">
             <i
-              class="fa-solid fa-phone text-ochre/50 text-sm mt-0.5 shrink-0 w-4"
+              class="fa-solid fa-phone text-ochre/50 text-base mt-0.5 shrink-0 w-4"
             ></i>
-            <span class="text-ivory/45 text-sm">+39 375 927 8085</span>
+            <span class="text-ivory/45 text-base">+39 375 927 8085</span>
           </li>
           <li class="flex items-start gap-3">
             <i
-              class="fa-solid fa-envelope text-ochre/50 text-sm mt-0.5 shrink-0 w-4"
+              class="fa-solid fa-envelope text-ochre/50 text-base mt-0.5 shrink-0 w-4"
             ></i>
             <a
               href="mailto:servizi.butto@gmail.com"
-              class="text-ivory/45 hover:text-ochre text-sm transition-colors"
+              class="text-ivory/45 hover:text-ochre text-base transition-colors"
             >
               servizi.butto@gmail.com
             </a>
           </li>
           <li class="flex items-start gap-3">
             <i
-              class="fa-solid fa-envelope-open-text text-ochre/50 text-sm mt-0.5 shrink-0 w-4"
+              class="fa-solid fa-envelope-open-text text-ochre/50 text-base mt-0.5 shrink-0 w-4"
             ></i>
             <a
               href="mailto:impresabutto@pec.it"
-              class="text-ivory/45 hover:text-ochre text-sm transition-colors"
+              class="text-ivory/45 hover:text-ochre text-base transition-colors"
             >
               impresabutto@pec.it
             </a>
@@ -195,12 +195,12 @@ const docLinks = [
     >
       <div class="flex flex-col gap-2">
         <span
-          class="font-condensed text-[0.7rem] text-ivory/40 tracking-[0.1em] uppercase"
+          class="font-condensed text-[0.82rem] text-ivory/40 tracking-[0.1em] uppercase"
         >
           © {new Date().getFullYear()} Buttò Carmelo S.r.l.
         </span>
         <span
-          class="font-body text-[0.65rem] text-ivory/25 leading-relaxed max-w-3xl"
+          class="font-body text-[0.78rem] text-ivory/25 leading-relaxed max-w-3xl"
         >
           Sede Legale: Via San Giuseppe 42, 94010 Assoro (EN) | P.IVA e C.F.: 01208350866<br />
           Capitale Sociale: € 10.000,00 i.v. | Ufficio del Registro delle Imprese di Enna | REA: EN-68443<br />
@@ -209,7 +209,7 @@ const docLinks = [
       </div>
       <span
         data-i18n="footer.tagline"
-        class="font-condensed text-[0.62rem] text-ivory/15 tracking-[0.2em] uppercase shrink-0"
+        class="font-condensed text-[0.74rem] text-ivory/15 tracking-[0.2em] uppercase shrink-0"
       >
         Custodi dell'Ambiente dal 1978
       </span>
