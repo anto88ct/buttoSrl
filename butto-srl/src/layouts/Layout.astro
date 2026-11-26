@@ -6,7 +6,6 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description?: string;
-  ogImage?: string;
   canonicalURL?: string;
   noindex?: boolean;
 }
@@ -14,7 +13,6 @@ interface Props {
 const {
   title,
   description = 'Buttò S.r.l. – Eccellenza nella gestione integrata dei servizi ambientali ad Assoro (EN). Smaltimento rifiuti, appalti pubblici di pulizia e sostenibilità circolare.',
-  ogImage = '/og-default.jpg',  // static file in public/
   canonicalURL = Astro.url.pathname,
   noindex = false,
 } = Astro.props;
@@ -25,7 +23,8 @@ canonical.search = '';
 canonical.hash = '';
 canonical.pathname = canonical.pathname === '/' ? '/' : canonical.pathname.replace(/\/+$/, '');
 const canonicalHref = canonical.href;
-const imageURL = new URL(ogImage, siteURL).href;
+// Link previews (WhatsApp, social) show the logo on every page. Static file in public/.
+const imageURL = new URL('/og-logo.png', siteURL).href;
 const fullTitle = title === 'Home'
   ? 'Buttò S.r.l. | Servizi ambientali e rifiuti in Sicilia'
   : `${title} | Buttò S.r.l.`;
@@ -48,9 +47,12 @@ const breadcrumbItems = title === 'Home'
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={imageURL} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:url" content={canonicalHref} />
     <meta property="og:site_name" content="Buttò S.r.l." />
-    <meta property="og:image:alt" content="Buttò S.r.l. — servizi ambientali in Sicilia" />
+    <meta property="og:image:alt" content="Logo Buttò Carmelo S.r.l." />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="Informazioni per assistenti AI" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="it_IT" />
@@ -73,6 +75,12 @@ const breadcrumbItems = title === 'Home'
       "image": imageURL,
       "telephone": "+39 375 927 8085",
       "email": "servizi.butto@gmail.com",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via S. Giuseppe N°42",

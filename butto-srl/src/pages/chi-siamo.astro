@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import HeroWatermark from '../components/HeroWatermark.astro';
 import MappaSicilia from '../components/MappaSicilia.astro';
+import Bussola from '../components/Bussola.astro';
 import { Image } from 'astro:assets';
 
 
@@ -30,7 +31,6 @@ const timeline = [
 <Layout
   title="Chi Siamo – La Nostra Storia dal 1978"
   description="La storia di Buttò S.r.l. – dall'eredità del fondatore Carmelo Buttò ai valori che guidano oggi l'azienda nella gestione ambientale ad Assoro (EN)."
-  ogImage="/founder.jpg"
 >
 
   <!-- ══════════════════════ HERO ══════════════════════ -->
@@ -61,10 +61,6 @@ const timeline = [
               <Image src="/owner_first.webp" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-1 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
               <Image src="/owner_second.webp" alt="Carmelo Buttò, fondatore" class="founder-swap-img founder-swap-img-2 w-full h-full object-cover" loading="lazy" width={800} height={1067} />
               <div class="absolute inset-0 bg-gradient-to-t from-ink/40 to-transparent pointer-events-none"></div>
-            </div>
-            <div class="absolute top-6 right-6 bg-ochre text-forest px-4 py-2.5">
-              <p data-i18n="chiSiamo.founder.fondazione" class="font-condensed font-800 text-xs uppercase tracking-[0.2em] text-forest/60">Fondazione</p>
-              <p class="font-display text-3xl leading-none">1978</p>
             </div>
           </div>
         </div>
@@ -200,7 +196,7 @@ const timeline = [
   </section>
 
   <!-- ══════════════════════ VALORI ══════════════════════ -->
-  <section class="py-28 bg-ivory">
+  <section class="py-28 bg-ivory dot-grid">
     <div class="max-w-screen-2xl mx-auto px-6 lg:px-14">
       <div class="mb-20 reveal">
         <span data-i18n="chiSiamo.valori.eyebrow" class="overline text-ochre">I Nostri Valori</span>
@@ -208,23 +204,7 @@ const timeline = [
         <h2 data-i18n="chiSiamo.valori.h2" class="display-sm text-ink mt-5 italic">La Bussola dell'Azienda</h2>
       </div>
 
-      <div class="grid sm:grid-cols-2 gap-4">
-        {valori.map(({ icon, title, desc }, i) => (
-          <div class={`group relative overflow-hidden bg-ivory border border-linen/80 hover:border-forest hover:bg-forest shadow-[0_8px_40px_rgba(22,44,27,0.08),0_2px_8px_rgba(22,44,27,0.05)] hover:shadow-[0_22px_60px_rgba(22,44,27,0.24)] transition-[background-color,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-default reveal delay-${(i % 4) + 1}`}>
-            <span aria-hidden="true" class="absolute inset-x-0 top-0 h-[3px] bg-ochre origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"></span>
-            <div class="flex flex-col gap-6 p-7 lg:p-9">
-              <div class="flex items-center justify-between pb-5 border-b border-linen group-hover:border-ivory/15 transition-colors duration-500">
-                <span class="font-condensed font-700 text-[0.72rem] uppercase tracking-[0.22em] text-muted group-hover:text-ochre transition-colors duration-500">N°&thinsp;{String(i + 1).padStart(2, '0')}</span>
-                <i class={`fa-solid ${icon} text-[1.05rem] text-ochre group-hover:text-ochre-light transition-colors duration-500`}></i>
-              </div>
-              <div class="space-y-3">
-                <h3 data-i18n={`chiSiamo.valori.items.${i}.title`} class="font-serif text-2xl italic text-ink group-hover:text-ivory transition-colors duration-500 leading-tight text-balance">{title}</h3>
-                <p data-i18n={`chiSiamo.valori.items.${i}.desc`} class="font-body text-ink/75 group-hover:text-ivory/65 text-sm leading-relaxed transition-colors duration-500 text-pretty">{desc}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Bussola items={valori} />
     </div>
   </section>
 

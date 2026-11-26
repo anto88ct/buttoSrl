@@ -1,0 +1,145 @@
+---
+// The four environmental pillars drawn as a colonnade: one beam, four columns, one base.
+interface Props {
+  items: { icon: string; title: string; desc: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="colonnato" data-colonnato>
+  <div class="trabeazione" aria-hidden="true"></div>
+
+  <ul class="colonne">
+    {items.map(({ icon, title, desc }, i) => (
+      <li class="colonna" style={`--ordine:${i}`}>
+        <div class="capitello" aria-hidden="true"></div>
+        <div class="fusto">
+          <span class="medaglione" aria-hidden="true"><i class={`fa-solid ${icon}`}></i></span>
+          <h3 data-i18n={`sostenibilita.pilastri.items.${i}.title`} class="font-serif text-2xl xl:text-3xl italic leading-tight text-ivory text-balance">{title}</h3>
+          <p data-i18n={`sostenibilita.pilastri.items.${i}.desc`} class="font-body text-base leading-relaxed text-ivory/85 text-pretty">{desc}</p>
+          <div class="scanalature" aria-hidden="true"></div>
+        </div>
+        <div class="plinto" aria-hidden="true"></div>
+      </li>
+    ))}
+  </ul>
+
+  <div class="basamento" aria-hidden="true"></div>
+</div>
+
+<style>
+  .colonne { display: grid; gap: 2.5rem; }
+  .colonna { display: flex; flex-direction: column; }
+
+  /* Capital and plinth are wider than the shaft, as on a real column. */
+  .capitello { height: 1.75rem; display: flex; flex-direction: column; align-items: center; }
+  .capitello::before { content: ''; width: 100%; height: 0.75rem; background: var(--ochre); }
+  .capitello::after {
+    content: '';
+    width: 94%;
+    height: 1rem;
+    background: var(--forest);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+  }
+
+  .fusto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-inline: 5%;
+    padding: 2rem 1.25rem 0;
+    text-align: center;
+    background: var(--forest-mid);
+  }
+  .medaglione {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: var(--ochre);
+    color: var(--forest);
+    font-size: 1.25rem;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Flutes close the lower shaft, away from the text, and start at the same height on every column. */
+  .scanalature {
+    position: relative;
+    align-self: stretch;
+    height: 9rem;
+    margin-top: auto;
+    overflow: hidden;
+    background: repeating-linear-gradient(90deg,
+      transparent 0 8%,
+      rgb(14 12 9 / 0.28) 8% 11%,
+      rgb(242 237 223 / 0.13) 11% 12%,
+      transparent 12% 20%);
+  }
+  /* Warm light that climbs the flutes on hover. */
+  .scanalature::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(196 146 42 / 0.55), transparent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .colonna:hover .scanalature::after { transform: scaleY(1); }
+  .colonna:hover .medaglione { transform: translateY(-0.35rem); }
+
+  .plinto { height: 1.5rem; display: flex; flex-direction: column; align-items: center; }
+  .plinto::before { content: ''; width: 94%; height: 0.625rem; background: var(--forest); }
+  .plinto::after { content: ''; width: 100%; height: 0.875rem; background: var(--forest-soft); }
+
+  /* The shared beam and stepped base only make sense when the columns stand in one row. */
+  .trabeazione, .basamento { display: none; }
+  @media (min-width: 640px) { .colonne { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1024px) {
+    .colonne { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding-inline: 1.5rem; }
+    .trabeazione, .basamento { display: block; }
+    .trabeazione {
+      height: 3.5rem;
+      background: linear-gradient(var(--forest) 0 60%, var(--ochre) 60% 68%, var(--forest-mid) 68%);
+    }
+    .basamento {
+      height: 2.5rem;
+      background: var(--forest);
+      /* two steps */
+      clip-path: polygon(0.75rem 0, calc(100% - 0.75rem) 0, calc(100% - 0.75rem) 50%, 100% 50%, 100% 100%, 0 100%, 0 50%, 0.75rem 50%);
+    }
+  }
+
+  /* Build sequence: columns rise from the base, then the beam settles on them.
+     "in-attesa" is added by script only when the colonnade is still off screen. */
+  .colonna { transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--ordine) * 0.16s); clip-path: inset(0 -1rem -1rem -1rem); }
+  .trabeazione {
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.9s, opacity 0.5s ease 0.9s;
+  }
+  .in-attesa .colonna { clip-path: inset(100% -1rem -1rem -1rem); transition: none; }
+  .in-attesa .trabeazione { transform: translateY(-3rem); opacity: 0; transition: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .colonna, .trabeazione, .medaglione, .scanalature::after { transition: none; }
+  }
+</style>
+
+<script>
+  (() => {
+    const root = document.querySelector<HTMLElement>('[data-colonnato]');
+    if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (root.getBoundingClientRect().top < window.innerHeight) return;
+
+    root.classList.add('in-attesa');
+    // The root is observed, not the columns: a fully clipped element never intersects.
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      root.classList.remove('in-attesa');
+    }, { rootMargin: '0px 0px -25% 0px' });
+    observer.observe(root);
+  })();
+</script>

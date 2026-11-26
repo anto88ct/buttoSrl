@@ -45,33 +45,44 @@ const isActive = (href: string) => currentPath === href || (href !== '/' && curr
 
       <details class="mobile-navigation xl:hidden">
         <summary class="menu-toggle flex size-12 cursor-pointer items-center justify-center rounded-sm border border-ivory/20" aria-label="Menu di navigazione">
-          <svg aria-hidden="true" class="menu-bars size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" />
-          </svg>
-          <svg aria-hidden="true" class="menu-close size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="m6 6 12 12M6 18 18 6" stroke-linecap="round" />
-          </svg>
+          <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
         </summary>
-        <div class="mobile-panel absolute inset-x-0 top-full rounded-b-2xl border border-ivory/15 bg-forest shadow-lg">
-          <div class="mx-auto max-w-screen-2xl px-5 py-5 sm:px-8">
-            <ul class="divide-y divide-ivory/10">
-              {navLinks.map(({ label, href, key }) => (
-                <li>
-                  <a href={href} aria-current={isActive(href) ? 'page' : undefined}
-                    class="mobile-link flex min-h-14 items-center justify-between gap-4 px-3 py-3 font-body text-lg font-medium text-ivory/80">
+        <div class="mobile-panel absolute inset-x-0 top-full">
+          <div class="menu-body mx-auto grid min-h-full w-full content-between px-5 pt-3 sm:px-8">
+            <ul class="menu-list">
+              {navLinks.map(({ label, href, key }, i) => (
+                <li class="menu-item" style={`--ordine:${i}`}>
+                  <a href={href} aria-current={isActive(href) ? 'page' : undefined} class="mobile-link">
                     <span data-i18n={key}>{label}</span>
-                    <svg aria-hidden="true" class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                      <path d="m9 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
+                    <svg aria-hidden="true" class="mobile-arrow size-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                      <path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                   </a>
                 </li>
               ))}
             </ul>
-            <div class="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-ivory/15 pt-5">
-              <LanguageSwitch />
+
+            <div class="menu-item menu-aside flex flex-col gap-4" style={`--ordine:${navLinks.length}`}>
+              <div class="flex flex-col">
+                <a href="tel:+393759278085" class="menu-contact">
+                  <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                  <span class="font-condensed text-2xl font-semibold tracking-wide tabular-nums">+39 375 927 8085</span>
+                </a>
+                <p class="menu-contact text-ivory/75">
+                  <i class="fa-solid fa-clock" aria-hidden="true"></i>
+                  <span data-i18n="footer.orari">Lun–Ven 09:00–18:00</span>
+                </p>
+                <a href="mailto:servizi.butto@gmail.com" class="menu-contact text-ivory/75">
+                  <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                  <span class="break-all">servizi.butto@gmail.com</span>
+                </a>
+              </div>
               <a href="/contatti" aria-current={isActive('/contatti') ? 'page' : undefined}
-                class="nav-contact inline-flex min-h-12 items-center justify-center rounded-sm px-5 font-body text-base font-semibold"
+                class="nav-contact inline-flex min-h-14 items-center justify-center rounded-sm px-5 font-body text-lg font-semibold sm:hidden"
                 data-i18n="nav.contattaci">Contattaci</a>
+              <div class="menu-lang flex justify-center border-t border-ivory/15 pt-4">
+                <LanguageSwitch />
+              </div>
             </div>
           </div>
         </div>
@@ -101,17 +112,11 @@ const isActive = (href: string) => currentPath === href || (href !== '/' && curr
       backdrop-filter: blur(24px) saturate(135%);
     }
     .site-header.nav-scrolled { background: rgb(22 44 27 / 84%); }
-    .mobile-panel {
-      background: rgb(22 44 27 / 94%);
-      -webkit-backdrop-filter: blur(24px) saturate(135%);
-      backdrop-filter: blur(24px) saturate(135%);
-    }
   }
 
   @media (prefers-reduced-transparency: reduce) {
     .site-header,
-    .site-header.nav-scrolled,
-    .mobile-panel {
+    .site-header.nav-scrolled {
       background: var(--forest);
       -webkit-backdrop-filter: none;
       backdrop-filter: none;
@@ -177,28 +182,136 @@ const isActive = (href: string) => currentPath === href || (href !== '/' && curr
     border-color: var(--ochre-light);
   }
 
-  .menu-close,
-  details[open] .menu-bars {
-    display: none;
+  /* Three bars that fold into a cross. */
+  .menu-icon { position: relative; width: 1.5rem; height: 1rem; }
+  .menu-icon span {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
   }
+  .menu-icon span:nth-child(1) { top: 0; }
+  .menu-icon span:nth-child(2) { top: calc(50% - 1px); }
+  .menu-icon span:nth-child(3) { bottom: 0; }
+  .mobile-navigation[open]:not(.is-closing) .menu-icon span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-navigation[open]:not(.is-closing) .menu-icon span:nth-child(2) { opacity: 0; transform: scaleX(0.2); }
+  .mobile-navigation[open]:not(.is-closing) .menu-icon span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-  details[open] .menu-close {
-    display: block;
+  /* Open menu: header and panel become one solid sheet down to the bottom of the screen. */
+  .site-header:has(.mobile-navigation[open]) {
+    background: var(--forest);
+    border-bottom-color: transparent;
+    border-radius: 1rem 1rem 0 0;
   }
 
   .mobile-panel {
-    max-height: calc(100dvh - var(--header-h, 5rem) - env(safe-area-inset-top, 0px));
+    height: calc(100dvh - var(--header-h, 5rem) - env(safe-area-inset-bottom, 0px) - 0.5rem);
+    margin-inline: -1px;
     overflow-y: auto;
     overscroll-behavior: contain;
-    padding-bottom: env(safe-area-inset-bottom, 0px);
-    padding-left: env(safe-area-inset-left, 0px);
-    padding-right: env(safe-area-inset-right, 0px);
+    background: var(--forest);
+    border: 1px solid rgb(242 237 223 / 22%);
+    border-top: 0;
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 24px 48px -12px rgb(14 12 9 / 45%);
   }
 
-  .mobile-link:hover,
-  .mobile-link[aria-current='page'] {
+  /* One column, contacts resting at the bottom. */
+  .menu-body { max-width: 36rem; gap: 1.5rem; padding-bottom: 1.5rem; }
+  .menu-list { display: flex; flex-direction: column; }
+  .menu-list li + li { border-top: 1px solid rgb(242 237 223 / 12%); }
+
+  .mobile-link {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: clamp(0.5rem, 1.4dvh, 1rem);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.75rem, 4.6dvh, 2.5rem);
+    line-height: 1.15;
+    color: var(--ivory);
+  }
+  .mobile-arrow {
     color: var(--ochre-light);
-    background: rgb(242 237 223 / 5%);
+    opacity: 0;
+    transform: translateX(-0.75rem);
+    transition: opacity 0.25s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .mobile-link:hover,
+  .mobile-link:active,
+  .mobile-link[aria-current='page'] { color: var(--ochre-light); }
+  .mobile-link:hover .mobile-arrow,
+  .mobile-link:focus-visible .mobile-arrow,
+  .mobile-link[aria-current='page'] .mobile-arrow { opacity: 1; transform: none; }
+  .mobile-link:focus-visible { outline-offset: -2px; }
+
+  .menu-contact {
+    display: flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.875rem;
+    font-size: 1rem;
+  }
+  .menu-contact i { width: 1.25rem; text-align: center; color: var(--ochre-light); }
+  a.menu-contact:hover { color: var(--ochre-light); }
+
+  /* Language buttons get finger-sized targets inside the menu. */
+  .menu-lang :global(.lang-btn) { width: 3.5rem; height: 2.75rem; }
+
+  /* Short portrait phones: tighter rows so the contacts stay on screen. */
+  @media (max-height: 700px) and (orientation: portrait) {
+    .menu-body { gap: 0.75rem; padding-bottom: 0.75rem; }
+    .mobile-link { min-height: 2.75rem; padding-block: 0.25rem; font-size: 1.625rem; }
+    .menu-aside { gap: 0.5rem; }
+    .menu-contact { min-height: 2.25rem; }
+    .menu-aside .nav-contact { min-height: 3rem; }
+    .menu-lang { padding-top: 0.5rem; }
+  }
+
+  /* Landscape: pages on the left, contacts beside them. */
+  @media (min-width: 640px) and (orientation: landscape) {
+    .menu-body {
+      max-width: 64rem;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-content: center;
+      align-items: center;
+      column-gap: 3rem;
+    }
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    .menu-body { align-content: start; padding-bottom: 0.5rem; }
+    .mobile-link { min-height: 2.75rem; padding-block: 0.125rem; font-size: 1.5rem; }
+    .menu-aside { gap: 0.5rem; }
+    .menu-lang { padding-top: 0.5rem; }
+  }
+
+  /* The sheet unrolls from the header, then the entries follow one after the other. */
+  .mobile-navigation[open] .mobile-panel {
+    animation: menu-unroll 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  }
+  .mobile-navigation[open] .menu-item {
+    animation: menu-enter 0.65s cubic-bezier(0.16, 1, 0.3, 1) calc(0.08s + var(--ordine) * 0.05s) backwards;
+  }
+  @keyframes menu-unroll {
+    from { clip-path: inset(0 0 100% 0); }
+    to   { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes menu-enter {
+    from { opacity: 0; transform: translateY(1.25rem); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-navigation[open] .mobile-panel,
+    .mobile-navigation[open] .menu-item { animation: none; }
+    .menu-icon span,
+    .mobile-arrow { transition: none; }
   }
 
   @media (min-width: 640px) {
@@ -217,3 +330,67 @@ const isActive = (href: string) => currentPath === href || (href !== '/' && curr
     .nav-shell { padding-inline: 3rem; }
   }
 </style>
+
+<script>
+  (() => {
+    const header = document.querySelector<HTMLElement>('.site-header');
+    const menu = header?.querySelector<HTMLDetailsElement>('.mobile-navigation');
+    if (!header || !menu) return;
+    const toggle = menu.querySelector('summary')!;
+    const panel = menu.querySelector<HTMLElement>('.mobile-panel')!;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let closing: Animation | null = null;
+
+    // While the menu is open the page behind it neither scrolls nor takes focus.
+    const lock = (locked: boolean) => {
+      document.documentElement.style.overflow = locked ? 'hidden' : '';
+      Array.from(document.body.children).forEach((el) => {
+        if (!el.contains(header)) el.toggleAttribute('inert', locked);
+      });
+    };
+
+    const closeNow = () => {
+      closing?.cancel();
+      closing = null;
+      menu.classList.remove('is-closing');
+      menu.open = false;
+      lock(false);
+    };
+
+    const close = () => {
+      if (!menu.open || closing) return;
+      if (reduceMotion.matches) return closeNow();
+      menu.classList.add('is-closing');
+      closing = panel.animate(
+        [{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 0 100% 0)' }],
+        { duration: 260, easing: 'cubic-bezier(0.5, 0, 0.75, 0)', fill: 'forwards' },
+      );
+      closing.onfinish = closeNow;
+    };
+
+    menu.addEventListener('toggle', () => lock(menu.open));
+    toggle.addEventListener('click', (e) => {
+      if (!menu.open) return;
+      e.preventDefault();
+      close();
+    });
+    panel.addEventListener('click', (e) => {
+      if ((e.target as Element).closest('a')) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape' || !menu.open) return;
+      close();
+      toggle.focus();
+    });
+    document.addEventListener('pointerdown', (e) => {
+      if (!header.contains(e.target as Node)) close();
+    });
+    window.matchMedia('(min-width: 1280px)').addEventListener('change', (e) => {
+      if (e.matches) closeNow();
+    });
+    // A page restored by the back button must not come back with the menu open.
+    window.addEventListener('pageshow', (e) => {
+      if (e.persisted) closeNow();
+    });
+  })();
+</script>

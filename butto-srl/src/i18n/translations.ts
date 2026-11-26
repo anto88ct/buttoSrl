@@ -15,6 +15,7 @@ export const translations = {
       contatti: 'Contatti',
       seguici: 'Seguici',
       emergenze: 'Emergenze 24/7',
+      orari: 'Lun–Ven 09:00–18:00',
       tagline: "Custodi dell'Ambiente dal 1978",
       descrizione: "Dal 1978, custodi dell'ambiente siciliano. Leader nella gestione integrata dei rifiuti e servizi pubblici.",
     },
@@ -109,7 +110,6 @@ export const translations = {
         quote: '"Un territorio pulito è il regalo più grande che possiamo fare alle generazioni future."',
         p1: "Nato ad Assoro in una famiglia profondamente legata alla terra siciliana, Carmelo Buttò ha iniziato la sua attività nel 1978 con una visione semplice ma potente: lasciare il territorio migliore di come lo aveva trovato.",
         p2: "Quello che era un piccolo servizio di raccolta rifiuti si è trasformato, grazie alla sua dedizione, in un'azienda al servizio di enti pubblici e imprese in Sicilia.",
-        fondazione: 'Fondazione',
         esperienza: 'di esperienza',
         sedeStorica: 'sede storica',
       },
@@ -142,6 +142,7 @@ export const translations = {
       valori: {
         eyebrow: 'I Nostri Valori',
         h2: "La Bussola dell'Azienda",
+        ovest: 'O',
         items: [
           { title: 'Integrità',            desc: 'Ogni contratto e ogni operazione è gestita con la massima trasparenza verso la comunità e le istituzioni.' },
           { title: 'Rispetto Ambientale',  desc: "L'ambiente non è il nostro campo di lavoro, è il nostro mandato morale. Ogni azione mira a lasciare il territorio migliore di com'era." },
@@ -165,7 +166,7 @@ export const translations = {
       learnMore: 'Informazioni',
       intro: {
         h2: 'I Nostri Servizi',
-        body: "Quattro aree di competenza integrate, pensate per rispondere con precisione normativa alle esigenze di enti pubblici e imprese in tutta la Sicilia.",
+        body: "Tre aree di competenza integrate, pensate per rispondere con precisione normativa alle esigenze di enti pubblici e imprese in tutta la Sicilia.",
       },
       scrollytelling: {
         loading: 'Caricamento',
@@ -227,13 +228,6 @@ export const translations = {
             { title: 'Manutenzione Stradale', desc: 'Pulizia e decoro di viali, marciapiedi, aree pedonali e spazi condivisi nelle aree urbane e periurbane.', tags: ['Viali e marciapiedi', 'Aree urbane e periurbane'] },
           ],
         },
-        {
-          title: 'Sostenibilità & Consulenza',
-          servizi: [
-            { title: 'Audit Ambientale', desc: "Analisi dei processi aziendali per identificare opportunità di riduzione degli sprechi e miglioramento dell'efficienza ambientale.", tags: ['Analisi dei processi', 'Efficienza ambientale'] },
-            { title: 'Piano Zero Waste', desc: 'Strategie personalizzate per raggiungere obiettivi di zero conferimento in discarica attraverso recupero e riciclo.', tags: ['Zero conferimento in discarica', 'Recupero e riciclo'] },
-          ],
-        },
       ],
     },
     sostenibilita: {
@@ -270,7 +264,6 @@ export const translations = {
       pilastri: {
         eyebrow: 'Principi Fondamentali',
         h2: 'I 4 Pilastri Ambientali',
-        ovest: 'O',
         items: [
           { title: 'Smaltimento Rifiuti Speciali', desc: 'Trattamento e smaltimento a norma di rifiuti speciali pericolosi e non pericolosi, con tracciabilità completa della filiera.' },
           { title: 'Energia Pulita',     desc: "Utilizzo crescente di fonti rinnovabili per i nostri impianti e ottimizzazione dei consumi energetici della flotta." },
@@ -422,10 +415,10 @@ export const translations = {
         sedeLabel: 'Sede Operativa',
         telLabel: 'Telefono',
         emailLabel: 'Email',
-        telNote: 'Lun–Ven 08:30–18:00',
+        telNote: 'Lun–Ven 09:00–18:00',
         schedule: [
-          { day: 'Lunedì – Venerdì', hours: '08:30 – 18:00' },
-          { day: 'Sabato',           hours: '09:00 – 12:00' },
+          { day: 'Lunedì – Venerdì', hours: '09:00 – 18:00' },
+          { day: 'Sabato',           hours: 'Chiuso' },
           { day: 'Domenica',         hours: 'Chiuso' },
         ],
       },
@@ -478,6 +471,7 @@ export const translations = {
       contatti: 'Contact',
       seguici: 'Follow Us',
       emergenze: 'Emergency 24/7',
+      orari: 'Mon–Fri 09:00–18:00',
       tagline: 'Guardians of Nature since 1978',
       descrizione: 'Since 1978, guardians of the Sicilian environment. Leaders in integrated waste management and public services.',
     },
@@ -572,7 +566,6 @@ export const translations = {
         quote: '"A clean territory is the greatest gift we can give to future generations."',
         p1: "Born in Assoro in a family deeply rooted in Sicilian land, Carmelo Buttò began his business in 1978 with a simple yet powerful vision: to leave the territory better than he found it.",
         p2: "What was a small waste collection service was transformed, through his dedication, into a company serving public bodies and businesses across Sicily.",
-        fondazione: 'Founded',
         esperienza: 'of experience',
         sedeStorica: 'historic headquarters',
       },
@@ -605,6 +598,7 @@ export const translations = {
       valori: {
         eyebrow: 'Our Values',
         h2: "The Company Compass",
+        ovest: 'W',
         items: [
           { title: 'Integrity',              desc: 'Every contract and operation is managed with maximum transparency towards the community and institutions.' },
           { title: 'Environmental Respect',  desc: "The environment is not our workplace — it is our moral mandate. Every action aims to leave the territory better than before." },
@@ -628,7 +622,7 @@ export const translations = {
       learnMore: 'Information',
       intro: {
         h2: 'Our Services',
-        body: 'Four integrated areas of expertise, built to meet the needs of public bodies and businesses across Sicily with regulatory precision.',
+        body: 'Three integrated areas of expertise, built to meet the needs of public bodies and businesses across Sicily with regulatory precision.',
       },
       scrollytelling: {
         loading: 'Loading',
@@ -690,13 +684,6 @@ export const translations = {
             { title: 'Road Maintenance',    desc: 'Cleaning and upkeep of avenues, pavements, pedestrian areas and shared spaces in urban and peri-urban zones.', tags: ['Avenues & pavements', 'Urban & peri-urban areas'] },
           ],
         },
-        {
-          title: 'Sustainability & Consulting',
-          servizi: [
-            { title: 'Environmental Audit', desc: "Analysis of business processes to identify opportunities for waste reduction and improvement of environmental efficiency.", tags: ['Process analysis', 'Environmental efficiency'] },
-            { title: 'Zero Waste Plan',     desc: 'Personalised strategies to achieve zero landfill objectives through recovery and recycling.', tags: ['Zero landfill target', 'Recovery & recycling'] },
-          ],
-        },
       ],
     },
     sostenibilita: {
@@ -733,7 +720,6 @@ export const translations = {
       pilastri: {
         eyebrow: 'Core Principles',
         h2: 'The 4 Environmental Pillars',
-        ovest: 'W',
         items: [
           { title: 'Special Waste Disposal', desc: 'Compliant treatment and disposal of hazardous and non-hazardous special waste, with full chain-of-custody traceability.' },
           { title: 'Clean Energy',      desc: "Growing use of renewable sources for our facilities and optimisation of fleet energy consumption." },
@@ -885,10 +871,10 @@ export const translations = {
         sedeLabel: 'Operational HQ',
         telLabel: 'Phone',
         emailLabel: 'Email',
-        telNote: 'Mon–Fri 08:30–18:00',
+        telNote: 'Mon–Fri 09:00–18:00',
         schedule: [
-          { day: 'Monday – Friday', hours: '08:30 – 18:00' },
-          { day: 'Saturday',        hours: '09:00 – 12:00' },
+          { day: 'Monday – Friday', hours: '09:00 – 18:00' },
+          { day: 'Saturday',        hours: 'Closed' },
           { day: 'Sunday',          hours: 'Closed' },
         ],
       },

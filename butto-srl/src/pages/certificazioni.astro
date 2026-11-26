@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import HeroWatermark from '../components/HeroWatermark.astro';
 import { translations } from '../i18n/translations';
 
-// Visual metadata only — all text (cat/tag/short/rows/paragraph) lives in
-// translations.ts so the rendered card and the modal (both languages) share one source.
+// Visual metadata only — all text (cat/tag/short/paragraph) lives in
+// translations.ts so both languages share one source.
 const alboMeta = [
   { kind: 'albo', icon: 'fa-truck-fast',
     img: 'https://images.unsplash.com/photo-1574974671999-24b7dfbb0d53?auto=format&fit=crop&w=1000&q=80',
@@ -27,18 +27,14 @@ const alboMeta = [
 ];
 
 const albiIt = translations.it.certificazioni.albo.cats;
-const albiEn = translations.en.certificazioni.albo.cats;
 
 const alboCarousel = alboMeta.map((meta, i) => ({
   ...meta,
   num: String(i + 1).padStart(2, '0'),
-  cat: albiIt[i].cat, tag: albiIt[i].tag, short: albiIt[i].short,
-}));
-
-const modalData = alboMeta.map((meta, i) => ({
-  ...meta,
-  num: String(i + 1).padStart(2, '0'),
-  it: albiIt[i], en: albiEn[i],
+  cat: albiIt[i].cat, tag: albiIt[i].tag,
+  short: albiIt[i].short,
+  // Only register cards also show the full registration text.
+  registration: meta.kind === 'albo' ? albiIt[i].paragraph : null,
 }));
 
 const loopSlides = [
@@ -72,7 +68,6 @@ const certSearchItems = [
 <Layout
   title="Certificazioni, Albo Gestori e Codici CER"
   description="Scopri le autorizzazioni, certificazioni ISO e i codici CER gestiti da Buttò S.r.l. per una gestione ambientale sicura e tracciabile."
-  ogImage="/certificazioni/industriali.jpg"
 >
 
   <!-- HERO -->
@@ -108,45 +103,42 @@ const certSearchItems = [
         <div class="reveal delay-1">
           <div id="albo-carousel" class="relative" role="region" aria-roledescription="carrello" aria-label="Categorie Albo Gestori Ambientali e certificazioni">
 
-            <div id="albo-viewport" class="overflow-hidden cursor-grab active:cursor-grabbing">
+            <div id="albo-viewport" class="overflow-hidden cursor-grab active:cursor-grabbing select-none">
               <div id="albo-track" class="flex gap-5">
-                {loopSlides.map(({ kind, num, icon, img, alt, cat, tag, short, clone, origIndex }) => (
-                  <div class="albo-slide shrink-0 w-[82%] sm:w-[64%]" data-clone={clone ? 'true' : 'false'}>
-                    <button
-                      type="button"
-                      class="albo-card group/card relative block w-full h-[440px] text-left bg-forest-mid border border-white/8 hover:border-ochre/40 overflow-hidden outline-none focus-visible:ring-2 focus-visible:ring-ochre transition-colors duration-500"
-                      data-cat-index={origIndex}
-                      aria-haspopup="dialog"
-                      aria-label={`${cat}: apri dettaglio`}
-                    >
-                      <div class="relative h-[56%] max-lg:h-[46%] overflow-hidden">
-                            <div
-                              class="absolute inset-0 bg-cover bg-center transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110"
-                              style={`background-image:url(${img})`}
-                              role="img"
-                              aria-label={alt}
-                            ></div>
-                            <div class="absolute inset-0 bg-forest/50 mix-blend-multiply"></div>
-                            <div class="absolute inset-0 bg-gradient-to-t from-forest-mid via-forest-mid/5 to-transparent"></div>
+                {loopSlides.map(({ kind, num, icon, img, alt, cat, tag, short, registration, clone, origIndex }) => (
+                  <div class="albo-slide shrink-0 w-[88%] sm:w-[64%]" data-clone={clone ? 'true' : 'false'} aria-hidden={clone ? 'true' : undefined}>
+                    <article class="albo-card group/card relative flex flex-col w-full h-full bg-forest-mid border border-white/8 hover:border-ochre/40 overflow-hidden transition-colors duration-500">
+                      <!-- The badge sits outside the clipped image box, so it can overlap its edge. -->
+                      <div class="relative shrink-0">
+                        <div class="relative h-56 max-lg:h-48 overflow-hidden">
+                          <div
+                            class="absolute inset-0 bg-cover bg-center transition-transform duration-[1400ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110"
+                            style={`background-image:url(${img})`}
+                            role="img"
+                            aria-label={alt}
+                          ></div>
+                          <div class="absolute inset-0 bg-forest/50 mix-blend-multiply"></div>
+                          <div class="absolute inset-0 bg-gradient-to-t from-forest-mid via-forest-mid/5 to-transparent"></div>
 
-                            <span class="absolute top-4 left-4 inline-block px-2.5 py-1 bg-ivory/10 border border-ochre/30 text-ochre text-[0.65rem] max-lg:text-xs max-lg:bg-forest/85 font-condensed tracking-wider backdrop-blur-sm">
-                              {kind === 'cert' ? 'Certificazione' : `Albo N° ${num}`}
-                            </span>
+                          <span class="absolute top-4 left-4 inline-block px-2.5 py-1 bg-ivory/10 border border-ochre/30 text-ochre text-[0.65rem] max-lg:text-xs max-lg:bg-forest/85 font-condensed tracking-wider backdrop-blur-sm">
+                            {kind === 'cert' ? 'Certificazione' : `Albo N° ${num}`}
+                          </span>
+                        </div>
 
-                            <span class="albo-icon-badge absolute -bottom-6 max-lg:bottom-1 left-6 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-lg shadow-ochre transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110 group-hover/card:rotate-[12deg]">
-                              <i class={`fa-solid ${icon}`}></i>
-                            </span>
-                          </div>
-
-                      <div class="h-[44%] max-lg:h-[54%] flex flex-col justify-center gap-1 max-lg:gap-2 px-6 pt-6 pb-5">
-                        <span data-i18n={`certificazioni.albo.cats.${origIndex}.tag`} class="font-condensed font-700 text-[0.64rem] max-lg:text-xs uppercase tracking-[0.18em] text-ochre/70 max-lg:text-ochre-light">{tag}</span>
-                        <h3 data-i18n={`certificazioni.albo.cats.${origIndex}.cat`} class="font-serif italic text-xl max-lg:text-2xl text-ivory leading-tight text-balance">{cat}</h3>
-                        <p data-i18n={`certificazioni.albo.cats.${origIndex}.short`} class="font-body text-[0.8rem] max-lg:text-sm text-ivory/55 max-lg:text-ivory/85 leading-snug mt-0.5 text-pretty line-clamp-2 max-lg:line-clamp-3">{short}</p>
-                        <span class="inline-flex items-center gap-1.5 font-condensed text-[0.64rem] max-lg:text-xs uppercase tracking-[0.14em] text-ochre/60 max-lg:text-ochre-light mt-1.5 group-hover/card:gap-2.5 transition-all duration-300">
-                          <i class="fa-solid fa-expand text-[0.55rem]"></i> Vedi dettaglio
+                        <span class="albo-icon-badge absolute -bottom-7 left-6 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-lg shadow-ochre transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:scale-110 group-hover/card:rotate-[12deg]" aria-hidden="true">
+                          <i class={`fa-solid ${icon}`}></i>
                         </span>
                       </div>
-                    </button>
+
+                      <div class="flex flex-col gap-2 px-6 max-lg:px-5 pt-11 pb-7">
+                        <span data-i18n={`certificazioni.albo.cats.${origIndex}.tag`} class="font-condensed font-700 text-[0.64rem] max-lg:text-xs uppercase tracking-[0.18em] text-ochre/70 max-lg:text-ochre-light">{tag}</span>
+                        <h3 data-i18n={`certificazioni.albo.cats.${origIndex}.cat`} class="font-serif italic text-3xl text-ivory leading-tight text-balance">{cat}</h3>
+                        <p data-i18n={`certificazioni.albo.cats.${origIndex}.short`} class="font-body font-medium text-lg text-ivory leading-snug mt-1 text-pretty">{short}</p>
+                        {registration && (
+                          <p data-i18n={`certificazioni.albo.cats.${origIndex}.paragraph`} class="font-body text-base text-ivory/90 leading-relaxed mt-3 pt-4 border-t border-ivory/20 text-pretty">{registration}</p>
+                        )}
+                      </div>
+                    </article>
                   </div>
                 ))}
               </div>
@@ -184,53 +176,7 @@ const certSearchItems = [
 
             <p id="albo-live" class="sr-only" aria-live="polite"></p>
 
-            <dialog id="albo-modal" aria-labelledby="albo-modal-title">
-              <div class="relative h-44 sm:h-52 overflow-hidden shrink-0">
-                <div id="albo-modal-img" class="absolute inset-0 bg-cover bg-center"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-ivory via-ivory/15 to-transparent"></div>
-                <button type="button" id="albo-modal-close" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-ivory/95 text-ink flex items-center justify-center hover:bg-ochre hover:text-ivory transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-ochre outline-none" aria-label="Chiudi dettaglio">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <span id="albo-modal-icon-badge" class="absolute -bottom-6 left-7 w-14 h-14 rounded-full bg-ochre text-forest flex items-center justify-center text-lg shadow-ochre">
-                  <i id="albo-modal-icon" class="fa-solid"></i>
-                </span>
-              </div>
-              <div class="px-7 pt-9 pb-8 overflow-y-auto">
-                <span id="albo-modal-tag" class="font-condensed font-700 text-[0.68rem] uppercase tracking-[0.2em] text-ochre"></span>
-                <h3 id="albo-modal-title" class="font-serif italic text-2xl sm:text-3xl text-ink mt-2 text-balance"></h3>
-                <dl id="albo-modal-rows" class="mt-6 space-y-3 border-t border-linen pt-6"></dl>
-                <p id="albo-modal-paragraph" class="font-body text-sm text-muted leading-relaxed mt-6 pt-6 border-t border-linen text-pretty"></p>
-              </div>
-            </dialog>
-
-            <script type="application/json" id="albo-modal-data" set:html={JSON.stringify(modalData)} />
           </div>
-        </div>
-
-        <!-- Semantic duplicate of the carousel/modal data — same content, static
-             markup so it's readable without the click-to-open dialog interaction. -->
-        <div class="sr-only">
-          <h3>Elenco completo — Albo Gestori Ambientali e Certificazioni</h3>
-          {alboCarousel.map((item, i) => {
-            const detail = albiIt[i];
-            return (
-              <article>
-                <h4>{item.kind === 'cert' ? 'Certificazione' : `Albo Gestori Ambientali N° ${item.num}`} — {item.cat}</h4>
-                <p>{item.short}</p>
-                {detail.paragraph && <p>{detail.paragraph}</p>}
-                {detail.rows && (
-                  <dl>
-                    {detail.rows.map((row: { label: string; value: string }) => (
-                      <>
-                        <dt>{row.label}</dt>
-                        <dd>{row.value}</dd>
-                      </>
-                    ))}
-                  </dl>
-                )}
-              </article>
-            );
-          })}
         </div>
       </div>
     </div>
@@ -245,19 +191,6 @@ const certSearchItems = [
       const nextBtn = document.getElementById('albo-next');
       const label = document.getElementById('albo-current-label');
       const live = document.getElementById('albo-live');
-      const modal = document.getElementById('albo-modal') as HTMLDialogElement | null;
-      const modalImg = document.getElementById('albo-modal-img');
-      const modalIconBadge = document.getElementById('albo-modal-icon-badge');
-      const modalIcon = document.getElementById('albo-modal-icon');
-      const modalTag = document.getElementById('albo-modal-tag');
-      const modalTitle = document.getElementById('albo-modal-title');
-      const modalRows = document.getElementById('albo-modal-rows');
-      const modalParagraph = document.getElementById('albo-modal-paragraph');
-      const modalClose = document.getElementById('albo-modal-close');
-      const modalDataEl = document.getElementById('albo-modal-data');
-      const modalData: Array<{ icon: string; img: string; alt: string; kind: string; it: any; en: any }> = modalDataEl
-        ? JSON.parse(modalDataEl.textContent || '[]')
-        : [];
       if (!root || !viewport || !track || !prevBtn || !nextBtn) return;
 
       const dots = Array.from(root.querySelectorAll<HTMLElement>('.albo-dot'));
@@ -273,10 +206,8 @@ const certSearchItems = [
       let wrapTimerId: number | null = null;
       let inView = false;
       let isDragging = false;
-      let dragMoved = false;
       let dragStartX = 0;
       let dragBaseX = 0;
-      let dragTargetCard: HTMLElement | null = null;
 
       function measure() {
         const gap = parseFloat(window.getComputedStyle(track!).columnGap || '0') || 0;
@@ -332,7 +263,7 @@ const certSearchItems = [
       }
       function startAutoplay() {
         stopAutoplay();
-        if (reduceMotion || !inView || modal?.open) return;
+        if (reduceMotion || !inView) return;
         autoplayId = window.setInterval(() => { if (!isDragging) next(); }, 4800);
       }
 
@@ -354,10 +285,8 @@ const certSearchItems = [
 
       viewport.addEventListener('pointerdown', (e: PointerEvent) => {
         isDragging = true;
-        dragMoved = false;
         dragStartX = e.clientX;
         dragBaseX = -pos * stepPx;
-        dragTargetCard = (e.target as HTMLElement)?.closest<HTMLElement>('.albo-card');
         track!.style.transition = 'none';
         stopAutoplay();
         viewport.setPointerCapture(e.pointerId);
@@ -365,7 +294,6 @@ const certSearchItems = [
       viewport.addEventListener('pointermove', (e: PointerEvent) => {
         if (!isDragging) return;
         const dx = e.clientX - dragStartX;
-        if (Math.abs(dx) > 4) dragMoved = true;
         track!.style.transform = `translateX(${dragBaseX + dx}px)`;
       });
       function endDrag(e: PointerEvent) {
@@ -375,76 +303,13 @@ const certSearchItems = [
         const threshold = stepPx * 0.18;
         if (dx <= -threshold) next();
         else if (dx >= threshold) prev();
-        else {
-          applyTransform(true);
-          // setPointerCapture retargets the synthesized click to `viewport`, so a real
-          // tap never reaches the card's own click listener — resolve it here instead.
-          if (!dragMoved && dragTargetCard) openCardModal(dragTargetCard);
-        }
-        dragTargetCard = null;
+        else applyTransform(true);
         startAutoplay();
       }
       viewport.addEventListener('pointerup', endDrag);
       viewport.addEventListener('pointercancel', endDrag);
 
       document.addEventListener('langchange', updateUI);
-
-      function renderModal(index: number) {
-        const item = modalData[index];
-        if (!item || !modal) return;
-        const lang = document.documentElement.lang === 'en' ? 'en' : 'it';
-        const text = item[lang];
-
-        if (modalImg) modalImg.style.backgroundImage = `url(${item.img})`;
-        if (modalIcon) modalIcon.className = `fa-solid ${item.icon}`;
-        if (modalIconBadge) modalIconBadge.setAttribute('aria-hidden', 'true');
-        if (modalTag) modalTag.textContent = text.tag;
-        if (modalTitle) modalTitle.textContent = text.cat;
-        if (modalParagraph) modalParagraph.textContent = text.paragraph;
-        if (modalRows) {
-          modalRows.innerHTML = '';
-          (text.rows as Array<{ label: string; value: string }>).forEach((row) => {
-            const rowEl = document.createElement('div');
-            rowEl.className = 'flex flex-col sm:flex-row sm:items-baseline gap-0.5 sm:gap-3';
-            const dt = document.createElement('dt');
-            dt.className = 'shrink-0 sm:w-40 font-condensed font-700 text-[0.68rem] uppercase tracking-[0.12em] text-muted';
-            dt.textContent = row.label;
-            const dd = document.createElement('dd');
-            dd.className = 'font-body text-sm text-ink';
-            dd.textContent = row.value;
-            rowEl.append(dt, dd);
-            modalRows.append(rowEl);
-          });
-        }
-        modal.dataset.index = String(index);
-      }
-
-      function openCardModal(card: HTMLElement) {
-        const index = Number(card.dataset.catIndex);
-        if (Number.isNaN(index) || !modal) return;
-        renderModal(index);
-        stopAutoplay();
-        modal.showModal();
-      }
-
-      // Reached by keyboard activation (Enter/Space) — pointer-driven taps are
-      // resolved in endDrag() instead, since pointer capture retargets their click.
-      const cards = Array.from(root.querySelectorAll<HTMLElement>('.albo-card'));
-      cards.forEach((card) => {
-        card.addEventListener('click', () => {
-          if (dragMoved) return;
-          openCardModal(card);
-        });
-      });
-
-      modal?.addEventListener('click', (e: MouseEvent) => {
-        if (e.target === modal) modal.close();
-      });
-      modalClose?.addEventListener('click', () => modal?.close());
-      modal?.addEventListener('close', startAutoplay);
-      document.addEventListener('langchange', () => {
-        if (modal?.open && modal.dataset.index) renderModal(Number(modal.dataset.index));
-      });
 
       window.addEventListener('resize', () => { measure(); applyTransform(false); }, { passive: true });
 
@@ -463,49 +328,8 @@ const certSearchItems = [
   </script>
 
   <style>
-    #albo-modal {
-      padding: 0;
-      border: none;
-      width: min(560px, 92vw);
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--ivory);
-      box-shadow: 0 32px 80px -16px rgba(14, 12, 9, 0.45);
-      opacity: 0;
-      transform: scale(0.96) translateY(12px);
-      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        overlay 0.4s allow-discrete,
-        display 0.4s allow-discrete;
-    }
-    #albo-modal[open] {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-    @starting-style {
-      #albo-modal[open] {
-        opacity: 0;
-        transform: scale(0.96) translateY(12px);
-      }
-    }
-    #albo-modal::backdrop {
-      background: rgba(14, 12, 9, 0);
-      transition: background 0.4s ease, overlay 0.4s allow-discrete, display 0.4s allow-discrete;
-    }
-    #albo-modal[open]::backdrop {
-      background: rgba(14, 12, 9, 0.6);
-      backdrop-filter: blur(3px);
-    }
-    @starting-style {
-      #albo-modal[open]::backdrop {
-        background: rgba(14, 12, 9, 0);
-      }
-    }
     @media (prefers-reduced-motion: reduce) {
-      #albo-track,
-      #albo-modal,
-      #albo-modal::backdrop {
+      #albo-track {
         transition: none !important;
       }
     }

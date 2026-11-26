@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { clientLogos } from '../data/clients';
 import HeroWatermark from '../components/HeroWatermark.astro';
-import PilastriBussola from '../components/PilastriBussola.astro';
+import Pilastri from '../components/Pilastri.astro';
 import { Image } from 'astro:assets';
 import leafeHeart from '../assets/leafe-heart.jpg';
 
@@ -24,7 +24,6 @@ const sdgs = [
 <Layout
   title="Sostenibilità e Impatto Ambientale in Sicilia"
   description="L'impegno ambientale di Buttò S.r.l.: 4.200 tonnellate di CO₂ risparmiate, 85% di rifiuti recuperati e uno smaltimento rifiuti speciali certificato."
-  ogImage="/leafe_heart.jpg"
 >
 
   <!-- ══════════════════════ HERO ══════════════════════ -->
@@ -150,7 +149,7 @@ const sdgs = [
         <div class="rule-ochre"></div>
         <h2 data-i18n="sostenibilita.pilastri.h2" class="display-sm text-ink italic mt-5">I 4 Pilastri Ambientali</h2>
       </div>
-      <PilastriBussola items={pilastri} />
+      <Pilastri items={pilastri} />
     </div>
   </section>
 

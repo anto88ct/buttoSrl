@@ -1,5 +1,5 @@
 ---
-// The four environmental pillars set around a compass. The needle turns towards the chosen card.
+// Four company values set around a compass. The needle turns towards the chosen card.
 interface Props {
   items: { icon: string; title: string; desc: string }[];
 }
@@ -15,7 +15,7 @@ const at = (bearing: number, radius: number) => {
 const ticks = Array.from({ length: 60 }, (_, i) => i * 6);
 const cardinals = [
   { bearing: 0, letter: 'N' }, { bearing: 90, letter: 'E' },
-  { bearing: 180, letter: 'S' }, { bearing: 270, letter: 'O', key: 'sostenibilita.pilastri.ovest' },
+  { bearing: 180, letter: 'S' }, { bearing: 270, letter: 'O', key: 'chiSiamo.valori.ovest' },
 ];
 ---
 
@@ -61,8 +61,8 @@ const cardinals = [
     {items.map(({ icon, title, desc }, i) => (
       <li class={`bussola-card bussola-${corners[i]}`} data-pillar={i} data-bearing={bearings[i]}>
         <i class={`fa-solid ${icon} card-icon`} aria-hidden="true"></i>
-        <h3 data-i18n={`sostenibilita.pilastri.items.${i}.title`} class="card-title font-serif text-2xl xl:text-3xl italic leading-tight text-balance">{title}</h3>
-        <p data-i18n={`sostenibilita.pilastri.items.${i}.desc`} class="card-desc font-body leading-relaxed text-pretty">{desc}</p>
+        <h3 data-i18n={`chiSiamo.valori.items.${i}.title`} class="card-title font-serif text-2xl xl:text-3xl italic leading-tight text-balance">{title}</h3>
+        <p data-i18n={`chiSiamo.valori.items.${i}.desc`} class="card-desc font-body leading-relaxed text-pretty">{desc}</p>
       </li>
     ))}
   </ul>

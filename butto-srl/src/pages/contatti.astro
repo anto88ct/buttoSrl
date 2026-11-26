@@ -16,14 +16,14 @@ const info = [
     lines: ["+39 375 927 8085"],
     links: ["tel:+393759278085"],
     noteKey: "contatti.info.telNote",
-    note: "Lun–Ven 08:30–18:00",
+    note: "Lun–Ven 09:00–18:00",
   },
   {
     icon: "fa-envelope",
     titleKey: "contatti.info.emailLabel",
     title: "Email",
-    lines: ["servizi.butto@gmail.com", "impresabutto@pec.it"],
-    links: ["mailto:servizi.butto@gmail.com", "mailto:impresabutto@pec.it"],
+    lines: ["servizi.butto@gmail.com"],
+    links: ["mailto:servizi.butto@gmail.com"],
   },
 ];
 
@@ -32,15 +32,15 @@ const schedule = [
     dayKey: "contatti.info.schedule.0.day",
     day: "Lunedì – Venerdì",
     hoursKey: undefined,
-    hours: "08:30 – 18:00",
+    hours: "09:00 – 18:00",
     open: true,
   },
   {
     dayKey: "contatti.info.schedule.1.day",
     day: "Sabato",
-    hoursKey: undefined,
-    hours: "09:00 – 12:00",
-    open: true,
+    hoursKey: "contatti.info.schedule.1.hours",
+    hours: "Chiuso",
+    open: false,
   },
   {
     dayKey: "contatti.info.schedule.2.day",
@@ -64,7 +64,6 @@ const temi = [
 <Layout
   title="Contatti e Richiesta Preventivo Gratuito"
   description="Contatta Buttò S.r.l. – Entra in contatto con il team di gestione ambientale di Assoro (EN) per preventivi, collaborazioni e segnalazioni urgenti."
-  ogImage="/cleaning.jpg"
 >
   <!-- ══════════════════════ MAIN CONTENT ══════════════════════ -->
   <section class="pb-20 lg:pb-28 bg-ivory dot-grid" style="padding-top: calc(var(--header-h, 5.5rem) + 2rem);">
