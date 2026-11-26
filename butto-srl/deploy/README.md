@@ -16,6 +16,10 @@ Nel pannello OVHcloud:
 
 ## 3. Build e caricamento
 
+Rilascio automatico: dal ramo `master`, senza modifiche in sospeso, eseguire `./deploy.sh`. Lo script chiede la password FTP, esegue build e controlli, salva un backup in `../backup-ovh/` (accanto alla cartella del repository), carica solo i file cambiati, chiede conferma prima di cancellare quelli obsoleti e verifica il risultato. Serve Podman o Docker.
+
+Procedura manuale, in alternativa:
+
 ```bash
 npm ci
 npm run build
